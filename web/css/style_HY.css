@@ -1,0 +1,334 @@
+@charset "UTF-8";
+/* font-family: 'Noto Sans KR', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+
+
+
+/* ----------- Checkout -------------- */
+
+/* order - head */
+
+#order {
+    margin-bottom : 50px;
+}
+
+div#order_head {
+    width : 1000px;
+    margin : auto;
+    text-align : left;
+    font-size : 35px;
+    padding-bottom : 8px;
+    margin-top : 90px;
+    margin-bottom : 20px;
+    border-bottom : 2px solid gray;
+}
+
+/* order_order_inf */
+
+
+/* 공용 css */
+
+.order_info {
+    width : 1000px;
+    margin : auto;
+}
+
+.order_info ~ div {
+    margin-top : 35px;
+}
+
+.order_table_wrap {
+    display : flex;
+    justify-content : space-between;
+    align-items : baseline;
+}
+
+.order_table_wrap div:first-child{
+    font-size : 20px;
+}
+
+.order_table_wrap div:last-child{
+    font-size : 6px;
+}
+
+.order_table {
+    margin-top : 8px;
+    border-collapse : collapse;
+    width : 1000px;
+    border-top : 2px solid gray;
+    border-bottom : 1px solid gray;
+    border-left : none;
+    border-right : none;
+}
+
+
+.order_table tr td {
+    border-bottom : 1px solid #E4E4E4;
+}
+
+.order_table tr td:first-child {
+    background-color : #F4F4F4;
+    border-right : 1px solid #E4E4E4;
+}
+
+.order_table input,select,textarea {
+    border : 0.5px solid #999999;
+    border-radius : 3px;
+}
+
+
+.order_table td {
+    /* border : 1px solid black; */
+    height : 45px;
+}
+
+.order_table tr td:first-child {
+    text-align : right;
+    font-size : 17px;
+    padding-right : 30px;
+    width : 20%;
+}
+
+.order_table tr td:last-child {
+    text-align : left;
+    font-size : 17px;
+    padding-left : 30px;
+    width : 70%;
+}
+
+
+/* 배송정보 */
+
+#order_deli_table tr td input[name="checkNew"] {
+    margin-left : 10px;
+}
+
+#order_deli_table tr:nth-child(3){
+    height : 100px;
+}
+
+#order_deli_table #deli_table_address ul li{
+    line-height : 30px;
+}
+
+#deli_table_address ul input{
+    margin-right : 5px;
+}
+
+#address_list li input[name="search_icon"]  {
+    background-image : url("../images/search_ui.png");
+    background-repeat : no-repeat;
+    background-position : center center;
+    background-size : contain;
+    width : 30px;
+    height : 23px;
+    cursor : pointer;
+}
+
+#order_deli_table tr ~ tr input {
+    height : 26px;
+}
+
+#order_deli_table tr:last-child{
+    height : 100px;
+}
+
+
+
+/* 결제정보 */
+
+.order_table_wrap #pay_head {
+    font-size : 20px;
+}
+
+.order_table tr td input[name="virAccount"]{
+    margin-left : 5px;
+}
+
+
+/* 결제버튼 */
+
+#btn_order_sub {
+    width : 1000px;
+    margin : auto;
+    margin-top : 35px;
+    text-align : center;
+}
+
+#btn_order_sub input {
+
+    font-size : 18px;
+    width : 150px;
+    height : 40px;
+    border : none;
+    border-radius : 5px;
+    background-color : #EAEAEA;
+    cursor : pointer;
+    
+}
+
+/* ----------- Cart -------------- */
+
+/* cart-title */
+
+.cart_title {
+    width : 1000px;
+    margin : auto;
+    margin-top : 90px;
+    margin-bottom : 8px;
+}
+
+
+.cart_tit_title {
+    display : inline;
+    font-size : 35px;
+}
+
+
+/* cart-body */
+
+section#cart_body{
+    width : 1000px;
+    height : 100%;
+    margin : auto;
+    
+}
+
+.cart_content #cart_table {
+    border-collapse : collapse;
+    width : 100%;
+    border-top : 2px solid gray;
+    border-bottom : 2px solid gray;
+}
+
+table#cart_table tr td {
+    text-align : center;
+    font-size : 13px;
+}
+
+#head_tr {
+    height : 40px;
+}
+
+#head_tr td {
+    border-bottom : 2px solid gray;
+} 
+
+.cart_content table tr td:first-child {
+    padding-left : 15px;
+}
+
+.cart_content table tr td:first-child , .cart_content table tr td:nth-child(5) {
+    width : 4%;
+}
+
+.cart_content table tr td:nth-child(4) , .cart_content table tr td:nth-child(6) {
+    width : 8%;
+}
+
+.cart_content table tr td:nth-child(2) {
+    width : 20%;
+    text-align : center;
+}
+
+.cart_content table tr td:nth-child(3){
+    width : 35%;
+}
+
+
+table#cart_table .cart_products {
+    height : 120px;
+    font-size : 12px;
+}
+
+
+table#cart_table .cart_products td:nth-child(2) img {
+    width : 85px;
+    height : 85px;
+    
+}
+
+table#cart_table .cart_products td:nth-child(3){
+    text-align : left;
+    font-size : 14px;
+    line-height : 30px;
+    padding-top : 0px;
+    padding-bottom : 0px;
+}
+
+table#cart_table .cart_products td:last-child {
+    line-height : 33px;
+}
+
+table#cart_table .cart_products td:last-child input {
+    width : 70px;
+    height : 23px;
+    border : none;
+    border-radius : 7%;
+    cursor : pointer;
+}
+
+table#cart_table #cart_null td {
+    height : 300px;
+    font-size : 40px;
+    line-height : 50px;
+}
+
+table#cart_table #cart_null td input {
+    width : 90px;
+    height : 30px;
+    background-color : #EAEAEA;
+    border : none;
+    border-radius : 5px;
+    cursor : pointer;
+}
+
+
+/* order price */
+
+
+div#order_price {
+    margin-top : 40px;
+    width : 1000px;
+}
+
+div#price_head_wrap {
+    display : flex;
+    justify-content : space-between;
+}
+
+div#price_body_wrap{
+    display : flex;
+    justify-content : space-between;
+}
+
+div#price_head_wrap div , div#price_body_wrap div{
+    justify-content : center;
+    text-align : center;
+    height : 50px;
+    width : 100px;
+}
+
+
+
+/* order end */
+
+div#order_end {
+   width : 1000px;
+   height : 70px;
+   text-align : center; 
+   margin-top : 20px;
+}
+
+div#order_end button{
+    font-size : 16px;
+    width : 87px;
+    height : 37px;
+    border : none;
+    border-radius : 5px;
+    background-color : #EAEAEA;
+    cursor : pointer;
+    
+}
+

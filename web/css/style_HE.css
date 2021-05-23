@@ -1,0 +1,364 @@
+section#HE_section{
+    margin:auto;
+    width:1000px;
+}
+/*마이페이지 상단 메뉴*/
+ul#mypage_nav{
+    margin:100px 0 60px 0;
+    height:40px;
+}
+ul#mypage_nav li{
+    float:left;
+    width:25%;
+    text-align: center;
+/*     border:1px black solid;
+    border-bottom:none; */
+    line-height: 40px;   /*텍스트 1줄일때 가능함*/
+}
+.selectli{
+	border:1px black solid;
+    border-bottom:none;
+/*     background-color:#EAEAEA; */
+    font-weight:border;
+}
+.noselectli{
+	border-right:1px lightgray solid;
+	border-top:1px lightgray solid;
+	border-left:1px lightgray solid;
+	border-bottom:1px black solid;
+}
+ul#mypage_nav li:hover{
+    background-color: rgb(214, 214, 214);
+    cursor:pointer;
+}
+/*처음엔 주문내역 화면만 보이게 하기*/
+#HE_wishlist,#HE_myboard,#HE_profile{
+	display:none;
+}
+/*---주문내역시작---*/
+/*주문내역 날짜*/
+ul#date_btn li{
+    float:left;
+}
+ul#date_btn button{
+    border:none;
+    border-radius: 10%;
+    width:50px;
+    height:30px;
+    text-align: center;
+    background-color: rgb(248, 248, 248);
+    color:rgb(147, 147, 147);
+    margin-right:2px;
+    font-size: 14px;
+    cursor:pointer;
+}
+ul#date_btn li:nth-child(5){
+    margin-right:40px;
+}
+button#search_ordered{
+	margin-left:20px;
+	background-color : black;
+	color:white;
+}
+ul.ordered_comment{
+    clear: both;
+    color:rgb(147, 147, 147);
+    padding-top:20px;
+    font-size: 12px;
+}
+div.mypage_content>p{
+    clear: both;
+    font-size:20px;
+    font-weight: bolder;
+    margin-top:50px; 
+    margin-bottom:10px;
+}
+div.mypage_content{
+    margin-bottom:100px;	
+}
+/*주문내역 테이블*/
+
+table#tbl-ordered{
+    border-collapse : collapse;
+    width : 100%;
+    border-top : 2px solid gray;
+    border-bottom : 2px solid gray;
+    text-align : center;
+    font-size : 13px;
+}
+.head_tr {
+    height : 40px;
+    border-bottom : 2px solid gray;
+}
+table#tbl-ordered img{
+    width:120px;
+    height:100px;
+    margin-top: 5px;
+}
+tr#total_price{
+    height:50px; 
+    border-bottom:1px black solid; 
+}
+tr#total_price>td>span{
+    float:right;
+    font-weight: bold;
+    font-size: 16px;
+    padding-right: 30px;
+}
+table#tbl-ordered tr{
+    border-bottom:1px black solid;
+    /* height:120px; */
+}
+tbody.ordered_tbody>tr:first-child>td:first-child{
+    border-right: 1px black solid;
+}
+td.display_none{
+    display:none;
+}
+tr#ordered_null>td{
+    font-size: 25px;
+    height:200px;
+    border: none;
+}
+/*td 사이즈*/
+td.display_none+td{
+    width:15%;
+}
+td.display_none+td+td{
+    width:40%;
+    text-align: left;
+}
+/*---주문내역 끝 ---*/
+
+/*---관심상품 시작---*/
+/*관심상품 리스트*/
+
+/*찜한 상품 없을 때*/
+table#tbl-wishlist #wish_null td {
+    height : 300px;
+    font-size : 40px;
+    line-height : 50px;
+}
+
+table#tbl-wishlist #wish_null td input {
+    width : 90px;
+    height : 30px;
+    background-color : #EAEAEA;
+    border : none;
+    border-radius : 5px;
+    cursor : pointer;
+}
+/* wish_content */
+
+.wish_content #tbl-wishlist {
+    border-collapse : collapse;
+    width : 100%;
+    border-top : 2px solid gray;
+    border-bottom : 2px solid gray;
+    text-align : center;
+    font-size : 13px;
+    height:auto;
+}
+
+table#tbl-wishlist tr{
+    border-bottom:1px black solid;
+}
+
+/*각 td별 사이즈*/
+.wish_content table tr td:first-child {
+    /* text-align : left; */
+    padding-left : 15px;
+}
+
+.wish_content table tr td:first-child , .wish_content table tr td:nth-child(5) {
+    width : 5%;
+}
+
+.wish_content table tr td:nth-child(4) , .wish_content table tr td:nth-child(6) {
+    width : 8%;
+}
+
+.wish_content table tr td:nth-child(2) {
+    width : 15%;
+    text-align : center;
+}
+
+.wish_content table tr td:nth-child(3){
+    width : 40%;
+}
+
+/*각 상품들 row*/
+table#tbl-wishlist .wish_product {
+    height : 120px;
+    font-size : 12px;
+}
+
+table#tbl-wishlist .wish_product td:nth-child(2) img {
+    width : 120px;
+    height : 100px; 
+}
+
+table#tbl-wishlist .wish_product td:nth-child(3){
+    text-align : left;
+    font-size : 14px;
+    line-height : 30px;
+    padding-top : 0px;
+    padding-bottom : 0px;
+}
+
+table#tbl-wishlist .wish_product td:last-child {
+    line-height : 33px;
+}
+
+table#tbl-wishlist .wish_product td:last-child input {
+    width : 100px;
+    height : 23px;
+    border : none;
+    border-radius : 7%;
+    cursor : pointer;
+}
+/*상품 밑 버튼*/
+div#wish-btn{
+	margin:20px 0 100px 0;
+}
+div#wish-btn button{
+    width:120px;
+    height:40px;
+    border : none;
+    border-radius : 7%;
+    margin: 30px 5px ;
+    font-size:16px;
+    cursor: pointer;
+}
+div#wish-btn button.right-btn{
+    float:right;
+}
+
+/*---관심상품 끝---*/
+
+/*---내가 쓴 게시글 시작---*/
+/*게시글 리스트*/
+div#myboard-list>table#tbl-myboard{
+    width:1000px;
+    border-top:2px gray solid;
+    border-bottom:2px gray solid;
+    background-color: #EAEAEA;
+    border-collapse: collapse;
+    height:200px;
+}
+tbody#myboard_tbody tr:nth-child(2n-1){
+    background-color:white;
+}
+table#tbl-myboard th{
+    border-bottom:2px gray solid;
+    text-align: center;
+    height:40px;
+}
+table#tbl-myboard tr>td:first-child{
+    text-align: center;
+    width:8%;
+}
+table#tbl-myboard tr>:nth-child(3){
+    width:10%;
+    text-align: center;
+}
+table#tbl-myboard td, table#tbl-myboard th{
+     border-right: 1px black solid; 
+}
+table#tbl-myboard td:nth-child(3), table#tbl-myboard th:nth-child(3){
+    border-right:none;
+} 
+table#tbl-myboard td:nth-child(2){
+    padding-left: 20px;
+}
+/*페이지바*/
+div#pageBar{
+    margin-top:100px; 
+    text-align:center; 
+    margin-bottom:100px;
+}
+div.pageBar-icon{
+    width:50px;
+    display: inline-block;
+    background-color:rgb(243, 243, 243);
+    border-radius: 3px;
+    height:50px;
+    line-height: 50px;
+    cursor: pointer;
+}
+div.pageBar-icon:hover{
+    background-color: rgb(52, 152, 219);
+    color:white;
+}
+div#pageBar span.cPage{color: #0066ff;}
+/*---내가 쓴 게시글 끝 ---*/
+
+/*---회원정보수정 시작----*/
+/*title*/
+div#profile_title{
+    text-align: center;
+    font-size: 30px;
+    height:200px;
+    line-height: 200px;
+}
+span.redPoint{
+    color:#E92E4D;
+}
+.float_right{
+    float:right;
+}
+#phone1, #phone2, #phone3{
+    width:56px;
+    height:30px;
+}
+table#tbl-profile input{
+    height:30px;
+}
+/*테이블*/
+table#tbl-profile{
+    border-collapse : collapse;
+    border:none;
+    width : 100%;
+    border-top : 1px solid gray;
+    border-bottom : 1px solid gray;
+    font-size : 13px;
+    margin: 10px 0 30px 0;
+}
+table#tbl-profile tr td:first-child{
+    text-align: left;
+    width:30%;
+    padding : 20px 0 20px 100px;
+    font-size: 18px;
+    font-weight: 300;
+}
+table#tbl-profile tr:nth-child(2) input{
+    margin-bottom:3px;
+}
+ul.profile_address li{
+    padding:3px 5px 3px 0;
+}
+td#address_td{
+    padding-bottom:10px;
+}
+span.profile_text{
+    color:gray;
+    font-weight: 200;
+}
+.profile_address>li input[type=button]{
+    width:80px;
+}
+/*밑 버튼*/
+#profile_btn{
+    text-align: center;
+}
+#profile_btn input{
+    width:120px;
+    height:50px;
+    border : none;
+    border-radius : 7%;
+    margin: 30px 5px;
+    font-size:16px;
+    margin:100px 60px 100px 60px;
+}
+
+/*---회원정보수정 끝 ----*/

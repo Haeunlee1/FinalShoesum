@@ -1,0 +1,55 @@
+html,
+body {
+  height: 100%;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 160px;
+  height: 80px;
+  background: url(../images/logo_png.png) no-repeat center;
+  background-size: contain;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+.form.login {
+  width: 250px;
+}
+
+.google {
+  background: url(../images/google.JPG) no-repeat center;
+  background-size: contain;
+}
+
+.facebook {
+  background: url(../images/facebook.JPG) no-repeat center;
+  background-size: contain;
+}
+
+.button-social {
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.link {
+  cursor: pointer;
+  padding: 0 13px;
+}
+
+.link.border {
+  border-right: 1px solid gray;
+}
+
+.container.link {
+  margin-bottom: 50px;
+}

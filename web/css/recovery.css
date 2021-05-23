@@ -1,0 +1,55 @@
+html,
+body {
+  height: 100%;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-recovery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container.hint {
+  width: 300px;
+  justify-content: space-between;
+}
+
+.container-pw {
+  background-color: rgba(230, 230, 230, 1);
+  border: 1px solid rgba(230, 230, 230, 1);
+  padding: 20px 30px;
+}
+
+.container-id {
+  border: 1px solid rgba(230, 230, 230, 1);
+  padding: 20px 30px;
+}
+
+.container.title {
+  margin-bottom: 30px;
+}
+
+.container.title>p {
+  font-size: 20px;
+}
+
+.container.blank {
+  margin-bottom: 60px;
+}
+
+.form.recovery {
+  width: 200px;
+}
