@@ -55,11 +55,10 @@
                 <td class="cart_total"><%= (c.getProPrice() * c.getCartProCount()) %></td>
                 <td>
                     <ul>
-                        <li><input type="button" name="btn_order" value = "주문하기" style="background-color : black; color : white" ></li>
+                        <li><input type="button" name="btn_order" value = "주문하기" style="background-color : black; color : white"></li>
                         <li><input type="button" name="btn_delete" value="삭제" style="background-color : #CCCCCC" onclick="location.replace('<%=request.getContextPath()%>/cart/cartDelete?cartNo=<%=c.getCartNo()%>&userNo=<%=c.getMemberNo()%>')">
                         </li>
-                    </ul>
-
+                    </ul> 
                 </td>
             </tr>
            	 <% } %>
@@ -81,7 +80,7 @@
             </div>
         </div>
         <div id="order_end">
-            <button>주문하기</button>
+            <button onlclik="location.assign('<%=request.getContextPath() %>/checkout/checkout?userNo=&from=c')">주문하기</button>
         </div>
         <%} %>
     </div>
