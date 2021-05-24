@@ -1,28 +1,28 @@
 package com.member.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.member.model.service.MemberService;
-import com.member.model.vo.Ordered;
+import com.member.model.vo.Member;
 
 /**
- * Servlet implementation class OrderedSearchServlet
+ * Servlet implementation class LoginServlet
  */
-@WebServlet("/member/orderedSearch")
-public class OrderedSearchServlet extends HttpServlet {
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderedSearchServlet() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +31,27 @@ public class OrderedSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//기간 정해서 주문내역 가져오기
-		String before=request.getParameter("before");
-		String after=request.getParameter("after");
-		System.out.println(before+"/"+after);
-		//일단 아이디값으로 넘겨보기
-		String userId="111";
-		//String userId="test";
-	
-		List<Ordered> list = new MemberService().selectOrdered(userId,before,after);
-		System.out.println("기간설정 : "+list.size());
-		request.setAttribute("orderList", list);
-		request.setAttribute("before", before);
-		request.setAttribute("after", after);
-		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);
+		
+		String memberId=request.getParameter("memberId");
+		String memberPw=request.getParameter("memberPw");
+		
+		System.out.println(memberId);
+		System.out.println(memberPw);
+		
+		Member m=new MemberService().login(memberId, memberPw);
+		
+		if(m != null) {
+			HttpSession session=request.getSession();
+			session.setAttribute("loginMember",  m);
+			
+			System.out.println(m);
+			
+			response.sendRedirect(request.getContextPath());
+			
+			
+		}else {
+			
+		}
 		
 		
 	}

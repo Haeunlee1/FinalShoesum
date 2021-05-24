@@ -27,6 +27,38 @@ public class MemberDao {
 		}
 	}
 	
+	public Member login(Connection conn, String memberId, String memberPw) {
+		// 로그인 
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMember"));
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberPw);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberNo(rs.getInt("member_no"));
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPw(rs.getString("member_pw"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setEmail(rs.getString("memer_email"));
+				m.setPhone(rs.getString("member_phone"));
+				m.setPostNo(rs.getString("member_post_no"));
+				m.setAddress(rs.getString("member_address"));
+				m.setAddressEnd(rs.getString("member_address_end"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
 	
 	
 	
@@ -47,6 +79,7 @@ public class MemberDao {
 				o=new Ordered();
 				o.setOrderDate(rs.getDate("order_date"));
 				o.setOrderNo(rs.getInt("order_pro_no"));
+				o.setProNo(rs.getString("pro_no"));
 				o.setState(rs.getString("order_state"));
 				o.setProName(rs.getString("pro_name"));
 				o.setProPrice(rs.getInt("pro_price"));
@@ -83,6 +116,7 @@ public class MemberDao {
 				o=new Ordered();
 				o.setOrderDate(rs.getDate("order_date"));
 				o.setOrderNo(rs.getInt("order_pro_no"));
+				o.setProNo(rs.getString("pro_no"));
 				o.setState(rs.getString("order_state"));
 				o.setProName(rs.getString("pro_name"));
 				o.setProPrice(rs.getInt("pro_price"));

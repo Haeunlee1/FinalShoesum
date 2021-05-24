@@ -60,4 +60,38 @@ public class ProductDao {
 		}
 		return list;
 	}
+	
+	public List<Product> allWishes(Connection conn, int userNo){
+		//찜 목록 가져오기
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Product> list =new ArrayList();
+		Product p = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("allWishes"));
+			pstmt.setInt(1, userNo);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p=new Product();
+				p.setProNo(rs.getString("pro_no"));
+				p.setProName(rs.getString("pro_name"));
+				p.setPrice(rs.getInt("pro_price"));
+				p.setSize(rs.getInt("pro_size"));
+				p.setColor(rs.getString("pro_color"));
+				p.setStock(rs.getInt("pro_stock"));
+				p.setImages1(rs.getString("img_src1"));
+				p.setImages2(rs.getString("img_src2"));
+				p.setImages3(rs.getString("img_src3"));
+				p.setImages4(rs.getString("img_src4"));
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+		
+	}
 }

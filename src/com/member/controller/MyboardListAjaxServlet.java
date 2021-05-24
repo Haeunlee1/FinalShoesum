@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.member.model.service.MemberService;
-import com.member.model.vo.Ordered;
+import com.board.model.service.BoardService;
+import com.board.model.vo.Board;
 
 /**
- * Servlet implementation class OrderedSearchServlet
+ * Servlet implementation class MyboardListAjaxServlet
  */
-@WebServlet("/member/orderedSearch")
-public class OrderedSearchServlet extends HttpServlet {
+@WebServlet("/member/myboardList")
+public class MyboardListAjaxServlet extends HttpServlet {
+	//ajax로 내가쓴게시글 불러오기
+	
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderedSearchServlet() {
+    public MyboardListAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +33,15 @@ public class OrderedSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//기간 정해서 주문내역 가져오기
-		String before=request.getParameter("before");
-		String after=request.getParameter("after");
-		System.out.println(before+"/"+after);
-		//일단 아이디값으로 넘겨보기
-		String userId="111";
-		//String userId="test";
+		//내가쓴게시글 불러오기
+		int memberNo=1;
+		request.setCharacterEncoding("utf-8");
+		List<Board> list = new BoardService().allBoards(memberNo);
+		request.setAttribute("boardList", list);
+		request.getRequestDispatcher("/views/mypage/myboardAjax.jsp").forward(request, response);
 	
-		List<Ordered> list = new MemberService().selectOrdered(userId,before,after);
-		System.out.println("기간설정 : "+list.size());
-		request.setAttribute("orderList", list);
-		request.setAttribute("before", before);
-		request.setAttribute("after", after);
-		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);
-		
-		
+	
+	
 	}
 
 	/**
