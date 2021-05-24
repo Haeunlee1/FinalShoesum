@@ -236,9 +236,9 @@ div#wish-btn button.right-btn{
 
 /*---관심상품 끝---*/
 
-/*---내가 쓴 게시글 시작---*/
+/*---내가 쓴 게시글 =>ajax로 넘김, ajax페이지에서 css적용하기---*/
 /*게시글 리스트*/
-div#myboard-list>table#tbl-myboard{
+/* div#myboard-list>table#tbl-myboard{
     width:1000px;
     border-top:2px gray solid;
     border-bottom:2px gray solid;
@@ -270,7 +270,7 @@ table#tbl-myboard td:nth-child(3), table#tbl-myboard th:nth-child(3){
 } 
 table#tbl-myboard td:nth-child(2){
     padding-left: 20px;
-}
+} */
 /*페이지바*/
 div#pageBar{
     margin-top:100px; 

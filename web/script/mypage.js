@@ -7,11 +7,7 @@ $(function(){
 	    $("#mypage_nav li").eq(index).addClass("selectli");
 	    $("#mypage_nav li").eq(index).removeClass("noselectli");
 	    $("#HE_section > article").hide();
-	    $("#HE_section > article").eq(index).show();
-	    if(index===3){
-	    	console.log(index);
-	    	$("#pageBar").hide();
-	    }		
+	    $("#HE_section > article").eq(index).show();		
 		
 	})
 });

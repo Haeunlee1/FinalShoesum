@@ -47,6 +47,7 @@ public class MemberDao {
 				o=new Ordered();
 				o.setOrderDate(rs.getDate("order_date"));
 				o.setOrderNo(rs.getInt("order_pro_no"));
+				o.setProNo(rs.getString("pro_no"));
 				o.setState(rs.getString("order_state"));
 				o.setProName(rs.getString("pro_name"));
 				o.setProPrice(rs.getInt("pro_price"));
@@ -83,6 +84,7 @@ public class MemberDao {
 				o=new Ordered();
 				o.setOrderDate(rs.getDate("order_date"));
 				o.setOrderNo(rs.getInt("order_pro_no"));
+				o.setProNo(rs.getString("pro_no"));
 				o.setState(rs.getString("order_state"));
 				o.setProName(rs.getString("pro_name"));
 				o.setProPrice(rs.getInt("pro_price"));

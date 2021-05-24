@@ -6,6 +6,9 @@
 <%
 	//주문내역리스트
 	List<Ordered> list = (List<Ordered>)request.getAttribute("orderList");
+	//기간 지정한 날짜 값 before
+	String before =(String)request.getAttribute("before");
+	String after=(String) request.getAttribute("after");
 
 %>
 
@@ -13,7 +16,7 @@
     <ul id="mypage_nav">
         <li class="selectli">주문내역</li>
         <li class="noselectli">관심상품</li>
-        <li class="noselectli">내가 쓴 게시글</li>
+        <li id="boardListLi" class="noselectli">내가 쓴 게시글</li>
         <li class="noselectli">회원 정보 수정</li>
     </ul>
     <article id="HE_ordered">
@@ -24,7 +27,7 @@
                 <li><button>1개월</button></li>
                 <li><button>3개월</button></li>
                 <li><button>6개월</button></li>
-                <li><input type="date" id="before"></li>
+                <li><input type="date" id="before" value=''></li> <%-- <%=before!=null?before:" " %> --%>
                 <li><span>&nbsp;&nbsp;~&nbsp;&nbsp; </span></li>
                 <li><input type="date" id="today"></li>
                 <li><button id="search_ordered">조회</button></li>
@@ -49,119 +52,87 @@
                         <td>취소/교환/반품</td>
                     </tr>
                 </thead>
-                <%if (list!=null){ 
-                	for(Ordered o : list) {
-                %>
+                <%-- <%if (list!=null){ 
+                	int pre=0;
+                	boolean flag=false;	
+                	for(int i=0;i<list.size();i++) {
+                		int count=0;
+                		pre=list.get(i).getOrderNo();
+                		System.out.println(pre);
+                		
+                		if(count==0){
+                			count+=1;
+                			for(int j=i+1;j<list.size();j++){
+                				flag=true;
+                				if(list.get(i).getOrderNo()==list.get(j).getOrderNo()){
+                					count++;
+                				}else{
+                					break;
+                				}
+                			}
+                		}
+                		String type="";   //신발 타입 분기
+                		if(list.get(i).getProNo().contains("m")) type="man";
+        				else if(list.get(i).getProNo().contains("w")) type="woman";
+        				else if(list.get(i).getProNo().contains("k")) type="kids";
+                %> --%>
                 <tbody class="ordered_tbody">
-                    <tr id="">
-                        <td rowspan="3"><%=o.getOrderDate() %><br>[<%=o.getOrderNo() %>]</td>
-                        <td class="display_none"></td>
+                <%if(!list.isEmpty()){
+                	int pre=-1;
+                	int count=0;
+					int price=0;
+					boolean row=false;
+                for(int i=0;i<list.size();i++){
+					count=0;
+					String type="";
+                	switch(list.get(i).getProNo().substring(0,1)){
+                		case "m" :type="man";break;
+                		case "w" :type="woman";break;
+                		case "k" :type="kids";break;
+                	}
+                	for(int j=0;j<list.size();j++){
+                		if(list.get(i).getOrderNo()==list.get(j).getOrderNo()){
+                			count++;
+                			price+=(list.get(i).getProPrice()*list.get(i).getAmount());
+                		}
+                	System.out.println(i+"/"+price);
+                	}
+                	price=0;
+                %>
+                	<tr>
+                    <%if(pre==-1||pre!=list.get(i).getOrderNo()){
+                    	pre=list.get(i).getOrderNo();%>
+                        <td rowspan="<%=count%>"><%=list.get(i).getOrderDate() %><br>[<%=list.get(i).getOrderNo() %>]</td>
+                    <%}else if(pre!=-1||pre!=list.get(i).getOrderNo()){
+                    	row=true;
+                    }%>
                         <td>
-                            <img alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=o.getProImg()%>" id="product_img" name="product_img">
+                            <img alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=type %>/<%=list.get(i).getProImg()%>" id="product_img" name="product_img">
                         </td>
                         <td>
                             <ul>
-                                <li><%=o.getProName() %></li>
-                                <li>[옵션 : <%=o.getProColor() %> / <%=o.getProSize() %>]</li>
+                                <li><%=list.get(i).getProName() %></li>
+                                <li>[옵션 : <%=list.get(i).getProColor() %> / <%=list.get(i).getProSize() %>]</li>
                             </ul>
                         </td>
-                        <td><%=o.getAmount() %></td>
-                        <td><%=o.getProPrice() %></td>
-                        <td><%=o.getState().equals("on")?"배송완료":"배송준비중" %></td>
+                        <td><%=list.get(i).getAmount() %></td>
+                        <td><%=list.get(i).getProPrice() %></td>
+                        <td><%=list.get(i).getState().equals("on")?"배송완료":"배송준비중" %></td>
                         <td>-</td>
                     </tr>
-                    <tr>
-                        <td class="display_none"></td> <!--테이블 맞추기 위해 none 함-->
-                        <td>
-                            <img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img">
-                        </td>
-                        <td>
-                            <ul>
-                                <li>구두</li>
-                                <li>[옵션 : 검정 / 230]</li>
-                            </ul>
-                        </td>
-                        <td>1</td>
-                        <td>30000</td>
-                        <td>배송완료</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td class="display_none"></td>
-                        <td>
-                            <img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img">
-                        </td>
-                        <td>
-                            <ul>
-                                <li>부츠</li>
-                                <li>[옵션 : 브라운 / 265]</li>
-                            </ul>
-                        </td>
-                        <td>1</td>
-                        <td>30000</td>
-                        <td>배송완료</td>
-                        <td>-</td>
-                    </tr>
+                    <% out.print(row);
+					out.print(list.get(i).getOrderNo());%>
+                    <!-- 분기문하나 넣어서 작성하기 / 주문번호가 바뀔 때  -->
+                    <%if (row){ 
+                    row=false;%>
                     <tr id="total_price">
-                        <td colspan="7"><span>총 액 : 90000원</span></td>
+                        <td colspan="7"><span>총 액 : <%=price %>원</span></td>
                     </tr>
+                <%}
+                }%> 
                 </tbody>
-                <%} 
-                } else{%>
-                <!-- <tbody class="ordered_tbody">
-                    <tr id="">
-                        <td rowspan="3">0000-00-00<br>[주문번호]</td>
-                        <td class="display_none"></td>
-                        <td>
-                            <img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img">
-                        </td>
-                        <td>
-                            <ul>
-                                <li>운동화</li>
-                                <li>[옵션 : 아이보리 / 245]</li>
-                            </ul>
-                        </td>
-                        <td>1</td>
-                        <td>30000</td>
-                        <td>배송완료</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td class="display_none"></td> 테이블 맞추기 위해 none 함
-                        <td>
-                            <img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img">
-                        </td>
-                        <td>
-                            <ul>
-                                <li>구두</li>
-                                <li>[옵션 : 검정 / 230]</li>
-                            </ul>
-                        </td>
-                        <td>1</td>
-                        <td>30000</td>
-                        <td>배송완료</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td class="display_none"></td>
-                        <td>
-                            <img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img">
-                        </td>
-                        <td>
-                            <ul>
-                                <li>부츠</li>
-                                <li>[옵션 : 브라운 / 265]</li>
-                            </ul>
-                        </td>
-                        <td>1</td>
-                        <td>30000</td>
-                        <td>배송완료</td>
-                        <td>-</td>
-                    </tr>
-                    <tr id="total_price">
-                        <td colspan="7"><span>총 액 : 90000원</span></td>
-                    </tr>
-                </tbody> -->
+                <% } else{%>
+                
                 <tbody class="ordered_tbody">
                     <tr id="ordered_null">
                         <td colspan="7"><span>주문 내역이 없습니다.</span></td>
@@ -250,7 +221,7 @@
     <article id="HE_myboard">
         <div id="myboard-list" class="mypage_content">
             <p>내가 쓴 게시글</p>
-            <table id="tbl-myboard">
+            <!-- <table id="tbl-myboard">
                 <thead>
                     <tr>
                         <th>번호</th>
@@ -272,7 +243,7 @@
                     <tr>
                         <td>2</td>
                         <td><a href="">2번 게시글 입니다.</a></td>
-                        <td><a href="">날짜</td>
+                        <td>날짜</td>
                     </tr>
                     <tr>
                         <td>1</td>
@@ -280,7 +251,10 @@
                         <td>날짜</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
+            
+            <!-- ajax해보기 -->
+            <div id="boardTarget"></div>
         </div>
         <div id="pageBar">
             <div class="pageBar-icon">&lt;</div>
@@ -382,8 +356,26 @@ $("#search_ordered").click(e=>{
 	//alert($("#before").val()+"/"+$("#today").val());
 	let before=$("#before").val();
 	let after=$("#today").val();
-	location.assign("<%=request.getContextPath()%>/member/orderedSearch?before="+before+"&after="+after);
+	location.assign("<%= request.getContextPath()%>/member/orderedSearch?before="+before+"&after="+after);
 	
 });
+
+$(function(){
+	//내가쓴게시글 ajax해보기
+	$("#boardListLi").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/member/myboardList",
+			/* data:{
+				id //추후에 로그인 아이디 넘겨주기
+			} */
+			type:"post",
+			success:data=>{
+				console.log(data);				
+				$("#boardTarget").html(data);
+			}
+		})
+	});
+});
+
 </script>
 <%@ include file="/views/common/footer.jsp"%>
