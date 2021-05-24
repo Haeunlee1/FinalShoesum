@@ -1,7 +1,6 @@
 package com.product.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-
 import com.product.model.service.ProductService;
 import com.product.model.vo.Product;
 
 /**
- * Servlet implementation class ProductListServlet
+ * Servlet implementation class ProductListAjaxServlet
  */
-@WebServlet("/product/productlist")
-public class ProductListServlet extends HttpServlet {
+@WebServlet("/product/productListAjax")
+public class ProductListAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductListServlet() {
+    public ProductListAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,8 +33,10 @@ public class ProductListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		// 제품 페이지로 이동
-		request.getRequestDispatcher("/views/product/product.jsp")
+		List<Product> list = new ProductService().allProduct();
+		request.setAttribute("products", list);
+	
+		request.getRequestDispatcher("/views/product/productListAjax.jsp")
 		.forward(request, response);
 	
 	}

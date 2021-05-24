@@ -20,4 +20,11 @@ public class ProductService {
 		close(conn);
 		return list;
 	}
+	
+	public List<Product> allProduct() {
+		Connection conn=getConnection();
+		List<Product> list = dao.allProduct(conn);
+		close(conn);
+		return list;
+	}
 }

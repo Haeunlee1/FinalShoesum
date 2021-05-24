@@ -4,6 +4,9 @@
 
 	<section>
 	    <div id="pd_top">
+<%-- 	    <%
+	    	if()
+	    %> --%>
 	        <p>MAN</p>
 	        <select name="" id="">
 	            <option value="">최신순</option>

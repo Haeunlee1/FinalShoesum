@@ -48,7 +48,7 @@
         </header>
         <nav>
             <ul id="menu_bar">
-                <li><a href="<%=request.getContextPath() %>/product/productlist">MAN</a>
+                <li><a href="<%=request.getContextPath() %>/product/productlist" value="man">MAN</a>
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
                         <li><a href="">스니커즈</a></li>
@@ -57,7 +57,7 @@
                         <li><a href="">구두</a></li>
                     </ul>
                 </li>
-                <li><a href="<%=request.getContextPath() %>/product/productlist">WOMAN</a>
+                <li><a href="<%=request.getContextPath() %>/product/productlist" value="woman">WOMAN</a>
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
                         <li><a href="">스니커즈</a></li>
@@ -66,7 +66,7 @@
                         <li><a href="">구두</a></li>
                     </ul>
                 </li>
-                <li><a href="<%=request.getContextPath() %>/product/productlist">KIDS</a>
+                <li><a href="<%=request.getContextPath() %>/product/productlist" value="kids">KIDS</a>
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
                         <li><a href="">스니커즈</a></li>
