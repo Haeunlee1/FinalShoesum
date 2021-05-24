@@ -1,20 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<%@page import="java.util.List, com.member.model.vo.*" %>
+<%@page import="java.util.List, com.member.model.vo.*,com.product.model.vo.*" %>
+<%@ page import="java.text.*"%>
 <%
 	//주문내역리스트
-	List<Ordered> list = (List<Ordered>)request.getAttribute("orderList");
+	List<Ordered> orderList = (List<Ordered>)request.getAttribute("orderList");
 	//기간 지정한 날짜 값 before
 	String before =(String)request.getAttribute("before");
 	String after=(String) request.getAttribute("after");
-
+	
 %>
+
 
 <section id="HE_section">
     <ul id="mypage_nav">
         <li class="selectli">주문내역</li>
-        <li class="noselectli">관심상품</li>
+        <li id="wishlistLi"class="noselectli">관심상품</li>
         <li id="boardListLi" class="noselectli">내가 쓴 게시글</li>
         <li class="noselectli">회원 정보 수정</li>
     </ul>
@@ -52,52 +54,60 @@
         </tr>
     </thead>
 	<tbody class="ordered_tbody">
-		<%if(!list.isEmpty()){
+		<%if(!orderList.isEmpty()){
            	int pre=-1;
            	int count=0;
 			int price=0;
 			boolean row=false;
-           for(int i=0;i<list.size();i++){
+           for(int i=0;i<orderList.size();i++){
 				count=0;
 				String type="";
-           	switch(list.get(i).getProNo().substring(0,1)){
+           	switch(orderList.get(i).getProNo().substring(0,1)){
            		case "m" :type="man";break;
            		case "w" :type="woman";break;
            		case "k" :type="kids";break;
            	}
-           	for(int j=0;j<list.size();j++){
-           		if(list.get(i).getOrderNo()==list.get(j).getOrderNo()){
+           	for(int j=0;j<orderList.size();j++){
+           		if(orderList.get(i).getOrderNo()==orderList.get(j).getOrderNo()){
            			count++;
            		}
            	}
-           	price+=(list.get(i).getAmount()*list.get(i).getProPrice());
+           	price+=(orderList.get(i).getAmount()*orderList.get(i).getProPrice());
            %>
              <tr>
-               <%if(pre==-1||pre!=list.get(i).getOrderNo()){
-                 	pre=list.get(i).getOrderNo();%>
-                   <td rowspan="<%=count%>"><%=list.get(i).getOrderDate() %><br>[<%=list.get(i).getOrderNo() %>]</td>
-               <%}else if(pre!=-1||pre!=list.get(i).getOrderNo()){
+               <%if(pre==-1||pre!=orderList.get(i).getOrderNo()){
+                 	pre=orderList.get(i).getOrderNo();%>
+                   <td rowspan="<%=count%>"><%=orderList.get(i).getOrderDate() %><br>[<%=orderList.get(i).getOrderNo() %>]</td>
+               <%}else if(pre!=-1||pre!=orderList.get(i).getOrderNo()){
                  	row=true;
                }%>
                  <td>
-                     <a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=list.get(i).getProNo()%>"><img title="<%=list.get(i).getProName()%>"alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=type %>/<%=list.get(i).getProImg()%>" id="product_img" name="product_img"></a>
+                     <a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=orderList.get(i).getProNo()%>">
+                     <img title="<%=orderList.get(i).getProName()%>"alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=type %>/<%=orderList.get(i).getProImg()%>" id="product_img" name="product_img">
+                     </a>
                  </td>
                  <td>
                      <ul>
-                         <li class="product_name"><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=list.get(i).getProNo()%>"><%=list.get(i).getProName() %></a></li>
-                         <li>[옵션 : <%=list.get(i).getProColor() %> / <%=list.get(i).getProSize() %>]</li>
+                         <li class="product_name">
+                         	<a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=orderList.get(i).getProNo()%>"><%=orderList.get(i).getProName() %></a>
+                         </li>
+                         <li>[옵션 : <%=orderList.get(i).getProColor() %> / <%=orderList.get(i).getProSize() %>]</li>
                      </ul>
                  </td>
-                 <td><%=list.get(i).getAmount() %></td>
-                 <td><%=list.get(i).getProPrice() %></td>
-                 <td><%=list.get(i).getState().equals("on")?"배송완료":"배송준비중" %></td>
+                 <td><%=orderList.get(i).getAmount() %></td>
+                 <td><%=orderList.get(i).getProPrice() %></td>
+                 <td><%=orderList.get(i).getState().equals("on")?"배송완료":"배송준비중" %></td>
                  <td>-</td>
              </tr>
-                 <!-- 분기문하나 넣어서 작성하기 / 주문번호가 바뀔 때  -->
              <%
              }%> 
+             <%	//회계형식 표현하기
+					DecimalFormat df = new DecimalFormat("#,###,###");
+					int val = price;
+					%>
                  <tr id="total_price">
-                     <td colspan="7"><span>총 주문금액 : <%=price %>원</span></td>
+                     <td colspan="7"><span>총 주문금액 : <%=df.format(val) %>원</span></td>
+
                  </tr>
              </tbody>
              <% } else{%>
@@ -113,77 +123,9 @@
     <article id="HE_wishlist">
         <div class="wish_content mypage_content">
             <p>찜한 상품</p>
-            <table id="tbl-wishlist">
-                    <tr class="head_tr">
-                        <td><input type="checkbox" id="checkAll" name="select_product" style="zoom:1.2" value=""></td> <!--전체체크 구현, 체크박스 사이즈는 style="zoom:1.5"-->
-                        <td>이미지</td>
-                        <td>상품 정보</td>
-                        <td>판매가</td>
-                        <td>수량</td>
-                        <td>배송비</td>
-                        <td>합계</td>
-                        <td>선택</td>
-                    </tr>
-                    <tr id="wish_null">
-                        <td colspan="8">
-                            <ul>
-                                <li>찜한 상품이 없습니다.</li>
-                                <li><input type="button" value="쇼핑하러가기" onclick="fn_goshopping();"></li>
-                            </ul>
-                        </td>
-                    </tr>
-                <tr class="wish_product">
-                    <td><input type="checkbox" class="chk" name="select_products" value=""></td>
-                    <td><img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img"></td>
-                    <td>
-                        <ul>
-                            <li>운동화</li>
-                            <li>[옵션 : 아이보리 / 245]</li> <!--옵션 선택 안해도 찜할 수 있음-->
-                        </ul>
-                    </td>
-                    <td>30000</td>
-                    <td>1</td>
-                    <td>3000</td>
-                    <td>33000원</td>
-                    <td>
-                        <ul>
-                            <li><input type="button" name="btn_order" value="주문하기" style="background-color : black; color : white"></li>
-                            <li><input type="button" name="btn_addCart" value="장바구니 담기" style="background-color : #CCCCCC"></li>
-                            <li><input type="button" name="btn_delete" value="삭제" style="background-color : #CCCCCC">
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr class="wish_product">
-                    <td><input type="checkbox" class="chk" name="select_products" value=""></td>
-                    <td><img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img"></td>
-                    <td>
-                        <ul>
-                            <li>러닝화 </li>
-                            <li></li>
-                        </ul>
-                    </td>
-                    <td>55000</td>
-                    <td>2</td>
-                    <td>무료</td>
-                    <td>110000원</td>
-                    <td>
-                        <ul>
-                            <li><input type="button" name="btn_order" value="주문하기" style="background-color : black; color : white"></li>
-                            <li><input type="button" name="btn_addCart" value="장바구니 담기" style="background-color : #CCCCCC"></li>
-                            <li><input type="button" name="btn_delete" value="삭제" style="background-color : #CCCCCC">
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-            </table>
-            <div id="wish-btn">
-                <button class="left-btn" onclick="">삭제하기</button>
-                <button class="left-btn" onclick="">장바구니 담기</button>
-                <button class="right-btn" onclick="">관심상품 비우기</button>
-                <button class="right-btn" onclick="" style="background-color : black; color : white">전체 상품 주문</button>
-            </div>
+            <!-- ajax구현 -->
+            <div id="wishlist_target"></div>
+            
         </div>
     </article>
     <article id="HE_myboard">
@@ -293,8 +235,24 @@ $("#search_ordered").click(e=>{
 	let before=$("#before").val();
 	let after=$("#today").val();
 	location.assign("<%= request.getContextPath()%>/member/orderedSearch?before="+before+"&after="+after);
-	//location.assign("<%= request.getContextPath()%>/member/orderSearchAjax?before="+before+"&after="+after);
 });
+
+//관심상품 ajax
+$(function(){
+	$("#wishlistLi").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/member/wishlist?userNo=1",
+			/* data:{
+				
+			} */
+			type:"post",
+			success:data=>{
+				console.log(data);
+				$("#wishlist_target").html(data);
+			}
+		})
+	})
+})
 
 $(function(){
 	//내가쓴게시글 ajax해보기
@@ -313,19 +271,19 @@ $(function(){
 	});
 });
 
-$("#checkAll").click(e=>{
-	if($("#checkAll").is(":checked")){
-		$(".chk").prop("checked",true);
-	}else{
-		$(".chk").prop("checked",false);
+const fn_goshopping=()=>{
+	//찜한상품 없을 때 쇼핑하러가기 / 메인이 아닌 상품목록페이지로 이동하기
+	location.assign("<%= request.getContextPath()%>/product/productlist");
+}
+
+const fn_wish_delete=()=>{
+	//찜한상품 삭제
+	//회원번호 & 상품번호 넘기기
+	if(confirm("선택한 상품을 삭제하시겠습니까?")){
+		location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1");
+		<%-- location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1"+'<%=loginMember.getUserId()%>'); --%>
 	}
-});
-$(".chk").click(e=>{
-	if($("input[name='select_products']:checked").length==2){
-		$("#checkAll").prop("checked",true);
-	}else{
-		$("#checkAll").prop("checked",false);
-	}
-})
+}
+
 </script>
 <%@ include file="/views/common/footer.jsp"%>

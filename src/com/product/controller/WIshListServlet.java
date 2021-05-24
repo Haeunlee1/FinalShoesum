@@ -1,4 +1,4 @@
-package com.member.controller;
+package com.product.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.member.model.service.MemberService;
-import com.member.model.vo.Ordered;
+import com.product.model.service.ProductService;
+import com.product.model.vo.Product;
 
 /**
- * Servlet implementation class OrderedSearchAjaxServlet
+ * Servlet implementation class WIshListServlet
  */
-@WebServlet("/member/orderSearchAjax")
-public class OrderedSearchAjaxServlet extends HttpServlet {
+@WebServlet("/member/wishlist")
+public class WIshListServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderedSearchAjaxServlet() {
+    public WIshListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +32,13 @@ public class OrderedSearchAjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//기간 정해서 주문내역 가져오기
-		String before=request.getParameter("before");
-		String after=request.getParameter("after");
-		System.out.println(before+"/"+after);
-		//일단 아이디값으로 넘겨보기
-		String userId="111";
-		//String userId="test";
-	
-		List<Ordered> list = new MemberService().selectOrdered(userId,before,after);
-		request.setAttribute("orderList", list);
-		request.setAttribute("before", before);
-		request.setAttribute("after", after);
-		request.getRequestDispatcher("/views/mypage/ajax/orderedAjax.jsp").forward(request, response);
-
-	
-	
+		//찜한 상품 목록 가져오기
+		//아이디가 아닌 넘버로 가져오기
+		int userNo=Integer.parseInt(request.getParameter("userNo"));
+		//Product객체로 가져오기
+		List<Product> list = new ProductService().allWishes(userNo);
+		request.setAttribute("wishlist", list);
+		request.getRequestDispatcher("/views/mypage/wishlistAjax.jsp").forward(request, response);
 	
 	}
 

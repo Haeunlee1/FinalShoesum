@@ -38,7 +38,7 @@ public class MyboardListAjaxServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		List<Board> list = new BoardService().allBoards(memberNo);
 		request.setAttribute("boardList", list);
-		request.getRequestDispatcher("/views/mypage/ajax/myboardAjax.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/mypage/myboardAjax.jsp").forward(request, response);
 	
 	
 	

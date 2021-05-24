@@ -137,90 +137,8 @@ td.display_none+td+td{
 /*---관심상품 시작---*/
 /*관심상품 리스트*/
 
-/*찜한 상품 없을 때*/
-table#tbl-wishlist #wish_null td {
-    height : 300px;
-    font-size : 40px;
-    line-height : 50px;
-}
+/*관심상품테이블=>ajax로 넘김*/
 
-table#tbl-wishlist #wish_null td input {
-    width : 90px;
-    height : 30px;
-    background-color : #EAEAEA;
-    border : none;
-    border-radius : 5px;
-    cursor : pointer;
-}
-/* wish_content */
-
-.wish_content #tbl-wishlist {
-    border-collapse : collapse;
-    width : 100%;
-    border-top : 2px solid gray;
-    border-bottom : 2px solid gray;
-    text-align : center;
-    font-size : 13px;
-    height:auto;
-}
-
-table#tbl-wishlist tr{
-    border-bottom:1px black solid;
-}
-
-/*각 td별 사이즈*/
-.wish_content table tr td:first-child {
-    /* text-align : left; */
-    padding-left : 15px;
-}
-
-.wish_content table tr td:first-child , .wish_content table tr td:nth-child(5) {
-    width : 5%;
-}
-
-.wish_content table tr td:nth-child(4) , .wish_content table tr td:nth-child(6) {
-    width : 8%;
-}
-
-.wish_content table tr td:nth-child(2) {
-    width : 15%;
-    text-align : center;
-}
-
-.wish_content table tr td:nth-child(3){
-    width : 40%;
-}
-
-/*각 상품들 row*/
-table#tbl-wishlist .wish_product {
-    height : 120px;
-    font-size : 12px;
-}
-
-table#tbl-wishlist .wish_product td:nth-child(2) img {
-    width : 120px;
-    height : 100px; 
-}
-
-table#tbl-wishlist .wish_product td:nth-child(3){
-    text-align : left;
-    font-size : 14px;
-    line-height : 30px;
-    padding-top : 0px;
-    padding-bottom : 0px;
-}
-
-table#tbl-wishlist .wish_product td:last-child {
-    line-height : 33px;
-}
-
-table#tbl-wishlist .wish_product td:last-child input {
-    width : 100px;
-    height : 23px;
-    border : none;
-    border-radius : 7%;
-    cursor : pointer;
-}
 /*상품 밑 버튼*/
 div#wish-btn{
 	margin:20px 0 100px 0;
@@ -240,41 +158,8 @@ div#wish-btn button.right-btn{
 
 /*---관심상품 끝---*/
 
-/*---내가 쓴 게시글 =>ajax로 넘김, ajax페이지에서 css적용하기---*/
-/*게시글 리스트*/
-/* div#myboard-list>table#tbl-myboard{
-    width:1000px;
-    border-top:2px gray solid;
-    border-bottom:2px gray solid;
-    background-color: #EAEAEA;
-    border-collapse: collapse;
-    height:200px;
-}
-tbody#myboard_tbody tr:nth-child(2n-1){
-    background-color:white;
-}
-table#tbl-myboard th{
-    border-bottom:2px gray solid;
-    text-align: center;
-    height:40px;
-}
-table#tbl-myboard tr>td:first-child{
-    text-align: center;
-    width:8%;
-}
-table#tbl-myboard tr>:nth-child(3){
-    width:10%;
-    text-align: center;
-}
-table#tbl-myboard td, table#tbl-myboard th{
-     border-right: 1px black solid; 
-}
-table#tbl-myboard td:nth-child(3), table#tbl-myboard th:nth-child(3){
-    border-right:none;
-} 
-table#tbl-myboard td:nth-child(2){
-    padding-left: 20px;
-} */
+/*---내가 쓴 게시글 =>ajax로 넘김, ajax페이지에서 css적용하기 페이지바만 놔두기---*/
+
 /*페이지바*/
 div#pageBar{
     margin-top:100px; 
