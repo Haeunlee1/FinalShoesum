@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%@page import="java.util.List, com.member.model.vo.*" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style_HE.css" type="text/css">
 <%
 	//주문내역리스트
 	List<Ordered> list = (List<Ordered>)request.getAttribute("orderList");
@@ -41,104 +40,73 @@
         <div class="mypage_content">
             <p>주문 상품 정보</p>
             <table id="tbl-ordered">
-                <thead>
-                    <tr class="head_tr">
-                        <td >주문일자<br>[주문번호]</td>
-                        <td>이미지</td>
-                        <td>상품정보</td>
-                        <td>수량</td>
-                        <td>상품구매금액</td>
-                        <td>주문처리상태</td>
-                        <td>취소/교환/반품</td>
-                    </tr>
-                </thead>
-                <%-- <%if (list!=null){ 
-                	int pre=0;
-                	boolean flag=false;	
-                	for(int i=0;i<list.size();i++) {
-                		int count=0;
-                		pre=list.get(i).getOrderNo();
-                		System.out.println(pre);
-                		
-                		if(count==0){
-                			count+=1;
-                			for(int j=i+1;j<list.size();j++){
-                				flag=true;
-                				if(list.get(i).getOrderNo()==list.get(j).getOrderNo()){
-                					count++;
-                				}else{
-                					break;
-                				}
-                			}
-                		}
-                		String type="";   //신발 타입 분기
-                		if(list.get(i).getProNo().contains("m")) type="man";
-        				else if(list.get(i).getProNo().contains("w")) type="woman";
-        				else if(list.get(i).getProNo().contains("k")) type="kids";
-                %> --%>
-                <tbody class="ordered_tbody">
-                <%if(!list.isEmpty()){
-                	int pre=-1;
-                	int count=0;
-					int price=0;
-					boolean row=false;
-                for(int i=0;i<list.size();i++){
-					count=0;
-					String type="";
-                	switch(list.get(i).getProNo().substring(0,1)){
-                		case "m" :type="man";break;
-                		case "w" :type="woman";break;
-                		case "k" :type="kids";break;
-                	}
-                	for(int j=0;j<list.size();j++){
-                		if(list.get(i).getOrderNo()==list.get(j).getOrderNo()){
-                			count++;
-                			price+=(list.get(i).getProPrice()*list.get(i).getAmount());
-                		}
-                	System.out.println(i+"/"+price);
-                	}
-                	price=0;
-                %>
-                	<tr>
-                    <%if(pre==-1||pre!=list.get(i).getOrderNo()){
-                    	pre=list.get(i).getOrderNo();%>
-                        <td rowspan="<%=count%>"><%=list.get(i).getOrderDate() %><br>[<%=list.get(i).getOrderNo() %>]</td>
-                    <%}else if(pre!=-1||pre!=list.get(i).getOrderNo()){
-                    	row=true;
-                    }%>
-                        <td>
-                            <img alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=type %>/<%=list.get(i).getProImg()%>" id="product_img" name="product_img">
-                        </td>
-                        <td>
-                            <ul>
-                                <li><%=list.get(i).getProName() %></li>
-                                <li>[옵션 : <%=list.get(i).getProColor() %> / <%=list.get(i).getProSize() %>]</li>
-                            </ul>
-                        </td>
-                        <td><%=list.get(i).getAmount() %></td>
-                        <td><%=list.get(i).getProPrice() %></td>
-                        <td><%=list.get(i).getState().equals("on")?"배송완료":"배송준비중" %></td>
-                        <td>-</td>
-                    </tr>
-                    <% out.print(row);
-					out.print(list.get(i).getOrderNo());%>
-                    <!-- 분기문하나 넣어서 작성하기 / 주문번호가 바뀔 때  -->
-                    <%if (row){ 
-                    row=false;%>
-                    <tr id="total_price">
-                        <td colspan="7"><span>총 액 : <%=price %>원</span></td>
-                    </tr>
-                <%}
-                }%> 
-                </tbody>
-                <% } else{%>
-                
-                <tbody class="ordered_tbody">
-                    <tr id="ordered_null">
-                        <td colspan="7"><span>주문 내역이 없습니다.</span></td>
-                    </tr>
-                </tbody>
-                <%} %>
+            <thead>
+        <tr class="head_tr">
+            <td >주문일자<br>[주문번호]</td>
+            <td>이미지</td>
+            <td>상품정보</td>
+            <td>수량</td>
+            <td>상품구매금액</td>
+            <td>주문처리상태</td>
+            <td>취소/교환/반품</td>
+        </tr>
+    </thead>
+	<tbody class="ordered_tbody">
+		<%if(!list.isEmpty()){
+           	int pre=-1;
+           	int count=0;
+			int price=0;
+			boolean row=false;
+           for(int i=0;i<list.size();i++){
+				count=0;
+				String type="";
+           	switch(list.get(i).getProNo().substring(0,1)){
+           		case "m" :type="man";break;
+           		case "w" :type="woman";break;
+           		case "k" :type="kids";break;
+           	}
+           	for(int j=0;j<list.size();j++){
+           		if(list.get(i).getOrderNo()==list.get(j).getOrderNo()){
+           			count++;
+           		}
+           	}
+           	price+=(list.get(i).getAmount()*list.get(i).getProPrice());
+           %>
+             <tr>
+               <%if(pre==-1||pre!=list.get(i).getOrderNo()){
+                 	pre=list.get(i).getOrderNo();%>
+                   <td rowspan="<%=count%>"><%=list.get(i).getOrderDate() %><br>[<%=list.get(i).getOrderNo() %>]</td>
+               <%}else if(pre!=-1||pre!=list.get(i).getOrderNo()){
+                 	row=true;
+               }%>
+                 <td>
+                     <a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=list.get(i).getProNo()%>"><img title="<%=list.get(i).getProName()%>"alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=type %>/<%=list.get(i).getProImg()%>" id="product_img" name="product_img"></a>
+                 </td>
+                 <td>
+                     <ul>
+                         <li class="product_name"><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=list.get(i).getProNo()%>"><%=list.get(i).getProName() %></a></li>
+                         <li>[옵션 : <%=list.get(i).getProColor() %> / <%=list.get(i).getProSize() %>]</li>
+                     </ul>
+                 </td>
+                 <td><%=list.get(i).getAmount() %></td>
+                 <td><%=list.get(i).getProPrice() %></td>
+                 <td><%=list.get(i).getState().equals("on")?"배송완료":"배송준비중" %></td>
+                 <td>-</td>
+             </tr>
+                 <!-- 분기문하나 넣어서 작성하기 / 주문번호가 바뀔 때  -->
+             <%
+             }%> 
+                 <tr id="total_price">
+                     <td colspan="7"><span>총 주문금액 : <%=price %>원</span></td>
+                 </tr>
+             </tbody>
+             <% } else{%>
+	             <tbody class="ordered_tbody">
+	                 <tr id="ordered_null">
+	                     <td colspan="7"><span>주문 내역이 없습니다.</span></td>
+	                 </tr>
+	             </tbody>
+             <%} %>
             </table>
         </div>
     </article>
@@ -147,7 +115,7 @@
             <p>찜한 상품</p>
             <table id="tbl-wishlist">
                     <tr class="head_tr">
-                        <td><input type="checkbox" name="select_product" value=""></td> <!--전체체크 구현, 체크박스 사이즈는 style="zoom:1.5"-->
+                        <td><input type="checkbox" id="checkAll" name="select_product" style="zoom:1.2" value=""></td> <!--전체체크 구현, 체크박스 사이즈는 style="zoom:1.5"-->
                         <td>이미지</td>
                         <td>상품 정보</td>
                         <td>판매가</td>
@@ -165,7 +133,7 @@
                         </td>
                     </tr>
                 <tr class="wish_product">
-                    <td><input type="checkbox" name="select_products" value=""></td>
+                    <td><input type="checkbox" class="chk" name="select_products" value=""></td>
                     <td><img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img"></td>
                     <td>
                         <ul>
@@ -187,7 +155,7 @@
                     </td>
                 </tr>
                 <tr class="wish_product">
-                    <td><input type="checkbox" name="select_products" value=""></td>
+                    <td><input type="checkbox" class="chk" name="select_products" value=""></td>
                     <td><img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img"></td>
                     <td>
                         <ul>
@@ -221,38 +189,6 @@
     <article id="HE_myboard">
         <div id="myboard-list" class="mypage_content">
             <p>내가 쓴 게시글</p>
-            <!-- <table id="tbl-myboard">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>작성일</th>
-                    </tr>
-                </thead>
-                <tbody id="myboard_tbody">
-                    <tr>
-                        <td>4</td>
-                        <td><a href="">4번 게시글 입니다.</a></td>
-                        <td>날짜</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><a href="">3번 게시글 입니다.</a></td>
-                        <td>날짜</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><a href="">2번 게시글 입니다.</a></td>
-                        <td>날짜</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">1번 게시글 입니다.</a></td>
-                        <td>날짜</td>
-                    </tr>
-                </tbody>
-            </table> -->
-            
             <!-- ajax해보기 -->
             <div id="boardTarget"></div>
         </div>
@@ -338,7 +274,7 @@
                 </table>
                 <div id="profile_btn">
                     <input type="submit" value="수정" style="background-color : black; color : white" >
-                    <input type="button" value="취소" onclick=""><!-- 메인으로 돌아가기 -->
+                    <input type="reset" value="취소" onclick=""><!-- 메인으로 돌아가기 -->
                 </div>
                 <input type="hidden" id="memberNo" name="memberNo" value="1"> <!--member_no를 hidden으로 넘기기  -->
             </form>
@@ -357,7 +293,7 @@ $("#search_ordered").click(e=>{
 	let before=$("#before").val();
 	let after=$("#today").val();
 	location.assign("<%= request.getContextPath()%>/member/orderedSearch?before="+before+"&after="+after);
-	
+	//location.assign("<%= request.getContextPath()%>/member/orderSearchAjax?before="+before+"&after="+after);
 });
 
 $(function(){
@@ -377,5 +313,19 @@ $(function(){
 	});
 });
 
+$("#checkAll").click(e=>{
+	if($("#checkAll").is(":checked")){
+		$(".chk").prop("checked",true);
+	}else{
+		$(".chk").prop("checked",false);
+	}
+});
+$(".chk").click(e=>{
+	if($("input[name='select_products']:checked").length==2){
+		$("#checkAll").prop("checked",true);
+	}else{
+		$("#checkAll").prop("checked",false);
+	}
+})
 </script>
 <%@ include file="/views/common/footer.jsp"%>
