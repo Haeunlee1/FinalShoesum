@@ -50,6 +50,21 @@ public class CartDao {
 				c.setProNo(rs.getInt("PRO_NO"));
 				c.setProPrice(rs.getInt("PRO_PRICE"));
 				c.setProSize(rs.getInt("PRO_SIZE"));
+				
+				switch(c.getProImgSrc().substring(0,1)) {
+				case "k":
+					c.setProCate("kids");
+					break;
+					
+				case "m" :
+					c.setProCate("man");
+					break;
+					
+				case "w" :
+					c.setProCate("woman");
+					break;
+				}
+				
 				list.add(c);
 			}
 			

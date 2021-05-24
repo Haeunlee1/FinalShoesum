@@ -16,7 +16,7 @@
     <div class="cart_content">
         <table class="cart_table" id= "cart_table">
             <tr id="head_tr">
-                <td><input type="checkbox" name="select_product" value=""></td>
+                <td><input type="checkbox" name="select_product" id = "select_product" onclick ="contAll();"></td>
                 <td>이미지</td>
                 <td>상품 정보</td>
                 <td>판매가</td>
@@ -38,8 +38,8 @@
             	for(Cart c : list){
             	%>
             <tr class="cart_products">
-                <td><input type="checkbox" name="select_products" value></td>
-                <td><img src="<%=request.getContextPath() %>/images/ui/logo.png" alt=""></td>
+                <td><input type="checkbox" class="select_products" name="select_products" onclick = "calPrice()"></td>
+                <td><img src="<%=request.getContextPath() %>/images/product/<%=c.getProCate() %>/<%=c.getProImgSrc() %>" alt=""></td>
                 <td>
 
                     <ul>
@@ -74,11 +74,11 @@
                 <div>결제금액</div>
             </div>
             <div id="price_body_wrap">
-                <div></div>
+                <div>0</div>
                 <div>+</div>
                 <div>무료</div>
                 <div>=</div>
-                <div></div>
+                <div>0</div>
             </div>
         </div>
         <div id="order_end">
@@ -92,22 +92,51 @@
 
 	<script>
 	
-	window.onload = ()=>{
 	
-	let getPrice = document.getElementsByClassName("cart_total");
-    let total = 0;
+		
+        // window 객체 생성 제거 후 작동 ? 
 
-    for(i=0;i<getPrice.length;i++){
-        total += (Number)(getPrice[i].innerHTML);
-    }
+        const contAll = function(){
 
-    
+            const selectAll = document.getElementById("select_product");
+
+            if (selectAll.checked==true){
+
+                let calCheck = document.getElementsByClassName("select_products");
+                for(i=0;i<calCheck.length;i++){
+                    calCheck[i].checked = true;
+                }
+                calPrice();
+                selectAll.checked = false;
+
+            }
+        }
+
+
+        // 체크 시 제품가격 더하기 
+
+	    const calPrice = function(){
 	
-    let putTotal = document.getElementById("price_body_wrap").children;
-    putTotal[0].innerText = total;
-    putTotal[4].innerText = total;
-    
-	}
+		
+            let calCheck = document.getElementsByClassName("select_products");
+            let getPrice = document.getElementsByClassName("cart_total");
+    	    let total = 0;
+
+            for(i=0;i<calCheck.length;i++){
+            	
+                 if(calCheck[i].checked == true){
+
+                     total += (Number)(getPrice[i].innerHTML);
+
+                 }
+
+            }
+            
+    	    let putTotal = document.getElementById("price_body_wrap").children;
+    	    putTotal[0].innerText = total;
+    	    putTotal[4].innerText = total;
+
+		    } 
 	
 	</script>
 

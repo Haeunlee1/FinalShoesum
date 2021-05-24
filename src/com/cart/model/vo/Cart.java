@@ -11,6 +11,7 @@ public class Cart {
 	private int proSize;
 	private String proColor;
 	private String proImgSrc;
+	private String proCate;
 	private int memberNo;
 	
 	
@@ -24,7 +25,7 @@ public class Cart {
 
 
 	public Cart(int cartNo, int cartProCount, int proNo, String proName, int proPrice, int proSize, String proColor,
-			String proImgSrc, int memberNo) {
+			String proImgSrc, String proCate, int memberNo) {
 		super();
 		this.cartNo = cartNo;
 		this.cartProCount = cartProCount;
@@ -34,6 +35,7 @@ public class Cart {
 		this.proSize = proSize;
 		this.proColor = proColor;
 		this.proImgSrc = proImgSrc;
+		this.proCate = proCate;
 		this.memberNo = memberNo;
 	}
 
@@ -149,14 +151,20 @@ public class Cart {
 		this.proImgSrc = proImgSrc;
 	}
 
+	
+	public String getProCate() {
+		return proCate;
+	}
 
+
+	public void setProCate(String proCate) {
+		this.proCate = proCate;
+	}
 
 
 	public int getMemberNo() {
 		return memberNo;
 	}
-
-
 
 
 	public void setMemberNo(int memberNo) {
