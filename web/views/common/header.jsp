@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.member.model.vo.Member" %>
 <%
-	//로그인된 객체 
+	//로그인된 객체
+	Member loginMember=(Member)session.getAttribute("loginMember");
 
 
-%>
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +33,11 @@
         <!-- 공통 header 시작-->
         <header>
             <ul id="header_top">
-                <li><a href="">로그인</a></li>
+            	<%if(loginMember==null) { %>
+                	<li><a href="<%=request.getContextPath() %>/views/login/login.jsp">로그인</a></li>
+                <%}else { %>
+                	<li><a href="<%=request.getContextPath() %>/logout">로그아웃<a></a></li>
+                <%} %>
                 <li><a href="">회원가입</a></li>
                 <li><a href="">질문게시판</a></li>
                 <li><a href="">자주묻는질문</a></li>
@@ -43,7 +49,7 @@
             </div>
             <div id="direct_ui">
                 <a href="<%=request.getContextPath()%>/member/mypage.do?"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
-                <a href="<%=request.getContextPath()%>/cart/cartView?userNo=1"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
+                <a href="<%=request.getContextPath()%>/cart/cartView?userNo=0"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
             </div>
         </header>
         <nav>

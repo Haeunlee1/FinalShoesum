@@ -1,19 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<%@page import="java.util.List, com.member.model.vo.*" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style_HE.css" type="text/css">
+<%@page import="java.util.List, com.member.model.vo.*,com.product.model.vo.*" %>
+<%@ page import="java.text.*"%>
 <%
 	//주문내역리스트
-	List<Ordered> list = (List<Ordered>)request.getAttribute("orderList");
-
+	List<Ordered> orderList = (List<Ordered>)request.getAttribute("orderList");
+	//기간 지정한 날짜 값 before
+	String before =(String)request.getAttribute("before");
+	String after=(String) request.getAttribute("after");
+	
 %>
+
 
 <section id="HE_section">
     <ul id="mypage_nav">
         <li class="selectli">주문내역</li>
-        <li class="noselectli">관심상품</li>
-        <li class="noselectli">내가 쓴 게시글</li>
+        <li id="wishlistLi"class="noselectli">관심상품</li>
+        <li id="boardListLi" class="noselectli">내가 쓴 게시글</li>
         <li class="noselectli">회원 정보 수정</li>
     </ul>
     <article id="HE_ordered">
@@ -24,7 +28,7 @@
                 <li><button>1개월</button></li>
                 <li><button>3개월</button></li>
                 <li><button>6개월</button></li>
-                <li><input type="date" id="before"></li>
+                <li><input type="date" id="before" value=''></li> <%-- <%=before!=null?before:" " %> --%>
                 <li><span>&nbsp;&nbsp;~&nbsp;&nbsp; </span></li>
                 <li><input type="date" id="today"></li>
                 <li><button id="search_ordered">조회</button></li>
@@ -38,249 +42,97 @@
         <div class="mypage_content">
             <p>주문 상품 정보</p>
             <table id="tbl-ordered">
-                <thead>
-                    <tr class="head_tr">
-                        <td >주문일자<br>[주문번호]</td>
-                        <td>이미지</td>
-                        <td>상품정보</td>
-                        <td>수량</td>
-                        <td>상품구매금액</td>
-                        <td>주문처리상태</td>
-                        <td>취소/교환/반품</td>
-                    </tr>
-                </thead>
-                <%if (list!=null){ 
-                	for(Ordered o : list) {
-                %>
-                <tbody class="ordered_tbody">
-                    <tr id="">
-                        <td rowspan="3"><%=o.getOrderDate() %><br>[<%=o.getOrderNo() %>]</td>
-                        <td class="display_none"></td>
-                        <td>
-                            <img alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=o.getProImg()%>" id="product_img" name="product_img">
-                        </td>
-                        <td>
-                            <ul>
-                                <li><%=o.getProName() %></li>
-                                <li>[옵션 : <%=o.getProColor() %> / <%=o.getProSize() %>]</li>
-                            </ul>
-                        </td>
-                        <td><%=o.getAmount() %></td>
-                        <td><%=o.getProPrice() %></td>
-                        <td><%=o.getState().equals("on")?"배송완료":"배송준비중" %></td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td class="display_none"></td> <!--테이블 맞추기 위해 none 함-->
-                        <td>
-                            <img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img">
-                        </td>
-                        <td>
-                            <ul>
-                                <li>구두</li>
-                                <li>[옵션 : 검정 / 230]</li>
-                            </ul>
-                        </td>
-                        <td>1</td>
-                        <td>30000</td>
-                        <td>배송완료</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td class="display_none"></td>
-                        <td>
-                            <img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img">
-                        </td>
-                        <td>
-                            <ul>
-                                <li>부츠</li>
-                                <li>[옵션 : 브라운 / 265]</li>
-                            </ul>
-                        </td>
-                        <td>1</td>
-                        <td>30000</td>
-                        <td>배송완료</td>
-                        <td>-</td>
-                    </tr>
-                    <tr id="total_price">
-                        <td colspan="7"><span>총 액 : 90000원</span></td>
-                    </tr>
-                </tbody>
-                <%} 
-                } else{%>
-                <!-- <tbody class="ordered_tbody">
-                    <tr id="">
-                        <td rowspan="3">0000-00-00<br>[주문번호]</td>
-                        <td class="display_none"></td>
-                        <td>
-                            <img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img">
-                        </td>
-                        <td>
-                            <ul>
-                                <li>운동화</li>
-                                <li>[옵션 : 아이보리 / 245]</li>
-                            </ul>
-                        </td>
-                        <td>1</td>
-                        <td>30000</td>
-                        <td>배송완료</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td class="display_none"></td> 테이블 맞추기 위해 none 함
-                        <td>
-                            <img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img">
-                        </td>
-                        <td>
-                            <ul>
-                                <li>구두</li>
-                                <li>[옵션 : 검정 / 230]</li>
-                            </ul>
-                        </td>
-                        <td>1</td>
-                        <td>30000</td>
-                        <td>배송완료</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td class="display_none"></td>
-                        <td>
-                            <img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img">
-                        </td>
-                        <td>
-                            <ul>
-                                <li>부츠</li>
-                                <li>[옵션 : 브라운 / 265]</li>
-                            </ul>
-                        </td>
-                        <td>1</td>
-                        <td>30000</td>
-                        <td>배송완료</td>
-                        <td>-</td>
-                    </tr>
-                    <tr id="total_price">
-                        <td colspan="7"><span>총 액 : 90000원</span></td>
-                    </tr>
-                </tbody> -->
-                <tbody class="ordered_tbody">
-                    <tr id="ordered_null">
-                        <td colspan="7"><span>주문 내역이 없습니다.</span></td>
-                    </tr>
-                </tbody>
-                <%} %>
+            <thead>
+        <tr class="head_tr">
+            <td >주문일자<br>[주문번호]</td>
+            <td>이미지</td>
+            <td>상품정보</td>
+            <td>수량</td>
+            <td>상품구매금액</td>
+            <td>주문처리상태</td>
+            <td>취소/교환/반품</td>
+        </tr>
+    </thead>
+	<tbody class="ordered_tbody">
+		<%if(!orderList.isEmpty()){
+           	int pre=-1;
+           	int count=0;
+			int price=0;
+			boolean row=false;
+           for(int i=0;i<orderList.size();i++){
+				count=0;
+				String type="";
+           	switch(orderList.get(i).getProNo().substring(0,1)){
+           		case "m" :type="man";break;
+           		case "w" :type="woman";break;
+           		case "k" :type="kids";break;
+           	}
+           	for(int j=0;j<orderList.size();j++){
+           		if(orderList.get(i).getOrderNo()==orderList.get(j).getOrderNo()){
+           			count++;
+           		}
+           	}
+           	price+=(orderList.get(i).getAmount()*orderList.get(i).getProPrice());
+           %>
+             <tr>
+               <%if(pre==-1||pre!=orderList.get(i).getOrderNo()){
+                 	pre=orderList.get(i).getOrderNo();%>
+                   <td rowspan="<%=count%>"><%=orderList.get(i).getOrderDate() %><br>[<%=orderList.get(i).getOrderNo() %>]</td>
+               <%}else if(pre!=-1||pre!=orderList.get(i).getOrderNo()){
+                 	row=true;
+               }%>
+                 <td>
+                     <a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=orderList.get(i).getProNo()%>">
+                     <img title="<%=orderList.get(i).getProName()%>"alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=type %>/<%=orderList.get(i).getProImg()%>" id="product_img" name="product_img">
+                     </a>
+                 </td>
+                 <td>
+                     <ul>
+                         <li class="product_name">
+                         	<a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=orderList.get(i).getProNo()%>"><%=orderList.get(i).getProName() %></a>
+                         </li>
+                         <li>[옵션 : <%=orderList.get(i).getProColor() %> / <%=orderList.get(i).getProSize() %>]</li>
+                     </ul>
+                 </td>
+                 <td><%=orderList.get(i).getAmount() %></td>
+                 <td><%=orderList.get(i).getProPrice() %></td>
+                 <td><%=orderList.get(i).getState().equals("on")?"배송완료":"배송준비중" %></td>
+                 <td>-</td>
+             </tr>
+             <%
+             }%> 
+             <%	//회계형식 표현하기
+					DecimalFormat df = new DecimalFormat("#,###,###");
+					int val = price;
+					%>
+                 <tr id="total_price">
+                     <td colspan="7"><span>총 주문금액 : <%=df.format(val) %>원</span></td>
+
+                 </tr>
+             </tbody>
+             <% } else{%>
+	             <tbody class="ordered_tbody">
+	                 <tr id="ordered_null">
+	                     <td colspan="7"><span>주문 내역이 없습니다.</span></td>
+	                 </tr>
+	             </tbody>
+             <%} %>
             </table>
         </div>
     </article>
     <article id="HE_wishlist">
         <div class="wish_content mypage_content">
             <p>찜한 상품</p>
-            <table id="tbl-wishlist">
-                    <tr class="head_tr">
-                        <td><input type="checkbox" name="select_product" value=""></td> <!--전체체크 구현, 체크박스 사이즈는 style="zoom:1.5"-->
-                        <td>이미지</td>
-                        <td>상품 정보</td>
-                        <td>판매가</td>
-                        <td>수량</td>
-                        <td>배송비</td>
-                        <td>합계</td>
-                        <td>선택</td>
-                    </tr>
-                    <tr id="wish_null">
-                        <td colspan="8">
-                            <ul>
-                                <li>찜한 상품이 없습니다.</li>
-                                <li><input type="button" value="쇼핑하러가기" onclick="fn_goshopping();"></li>
-                            </ul>
-                        </td>
-                    </tr>
-                <tr class="wish_product">
-                    <td><input type="checkbox" name="select_products" value=""></td>
-                    <td><img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img"></td>
-                    <td>
-                        <ul>
-                            <li>운동화</li>
-                            <li>[옵션 : 아이보리 / 245]</li> <!--옵션 선택 안해도 찜할 수 있음-->
-                        </ul>
-                    </td>
-                    <td>30000</td>
-                    <td>1</td>
-                    <td>3000</td>
-                    <td>33000원</td>
-                    <td>
-                        <ul>
-                            <li><input type="button" name="btn_order" value="주문하기" style="background-color : black; color : white"></li>
-                            <li><input type="button" name="btn_addCart" value="장바구니 담기" style="background-color : #CCCCCC"></li>
-                            <li><input type="button" name="btn_delete" value="삭제" style="background-color : #CCCCCC">
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr class="wish_product">
-                    <td><input type="checkbox" name="select_products" value=""></td>
-                    <td><img alt="제품이미지" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kJDojQTm_yBdrWpp4yWLjhWXLJkWPNqmkw&usqp=CAU" id="product_img" name="product_img"></td>
-                    <td>
-                        <ul>
-                            <li>러닝화 </li>
-                            <li></li>
-                        </ul>
-                    </td>
-                    <td>55000</td>
-                    <td>2</td>
-                    <td>무료</td>
-                    <td>110000원</td>
-                    <td>
-                        <ul>
-                            <li><input type="button" name="btn_order" value="주문하기" style="background-color : black; color : white"></li>
-                            <li><input type="button" name="btn_addCart" value="장바구니 담기" style="background-color : #CCCCCC"></li>
-                            <li><input type="button" name="btn_delete" value="삭제" style="background-color : #CCCCCC">
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-            </table>
-            <div id="wish-btn">
-                <button class="left-btn" onclick="">삭제하기</button>
-                <button class="left-btn" onclick="">장바구니 담기</button>
-                <button class="right-btn" onclick="">관심상품 비우기</button>
-                <button class="right-btn" onclick="" style="background-color : black; color : white">전체 상품 주문</button>
-            </div>
+            <!-- ajax구현 -->
+            <div id="wishlist_target"></div>
+            
         </div>
     </article>
     <article id="HE_myboard">
         <div id="myboard-list" class="mypage_content">
             <p>내가 쓴 게시글</p>
-            <table id="tbl-myboard">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>작성일</th>
-                    </tr>
-                </thead>
-                <tbody id="myboard_tbody">
-                    <tr>
-                        <td>4</td>
-                        <td><a href="">4번 게시글 입니다.</a></td>
-                        <td>날짜</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><a href="">3번 게시글 입니다.</a></td>
-                        <td>날짜</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><a href="">2번 게시글 입니다.</a></td>
-                        <td><a href="">날짜</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="">1번 게시글 입니다.</a></td>
-                        <td>날짜</td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- ajax해보기 -->
+            <div id="boardTarget"></div>
         </div>
         <div id="pageBar">
             <div class="pageBar-icon">&lt;</div>
@@ -364,7 +216,7 @@
                 </table>
                 <div id="profile_btn">
                     <input type="submit" value="수정" style="background-color : black; color : white" >
-                    <input type="button" value="취소" onclick=""><!-- 메인으로 돌아가기 -->
+                    <input type="reset" value="취소" onclick=""><!-- 메인으로 돌아가기 -->
                 </div>
                 <input type="hidden" id="memberNo" name="memberNo" value="1"> <!--member_no를 hidden으로 넘기기  -->
             </form>
@@ -382,8 +234,56 @@ $("#search_ordered").click(e=>{
 	//alert($("#before").val()+"/"+$("#today").val());
 	let before=$("#before").val();
 	let after=$("#today").val();
-	location.assign("<%=request.getContextPath()%>/member/orderedSearch?before="+before+"&after="+after);
-	
+	location.assign("<%= request.getContextPath()%>/member/orderedSearch?before="+before+"&after="+after);
 });
+
+//관심상품 ajax
+$(function(){
+	$("#wishlistLi").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/member/wishlist?userNo=1",
+			/* data:{
+				
+			} */
+			type:"post",
+			success:data=>{
+				console.log(data);
+				$("#wishlist_target").html(data);
+			}
+		})
+	})
+})
+
+$(function(){
+	//내가쓴게시글 ajax해보기
+	$("#boardListLi").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/member/myboardList",
+			/* data:{
+				id //추후에 로그인 아이디 넘겨주기
+			} */
+			type:"post",
+			success:data=>{
+				console.log(data);				
+				$("#boardTarget").html(data);
+			}
+		})
+	});
+});
+
+const fn_goshopping=()=>{
+	//찜한상품 없을 때 쇼핑하러가기 / 메인이 아닌 상품목록페이지로 이동하기
+	location.assign("<%= request.getContextPath()%>/product/productlist");
+}
+
+const fn_wish_delete=()=>{
+	//찜한상품 삭제
+	//회원번호 & 상품번호 넘기기
+	if(confirm("선택한 상품을 삭제하시겠습니까?")){
+		location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1");
+		<%-- location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1"+'<%=loginMember.getUserId()%>'); --%>
+	}
+}
+
 </script>
 <%@ include file="/views/common/footer.jsp"%>

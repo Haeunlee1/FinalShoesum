@@ -16,6 +16,14 @@ public class MemberService {
 	
 	private MemberDao dao= new MemberDao();
 	
+	public Member login(String memberId, String memberPw) {
+		//로그인
+		Connection conn=getConnection();
+		Member m=dao.login(conn, memberId, memberPw);
+		close(conn);
+		return m;
+	}
+	
 	public List<Ordered> basicOrdered(String id){
 		//기본 주문내역 페이지
 		Connection conn=getConnection();

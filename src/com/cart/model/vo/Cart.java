@@ -3,14 +3,15 @@ package com.cart.model.vo;
 public class Cart {
 	
 	
-	private int cartNum;
+	private int cartNo;
 	private int cartProCount;
-	private int proNum;
+	private String proNo;
 	private String proName;
 	private int proPrice;
 	private int proSize;
 	private String proColor;
 	private String proImgSrc;
+	private String proCate;
 	private int memberNo;
 	
 	
@@ -23,32 +24,33 @@ public class Cart {
 
 
 
-	public Cart(int cartNum, int cartProCount, int proNum, String proName, int proPrice, int proSize, String proColor,
-			String proImgSrc, int memberNo) {
+	public Cart(int cartNo, int cartProCount, String proNo, String proName, int proPrice, int proSize, String proColor,
+			String proImgSrc, String proCate, int memberNo) {
 		super();
-		this.cartNum = cartNum;
+		this.cartNo = cartNo;
 		this.cartProCount = cartProCount;
-		this.proNum = proNum;
+		this.proNo= proNo;
 		this.proName = proName;
 		this.proPrice = proPrice;
 		this.proSize = proSize;
 		this.proColor = proColor;
 		this.proImgSrc = proImgSrc;
+		this.proCate = proCate;
 		this.memberNo = memberNo;
 	}
 
 
 
 
-	public int getCartNum() {
-		return cartNum;
+	public int getCartNo() {
+		return cartNo;
 	}
 
 
 
 
-	public void setCartNum(int cartNum) {
-		this.cartNum = cartNum;
+	public void setCartNo(int cartNo) {
+		this.cartNo= cartNo;
 	}
 
 
@@ -68,15 +70,15 @@ public class Cart {
 
 
 
-	public int getProNum() {
-		return proNum;
+	public String getProNo() {
+		return proNo;
 	}
 
 
 
 
-	public void setProNum(int proNum) {
-		this.proNum = proNum;
+	public void setProNo(String proNo) {
+		this.proNo= proNo;
 	}
 
 
@@ -149,14 +151,20 @@ public class Cart {
 		this.proImgSrc = proImgSrc;
 	}
 
+	
+	public String getProCate() {
+		return proCate;
+	}
 
+
+	public void setProCate(String proCate) {
+		this.proCate = proCate;
+	}
 
 
 	public int getMemberNo() {
 		return memberNo;
 	}
-
-
 
 
 	public void setMemberNo(int memberNo) {

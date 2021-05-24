@@ -28,10 +28,10 @@ public class CartService {
 		return list;
 	}
 	
-	public int cartDelete(int cartNum) {
+	public int cartDelete(int cartNo) {
 		
 		Connection conn = getConnection();
-		int result = dao.cartDelete(conn,cartNum);
+		int result = dao.cartDelete(conn,cartNo);
 		if(result>0) {
 			commit(conn);
 		} else {

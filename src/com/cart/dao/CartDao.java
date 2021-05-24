@@ -41,15 +41,30 @@ public class CartDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Cart c = new Cart();
-				c.setCartNum(rs.getInt("CART_NUMBER"));
+				c.setCartNo(rs.getInt("CART_NUMBER"));
 				c.setCartProCount(rs.getInt("PRO_COUNT"));
 				c.setMemberNo(rs.getInt("MEMBER_NO"));
 				c.setProColor(rs.getString("PRO_COLOR"));
-				c.setProImgSrc(rs.getString("IMG_SRC"));
+				c.setProImgSrc(rs.getString("IMG_SRC1"));
 				c.setProName(rs.getString("PRO_NAME"));
-				c.setProNum(rs.getInt("PRO_NO"));
+				c.setProNo(rs.getString("PRO_NO"));
 				c.setProPrice(rs.getInt("PRO_PRICE"));
 				c.setProSize(rs.getInt("PRO_SIZE"));
+				
+				switch(c.getProImgSrc().substring(0,1)) {
+				case "k":
+					c.setProCate("kids");
+					break;
+					
+				case "m" :
+					c.setProCate("man");
+					break;
+					
+				case "w" :
+					c.setProCate("woman");
+					break;
+				}
+				
 				list.add(c);
 			}
 			
@@ -64,14 +79,14 @@ public class CartDao {
 		
 	}
 	
-	public int cartDelete(Connection conn , int cartNum) {
+	public int cartDelete(Connection conn , int cartNo) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("cartDelete"));
-			pstmt.setInt(1, cartNum);
+			pstmt.setInt(1, cartNo);
 			result = pstmt.executeUpdate();
 			
 		} catch(SQLException e) {
