@@ -45,9 +45,9 @@ public class CartDao {
 				c.setCartProCount(rs.getInt("PRO_COUNT"));
 				c.setMemberNo(rs.getInt("MEMBER_NO"));
 				c.setProColor(rs.getString("PRO_COLOR"));
-				c.setProImgSrc(rs.getString("IMG_SRC"));
+				c.setProImgSrc(rs.getString("IMG_SRC1"));
 				c.setProName(rs.getString("PRO_NAME"));
-				c.setProNo(rs.getInt("PRO_NO"));
+				c.setProNo(rs.getString("PRO_NO"));
 				c.setProPrice(rs.getInt("PRO_PRICE"));
 				c.setProSize(rs.getInt("PRO_SIZE"));
 				

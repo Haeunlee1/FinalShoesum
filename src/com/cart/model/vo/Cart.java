@@ -5,7 +5,7 @@ public class Cart {
 	
 	private int cartNo;
 	private int cartProCount;
-	private int proNo;
+	private String proNo;
 	private String proName;
 	private int proPrice;
 	private int proSize;
@@ -24,7 +24,7 @@ public class Cart {
 
 
 
-	public Cart(int cartNo, int cartProCount, int proNo, String proName, int proPrice, int proSize, String proColor,
+	public Cart(int cartNo, int cartProCount, String proNo, String proName, int proPrice, int proSize, String proColor,
 			String proImgSrc, String proCate, int memberNo) {
 		super();
 		this.cartNo = cartNo;
@@ -70,14 +70,14 @@ public class Cart {
 
 
 
-	public int getProNo() {
+	public String getProNo() {
 		return proNo;
 	}
 
 
 
 
-	public void setProNo(int proNo) {
+	public void setProNo(String proNo) {
 		this.proNo= proNo;
 	}
 
