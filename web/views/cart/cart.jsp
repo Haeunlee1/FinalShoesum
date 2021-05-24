@@ -16,7 +16,7 @@
     <div class="cart_content">
         <table class="cart_table" id= "cart_table">
             <tr id="head_tr">
-                <td><input type="checkbox" name="select_product" value=""></td>
+                <td><input type="checkbox" name="select_product" id = "select_product" onclick ="contAll();"></td>
                 <td>이미지</td>
                 <td>상품 정보</td>
                 <td>판매가</td>
@@ -38,14 +38,14 @@
             	for(Cart c : list){
             	%>
             <tr class="cart_products">
-                <td><input type="checkbox" name="select_products" value></td>
-                <td><img src="<%=request.getContextPath() %>/images/ui/logo.png" alt=""></td>
+                <td><input type="checkbox" class="select_products" name="select_products" onclick = "calPrice()"></td>
+                <td><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=c.getProNo()%>"><img src="<%=request.getContextPath() %>/images/product/<%=c.getProCate() %>/<%=c.getProImgSrc() %>" alt=""></a></td>
                 <td>
 
                     <ul>
-                        <li>제품 명 : <%=c.getProName() %> </li>
-                        <li>사이즈 : <%=c.getProSize() %></li>
-                        <li>색상 : <%= c.getProColor() %></li>
+                        <li><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=c.getProNo()%>">제품 명 : <%=c.getProName() %></a> </li>
+                        <li><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=c.getProNo()%>">사이즈 : <%=c.getProSize() %></a></li>
+                        <li><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=c.getProNo()%>">색상 : <%= c.getProColor() %></a></li>
                     </ul>
 
                 </td>
@@ -55,9 +55,8 @@
                 <td class="cart_total"><%= (c.getProPrice() * c.getCartProCount()) %></td>
                 <td>
                     <ul>
-                        <li><input type="button" name="btn_order" value="주문하기"
-                                style="background-color : black; color : white"></li>
-                        <li><input type="button" name="btn_delete" value="삭제" style="background-color : #CCCCCC" onclick="location.replace('<%=request.getContextPath()%>/cart/cartDelete?cartNo=<%=c.getCartNum()%>&userNo=<%=c.getMemberNo()%>')">
+                        <li><input type="button" name="btn_order" value = "주문하기" style="background-color : black; color : white" ></li>
+                        <li><input type="button" name="btn_delete" value="삭제" style="background-color : #CCCCCC" onclick="location.replace('<%=request.getContextPath()%>/cart/cartDelete?cartNo=<%=c.getCartNo()%>&userNo=<%=c.getMemberNo()%>')">
                         </li>
                     </ul>
 
@@ -74,11 +73,11 @@
                 <div>결제금액</div>
             </div>
             <div id="price_body_wrap">
-                <div>1000</div>
+                <div>0</div>
                 <div>+</div>
                 <div>무료</div>
                 <div>=</div>
-                <div>1000</div>
+                <div>0</div>
             </div>
         </div>
         <div id="order_end">
@@ -87,12 +86,56 @@
         <%} %>
     </div>
 	
+	
 </section>
 
 	<script>
 	
-	let getPrice =  document.querySelectorAll('.cart_total');
-	let total = 0;
+	
+		
+        // window 객체 생성 제거 후 작동 ? 
+
+        const contAll = function(){
+
+            const selectAll = document.getElementById("select_product");
+
+            if (selectAll.checked==true){
+
+                let calCheck = document.getElementsByClassName("select_products");
+                for(i=0;i<calCheck.length;i++){
+                    calCheck[i].checked = true;
+                }
+                calPrice();
+                selectAll.checked = false;
+
+            }
+        }
+
+
+        // 체크 시 제품가격 더하기 
+
+	    const calPrice = function(){
+	
+		
+            let calCheck = document.getElementsByClassName("select_products");
+            let getPrice = document.getElementsByClassName("cart_total");
+    	    let total = 0;
+
+            for(i=0;i<calCheck.length;i++){
+            	
+                 if(calCheck[i].checked == true){
+
+                     total += (Number)(getPrice[i].innerHTML);
+
+                 }
+
+            }
+            
+    	    let putTotal = document.getElementById("price_body_wrap").children;
+    	    putTotal[0].innerText = total;
+    	    putTotal[4].innerText = total;
+
+		    } 
 	
 	</script>
 
