@@ -31,19 +31,22 @@ public class CartDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String userNum = request.getParameter("userNo");
-		int cartNum = Integer.parseInt(request.getParameter("cartNo"));
-		int result = new CartService().cartDelete(cartNum);
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int cartNo = Integer.parseInt(request.getParameter("cartNo"));
+		int result = new CartService().cartDelete(cartNo);
 		String msg = "";
-		String loc = "";
+		String loc = "/cart/cartView?userNo="+userNo;
+		
 		
 		if(!(result>0)) {
 			msg = "삭제 실패";
-			loc = "cart/cartView?userNo="+userNum;
+			
 		} else {
 			msg = "삭제 성공";
-			loc = "cart/cartView?userNo="+userNum;
 		}
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		

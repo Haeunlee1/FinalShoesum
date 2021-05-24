@@ -3,9 +3,9 @@ package com.cart.model.vo;
 public class Cart {
 	
 	
-	private int cartNum;
+	private int cartNo;
 	private int cartProCount;
-	private int proNum;
+	private int proNo;
 	private String proName;
 	private int proPrice;
 	private int proSize;
@@ -23,12 +23,12 @@ public class Cart {
 
 
 
-	public Cart(int cartNum, int cartProCount, int proNum, String proName, int proPrice, int proSize, String proColor,
+	public Cart(int cartNo, int cartProCount, int proNo, String proName, int proPrice, int proSize, String proColor,
 			String proImgSrc, int memberNo) {
 		super();
-		this.cartNum = cartNum;
+		this.cartNo = cartNo;
 		this.cartProCount = cartProCount;
-		this.proNum = proNum;
+		this.proNo= proNo;
 		this.proName = proName;
 		this.proPrice = proPrice;
 		this.proSize = proSize;
@@ -40,15 +40,15 @@ public class Cart {
 
 
 
-	public int getCartNum() {
-		return cartNum;
+	public int getCartNo() {
+		return cartNo;
 	}
 
 
 
 
-	public void setCartNum(int cartNum) {
-		this.cartNum = cartNum;
+	public void setCartNo(int cartNo) {
+		this.cartNo= cartNo;
 	}
 
 
@@ -68,15 +68,15 @@ public class Cart {
 
 
 
-	public int getProNum() {
-		return proNum;
+	public int getProNo() {
+		return proNo;
 	}
 
 
 
 
-	public void setProNum(int proNum) {
-		this.proNum = proNum;
+	public void setProNo(int proNo) {
+		this.proNo= proNo;
 	}
 
 

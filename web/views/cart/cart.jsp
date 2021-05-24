@@ -57,7 +57,7 @@
                     <ul>
                         <li><input type="button" name="btn_order" value="주문하기"
                                 style="background-color : black; color : white"></li>
-                        <li><input type="button" name="btn_delete" value="삭제" style="background-color : #CCCCCC" onclick="location.replace('<%=request.getContextPath()%>/cart/cartDelete?cartNo=<%=c.getCartNum()%>&userNo=<%=c.getMemberNo()%>')">
+                        <li><input type="button" name="btn_delete" value="삭제" style="background-color : #CCCCCC" onclick="location.replace('<%=request.getContextPath()%>/cart/cartDelete?cartNo=<%=c.getCartNo()%>&userNo=<%=c.getMemberNo()%>')">
                         </li>
                     </ul>
 
@@ -74,11 +74,11 @@
                 <div>결제금액</div>
             </div>
             <div id="price_body_wrap">
-                <div>1000</div>
+                <div></div>
                 <div>+</div>
                 <div>무료</div>
                 <div>=</div>
-                <div>1000</div>
+                <div></div>
             </div>
         </div>
         <div id="order_end">
@@ -87,12 +87,27 @@
         <%} %>
     </div>
 	
+	
 </section>
 
 	<script>
 	
-	let getPrice =  document.querySelectorAll('.cart_total');
-	let total = 0;
+	window.onload = ()=>{
+	
+	let getPrice = document.getElementsByClassName("cart_total");
+    let total = 0;
+
+    for(i=0;i<getPrice.length;i++){
+        total += (Number)(getPrice[i].innerHTML);
+    }
+
+    
+	
+    let putTotal = document.getElementById("price_body_wrap").children;
+    putTotal[0].innerText = total;
+    putTotal[4].innerText = total;
+    
+	}
 	
 	</script>
 
