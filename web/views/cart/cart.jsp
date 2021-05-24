@@ -39,13 +39,13 @@
             	%>
             <tr class="cart_products">
                 <td><input type="checkbox" class="select_products" name="select_products" onclick = "calPrice()"></td>
-                <td><img src="<%=request.getContextPath() %>/images/product/<%=c.getProCate() %>/<%=c.getProImgSrc() %>" alt=""></td>
+                <td><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=c.getProNo()%>"><img src="<%=request.getContextPath() %>/images/product/<%=c.getProCate() %>/<%=c.getProImgSrc() %>" alt=""></a></td>
                 <td>
 
                     <ul>
-                        <li>제품 명 : <%=c.getProName() %> </li>
-                        <li>사이즈 : <%=c.getProSize() %></li>
-                        <li>색상 : <%= c.getProColor() %></li>
+                        <li><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=c.getProNo()%>">제품 명 : <%=c.getProName() %></a> </li>
+                        <li><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=c.getProNo()%>">사이즈 : <%=c.getProSize() %></a></li>
+                        <li><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=c.getProNo()%>">색상 : <%= c.getProColor() %></a></li>
                     </ul>
 
                 </td>
@@ -55,8 +55,7 @@
                 <td class="cart_total"><%= (c.getProPrice() * c.getCartProCount()) %></td>
                 <td>
                     <ul>
-                        <li><input type="button" name="btn_order" value="주문하기"
-                                style="background-color : black; color : white"></li>
+                        <li><input type="button" name="btn_order" value = "주문하기" style="background-color : black; color : white" ></li>
                         <li><input type="button" name="btn_delete" value="삭제" style="background-color : #CCCCCC" onclick="location.replace('<%=request.getContextPath()%>/cart/cartDelete?cartNo=<%=c.getCartNo()%>&userNo=<%=c.getMemberNo()%>')">
                         </li>
                     </ul>

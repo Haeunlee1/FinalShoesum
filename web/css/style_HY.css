@@ -244,9 +244,8 @@ table#cart_table .cart_products {
 
 
 table#cart_table .cart_products td:nth-child(2) img {
-    width : 85px;
-    height : 85px;
-    
+    width : 120px;
+    height : 95px;
 }
 
 table#cart_table .cart_products td:nth-child(3){
