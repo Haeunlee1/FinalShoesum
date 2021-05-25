@@ -74,7 +74,7 @@
            	}
            	price+=(orderList.get(i).getAmount()*orderList.get(i).getProPrice());
            %>
-             <tr>
+             <tr><%out.print(pre);out.print(orderList.get(i).getOrderNo()); %>
                <%if(pre==-1||pre!=orderList.get(i).getOrderNo()){
                  	pre=orderList.get(i).getOrderNo();%>
                    <td rowspan="<%=count%>"><%=orderList.get(i).getOrderDate() %><br>[<%=orderList.get(i).getOrderNo() %>]</td>
