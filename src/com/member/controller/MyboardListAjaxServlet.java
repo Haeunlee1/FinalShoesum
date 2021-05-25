@@ -34,7 +34,8 @@ public class MyboardListAjaxServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//내가쓴게시글 불러오기
-		int memberNo=1;
+		
+		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		request.setCharacterEncoding("utf-8");
 		List<Board> list = new BoardService().allBoards(memberNo);
 		request.setAttribute("boardList", list);

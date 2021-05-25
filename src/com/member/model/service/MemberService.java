@@ -24,18 +24,18 @@ public class MemberService {
 		return m;
 	}
 	
-	public List<Ordered> basicOrdered(String id){
+	public List<Ordered> basicOrdered(int no){
 		//기본 주문내역 페이지
 		Connection conn=getConnection();
-		List<Ordered> list=dao.basicOrdered(conn, id);
+		List<Ordered> list=dao.basicOrdered(conn, no);
 		close(conn);
 		return list;
 	}
 	
-	public List<Ordered> selectOrdered(String id, String before, String after){
+	public List<Ordered> selectOrdered(int memberNo, String before, String after){
 		//기간설정한 후 주문내역 조회
 		Connection conn=getConnection();
-		List<Ordered> list=dao.selectOrdered(conn,id, before, after);
+		List<Ordered> list=dao.selectOrdered(conn,memberNo, before, after);
 		close(conn);
 		return list;
 	}

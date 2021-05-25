@@ -48,8 +48,13 @@
                 <button></button>
             </div>
             <div id="direct_ui">
-                <a href="<%=request.getContextPath()%>/member/mypage.do?"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
+            <%if(loginMember!=null){ %>
+                <a href="<%=request.getContextPath()%>/member/mypage.do?memberNo=<%=loginMember.getMemberNo()%>"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
                 <a href="<%=request.getContextPath()%>/cart/cartView?userNo=0"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
+            <%}else{ %>
+            	<a href="<%=request.getContextPath()%>/member/mypage.do"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
+                <a href="<%=request.getContextPath()%>/cart/cartView?userNo=0"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
+            <%} %>
             </div>
         </header>
         <nav>

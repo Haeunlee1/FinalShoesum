@@ -5,9 +5,19 @@
 
 <%
 
-	List<Checkout> c = (List<Checkout>)request.getAttribute("list");
+	List<Checkout> list = (List<Checkout>)request.getAttribute("list");
 	Member m = (Member)request.getAttribute("member");
 
+	String checkPro = "";
+	int checkPrice = 0;		
+	
+	for (Checkout c : list){
+		
+		checkPro += c.getProName() + " ";
+		checkPrice += (c.getProPrice() * c.getProCount());
+	}
+	
+	
 %>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -102,7 +112,7 @@
             <tr>
                 <td>받으시는 분<span style="color:#E92E4D;">*</span></td>
                 <td>
-                    <input type="text" name="getName" id = "getName">
+                    <input type="text" name="getName" id = "getName" required>
                 </td>
             </tr>
             <tr id="deli_table_address">
@@ -110,14 +120,14 @@
                 <td>
                         <ul class="profile_address">
                            <li> 
-                               <input type="text" name="postcode" id="postcode" size="6">&nbsp;&nbsp;
-                               <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+                               <input type="text" name="postcode" id="postcode" size="6" required>&nbsp;&nbsp;
+                               <input type="button" onclick="execDaumPostcode()" value="우편번호"><br>
                            </li>
-                           <li><input type="text" name="address1" id="address1" size="50">
+                           <li><input type="text" name="address1" id="address1" size="50" required>
                                <span class="profile_text">&nbsp;&nbsp;기본 주소</span>
                            </li>
                            <li>
-                              <input type="text" name="address2" id="address2" size="50">
+                              <input type="text" name="address2" id="address2" size="50" required>
                                <span class="profile_text">&nbsp;&nbsp;나머지 주소</span>
                                <input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
                            </li>
@@ -134,9 +144,9 @@
                         <option value="019">019</option>
                         </select>
                         -
-                        <input type="tel" name="selPhoneMid" id="selPhoneMid" style="width:56px;">
+                        <input type="tel" name="selPhoneMid" id="selPhoneMid" style="width:56px;" required>
                         -
-                        <input type="tel" name="selPhoneEnd" id="selPhoneEnd" style="width:56px;">
+                        <input type="tel" name="selPhoneEnd" id="selPhoneEnd" style="width:56px;" required>
                 </td>
             </tr>
             <tr>
@@ -152,11 +162,11 @@
         <table class="order_table">
             <tr>
                 <td>주문상품</td>
-                <td>신발</td>
+                <td><%=checkPro %></td>
             </tr>
             <tr>
                 <td>총상품가격</td>
-                <td>100000</td>
+                <td><%=checkPrice %>원</td>
             </tr>
             <tr>
                 <td>배송비</td>
@@ -164,21 +174,21 @@
             </tr>
             <tr>
                 <td>총 결제금액</td>
-                <td>1000원</td>
+                <td><%=checkPrice %>원</td>
             </tr>
             <tr>
                 <td>결제방법</td>
                 <td>
-                    <input type="checkbox" name="transAccount"> &nbsp;계좌이체
-                    <input type="checkbox" name="virAccount"> &nbsp;무통장입금
+                    <input type="checkbox" id = "payAccountBtn" name="payAccountBtn" onclick = "payAccount()"> &nbsp;계좌이체
+                    <input type="checkbox" id = "virAccountBtn" name="virAccountBtn" onclick="payVirtual()"> &nbsp;무통장입금
                 </td>
             </tr>
-            <tr>
+            <tr id = "payAccount" style = "display : none;">
                 <td>계좌이체</td>
                 <td>
                     <select name="selBank" style="width : 90px;height : 28px;">
                         <option value="">선택</option>
-                        <option value="농협은행">농협은행</option>
+                        <option value="카카오">카카오</option>
                         <option value="국민은행">국민은행</option>
                         <option value="신한은행">신한은행</option>
                         <option value="우리은행">우리은행</option>
@@ -192,7 +202,7 @@
                     </select>
                 </td>
             </tr>
-            <tr>
+            <tr id= "payVirtual" style = "display : none;">
                 <td>무통장입금</td>
                 <td>
                     <select name="selVirBank" id="selVirBank" style="width:90px;height:28px;">
@@ -212,7 +222,7 @@
         </table>
     </div>
     <div id="btn_order_sub">
-        <input type="submit" value="결제하기">
+        <input type="button" value="결제하기" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkoutEnd?totalPrice=<%=checkPrice %>')">
     </div>
 </section>
 
@@ -267,7 +277,21 @@
     		document.getElementById("selPhoneEnd").value = "";	
         	
     }
-        
+
+   const payAccount = function(){
+	   
+	   document.getElementById("virAccountBtn").checked = false;
+	   document.getElementById("payAccount").style.display = "table-row";
+	   document.getElementById("payVirtual").style.display = "none";
+	   
+   }
+   
+   const payVirtual = function(){
+	   
+	   document.getElementById("payAccountBtn").checked = false;
+	   document.getElementById("payVirtual").style.display = "table-row";
+	   document.getElementById("payAccount").style.display = "none";
+   }
 
 
 </script>

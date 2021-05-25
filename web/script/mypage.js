@@ -58,32 +58,13 @@ $(function(){
 		
 		let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 		$("#before").val(resultDate);
+		console.log(resultDate);
 	});
 });*/
 
 /*----------------주문내역 끝--------------*/
 
-/*---------------관심상품 script---------------*/
-//전체체크
-
-$("#checkAll").click(e=>{
-	if($("#checkAll").is(":checked")){
-		$(".chk").prop("checked",true);
-	}else{
-		$(".chk").prop("checked",false);
-	}
-});
-//하나라도 체크 빠지면 전체체크 해제
-$(".chk").click(e=>{
-	if($("input[name='select_products']:checked").length==2){
-		$("#checkAll").prop("checked",true);
-	}else{
-		$("#checkAll").prop("checked",false);
-	}
-});
-
-/*---------------관심상품 끝---------------*/
-
+/*---------------관심상품,내가쓴게시글 script=>Ajax---------------*/
 
 /*---------------회원정보수정 script---------------*/
 $(function(){
@@ -113,17 +94,6 @@ $(function(){
 	})
 });
 
-
-
-
-/*
-const fn_profile_edit=()=>{
-	//회원정보 submit하는 메소드 => form에 action넣었음 나중에 이 메소드 삭제하기
-	const frm=$("#profileFrm");
-	frm.attr("action","<%=request.getContextPath()%>/member/profileEdit");
-	frm.submit();
-}
-*/
 
 function execDaumPostcode() {
 	//다음주소api

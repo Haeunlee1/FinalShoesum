@@ -3,6 +3,7 @@
     <%@page import="java.util.List, com.member.model.vo.*,com.product.model.vo.*" %>
    <%  List<Product> wishList =(List<Product>)request.getAttribute("wishlist");
     	int count=0;
+    	int memberNo=(int)(request.getAttribute("memberNo"));
    %>
     	<table id="tbl-wishlist">
 		<%if(!wishList.isEmpty()) {%>
@@ -63,13 +64,15 @@
              </tr>
 		<%} %>
 		</table>
+		<%if(!wishList.isEmpty()) {%>
 		<div id="wish-btn">
 			선택한 상품을 
             <button class="left-btn" onclick="fn_checkwish_delete();">삭제하기</button>
             <button class="left-btn" onclick="">장바구니 담기</button>
-            <button class="right-btn" onclick="">관심상품 비우기</button>
+            <button class="right-btn" onclick="fn_allwish_delete();">관심상품 비우기</button>
             <button class="right-btn" onclick="" style="background-color : black; color : white">전체 상품 주문</button>
         </div>
+        <%} %>
 <script>
 //전체체크
 $("#checkAll").click(e=>{
@@ -94,7 +97,7 @@ $("input[name=btn_delete]").click(e=>{
 	if(confirm("해당 상품을 삭제하시겠습니까?")){
 		let proNo=$(e.target).attr("title");
 		console.log(proNo);
-		location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1&proNo="+proNo);
+		location.replace("<%=request.getContextPath()%>/member/wishDelete?memberNo="+'<%=memberNo%>'+"&proNo="+proNo);
 	}
 });
 
@@ -105,11 +108,22 @@ const fn_checkwish_delete=()=>{
 		$("input[class='chk']:checked").each(function(){
 			checkArr.push($(this).attr("title"));
 		});
-		location.replace("<%=request.getContextPath()%>/member/wishCheckDelete?userNo=1&checkArr="+checkArr);
-		<%-- location.replace("<%=request.getContextPath()%>/member/wishCheckDelete?userNo=1"); --%>
-		
+		location.href="<%=request.getContextPath()%>/member/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+checkArr;
 	}
 }
+
+const fn_allwish_delete=()=>{
+	//관심상품 전체 삭제
+	if(confirm("정말 모든 관심상품을 삭제하시겠습니까?")){
+		let allwishArr=new Array();
+		$("input[class='chk']").each(function(){
+			allwishArr.push($(this).attr("title"));
+		});
+		location.href="<%=request.getContextPath()%>/member/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+allwishArr;
+	}
+}
+
+
 </script>
 
 

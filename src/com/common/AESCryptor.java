@@ -35,7 +35,6 @@ public class AESCryptor {
 		if(f.exists()) {
 			//key를 저장하는 파일이 있으면?
 			try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))){
-				
 				this.key=(SecretKey)ois.readObject();
 			}catch(IOException | ClassNotFoundException e) {
 				e.printStackTrace();
