@@ -21,16 +21,18 @@ public class ProductService {
 		return list;
 	}
 	
-<<<<<<< HEAD
+
 	public List<Product> allProduct() {
 		Connection conn=getConnection();
 		List<Product> list = dao.allProduct(conn);
-=======
+		close(conn);
+		return list;
+	}
+
 	public List<Product> allWishes(int userNo){
 		//찜상품 가져오기
 		Connection conn=getConnection();
 		List<Product> list=dao.allWishes(conn,userNo);
->>>>>>> branch 'master' of https://github.com/Haeunlee1/FinalShoesum.git
 		close(conn);
 		return list;
 	}
