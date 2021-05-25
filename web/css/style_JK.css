@@ -248,6 +248,12 @@ div.sale {
     font-weight: bold;
     font-size: 18px;
 }
+span.sale_price {
+	font-weight: bold;
+	color: red;
+	font-size: 23px;
+	/* font-style: italic; */
+}
 div.time_attack {
     width: 100%;
     height: 45px;

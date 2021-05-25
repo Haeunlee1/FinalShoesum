@@ -20,11 +20,27 @@ public class ProductService {
 		close(conn);
 		return list;
 	}
-	
 
 	public List<Product> allProduct() {
+		// 전체 상품 리스트 가져오기 -> 메인 bestproduct 사용
 		Connection conn=getConnection();
 		List<Product> list = dao.allProduct(conn);
+		close(conn);
+		return list;
+	}
+	
+	public List<Product> recentProduct() {
+		// 최근 등록한 상품 5개 가져오기 -> 메인 newproduct 사용
+		Connection conn=getConnection();
+		List<Product> list = dao.recentProduct(conn);
+		close(conn);
+		return list;
+	}
+	
+	public List<Product> hotProduct() {
+		// 랜덤으로 3가지 상품 가져오기 -> 메인 hotdeal 사용
+		Connection conn=getConnection();
+		List<Product> list = dao.hotProduct(conn);
 		close(conn);
 		return list;
 	}
