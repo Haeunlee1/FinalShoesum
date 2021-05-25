@@ -46,7 +46,7 @@ public class ProfileEditServlet extends HttpServlet {
 		
 		String msg=result>0?m.getMemberId()+"님 정보수정 성공 :)":"정보수정 실패 :(";
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/member/profileEdit?memberNo="+memberNo);
+		request.setAttribute("loc", "/member/mypage.do?memberNo="+memberNo);
 		//=>가입된 회원이 아니라고 뜨는것 , 쿼리스트링을 추가해주자 왜? jsp에서 쿼리스트링으로 넣어줬었음 => helloMVC참고하기
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);	
 	}

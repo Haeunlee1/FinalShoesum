@@ -153,7 +153,8 @@
                 <table id="tbl-profile" >
                     <tr>
                         <td>아이디<span class="redPoint">*</span></td>
-                        <td><input type="text"  name="userId" id="userId" value="<%=loginMember.getMemberId() %>" readonly></td>
+                        <td><input type="text"  name="userId" id="userId" value="<%=loginMember.getMemberId() %>" readonly>
+                        <span class="profile_text">(아이디는 수정불가)</span></td>
                     </tr>
                     <tr>
                         <td>비밀번호<span class="redPoint">*</span></td>
