@@ -1,7 +1,6 @@
 package com.product.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.product.model.service.ProductService;
-import com.product.model.vo.Product;
 
 /**
- * Servlet implementation class ProductDetailServlet
+ * Servlet implementation class WishDeleteServlet
  */
-@WebServlet("/product/productDetail")
-public class ProductDetailServlet extends HttpServlet {
+@WebServlet("/member/wishDelete")
+public class WishDeleteServlet extends HttpServlet {
+	//관심상품 지우기
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductDetailServlet() {
+    public WishDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +30,18 @@ public class ProductDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//회원번호, 상품번호로 db에 관심상품 지우기
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		String proNo =request.getParameter("proNo");
+		System.out.println("userNo:"+userNo+" / proNo:"+proNo);
+		int result = new ProductService().deleteWish(userNo, proNo);
+		System.out.println("result"+result);
+		String msg=result>0?"관심상품에서 삭제되었습니다":"삭제실패";
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", "/member/mypage.do");		//추후에 로그인로직 완성되면 userNo넘기기
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
-		//상품 디테일로 보내주는 서블릿
-		//상품 jsp에서 그 상품의 번호를 넘겨받기
-		String proNo=request.getParameter("proNo");
-		
-		if(request.getParameter("hotpd")!=null&&request.getParameter("sale")!=null) {
-			String hotpd=request.getParameter("hotpd");
-			double sale=Double.parseDouble(request.getParameter("sale"));
-			
-			request.setAttribute("hotpd", hotpd);
-			request.setAttribute("sale", sale);
-		}
-		
-		List<Product> list = new ProductService().selectProduct(proNo);
-		request.setAttribute("list",list );
-		request.getRequestDispatcher("/views/product/product_detail.jsp").forward(request, response);
+	
 	
 	}
 

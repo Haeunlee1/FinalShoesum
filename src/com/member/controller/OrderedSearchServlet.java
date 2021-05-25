@@ -46,7 +46,6 @@ public class OrderedSearchServlet extends HttpServlet {
 		request.setAttribute("after", after);
 		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);
 		
-		
 	}
 
 	/**

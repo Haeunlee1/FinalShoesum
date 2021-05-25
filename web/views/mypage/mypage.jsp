@@ -28,9 +28,9 @@
                 <li><button>1개월</button></li>
                 <li><button>3개월</button></li>
                 <li><button>6개월</button></li>
-                <li><input type="date" id="before" value=''></li> <%-- <%=before!=null?before:" " %> --%>
+                <li><input type="date" id="before" value='<%=before!=null?before:"" %>'></li> <%-- <%=before!=null?before:" " %> --%>
                 <li><span>&nbsp;&nbsp;~&nbsp;&nbsp; </span></li>
-                <li><input type="date" id="today"></li>
+                <li><input type="date" id="today" value='<%=after!=null?after:"" %>'></li>
                 <li><button id="search_ordered">조회</button></li>
             </ul>
             <ul class="ordered_comment">
@@ -247,7 +247,6 @@ $(function(){
 			} */
 			type:"post",
 			success:data=>{
-				console.log(data);
 				$("#wishlist_target").html(data);
 			}
 		})
@@ -264,7 +263,6 @@ $(function(){
 			} */
 			type:"post",
 			success:data=>{
-				console.log(data);				
 				$("#boardTarget").html(data);
 			}
 		})
@@ -276,14 +274,14 @@ const fn_goshopping=()=>{
 	location.assign("<%= request.getContextPath()%>/product/productlist");
 }
 
-const fn_wish_delete=()=>{
+<%-- const fn_wish_delete=()=>{
 	//찜한상품 삭제
 	//회원번호 & 상품번호 넘기기
 	if(confirm("선택한 상품을 삭제하시겠습니까?")){
 		location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1");
-		<%-- location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1"+'<%=loginMember.getUserId()%>'); --%>
+		location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1"+'<%=loginMember.getUserId()%>');
 	}
-}
+} --%>
 
 </script>
 <%@ include file="/views/common/footer.jsp"%>

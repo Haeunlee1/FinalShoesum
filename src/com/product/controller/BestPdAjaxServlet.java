@@ -13,16 +13,16 @@ import com.product.model.service.ProductService;
 import com.product.model.vo.Product;
 
 /**
- * Servlet implementation class ProductDetailServlet
+ * Servlet implementation class ProductListAjaxServlet
  */
-@WebServlet("/product/productDetail")
-public class ProductDetailServlet extends HttpServlet {
+@WebServlet("/product/bestPdAjax")
+public class BestPdAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductDetailServlet() {
+    public BestPdAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +31,14 @@ public class ProductDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//상품 디테일로 보내주는 서블릿
-		//상품 jsp에서 그 상품의 번호를 넘겨받기
-		String proNo=request.getParameter("proNo");
-		
-		if(request.getParameter("hotpd")!=null&&request.getParameter("sale")!=null) {
-			String hotpd=request.getParameter("hotpd");
-			double sale=Double.parseDouble(request.getParameter("sale"));
-			
-			request.setAttribute("hotpd", hotpd);
-			request.setAttribute("sale", sale);
-		}
-		
-		List<Product> list = new ProductService().selectProduct(proNo);
-		request.setAttribute("list",list );
-		request.getRequestDispatcher("/views/product/product_detail.jsp").forward(request, response);
+
+		// 전체 상품 목록 가져오기
+		List<Product> list = new ProductService().allProduct();
+		request.setAttribute("products", list);
+	
+		// index에 bestproduct 랜덤으로 나타나도록 하는 jsp로 이동
+		request.getRequestDispatcher("/views/product/bestPdAjax.jsp")
+		.forward(request, response);
 	
 	}
 
