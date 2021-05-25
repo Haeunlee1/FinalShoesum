@@ -30,13 +30,13 @@ public class WishCheckDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userNo=Integer.parseInt(request.getParameter("userNo"));
+		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		String[] checkArr=request.getParameter("checkArr").split(",");
 		//String checkArr=String.join(",",request.getParameter("checkArr"));
-		int result=new ProductService().checkDeleteWish(userNo,checkArr);
+		int result=new ProductService().checkDeleteWish(memberNo,checkArr);
 		
 		String msg=result>0?"선택한 상품이 삭제되었습니다":"삭제실패";
-		request.setAttribute("loc", "/member/mypage.do");
+		request.setAttribute("loc", "/member/mypage.do?memberNo="+memberNo);
 		request.setAttribute("msg", msg);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		

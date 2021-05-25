@@ -36,9 +36,9 @@ public class OrderedSearchServlet extends HttpServlet {
 		String after=request.getParameter("after");
 		System.out.println(before+"/"+after);
 		//일단 아이디값으로 넘겨보기
-		String userId=request.getParameter("memberId");
+		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 	
-		List<Ordered> list = new MemberService().selectOrdered(userId,before,after);
+		List<Ordered> list = new MemberService().selectOrdered(memberNo,before,after);
 		request.setAttribute("orderList", list);
 		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);
 		

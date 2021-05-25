@@ -39,6 +39,7 @@ public class WIshListServlet extends HttpServlet {
 		//Product객체로 가져오기
 		List<Product> list = new ProductService().allWishes(memberNo);
 		request.setAttribute("wishlist", list);
+		request.setAttribute("memberNo", memberNo);
 		request.getRequestDispatcher("/views/mypage/wishlistAjax.jsp").forward(request, response);
 	
 	}

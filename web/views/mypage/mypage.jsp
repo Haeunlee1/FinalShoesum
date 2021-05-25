@@ -280,7 +280,7 @@ $("#search_ordered").click(e=>{
 	//alert($("#before").val()+"/"+$("#today").val());
 	let before=$("#before").val();
 	let after=$("#today").val();
-	location.assign("<%= request.getContextPath()%>/member/orderedSearch?memberId="+'<%=loginMember.getMemberId()%>'+"&before="+before+"&after="+after);
+	location.assign("<%= request.getContextPath()%>/member/orderedSearch?memberNo="+'<%=loginMember.getMemberNo()%>'+"&before="+before+"&after="+after);
 });
 
 //관심상품 ajax

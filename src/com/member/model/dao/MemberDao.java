@@ -64,7 +64,7 @@ public class MemberDao {
 	
 	
 	
-	public List<Ordered> basicOrdered(Connection conn, String id){
+	public List<Ordered> basicOrdered(Connection conn, int no){
 		//주문내역 가져오기. 날짜 & 아이디 / 기본화면=>3개월이내 조회, db에 넘겨주기
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -72,7 +72,7 @@ public class MemberDao {
 		Ordered o = null;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("basicOrdered"));
-			pstmt.setString(1, id);
+			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				//결과가 있으면 list에 담기
@@ -99,7 +99,7 @@ public class MemberDao {
 		
 	}
 	
-	public List<Ordered> selectOrdered(Connection conn, String id, String before, String after){
+	public List<Ordered> selectOrdered(Connection conn, int memberNo, String before, String after){
 		//기간설정해서 가져오기
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -107,7 +107,7 @@ public class MemberDao {
 		Ordered o = null;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectOrdered"));
-			pstmt.setString(1, id);
+			pstmt.setInt(1, memberNo);
 			pstmt.setString(2, before);
 			pstmt.setString(3, after);
 			rs=pstmt.executeQuery();

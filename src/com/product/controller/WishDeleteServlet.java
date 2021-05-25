@@ -31,14 +31,14 @@ public class WishDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//회원번호, 상품번호로 db에 관심상품 지우기
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int userNo = Integer.parseInt(request.getParameter("memberNo"));
 		String proNo =request.getParameter("proNo");
 		System.out.println("userNo:"+userNo+" / proNo:"+proNo);
 		int result = new ProductService().deleteWish(userNo, proNo);
 		System.out.println("result"+result);
 		String msg=result>0?"관심상품에서 삭제되었습니다":"삭제실패";
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/member/mypage.do");		//추후에 로그인로직 완성되면 userNo넘기기
+		request.setAttribute("loc", "/member/mypage.do?memberNo="+userNo);		//추후에 로그인로직 완성되면 userNo넘기기
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 	

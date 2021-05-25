@@ -3,6 +3,7 @@
     <%@page import="java.util.List, com.member.model.vo.*,com.product.model.vo.*" %>
    <%  List<Product> wishList =(List<Product>)request.getAttribute("wishlist");
     	int count=0;
+    	int memberNo=(int)(request.getAttribute("memberNo"));
    %>
     	<table id="tbl-wishlist">
 		<%if(!wishList.isEmpty()) {%>
@@ -96,7 +97,7 @@ $("input[name=btn_delete]").click(e=>{
 	if(confirm("해당 상품을 삭제하시겠습니까?")){
 		let proNo=$(e.target).attr("title");
 		console.log(proNo);
-		location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1&proNo="+proNo);
+		location.replace("<%=request.getContextPath()%>/member/wishDelete?memberNo="+'<%=memberNo%>'+"&proNo="+proNo);
 	}
 });
 
@@ -107,7 +108,7 @@ const fn_checkwish_delete=()=>{
 		$("input[class='chk']:checked").each(function(){
 			checkArr.push($(this).attr("title"));
 		});
-		location.href="<%=request.getContextPath()%>/member/wishCheckDelete?userNo=1&checkArr="+checkArr;
+		location.href="<%=request.getContextPath()%>/member/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+checkArr;
 	}
 }
 
@@ -118,7 +119,7 @@ const fn_allwish_delete=()=>{
 		$("input[class='chk']").each(function(){
 			allwishArr.push($(this).attr("title"));
 		});
-		location.href="<%=request.getContextPath()%>/member/wishCheckDelete?userNo=1&checkArr="+allwishArr;
+		location.href="<%=request.getContextPath()%>/member/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+allwishArr;
 	}
 }
 

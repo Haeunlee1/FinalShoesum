@@ -95,17 +95,6 @@ $(function(){
 });
 
 
-
-
-/*
-const fn_profile_edit=()=>{
-	//회원정보 submit하는 메소드 => form에 action넣었음 나중에 이 메소드 삭제하기
-	const frm=$("#profileFrm");
-	frm.attr("action","<%=request.getContextPath()%>/member/profileEdit");
-	frm.submit();
-}
-*/
-
 function execDaumPostcode() {
 	//다음주소api
     new daum.Postcode({
