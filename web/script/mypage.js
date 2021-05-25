@@ -7,11 +7,7 @@ $(function(){
 	    $("#mypage_nav li").eq(index).addClass("selectli");
 	    $("#mypage_nav li").eq(index).removeClass("noselectli");
 	    $("#HE_section > article").hide();
-	    $("#HE_section > article").eq(index).show();
-	    if(index===3){
-	    	console.log(index);
-	    	$("#pageBar").hide();
-	    }		
+	    $("#HE_section > article").eq(index).show();		
 		
 	})
 });
@@ -77,10 +73,24 @@ $("#search_ordered").click(e=>{
 /*----------------주문내역 끝--------------*/
 
 /*---------------관심상품 script---------------*/
-const fn_goshopping=()=>{
-	//찜한상품 없을 때 쇼핑하러가기 / 메인이 아닌 상품목록페이지로 이동하기
-	alert("쇼핑 하러 가기");
-}
+//전체체크
+
+$("#checkAll").click(e=>{
+	if($("#checkAll").is(":checked")){
+		$(".chk").prop("checked",true);
+	}else{
+		$(".chk").prop("checked",false);
+	}
+});
+//하나라도 체크 빠지면 전체체크 해제
+$(".chk").click(e=>{
+	if($("input[name='select_products']:checked").length==2){
+		$("#checkAll").prop("checked",true);
+	}else{
+		$("#checkAll").prop("checked",false);
+	}
+});
+
 /*---------------관심상품 끝---------------*/
 
 

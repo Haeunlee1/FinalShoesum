@@ -103,11 +103,24 @@
    </section>
    
    <script>
+           	$(document).ready((e)=>{
+           		$.ajax({
+           			url:"<%=request.getContextPath() %>/product/productListAjax",
+           			success:data=>{
+           				console.log(data);
+           				$("#best_pd").html(data);
+           			}
+           		})
+           		
+           	});
+           	
             $(function(){
+            	
+            	// 메인슬라이드 스크립트
                 var $slider = $('#main_slide'),
                 $firstSlide = $slider.find('img').first()
                 .stop(true).animate({'opacity':1},200);
-
+				
                 function PrevSlide(){
                     stopSlide();startSlide();
                     var $lastSlide = $slider.find('img').last()
@@ -127,7 +140,8 @@
                     $firstSlide = $slider.find('img').first()
                     .stop(true).animate({'opacity':1},400);
                 }
-  
+                
+  				// 이전, 다음 버튼
                 $('#next').on('click', function(){
                     NextSlide();
                 });
@@ -154,7 +168,7 @@
                 });
 
 
-            
+            	// 핫딜 카운트다운 스크립트
                 CountDownTimer('06/06/2021', 'count_time');
                 CountDownTimer('06/03/2021', 'count_time2');
                 CountDownTimer('07/02/2021', 'count_time3');

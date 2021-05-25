@@ -10,6 +10,7 @@ public class Ordered {
 	private int orderNo;
 	private String state;
 	
+	private String proNo;
 	private String proName;
 	private int proPrice;
 	private int proSize;
@@ -21,12 +22,13 @@ public class Ordered {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ordered(Date orderDate, int orderNo, String state, String proName, int proPrice, int proSize,
+	public Ordered(Date orderDate, int orderNo, String state, String proNo, String proName, int proPrice, int proSize,
 			String proColor, int amount, String proImg) {
 		super();
 		this.orderDate = orderDate;
 		this.orderNo = orderNo;
 		this.state = state;
+		this.proNo = proNo;
 		this.proName = proName;
 		this.proPrice = proPrice;
 		this.proSize = proSize;
@@ -57,6 +59,14 @@ public class Ordered {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getProNo() {
+		return proNo;
+	}
+
+	public void setProNo(String proNo) {
+		this.proNo = proNo;
 	}
 
 	public String getProName() {
@@ -106,6 +116,7 @@ public class Ordered {
 	public void setProImg(String proImg) {
 		this.proImg = proImg;
 	}
+
 	
 	
 }

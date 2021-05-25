@@ -14,9 +14,25 @@ public class ProductService {
 	private ProductDao dao= new ProductDao();
 	
 	public List<Product> selectProduct(String proNo) {
-		//상품번호로 이미지테이블 연결하여 주소들 가져오기
+		//상품 가져오기 =>상품상세페이지
 		Connection conn=getConnection();
 		List<Product> list = dao.selectProduct(conn, proNo);
+		close(conn);
+		return list;
+	}
+	
+
+	public List<Product> allProduct() {
+		Connection conn=getConnection();
+		List<Product> list = dao.allProduct(conn);
+		close(conn);
+		return list;
+	}
+
+	public List<Product> allWishes(int userNo){
+		//찜상품 가져오기
+		Connection conn=getConnection();
+		List<Product> list=dao.allWishes(conn,userNo);
 		close(conn);
 		return list;
 	}

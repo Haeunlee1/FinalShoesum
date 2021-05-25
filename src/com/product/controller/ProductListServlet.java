@@ -1,11 +1,19 @@
 package com.product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+
+import com.product.model.service.ProductService;
+import com.product.model.vo.Product;
 
 /**
  * Servlet implementation class ProductListServlet
@@ -31,10 +39,6 @@ public class ProductListServlet extends HttpServlet {
 		// 제품 페이지로 이동
 		request.getRequestDispatcher("/views/product/product.jsp")
 		.forward(request, response);
-	
-	
-	
-	
 	
 	}
 
