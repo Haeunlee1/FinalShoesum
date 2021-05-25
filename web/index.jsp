@@ -12,44 +12,48 @@
            <img src="<%=request.getContextPath() %>/images/main_slide/main_02.jpg" alt="메인이미지2">
            <img src="<%=request.getContextPath() %>/images/main_slide/main_03.jpg" alt="메인이미지3">
        </div>
+       
+       
        <div id="hot_pd">
 	       <h2>HOT DEAL</h2>
 	       <div class="product">
 	           <div>
-	               <a href="">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=w01_white&hotpd=hotpd&sale=0.8">
 	                   <div class="sale">20%</div>
-	                   <img src="<%=request.getContextPath() %>/images/product/shose.png" alt="">
+	                   <img src="<%=request.getContextPath() %>/images/product/woman/w_01_01.jpg" alt="">
 	                   <div class="time_attack">
 	                       <img src="<%=request.getContextPath() %>/images/ui/time_attcak.png" alt="">
 	                       <div id="count_time"></div>
 	                   </div>
 	               </a>
-	               <p>[슈썸]상품이름<br>가격</p>
+	               <p>[슈썸]블레어뮬<br><span class="sale_price">40000</span></p>
 	           </div>
 	           <div>
-	               <a href="">
-	                   <div class="sale">33%</div>
-	                   <img src="<%=request.getContextPath() %>/images/product/shose.png" alt="">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=m01_gray&hotpd=hotpd&sale=0.65">
+	                   <div class="sale">35%</div>
+	                   <img src="<%=request.getContextPath() %>/images/product/man/m_01_01.jpg" alt="">
 	                   <div class="time_attack">
 	                       <img src="<%=request.getContextPath() %>/images/ui/time_attcak.png" alt="">
 	                       <div id="count_time2"></div>
 	                   </div>
 	               </a>
-	               <p>[슈썸]상품이름<br>가격</p>
+	               <p>[슈썸]에어맥스SC<br><span class="sale_price">19500</span></p>
 	           </div>
 	           <div>
-	               <a href="">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=k01_white&hotpd=hotpd&sale=0.23">
 	                   <div class="sale">77%</div>
-	                   <img src="<%=request.getContextPath() %>/images/product/shose.png" alt="">
+	                   <img src="<%=request.getContextPath() %>/images/product/kids/k_01_01.jpg" alt="">
 	                   <div class="time_attack">
 	                       <img src="<%=request.getContextPath() %>/images/ui/time_attcak.png" alt="">
 	                       <div id="count_time3"></div>
 	                   </div>
 	               </a>
-	               <p>[슈썸]상품이름<br>가격</p>
+	               <p>[슈썸]척테일러<br><span class="sale_price">8700</span></p>
 	           </div>
 	       </div>
 	   </div>
+	   
+	   <!-- Ajax 처리 -->
        <div id="best_pd">
            <h2>BEST PRODUCT</h2>
            <div class="product">
@@ -57,43 +61,13 @@
                    <a href="<%=request.getContextPath() %>/product/productDetail?proNo=m01_gray"><img src="images/product/man/m_01_01.jpg" alt=""></a>
                    <p>[슈썸]상품이름<br>가격</p>
                </div>
-               <div>
-                   <a href="<%=request.getContextPath() %>/product/productDetail?proNo=w01_white"><img src="images/product/woman/w_01_01.jpg" alt=""></a>
-                   <p>[슈썸]상품이름<br>가격</p>
-               </div>
-               <div>
-                   <a href=""><img src="images/product/shose.png" alt=""></a>
-                   <p>[슈썸]상품이름<br>가격</p>
-               </div>
-               <div>
-                   <a href=""><img src="images/product/shose.png" alt=""></a>
-                   <p>[슈썸]상품이름<br>가격</p>
-               </div>
-               <div>
-                   <a href=""><img src="images/product/shose.png" alt=""></a>
-                   <p>[슈썸]상품이름<br>가격</p>
-               </div>
            </div>
        </div>
+       
+       <!-- Ajax 처리 -->
        <div id="new_pd">
            <h2>NEW PRODUCT</h2>
            <div class="product">
-               <div>
-                   <a href=""><img src="images/product/shose.png" alt=""></a>
-                   <p>[슈썸]상품이름<br>가격</p>
-               </div>
-               <div>
-                   <a href=""><img src="images/product/shose.png" alt=""></a>
-                   <p>[슈썸]상품이름<br>가격</p>
-               </div>
-               <div>
-                   <a href=""><img src="images/product/shose.png" alt=""></a>
-                   <p>[슈썸]상품이름<br>가격</p>
-               </div>
-               <div>
-                   <a href=""><img src="images/product/shose.png" alt=""></a>
-                   <p>[슈썸]상품이름<br>가격</p>
-               </div>
                <div>
                    <a href=""><img src="images/product/shose.png" alt=""></a>
                    <p>[슈썸]상품이름<br>가격</p>
@@ -102,16 +76,26 @@
        </div>
    </section>
    
-   <script>
+		<script>
            	$(document).ready((e)=>{
+           		// bestproduct Ajax
            		$.ajax({
-           			url:"<%=request.getContextPath() %>/product/productListAjax",
+           			url:"<%=request.getContextPath() %>/product/bestPdAjax",
+           			async: true,
            			success:data=>{
-           				console.log(data);
+           				/* console.log(data); */
            				$("#best_pd").html(data);
            			}
-           		})
-           		
+           		});
+           		// newproduct Ajax
+           		$.ajax({
+           			url:"<%=request.getContextPath() %>/product/newPdAjax",
+           			async: true,
+           			success:data=>{
+           				console.log(data);
+           				$("#new_pd").html(data);
+           			}
+           		});
            	});
            	
             $(function(){

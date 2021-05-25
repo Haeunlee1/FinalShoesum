@@ -4,7 +4,7 @@
 <%@ page import="java.util.List,com.product.model.vo.*" %>
 <%
 	List<Product> list = (List<Product>)request.getAttribute("list");
-	int price = list.get(0).getPrice();
+	int price=list.get(0).getPrice();
 %>
 
 	<section>
@@ -13,9 +13,9 @@
 			String type="";	
 		
 			for(Product p:list){
-				if(p.getProNo().contains("m")) type="man";
-				else if(p.getProNo().contains("w")) type="woman";
-				else if(p.getProNo().contains("k")) type="kids";
+				if(p.getProNo().substring(0,1).contains("m")) type="man";
+				else if(p.getProNo().substring(0,1).contains("w")) type="woman";
+				else if(p.getProNo().substring(0,1).contains("k")) type="kids";
 					
 				%>
 		    		<img src="<%=request.getContextPath() %>/images/product/<%=type %>/<%=p.getImages1() %>" alt="" class="bigPic">
@@ -63,8 +63,18 @@
 		  	</div>
 	        <div class="pd_price">
 	            <p>총 결제금액</p>
-				<p class="total_price">￦　<%=p.getPrice() %></p>
-                <!-- 상품 금액 불러올 때 아래 스크립트에서도 request값으로 넣으면 ￦표시 제외하고 parseInt 처리 가능하지않을까....? -->
+	            <%
+	            	if(request.getAttribute("hotpd")!=null) {
+	        			String hotpd = (String)request.getAttribute("hotpd");
+	        			double sale = (double)request.getAttribute("sale");
+	        			
+		            	price=((int)(price*sale)/100)*100;
+	  			%>
+					<p class="total_price">￦　<%=price %></p>
+					<!-- 백의자리에서 버림구현하기 -->
+					<%}else { %>
+						<p class="total_price">￦　<%=price %></p>
+					<%} %>
 	        </div>
 		        <button>구매하기</button>
 		        <button>장바구니</button>
@@ -153,6 +163,7 @@
                 $('input[name=pop_out]').val(num);
                 
                 const basic_amount = <%=price %>;
+              	console.log(typeof(basic_amount));
                 var show_total_amount = basic_amount * num;
                 $('.total_price').html('￦　'+show_total_amount);
                 

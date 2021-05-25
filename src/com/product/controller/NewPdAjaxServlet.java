@@ -13,16 +13,16 @@ import com.product.model.service.ProductService;
 import com.product.model.vo.Product;
 
 /**
- * Servlet implementation class ProductDetailServlet
+ * Servlet implementation class NewPdAjaxServlet
  */
-@WebServlet("/product/productDetail")
-public class ProductDetailServlet extends HttpServlet {
+@WebServlet("/product/newPdAjax")
+public class NewPdAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductDetailServlet() {
+    public NewPdAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +32,14 @@ public class ProductDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//상품 디테일로 보내주는 서블릿
-		//상품 jsp에서 그 상품의 번호를 넘겨받기
-		String proNo=request.getParameter("proNo");
-		
-		if(request.getParameter("hotpd")!=null&&request.getParameter("sale")!=null) {
-			String hotpd=request.getParameter("hotpd");
-			double sale=Double.parseDouble(request.getParameter("sale"));
-			
-			request.setAttribute("hotpd", hotpd);
-			request.setAttribute("sale", sale);
-		}
-		
-		List<Product> list = new ProductService().selectProduct(proNo);
-		request.setAttribute("list",list );
-		request.getRequestDispatcher("/views/product/product_detail.jsp").forward(request, response);
+		// 가장 마지막에 등록한 상품 5가지 가져오기
+		List<Product> recentpd = new ProductService().recentProduct();
+		request.setAttribute("recentpd", recentpd);
 	
+		// index에 newproduct 상품 5개 나타나도록 하는 jsp로 이동
+		request.getRequestDispatcher("/views/product/newPdAjax.jsp")
+		.forward(request, response);
+		
 	}
 
 	/**
