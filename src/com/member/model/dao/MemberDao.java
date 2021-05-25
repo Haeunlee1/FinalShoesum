@@ -158,4 +158,94 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+	public int insertMember(Connection conn, Member m) {
+		//회원정보 등록 
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertMember"));
+			
+			pstmt.setString(1,m.getMemberId());
+			pstmt.setString(2,m.getMemberPw());
+			pstmt.setString(3,m.getMemberName());
+			pstmt.setString(4,m.getEmail());
+			pstmt.setString(5,m.getPhone());
+			pstmt.setString(6,m.getPostNo());
+			pstmt.setString(7,m.getAddress());
+			pstmt.setString(8,m.getAddressEnd());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	public Member findId(Connection conn, String memberNm, String memberEmail) {
+		// 로그인 
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberId"));
+			pstmt.setString(1, memberNm);
+			pstmt.setString(2, memberEmail);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberNo(rs.getInt("member_no"));
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPw(rs.getString("member_pw"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setEmail(rs.getString("member_email"));
+				m.setPhone(rs.getString("member_phone"));
+				m.setPostNo(rs.getString("member_post_no"));
+				m.setAddress(rs.getString("member_address"));
+				m.setAddressEnd(rs.getString("member_address_end"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	public Member findPw(Connection conn, String memberNm, String memberEmail, String memberId) {
+		// 로그인 
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberPw"));
+			pstmt.setString(1, memberNm);
+			pstmt.setString(2, memberEmail);
+			pstmt.setString(3, memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberNo(rs.getInt("member_no"));
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPw(rs.getString("member_pw"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setEmail(rs.getString("member_email"));
+				m.setPhone(rs.getString("member_phone"));
+				m.setPostNo(rs.getString("member_post_no"));
+				m.setAddress(rs.getString("member_address"));
+				m.setAddressEnd(rs.getString("member_address_end"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
 }
