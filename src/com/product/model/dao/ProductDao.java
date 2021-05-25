@@ -127,4 +127,22 @@ public class ProductDao {
 		return list;
 		
 	}
+	
+	public int deleteWish(Connection conn, int userNo, String proNo) {
+		//관심상품 삭제 => 테이블 버튼 & 체크 삭제
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteWish"));
+			pstmt.setInt(1, userNo);
+			pstmt.setString(2, proNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 }

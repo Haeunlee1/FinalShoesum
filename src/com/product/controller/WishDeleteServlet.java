@@ -1,7 +1,6 @@
-package com.member.controller;
+package com.product.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.member.model.service.MemberService;
-import com.member.model.vo.Ordered;
+import com.product.model.service.ProductService;
 
 /**
- * Servlet implementation class OrderedSearchServlet
+ * Servlet implementation class WishDeleteServlet
  */
-@WebServlet("/member/orderedSearch")
-public class OrderedSearchServlet extends HttpServlet {
+@WebServlet("/member/wishDelete")
+public class WishDeleteServlet extends HttpServlet {
+	//관심상품 지우기
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderedSearchServlet() {
+    public WishDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +30,19 @@ public class OrderedSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//기간 정해서 주문내역 가져오기
-		String before=request.getParameter("before");
-		String after=request.getParameter("after");
-		System.out.println(before+"/"+after);
-		//일단 아이디값으로 넘겨보기
-		String userId="111";
-		//String userId="test";
-	
-		List<Ordered> list = new MemberService().selectOrdered(userId,before,after);
-		System.out.println("기간설정 : "+list.size());
-		request.setAttribute("orderList", list);
-		request.setAttribute("before", before);
-		request.setAttribute("after", after);
-		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);
+		//회원번호, 상품번호로 db에 관심상품 지우기
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		String proNo =request.getParameter("proNo");
+		System.out.println("userNo:"+userNo+" / proNo:"+proNo);
+		int result = new ProductService().deleteWish(userNo, proNo);
+		System.out.println("result"+result);
+		String msg=result>0?"관심상품에서 삭제되었습니다":"삭제실패";
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", "/member/mypage.do");		//추후에 로그인로직 완성되면 userNo넘기기
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
+	
+	
 	}
 
 	/**

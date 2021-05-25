@@ -1,7 +1,6 @@
-package com.member.controller;
+package com.product.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.member.model.service.MemberService;
-import com.member.model.vo.Ordered;
+import com.product.model.service.ProductService;
 
 /**
- * Servlet implementation class OrderedSearchServlet
+ * Servlet implementation class WishCheckDeleteServlet
  */
-@WebServlet("/member/orderedSearch")
-public class OrderedSearchServlet extends HttpServlet {
+@WebServlet("/member/wishCheckDelete")
+public class WishCheckDeleteServlet extends HttpServlet {
+	//체크된 관심상품만 지우기
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderedSearchServlet() {
+    public WishCheckDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +30,17 @@ public class OrderedSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//기간 정해서 주문내역 가져오기
-		String before=request.getParameter("before");
-		String after=request.getParameter("after");
-		System.out.println(before+"/"+after);
-		//일단 아이디값으로 넘겨보기
-		String userId="111";
-		//String userId="test";
-	
-		List<Ordered> list = new MemberService().selectOrdered(userId,before,after);
-		System.out.println("기간설정 : "+list.size());
-		request.setAttribute("orderList", list);
-		request.setAttribute("before", before);
-		request.setAttribute("after", after);
-		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);
+		int userNo=Integer.parseInt(request.getParameter("userNo"));
+		String[] checkArr=request.getParameter("checkArr").split(",");
+		//String checkArr=String.join(",",request.getParameter("checkArr"));
+		int result=new ProductService().checkDeleteWish(userNo,checkArr);
 		
+		String msg=result>0?"선택한 상품이 삭제되었습니다":"삭제실패";
+		request.setAttribute("loc", "/member/mypage.do");
+		request.setAttribute("msg", msg);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
+	
 	}
 
 	/**

@@ -13,7 +13,7 @@ $(function(){
 });
 
 /*----------------주문내역 script--------------*/
-$(function(){
+/*$(function(){
 	//현재날짜, 이전날짜 기본 셋팅
 	
 	let nowDate = new Date();
@@ -59,17 +59,8 @@ $(function(){
 		let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 		$("#before").val(resultDate);
 	});
-});
+});*/
 
-/*//날짜조회버튼 페이지 이동이 문자열로 인식되서 jsp파일에서 해보기
-$("#search_ordered").click(e=>{
-	//날짜 잘 넘어오는지 체크
-	//alert($("#before").val()+"/"+$("#today").val());
-	let before=$("#before").val();
-	let after=$("#today").val();
-	location.assign('"/orderedSearch?before="+before+"&after="+after');
-	
-})*/
 /*----------------주문내역 끝--------------*/
 
 /*---------------관심상품 script---------------*/
