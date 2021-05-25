@@ -1,6 +1,6 @@
 package com.board.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Board {
 	private int qabNo;
@@ -10,13 +10,16 @@ public class Board {
 	private Date qabDate;
 	private int qabPw;
 	private int qabState;
+	private int commentNo;
+	private String commentCtn;
+	private Date commentDate;
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Board(int qabNo, String qabTitle, String qabWriter, String qabContent, Date qabDate, int qabPw,
-			int qabState) {
+	public Board(int qabNo, String qabTitle, String qabWriter, String qabContent, Date qabDate, int qabPw, int qabState,
+			int commentNo, String commentCtn, Date commentDate) {
 		super();
 		this.qabNo = qabNo;
 		this.qabTitle = qabTitle;
@@ -25,6 +28,9 @@ public class Board {
 		this.qabDate = qabDate;
 		this.qabPw = qabPw;
 		this.qabState = qabState;
+		this.commentNo = commentNo;
+		this.commentCtn = commentCtn;
+		this.commentDate = commentDate;
 	}
 
 	public int getQabNo() {
@@ -82,6 +88,32 @@ public class Board {
 	public void setQabState(int qabState) {
 		this.qabState = qabState;
 	}
+
+	public int getCommentNo() {
+		return commentNo;
+	}
+
+	public void setCommentNo(int commentNo) {
+		this.commentNo = commentNo;
+	}
+
+	public String getCommentCtn() {
+		return commentCtn;
+	}
+
+	public void setCommentCtn(String commentCtn) {
+		this.commentCtn = commentCtn;
+	}
+
+	public Date getCommentDate() {
+		return commentDate;
+	}
+
+	public void setCommentDate(Date commentDate) {
+		this.commentDate = commentDate;
+	}
 	
+	
+
 	
 }

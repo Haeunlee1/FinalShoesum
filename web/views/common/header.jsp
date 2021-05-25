@@ -33,8 +33,8 @@
             <ul id="header_top">
                 <li><a href="">로그인</a></li>
                 <li><a href="">회원가입</a></li>
-                <li><a href="">질문게시판</a></li>
-                <li><a href="">자주묻는질문</a></li>
+                <li><a href="<%= request.getContextPath()%>/board/boardList?userNo=0">질문게시판</a></li>
+                <li><a href="<%= request.getContextPath()%>/faq/faqList">자주묻는질문</a></li>
             </ul>
             <div id="logo" onclick="location.assign('<%=request.getContextPath() %>')"></div>
             <div id="search_bar">
