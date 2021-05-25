@@ -44,7 +44,7 @@ public class MemberDao {
 				m.setMemberId(rs.getString("member_id"));
 				m.setMemberPw(rs.getString("member_pw"));
 				m.setMemberName(rs.getString("member_name"));
-				m.setEmail(rs.getString("memer_email"));
+				m.setEmail(rs.getString("member_email"));
 				m.setPhone(rs.getString("member_phone"));
 				m.setPostNo(rs.getString("member_post_no"));
 				m.setAddress(rs.getString("member_address"));

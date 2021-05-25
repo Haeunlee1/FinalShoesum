@@ -1,11 +1,17 @@
 package com.checkout.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.checkout.model.service.CheckoutService;
+import com.checkout.model.vo.Checkout;
+import com.member.model.vo.Member;
 
 /**
  * Servlet implementation class CheckoutServlet
@@ -26,8 +32,48 @@ public class CheckoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		
+		// 파라미터 값 가져오기 
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		
+		int proCount;
+		
+		// 분기 처리 하기
+		try {
+			proCount = Integer.parseInt(request.getParameter("proCount"));
+		} catch(NumberFormatException e) {
+			proCount = 0; 
+		}
+		
+		String proNo = request.getParameter("proNo");
+		String from = request.getParameter("from"); 
+		
+		
+
+		// 멤머데이터 , 상품 데이터 가져오기
+		Member m = new CheckoutService().memberInfo(userNo);
+		request.setAttribute("member",m);
+		
+		// 분기처리하기 
+		
+		switch (from) {
+		
+		case "c":
+			List<Checkout> list = new CheckoutService().checkoutPro(userNo);
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/views/checkout/checkoutCart.jsp").forward(request, response);
+			break;
+			
+		case "p":
+			Checkout c = new CheckoutService().checkoutPro(proNo,proCount);
+			request.setAttribute("pro", c);
+			request.getRequestDispatcher("/views/checkout/checkoutPro.jsp").forward(request,response);
+			break;
+		};
+		
+		
+		
 	}
 
 	/**
