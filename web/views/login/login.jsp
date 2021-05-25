@@ -17,7 +17,7 @@
 <body>
   <div class="login_wrapper">
     <div>
-      <div class="logo"></div>
+      <a href="<%=request.getContextPath()  %>"><div class="logo"></div></a>
       <form id="loginFrm" action="<%=request.getContextPath() %>/login" method="post" onsubmit="return fn_login validate();">
 	      <div class="container center">
 	        <input type="text" name="memberId" class="form login" placeholder="아이디 입력">
