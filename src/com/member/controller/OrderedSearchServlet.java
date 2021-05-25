@@ -40,10 +40,7 @@ public class OrderedSearchServlet extends HttpServlet {
 		//String userId="test";
 	
 		List<Ordered> list = new MemberService().selectOrdered(userId,before,after);
-		System.out.println("기간설정 : "+list.size());
 		request.setAttribute("orderList", list);
-		request.setAttribute("before", before);
-		request.setAttribute("after", after);
 		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);
 		
 	}
