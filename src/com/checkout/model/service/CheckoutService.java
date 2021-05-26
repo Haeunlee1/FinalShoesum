@@ -27,10 +27,10 @@ public class CheckoutService {
 	
 	// 상품 가져오기 from cart
 	
-	public List<Checkout> checkoutPro(int userNo) {
+	public List<Checkout> checkoutPro(String cartNo) {
 		
 		Connection conn = getConnection();
-		List<Checkout> list = dao.checkoutPro(conn,userNo);
+		List<Checkout> list = dao.checkoutPro(conn,cartNo);
 		close(conn);
 		return list;
 		

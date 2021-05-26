@@ -38,7 +38,9 @@
             	for(Cart c : list){
             	%>
             <tr class="cart_products">
-                <td><input type="checkbox" class="select_products" name="select_products" onclick = "calPrice()"></td>
+                <td><input type="checkbox" class="select_products" name="select_products" onclick = "calPrice()">
+                <input type ="hidden" class = "hold_cart_no" value="<%= c.getCartNo() %>">
+                </td>
                 <td><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=c.getProNo()%>"><img src="<%=request.getContextPath() %>/images/product/<%=c.getProCate() %>/<%=c.getProImgSrc() %>" alt=""></a></td>
                 <td>
 
@@ -64,7 +66,7 @@
            	 <% } %>
             <% } %>
         </table>
-            <% if (list!=null){ %>
+            <% if (!list.isEmpty()){ %>
         <div id="order_price">
             <div id="price_head_wrap">
                 <div>총상품가격</div>
@@ -80,7 +82,7 @@
             </div>
         </div>
         <div id="order_end">
-            <button onclick="location.assign('<%=request.getContextPath() %>/checkout/checkout?userNo=<%=loginMember.getMemberNo() %>&from=c')">주문하기</button>
+            <button onclick="checkout()">주문하기</button>
         </div>
         <%} %>
     </div>
@@ -91,6 +93,33 @@
 	<script>
 	
 	
+		 // 주문하기 버튼 함수 
+		 
+		 const checkout = function(){
+			 
+			let getPrice = document.getElementById('price_body_wrap').children;
+			
+			console.log(getPrice[0].innerText == 0);
+			
+			if(getPrice[0].innerText == 0){
+				
+				alert("상품을 선택해주세요!");
+				
+			} else {
+				
+				let cartCount = document.getElementsByClassName("cart_products");
+				let getCartNo = "";
+				
+				for(i=0;i<cartCount.length;i++){
+					if(cartCount[i].children[0].children[0].checked == true){
+						getCartNo += document.getElementsByClassName("hold_cart_no")[i].value +" / ";
+					}
+				}
+				console.log(getCartNo);
+				location.assign('<%=request.getContextPath() %>/checkout/checkout?userNo=<%=loginMember.getMemberNo() %>&cartNo='+getCartNo+'&from=c');
+			}
+			 
+		 }
 		 
 
         const contAll = function(){
