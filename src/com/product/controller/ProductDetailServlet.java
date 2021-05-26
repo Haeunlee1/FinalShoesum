@@ -36,7 +36,7 @@ public class ProductDetailServlet extends HttpServlet {
 		//상품 디테일로 보내주는 서블릿
 		//상품 jsp에서 그 상품의 번호를 넘겨받기
 		String proNo=request.getParameter("proNo");
-		
+		System.out.println(proNo);
 		/*
 		 * HttpSession session=request.getSession(false); if(session!=null) { int
 		 * memberNo=Integer.parseInt(request.getParameter("memberNo")); int result = new
