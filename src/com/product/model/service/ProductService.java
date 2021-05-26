@@ -39,10 +39,10 @@ public class ProductService {
 		return list;
 	}
 	
-	public List<Product> hotProduct() {
-		// 랜덤으로 3가지 상품 가져오기 -> 메인 hotdeal 사용
+	public List<Product> manProduct() {
+		// 남자 상품 리스트 가져오기
 		Connection conn=getConnection();
-		List<Product> list = dao.hotProduct(conn);
+		List<Product> list = dao.manProduct(conn);
 		close(conn);
 		return list;
 	}

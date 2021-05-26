@@ -8,7 +8,7 @@
 	DecimalFormat df = new DecimalFormat("#,###,###"); 
 %>
 
-	<div id="new_pd">
+		<!-- index page new product Ajax -->
     	<h2>NEW PRODUCT</h2>
         <div class="product">
         
@@ -30,4 +30,5 @@
 			} %>  
 			
 		</div>
-	</div>
+		
+		
