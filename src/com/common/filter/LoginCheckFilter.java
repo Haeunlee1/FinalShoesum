@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class LoginCheckFilter
  */
-@WebFilter({"/member/*","/cart/*","/checkout/*"})
+@WebFilter({"/mypage/*","/cart/*","/checkout/*"})
 public class LoginCheckFilter implements Filter {
 //마이페이지 등 로그인을 해야지만 들어갈 수 있게 하기
     /**

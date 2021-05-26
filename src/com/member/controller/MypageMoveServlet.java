@@ -19,7 +19,7 @@ import com.member.model.vo.Ordered;
 /**
  * Servlet implementation class MypageMoveServlet
  */
-@WebServlet(name="mypagemove",urlPatterns = "/member/mypage.do")
+@WebServlet(name="mypagemove",urlPatterns = "/mypage/mypage.do")
 public class MypageMoveServlet extends HttpServlet {
 	//메인에서 아이콘 클릭시 마이페이지로 이동, 로그인 되어있어야하는 상태
 	

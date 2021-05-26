@@ -13,7 +13,7 @@ import com.member.model.vo.Member;
 /**
  * Servlet implementation class ProfileEditServlet
  */
-@WebServlet(name="profileEditServlet", urlPatterns="/member/profileEdit")
+@WebServlet(name="profileEditServlet", urlPatterns="/mypage/profileEdit")
 public class ProfileEditServlet extends HttpServlet {
 	//회원정보수정 서블릿
 	

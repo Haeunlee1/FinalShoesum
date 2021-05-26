@@ -13,7 +13,7 @@ import com.product.model.service.ProductService;
 /**
  * Servlet implementation class WishToCartServlet
  */
-@WebServlet("/member/wishToCart")
+@WebServlet("/mypage/wishToCart")
 public class WishToCartServlet extends HttpServlet {
 	//찜한상품에서 장바구니로 이동
 	private static final long serialVersionUID = 1L;

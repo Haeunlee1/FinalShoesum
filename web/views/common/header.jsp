@@ -38,7 +38,7 @@
                 	<li><a href="<%=request.getContextPath() %>/logout">로그아웃<a></a></li>
                 <%} %>
                 <li><a href="<%=request.getContextPath() %>/views/member/regiester.jsp">회원가입</a></li>
-                <li><a href="">질문게시판</a></li>
+                <li><a href="<%=request.getContextPath() %>/board/boardList">질문게시판</a></li>
                 <li><a href="">자주묻는질문</a></li>
             </ul>
             <div id="logo" onclick="location.assign('<%=request.getContextPath() %>')"></div>
@@ -48,10 +48,10 @@
             </div>
             <div id="direct_ui">
             <%if(loginMember!=null){ %>
-                <a href="<%=request.getContextPath()%>/member/mypage.do?memberNo=<%=loginMember.getMemberNo()%>"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
+                <a href="<%=request.getContextPath()%>/mypage/mypage.do?memberNo=<%=loginMember.getMemberNo()%>"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
                 <a href="<%=request.getContextPath()%>/cart/cartView?userNo=0"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
             <%}else{ %>
-            	<a href="<%=request.getContextPath()%>/member/mypage.do"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
+            	<a href="<%=request.getContextPath()%>/mypage/mypage.do"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
                 <a href="<%=request.getContextPath()%>/cart/cartView?userNo=0"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
             <%} %>
             </div>
