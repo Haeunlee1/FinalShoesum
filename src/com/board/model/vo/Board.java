@@ -26,6 +26,16 @@ public class Board {
 		this.qabPw = qabPw;
 		this.qabState = qabState;
 	}
+	
+	public Board(int qabNo, String qabTitle, String qabWriter, Date qabDate, int qabPw, int qabState) {
+		super();
+		this.qabNo = qabNo;
+		this.qabTitle = qabTitle;
+		this.qabWriter = qabWriter;
+		this.qabDate = qabDate;
+		this.qabPw = qabPw;
+		this.qabState = qabState;
+	}
 
 	public int getQabNo() {
 		return qabNo;
