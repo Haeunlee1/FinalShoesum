@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.product.model.vo.Product,java.text.*" %>
+<%@ page import="java.util.List,com.product.model.vo.Product,java.text.*,com.member.model.vo.*" %>
 <%
 	List<Product> recentpd=(List<Product>)request.getAttribute("recentpd");
 

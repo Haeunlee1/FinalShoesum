@@ -27,14 +27,14 @@ public class BoardDao {
 		}
 	}
 	
-	public List<Board> allBoards(Connection conn, int memberNo){
+	public List<Board> allMyBoards(Connection conn, int memberNo){
 		//내가쓴 게시글 가져오기
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Board> list=new ArrayList();
 		Board b=null;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("allBoards"));
+			pstmt=conn.prepareStatement(prop.getProperty("allMyBoards"));
 			pstmt.setInt(1, memberNo);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
@@ -56,4 +56,32 @@ public class BoardDao {
 		}
 		return list;
 	}
+	
+	/* 질문게시판 가져오기 */
+	public List<Board> boardList(Connection conn){
+		PreparedStatement pstmt = null;
+		ResultSet result = null;
+		List<Board> list = new ArrayList();
+		Board b=null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardList"));
+			result = pstmt.executeQuery();
+			while(result.next()) {
+				b = new Board();
+				b.setQabNo(result.getInt("QAB_NUMBER"));
+				b.setQabTitle(result.getString("QAB_TITLE"));
+				b.setQabWriter(result.getString("QAB_WRITER"));
+				b.setQabDate(result.getDate("QAB_DATE"));
+				b.setQabState(result.getInt("QAB_STATE"));
+				list.add(b);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(result);
+			close(pstmt);
+		}
+		return list;
+	}
+
 }

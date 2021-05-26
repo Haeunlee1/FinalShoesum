@@ -50,7 +50,7 @@
 	                         <li><input type="button" name="btn_addCart" title="<%=p.getLikeNo() %>" value="장바구니 담기" style="background-color : #CCCCCC"></li>
 	                         <li><input type="button" name="btn_delete" title="<%=p.getLikeNo() %>" value="삭제" style="background-color : #CCCCCC">
 	                         </li>
-	                         <form name="movetoCart" action="<%=request.getContextPath()%>/member/wishToCart" method="post">
+	                         <form name="movetoCart" action="<%=request.getContextPath()%>/mypage/wishToCart" method="post">
 				             	<input type="hidden" name="likeNo" value="<%=p.getLikeNo() %>">
 				             	<input type="hidden" name="proNo" value="<%=p.getProNo() %>">
                      		</form>	
@@ -100,16 +100,16 @@ $(".chk").click(e=>{
 });
 
 $("input[name=btn_delete]").click(e=>{
-	//찜한상품 삭제
+	//찜한상품 td 삭제버튼
 	//회원번호 & 찜번호 넘기기
 	if(confirm("해당 상품을 삭제하시겠습니까?")){
 		let likeNo=$(e.target).attr("title");
 		console.log(likeNo);
-		location.replace("<%=request.getContextPath()%>/member/wishDelete?memberNo="+'<%=memberNo%>'+"&likeNo="+likeNo);
+		location.replace("<%=request.getContextPath()%>/mypage/wishDelete?memberNo="+'<%=memberNo%>'+"&likeNo="+likeNo);
 	}
 });
 
-$("input[name=btn_addCart]").click(e=>{
+<%-- $("input[name=btn_addCart]").click(e=>{
 	//찜상품 장바구니로 넘기기 / 찜 db에서 삭제하고 장바구니에 추가하기 
 	//console.dir($("li[name=option]").html());
 	
@@ -117,18 +117,18 @@ $("input[name=btn_addCart]").click(e=>{
 	
 	
 	/* console.log($("input[name=btn_addCart]").attr("title")); */
-	<%-- const url="<%=request.getContextPath()%>/member/wishToCart?memberNo="+'<%=memberNo%>';
+	const url="<%=request.getContextPath()%>/member/wishToCart?memberNo="+'<%=memberNo%>';
 	$("#movetoCart").attr("action",url);
-	$("#movetoCart").submit(); --%>
+	$("#movetoCart").submit();
 	
 	/* let likeNo=$(e.target).attr("title");
 	console.log($(e.target).parent().prev().prev().attr("title"));
 	let p=$(e.target).parent().prev().prev().attr("title"); */
 	/* console.log($("input[type=hidden]").val()); */
-	<%-- location.href="<%=request.getContextPath()%>/member/wishToCart?mNo="+'<%=memberNo%>'+"&likeNo="+likeNo+"&p="+p; --%>
+	location.href="<%=request.getContextPath()%>/member/wishToCart?mNo="+'<%=memberNo%>'+"&likeNo="+likeNo+"&p="+p;
 	
 })
-
+ --%>
 //const fn_checkwish_delete=()=>{
 $(".checkwishBtn").click(()=>{
 	//삭제하기 => 테이블 밑 버튼 / checked된 것만 삭제하기
@@ -136,8 +136,9 @@ $(".checkwishBtn").click(()=>{
 		let checkArr=new Array();
 		$("input[class='chk']:checked").each(function(){
 			checkArr.push($(this).attr("title"));
-		});
-		location.href="<%=request.getContextPath()%>/member/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+checkArr;
+		})
+			console.log(checkArr);			
+		location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+checkArr);
 	}
 })
 
@@ -149,11 +150,10 @@ $(".allDelBtn").click(()=>{
 		$("input[class='chk']").each(function(){
 			allwishArr.push($(this).attr("title"));
 		});
-		location.href="<%=request.getContextPath()%>/member/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+allwishArr;
+		console.log(allwishArr);
+		location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+allwishArr);
 	}
 });
-
-
 </script>
 
 

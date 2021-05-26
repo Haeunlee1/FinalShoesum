@@ -1,7 +1,6 @@
-package com.member.controller;
+package com.product.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.board.model.service.BoardService;
-import com.board.model.vo.Board;
+import com.product.model.service.ProductService;
 
 /**
- * Servlet implementation class MyboardListAjaxServlet
+ * Servlet implementation class AddWishServlet
  */
-@WebServlet("/mypage/myboardList")
-public class MyboardListAjaxServlet extends HttpServlet {
-	//ajax로 내가쓴게시글 불러오기
+@WebServlet("/mypage/addWish")
+public class AddWishServlet extends HttpServlet {
+	//찜 상품 추가하기
 	
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyboardListAjaxServlet() {
+    public AddWishServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +31,16 @@ public class MyboardListAjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//내가쓴게시글 불러오기
-		
-		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
-		request.setCharacterEncoding("utf-8");
-		List<Board> list = new BoardService().allMyBoards(memberNo);
-		request.setAttribute("boardList", list);
-		request.getRequestDispatcher("/views/mypage/myboardAjax.jsp").forward(request, response);
-	
-	
-	
+		int memberNo =Integer.parseInt(request.getParameter("memberNo"));
+		String proNo=request.getParameter("proNo");
+		int result = new ProductService().addWish(memberNo,proNo);
+		if(result>0) {
+			request.getRequestDispatcher("/product/productDetail?proNo="+proNo).forward(request, response);
+		}else {
+			String msg="관심상품 등록 실패, 재시도 하세요";
+			String loc="/views/product/product_detail.jsp";
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**

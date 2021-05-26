@@ -12,11 +12,20 @@ import com.board.model.vo.Board;
 public class BoardService {
 	private BoardDao dao= new BoardDao();
 	
-	public List<Board> allBoards(int memberNo){
+	public List<Board> allMyBoards(int memberNo){
 		//내가쓴게시글 가져오기
 		Connection conn = getConnection();
-		List<Board> list = dao.allBoards(conn,memberNo);
+		List<Board> list = dao.allMyBoards(conn,memberNo);
 		close(conn);
 		return list;
+	}
+	
+	public List<Board> boardList() {
+		
+		Connection conn = getConnection();
+		List<Board> list = dao.boardList(conn);
+		close(conn);
+		return list;
+		
 	}
 }

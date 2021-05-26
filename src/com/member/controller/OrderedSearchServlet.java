@@ -15,7 +15,7 @@ import com.member.model.vo.Ordered;
 /**
  * Servlet implementation class OrderedSearchServlet
  */
-@WebServlet("/member/orderedSearch")
+@WebServlet("/mypage/orderedSearch")
 public class OrderedSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
