@@ -136,29 +136,47 @@ public class CheckoutDao {
 	
 	// 상품가져오기 from product
 	
-	public Checkout checkoutPro(Connection conn, String proNo, int proCount) {
+	public List<Checkout> checkoutPro(Connection conn, String proNo, String proCount) {
 		
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rs = null;
-		Checkout c = new Checkout();
+		List<Checkout> list = new ArrayList();
+		
+		String[] proNoArray = proNo.split("/"); 
+		String[] proCountArray = proCount.split("/");
+		
+		String proNoSql = "";
+		String proCountSql = "";
+		
+		for(int i = 0; i<proNoArray.length;i++) {
+			if(i==proNoArray.length-1) {
+				proNoSql += proNoArray[i];
+			} else {
+				proNoSql += proNoArray[i] + ",";
+			}
+		}
+		
+		int i = 0;
 		
 		try {
-			pstmt = conn.prepareStatement(prop.getProperty("checkoutPro"));
-			pstmt.setString(1, proNo);
-			rs = pstmt.executeQuery();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM PRODUCT WHERE PRO_NO IN("+proNoSql+")");
 			while(rs.next()) {
+				Checkout c = new Checkout();
 				c.setProNo(rs.getString("PRO_NO"));
 				c.setProName(rs.getString("PRO_NAME"));
 				c.setProPrice(rs.getInt("PRO_PRICE"));
-				c.setProCount(proCount);
+				c.setProCount(Integer.parseInt(proCountArray[i]));
+				i++;
+				list.add(c);
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(pstmt);
+			close(stmt);
 		}
-		return c;
+		return list;
 	}
 	
 	
