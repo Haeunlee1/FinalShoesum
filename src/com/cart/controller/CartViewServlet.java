@@ -37,7 +37,6 @@ public class CartViewServlet extends HttpServlet {
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
 		List<Cart> list = new CartService().cartListView(userNo);
-		System.out.println(list.isEmpty());
 		
 		request.setAttribute("list", list);
 		

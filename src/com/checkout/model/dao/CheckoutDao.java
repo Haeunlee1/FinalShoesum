@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -68,16 +69,29 @@ public class CheckoutDao {
 	
 	// 상품가져오기 from cart 
 	
-	public List<Checkout> checkoutPro(Connection conn, int userNo){
+	public List<Checkout> checkoutPro(Connection conn, String cartNo){
 		
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rs = null ;
 		List<Checkout> list = new ArrayList();
 		
+		
 		try {
-			pstmt = conn.prepareStatement(prop.getProperty("checkoutList"));
-			pstmt.setInt(1, userNo);
-			rs = pstmt.executeQuery();
+			
+			String[] cartArray = cartNo.split(" / ");
+			String cartSql = "";
+			for(int i = 0;i<cartArray.length;i++) {
+				if(i==cartArray.length-1) {
+					cartSql += cartArray[i];
+				} else {
+					cartSql +=cartArray[i] + ",";
+				}
+			}
+			
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT PRO_NO , PRO_NAME, PRO_PRICE,PRO_COUNT,CART_NUMBER"
+					+ " FROM CART JOIN PRODUCT USING(PRO_NO) WHERE CART_NUMBER in("+cartSql +")");
+			
 			while(rs.next()) {
 				Checkout c = new Checkout();
 				c.setProNo(rs.getString("PRO_NO"));
@@ -86,15 +100,38 @@ public class CheckoutDao {
 				c.setProCount(rs.getInt("PRO_COUNT"));
 				c.setCartNo(rs.getInt("CART_NUMBER"));
 				list.add(c);
-			}
+		}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(pstmt);
+			close(stmt);
 		}
+		
 		return list;
 	}
+		
+//		try {
+//			pstmt = conn.prepareStatement(prop.getProperty("checkoutList"));
+//			pstmt.setInt(1, cartNo);
+//			rs = pstmt.executeQuery();
+//			while(rs.next()) {
+//				Checkout c = new Checkout();
+//				c.setProNo(rs.getString("PRO_NO"));
+//				c.setProName(rs.getString("PRO_NAME"));
+//				c.setProPrice(rs.getInt("PRO_PRICE"));
+//				c.setProCount(rs.getInt("PRO_COUNT"));
+//				c.setCartNo(rs.getInt("CART_NUMBER"));
+//				list.add(c);
+//			}
+//		} catch(SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rs);
+//			close(pstmt);
+//		}
+				
+				
 	
 	
 	// 상품가져오기 from product

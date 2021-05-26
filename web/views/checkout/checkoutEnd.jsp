@@ -58,6 +58,8 @@
 	    		} else {
 	    			//[3] 아직 제대로 결제가 되지 않았습니다.
 	    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+	    			
+	    			
 	    		}
 	    	});
 	    	
@@ -68,6 +70,7 @@
 	        msg += '에러내용 : ' + rsp.error_msg;
 
 	        alert(msg);
+	        location.replace("<%=request.getContextPath()%>");
 	    }
 	});
 	

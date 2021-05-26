@@ -34,19 +34,26 @@ public class CheckoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		
-		// 파라미터 값 가져오기 
+		// 파라미터 값 가져오기
+		
+		// 유저번호 
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
-		int proCount;
+		// 카트번호
+		String cartNo = request.getParameter("cartNo");
 		
-		// 분기 처리 하기
+		// 제품 수량 분기 처리
+		int proCount;
 		try {
 			proCount = Integer.parseInt(request.getParameter("proCount"));
 		} catch(NumberFormatException e) {
-			proCount = 0; 
+			proCount = 0;
 		}
 		
+		// 제품번호 
 		String proNo = request.getParameter("proNo");
+		
+		// 출처
 		String from = request.getParameter("from"); 
 		
 		
@@ -60,16 +67,17 @@ public class CheckoutServlet extends HttpServlet {
 		switch (from) {
 		
 		case "c":
-			List<Checkout> list = new CheckoutService().checkoutPro(userNo);
+			List<Checkout> list = new CheckoutService().checkoutPro(cartNo);
+			
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/views/checkout/checkoutCart.jsp").forward(request, response);
 			break;
 			
-		case "p":
-			Checkout c = new CheckoutService().checkoutPro(proNo,proCount);
-			request.setAttribute("pro", c);
-			request.getRequestDispatcher("/views/checkout/checkoutPro.jsp").forward(request,response);
-			break;
+//		case "p":
+//			Checkout c = new CheckoutService().checkoutPro(proNo,proCount);
+//			request.setAttribute("pro", c);
+//			request.getRequestDispatcher("/views/checkout/checkoutPro.jsp").forward(request,response);
+//			break;
 		};
 		
 		

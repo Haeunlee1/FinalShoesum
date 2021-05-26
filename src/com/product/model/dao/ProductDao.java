@@ -42,9 +42,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -75,9 +72,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -108,9 +102,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -141,9 +132,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -175,9 +163,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));

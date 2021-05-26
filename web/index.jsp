@@ -26,7 +26,7 @@
 	                       <div id="count_time"></div>
 	                   </div>
 	               </a>
-	               <p>[슈썸]블레어뮬<br><span class="sale_price">40000</span></p>
+	               <p>[슈썸]블레어뮬<br><span class="sale_price">40,000</span></p>
 	           </div>
 	           <div>
 	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=m01_gray&hotpd=hotpd&sale=0.65">
@@ -37,7 +37,7 @@
 	                       <div id="count_time2"></div>
 	                   </div>
 	               </a>
-	               <p>[슈썸]에어맥스SC<br><span class="sale_price">19500</span></p>
+	               <p>[슈썸]에어맥스SC<br><span class="sale_price">19,500</span></p>
 	           </div>
 	           <div>
 	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=k01_white&hotpd=hotpd&sale=0.23">
@@ -48,7 +48,7 @@
 	                       <div id="count_time3"></div>
 	                   </div>
 	               </a>
-	               <p>[슈썸]척테일러<br><span class="sale_price">8700</span></p>
+	               <p>[슈썸]척테일러<br><span class="sale_price">8,700</span></p>
 	           </div>
 	       </div>
 	   </div>
@@ -77,6 +77,7 @@
    </section>
    
 		<script>
+		
            	$(document).ready((e)=>{
            		// bestproduct Ajax
            		$.ajax({

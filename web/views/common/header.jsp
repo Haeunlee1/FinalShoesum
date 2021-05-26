@@ -4,8 +4,7 @@
 <%
 	//로그인된 객체
 	Member loginMember=(Member)session.getAttribute("loginMember");
-
-
+	
 %>    
 <!DOCTYPE html>
 <html>
@@ -38,7 +37,7 @@
                 <%}else { %>
                 	<li><a href="<%=request.getContextPath() %>/logout">로그아웃<a></a></li>
                 <%} %>
-                <li><a href="<%=request.getContextPath()  %>/views/regiester/regiester.jsp">회원가입</a></li>
+                <li><a href="<%=request.getContextPath() %>/views/member/regiester.jsp">회원가입</a></li>
                 <li><a href="">질문게시판</a></li>
                 <li><a href="">자주묻는질문</a></li>
             </ul>

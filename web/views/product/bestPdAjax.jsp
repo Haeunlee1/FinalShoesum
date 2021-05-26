@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.product.model.vo.Product" %>
+<%@ page import="java.util.List,com.product.model.vo.Product,java.text.*" %>
 <%
 	List<Product> lists=(List<Product>)request.getAttribute("products");
 		
@@ -17,6 +17,9 @@
 			}
 		}
 	}
+	
+	// 회계표시
+	DecimalFormat df = new DecimalFormat("#,###,###");
 %>
 
     <div id="best_pd">
@@ -34,7 +37,7 @@
 		
          	<div>
             	<a href="<%=request.getContextPath() %>/product/productDetail?proNo=<%=lists.get(a[i]).getProNo() %>"><img src="<%=request.getContextPath() %>/images/product/<%=type %>/<%=lists.get(a[i]).getImages1() %>" alt=""></a>
-                <p>[슈썸]<%=lists.get(a[i]).getProName() %><br><%=lists.get(a[i]).getPrice() %></p>
+                <p>[슈썸]<%=lists.get(a[i]).getProName() %><br><%=df.format(lists.get(a[i]).getPrice()) %></p>
             </div>
              
          	<%}

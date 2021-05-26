@@ -3,13 +3,10 @@ package com.product.model.vo;
 import java.util.List;
 
 public class Product {
-//상품
+	//상품
 	private String proNo;
 	private String proName;
 	private int price;
-	private int size;
-	private String color;
-	private int stock;
 	private String images1;	 //이미지주소들
 	private String images2;	 //이미지주소들
 	private String images3;	 //이미지주소들
@@ -21,15 +18,12 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String proNo, String proName, int price, int size, String color, int stock, String images1,
+	public Product(String proNo, String proName, int price, String images1,
 			String images2, String images3, String images4) {
 		super();
 		this.proNo = proNo;
 		this.proName = proName;
 		this.price = price;
-		this.size = size;
-		this.color = color;
-		this.stock = stock;
 		this.images1 = images1;
 		this.images2 = images2;
 		this.images3 = images3;
@@ -74,30 +68,6 @@ public class Product {
 
 	public void setPrice(int price) {
 		this.price = price;
-	}
-
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	public int getStock() {
-		return stock;
-	}
-
-	public void setStock(int stock) {
-		this.stock = stock;
 	}
 
 	public String getImages1() {

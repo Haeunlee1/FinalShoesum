@@ -188,17 +188,12 @@
                 <td>
                     <select name="selBank" style="width : 90px;height : 28px;">
                         <option value="">선택</option>
-                        <option value="카카오">카카오</option>
-                        <option value="국민은행">국민은행</option>
-                        <option value="신한은행">신한은행</option>
-                        <option value="우리은행">우리은행</option>
-                        <option value="기업은행">기업은행</option>
-                        <option value="카카오뱅크">카카오뱅크</option>
-                        <option value="새마을금고">새마을금고</option>
-                        <option value="우체국">우체국</option>
-                        <option value="대구은행">대구은행</option>
-                        <option value="신협">신협</option>
-                        <option value="케이뱅크">케이뱅크</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
                     </select>
                 </td>
             </tr>
@@ -207,15 +202,12 @@
                 <td>
                     <select name="selVirBank" id="selVirBank" style="width:90px;height:28px;">
                         <option value="">선택</option>
-                        <option value="농협은행">농협은행</option>
-                        <option value="국민은행">국민은행</option>
-                        <option value="신한은행">신한은행</option>
-                        <option value="우리은행">우리은행</option>
-                        <option value="기업은행">기업은행</option>
-                        <option value="우체국">우체국</option>
-                        <option value="광주은행">광주은행</option>
-                        <option value="수협은행">수협은행</option>
-                        <option value="씨티은행">씨티은행</option>
+						<option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
                     </select>
                 </td>
             </tr>

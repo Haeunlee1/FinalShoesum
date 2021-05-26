@@ -49,4 +49,32 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+	public int insertMember(Member m) {
+		//회원가입
+		Connection conn= getConnection();
+		int result = dao.insertMember(conn, m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
+	
+	public Member selectMemberId(String memberNm, String memberEmail) {
+		//로그인
+		Connection conn=getConnection();
+		Member m=dao.findId(conn, memberNm, memberEmail);
+		close(conn);
+		return m;
+	}
+	
+	public Member selectMemberPw(String memberNm, String memberEmail, String memberId) {
+		//로그인
+		Connection conn=getConnection();
+		Member m=dao.findPw(conn, memberNm, memberEmail, memberId);
+		close(conn);
+		return m;
+	}
 }
+
