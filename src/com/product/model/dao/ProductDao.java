@@ -148,6 +148,49 @@ public class ProductDao {
 		return list;
 	}
 
+	public boolean selectWish(Connection conn, int memberNo, String proNo) {
+		//상품no와 회원no로 찜테이블에 있는지 없는지 확인하기
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		boolean check=false;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectWish"));
+			pstmt.setInt(1, memberNo);
+			pstmt.setString(2, proNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				check=true;
+			}else {
+				check=false;
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return check;
+	}
+
+	public int addWish(Connection conn, int memberNo, String proNo) {
+		//상품디테일에서 찜하기 추가
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("addWish"));
+			pstmt.setString(1, proNo);
+			pstmt.setInt(2, memberNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
 	public List<Product> allWishes(Connection conn, int userNo){
 		//찜 목록 가져오기
 		PreparedStatement pstmt=null;

@@ -47,6 +47,24 @@ public class ProductService {
 		return list;
 	}
 
+	public boolean selectWish(int memberNo, String proNo) {
+		//상품디테일 눌렀을 때 그 유저의 찜한 상품인지 아닌지 확인하는 로직
+		Connection conn=getConnection();
+		boolean check = dao.selectWish(conn,memberNo,proNo);
+		close(conn);
+		return check;
+	}
+	
+	public int addWish(int memberNo, String proNo) {
+		//상품디테일에서 찜하기 누르면 추가하기
+		Connection conn=getConnection();
+		int result=dao.addWish(conn,memberNo,proNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 	public List<Product> allWishes(int userNo){
 		//찜상품 가져오기
 		Connection conn=getConnection();

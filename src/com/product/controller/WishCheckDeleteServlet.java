@@ -13,7 +13,7 @@ import com.product.model.service.ProductService;
 /**
  * Servlet implementation class WishCheckDeleteServlet
  */
-@WebServlet("/member/wishCheckDelete")
+@WebServlet("/mypage/wishCheckDelete")
 public class WishCheckDeleteServlet extends HttpServlet {
 	//체크된 관심상품만 지우기
 	private static final long serialVersionUID = 1L;
@@ -34,9 +34,9 @@ public class WishCheckDeleteServlet extends HttpServlet {
 		String[] checkArr=request.getParameter("checkArr").split(",");
 		//String checkArr=String.join(",",request.getParameter("checkArr"));
 		int result=new ProductService().checkDeleteWish(memberNo,checkArr);
-		
+		System.out.println(checkArr);
 		String msg=result>0?"선택한 상품이 삭제되었습니다":"삭제실패";
-		request.setAttribute("loc", "/member/mypage.do?memberNo="+memberNo);
+		request.setAttribute("loc", "/mypage/mypage.do?memberNo="+memberNo);
 		request.setAttribute("msg", msg);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		

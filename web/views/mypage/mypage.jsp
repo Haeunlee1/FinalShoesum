@@ -148,7 +148,7 @@
                 <span>기본정보</span>
                 <span class="redPoint float_right">&nbsp;*</span><span class="float_right"> 필수입력사항</span>
             </div>
-            <form id="profileFrm" method="post" action="<%=request.getContextPath()%>/member/profileEdit">
+            <form id="profileFrm" method="post" action="<%=request.getContextPath()%>/mypage/profileEdit">
                 <table id="tbl-profile" >
                     <tr>
                         <td>아이디<span class="redPoint">*</span></td>
@@ -280,14 +280,14 @@ $("#search_ordered").click(e=>{
 	//alert($("#before").val()+"/"+$("#today").val());
 	let before=$("#before").val();
 	let after=$("#today").val();
-	location.assign("<%= request.getContextPath()%>/member/orderedSearch?memberNo="+'<%=loginMember.getMemberNo()%>'+"&before="+before+"&after="+after);
+	location.assign("<%= request.getContextPath()%>/mypage/orderedSearch?memberNo="+'<%=loginMember.getMemberNo()%>'+"&before="+before+"&after="+after);
 });
 
 //관심상품 ajax
 $(function(){
 	$("#wishlistLi").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/member/wishlist",
+			url:"<%=request.getContextPath()%>/mypage/wishlist",
 			data:{
 				"memberNo":"<%=loginMember.getMemberNo()%>"
 			},
@@ -304,7 +304,7 @@ $(function(){
 	//내가쓴게시글 ajax해보기
 	$("#boardListLi").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/member/myboardList",
+			url:"<%=request.getContextPath()%>/mypage/myboardList",
 			data:{
 				"memberNo":"<%=loginMember.getMemberNo()%>"
 			}, 

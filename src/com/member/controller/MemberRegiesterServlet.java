@@ -14,7 +14,7 @@ import com.member.model.vo.Member;
 /**
  * Servlet implementation class MemberRegiesterServlet
  */
-@WebServlet("/member/regiester")
+@WebServlet(name="memberRegiester",urlPatterns = "/member/regiester")
 public class MemberRegiesterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

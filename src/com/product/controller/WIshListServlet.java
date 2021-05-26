@@ -15,7 +15,7 @@ import com.product.model.vo.Product;
 /**
  * Servlet implementation class WIshListServlet
  */
-@WebServlet("/member/wishlist")
+@WebServlet("/mypage/wishlist")
 public class WIshListServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

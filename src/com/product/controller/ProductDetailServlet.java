@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.product.model.service.ProductService;
 import com.product.model.vo.Product;
@@ -35,6 +36,13 @@ public class ProductDetailServlet extends HttpServlet {
 		//상품 디테일로 보내주는 서블릿
 		//상품 jsp에서 그 상품의 번호를 넘겨받기
 		String proNo=request.getParameter("proNo");
+		
+		/*
+		 * HttpSession session=request.getSession(false); if(session!=null) { int
+		 * memberNo=Integer.parseInt(request.getParameter("memberNo")); int result = new
+		 * ProductService().selectWish(memberNo,proNo); //클릭한 상품이 해당 유저의 찜 목록에 있는지 확인하기
+		 * }
+		 */
 		
 		if(request.getParameter("hotpd")!=null&&request.getParameter("sale")!=null) {
 			String hotpd=request.getParameter("hotpd");
