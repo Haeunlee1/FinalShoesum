@@ -74,8 +74,7 @@ public class CheckoutServlet extends HttpServlet {
 		case "p":
 			list = new CheckoutService().checkoutPro(proNo,proCount);
 			request.setAttribute("list", list);
-			System.out.println(list.isEmpty());
-//			request.getRequestDispatcher("/views/checkout/checkoutPro.jsp").forward(request,response);
+			request.getRequestDispatcher("/views/checkout/checkoutPro.jsp").forward(request,response);
 			break;
 		};
 		
