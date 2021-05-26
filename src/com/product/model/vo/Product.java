@@ -3,7 +3,7 @@ package com.product.model.vo;
 import java.util.List;
 
 public class Product {
-//상품
+	//상품
 	private String proNo;
 	private String proName;
 	private int price;
@@ -15,12 +15,26 @@ public class Product {
 	private String images3;	 //이미지주소들
 	private String images4;	 //이미지주소들
 	
+	private int likeNo;		//찜번호 
+	
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String proNo, String proName, int price, int size, String color, int stock, String images1,
+	public Product(String proNo, String proName, int price, String images1,
 			String images2, String images3, String images4) {
+		super();
+		this.proNo = proNo;
+		this.proName = proName;
+		this.price = price;
+		this.images1 = images1;
+		this.images2 = images2;
+		this.images3 = images3;
+		this.images4 = images4;
+	}
+	
+	public Product(String proNo, String proName, int price, int size, String color, int stock, String images1,
+			String images2, String images3, String images4, int likeNo) {
 		super();
 		this.proNo = proNo;
 		this.proName = proName;
@@ -32,7 +46,9 @@ public class Product {
 		this.images2 = images2;
 		this.images3 = images3;
 		this.images4 = images4;
+		this.likeNo=likeNo;
 	}
+	
 
 	public String getProNo() {
 		return proNo;
@@ -57,7 +73,7 @@ public class Product {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
+	
 	public int getSize() {
 		return size;
 	}
@@ -114,7 +130,18 @@ public class Product {
 		this.images4 = images4;
 	}
 
-	
+	public int getLikeNo() {
+		return likeNo;
+	}
+
+	public void setLikeNo(int likeNo) {
+		this.likeNo = likeNo;
+	}
+
+	public String gettoString() {
+		return this.proNo + "," +this.price + "," + this.size + ","
+				+ this.color + "," + this.stock + "," + this.images1+"," + this.likeNo;
+	}
 	
 	
 }

@@ -44,7 +44,7 @@ public class MemberDao {
 				m.setMemberId(rs.getString("member_id"));
 				m.setMemberPw(rs.getString("member_pw"));
 				m.setMemberName(rs.getString("member_name"));
-				m.setEmail(rs.getString("memer_email"));
+				m.setEmail(rs.getString("member_email"));
 				m.setPhone(rs.getString("member_phone"));
 				m.setPostNo(rs.getString("member_post_no"));
 				m.setAddress(rs.getString("member_address"));
@@ -64,7 +64,7 @@ public class MemberDao {
 	
 	
 	
-	public List<Ordered> basicOrdered(Connection conn, String id){
+	public List<Ordered> basicOrdered(Connection conn, int no){
 		//주문내역 가져오기. 날짜 & 아이디 / 기본화면=>3개월이내 조회, db에 넘겨주기
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -72,7 +72,7 @@ public class MemberDao {
 		Ordered o = null;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("basicOrdered"));
-			pstmt.setString(1, id);
+			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				//결과가 있으면 list에 담기
@@ -99,7 +99,7 @@ public class MemberDao {
 		
 	}
 	
-	public List<Ordered> selectOrdered(Connection conn, String id, String before, String after){
+	public List<Ordered> selectOrdered(Connection conn, int memberNo, String before, String after){
 		//기간설정해서 가져오기
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -107,7 +107,7 @@ public class MemberDao {
 		Ordered o = null;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectOrdered"));
-			pstmt.setString(1, id);
+			pstmt.setInt(1, memberNo);
 			pstmt.setString(2, before);
 			pstmt.setString(3, after);
 			rs=pstmt.executeQuery();
@@ -157,5 +157,95 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public int insertMember(Connection conn, Member m) {
+		//회원정보 등록 
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertMember"));
+			
+			pstmt.setString(1,m.getMemberId());
+			pstmt.setString(2,m.getMemberPw());
+			pstmt.setString(3,m.getMemberName());
+			pstmt.setString(4,m.getEmail());
+			pstmt.setString(5,m.getPhone());
+			pstmt.setString(6,m.getPostNo());
+			pstmt.setString(7,m.getAddress());
+			pstmt.setString(8,m.getAddressEnd());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	public Member findId(Connection conn, String memberNm, String memberEmail) {
+		// 로그인 
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberId"));
+			pstmt.setString(1, memberNm);
+			pstmt.setString(2, memberEmail);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberNo(rs.getInt("member_no"));
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPw(rs.getString("member_pw"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setEmail(rs.getString("member_email"));
+				m.setPhone(rs.getString("member_phone"));
+				m.setPostNo(rs.getString("member_post_no"));
+				m.setAddress(rs.getString("member_address"));
+				m.setAddressEnd(rs.getString("member_address_end"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	public Member findPw(Connection conn, String memberNm, String memberEmail, String memberId) {
+		// 로그인 
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberPw"));
+			pstmt.setString(1, memberNm);
+			pstmt.setString(2, memberEmail);
+			pstmt.setString(3, memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberNo(rs.getInt("member_no"));
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPw(rs.getString("member_pw"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setEmail(rs.getString("member_email"));
+				m.setPhone(rs.getString("member_phone"));
+				m.setPostNo(rs.getString("member_post_no"));
+				m.setAddress(rs.getString("member_address"));
+				m.setAddressEnd(rs.getString("member_address_end"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
 	}
 }

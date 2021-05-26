@@ -37,7 +37,7 @@
                 <%}else { %>
                 	<li><a href="<%=request.getContextPath() %>/logout">로그아웃<a></a></li>
                 <%} %>
-                <li><a href="">회원가입</a></li>
+                <li><a href="<%=request.getContextPath() %>/views/member/regiester.jsp">회원가입</a></li>
                 <li><a href="<%=request.getContextPath() %>/board/boardList">질문게시판</a></li>
                 <li><a href="">자주묻는질문</a></li>
             </ul>
@@ -47,8 +47,13 @@
                 <button></button>
             </div>
             <div id="direct_ui">
-                <a href="<%=request.getContextPath()%>/member/mypage.do?"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
+            <%if(loginMember!=null){ %>
+                <a href="<%=request.getContextPath()%>/member/mypage.do?memberNo=<%=loginMember.getMemberNo()%>"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
                 <a href="<%=request.getContextPath()%>/cart/cartView?userNo=0"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
+            <%}else{ %>
+            	<a href="<%=request.getContextPath()%>/member/mypage.do"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
+                <a href="<%=request.getContextPath()%>/cart/cartView?userNo=0"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
+            <%} %>
             </div>
         </header>
         <nav>

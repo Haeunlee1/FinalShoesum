@@ -31,36 +31,37 @@
 		<div id="pd_info">
 		    <div class="pd_title">
 		        <span><%=p.getProName() %></span>
-		        <span>♥ 7</span>
+		        <button type="button" id="heart" value="0" class="heart">♡</button>
 		    </div>
 		    <div class="pd_choice">
 		        <p>구매정보</p>
 		        <p>사이즈</p>
 		        <select name="size" id="size">
-		            <option value="">230</option>
-		            <option value="">235</option>
-		            <option value="">240</option>
-		            <option value="">245</option>
-		            <option value="">250</option>
-		            <option value="">255</option>
-		            <option value="">260</option>
-		            <option value="">265</option>
-		            <option value="">270</option>
-		            <option value="">275</option>
-		            <option value="">280</option>
+		            <option value="230">230</option>
+		            <option value="240">240</option>
+		            <option value="250">250</option>
+		            <option value="260">260</option>
+		            <option value="270">270</option>
+		            <option value="280">280</option>
 		        </select>
 		        <p>색상</p>
 		        <select name="color" id="color">
-		            <option value="">빨간색</option>
-		            <option value="">검정색</option>
-		            <option value="">하얀색</option>
-		            <option value="">노랑색</option>
-		            <option value="">파랑색</option>
+		            <option value="white">화이트</option>
+		            <option value="beige">베이지</option>
+		            <option value="brown">브라운</option>
+		            <option value="yellow">옐로우</option>
+		            <option value="red">레드</option>
+		            <option value="pink">핑크</option>
+		            <option value="khaki">카키</option>
+		            <option value="navy">네이비</option>
+		            <option value="gray">그레이</option>
+		            <option value="black">블랙</option>
 		        </select>
 		        <p>수량</p>
 		        <div class="count_box">
 		            <button type="button" id="decreaseQuantity">-</button>
-                    <input type="text" name="pop_out" value="1" readonly="readonly" style="text-align:center;"/>
+                    <input type="text" name="pop_out" value="1" readonly="readonly" style="text-align:center;">
+                    <input type="hidden" name="pd_count" value="">
                     <button type ="button" id="increaseQuantity">+</button>		        
                 </div>
 		  	</div>
@@ -74,7 +75,6 @@
 		            	price=((int)(price*sale)/100)*100;
 	  			%>
 					<p class="total_price">￦　<%=df.format(price) %></p>
-					<!-- 백의자리에서 버림구현하기 -->
 						<%}else { %>
 							<p class="total_price">￦　<%=df.format(price) %></p>
 						<%} %>
@@ -88,7 +88,7 @@
 	    
 	    <div id="pd_review">
 	        <p>구매후기</p>
-	        <div class="review_box">
+	        <!-- <div class="review_box">
 	            <p>★★★★☆</p>
 	            <div>
 	                신발자체는 이뻐요.<br>
@@ -108,7 +108,7 @@
 	            <p>상품만족도　☆☆☆☆☆</p>
 	            <textarea name="" id="" cols="110" rows="5" placeholder="  상품에 대한 리뷰를 남겨주세요."></textarea>
 	            <button>등록</button>
-	        </div>
+	        </div> -->
 	    </div>
 	    
 	    <!-- Ajax 처리 -->
@@ -129,7 +129,7 @@
 		$(document).ready((e)=>{
 			// recommend_pd Ajax -> bestPd Ajax랑 로직 동일하게 구현, 출력창만 다르게!
 			$.ajax({
-				url:"<%=request.getContextPath() %>/product/bestPdAjax",
+				url:"<%=request.getContextPath() %>/product/recommendPdAjax",
 				success:data=>{
 					$("#recommend_pd").html(data);
 				}
@@ -137,6 +137,21 @@
 		});
 	
         $(function(){
+
+        	// 찜버튼 on,off 스크립트
+        	$("#heart").click(function(e){
+        		var icon=["♡","♥"];
+        		var heart=$(".heart").val();
+		        		
+        		if(heart=='0') {
+        			$(".heart").text(icon[1]);
+        			heart='1';
+        		}else {
+        			$(".heart").text(icon[0]);
+        			heart='0';
+        		}
+	        	$(".heart").val(heart);
+        	});
             
             // 마우스 오버시 이미지 변경 스크립트
             var smallPics=document.querySelectorAll(".smallPics");
@@ -162,6 +177,7 @@
                 };
                 
                 $('input[name=pop_out]').val(num);
+                $('input[name=pd_count]').val(num);
                 
                 const basic_amount = <%=price %>;
               	console.log(typeof(basic_amount));
@@ -182,11 +198,13 @@
                 }
                 
                 $('input[name=pop_out]').val(num);
+                $('input[name=pd_count]').val(num);
                 
                 const basic_amount = <%=price %>;
                 var show_total_amount = parseInt(basic_amount) * num;
                 $('.total_price').html('￦　'+show_total_amount.toLocaleString('ko-KR'));
             });
+            
         })
     </script>
 

@@ -73,6 +73,7 @@ div#order_head {
 }
 
 .order_table input,select,textarea {
+	font-size : 16px;
     border : 0.5px solid #999999;
     border-radius : 3px;
 }

@@ -15,9 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class LoginCheckFilter
  */
-@WebFilter(servletNames={		//테스트때문에 이름 다르게 씀 나중에 수정하기
-		"mypagemove1","profileEditServlet1"
-})
+@WebFilter({"/member/*","/cart/*","/checkout/*"})
 public class LoginCheckFilter implements Filter {
 //마이페이지 등 로그인을 해야지만 들어갈 수 있게 하기
     /**
@@ -44,7 +42,7 @@ public class LoginCheckFilter implements Filter {
 		if(session==null || session.getAttribute("loginMember")==null) {
 			//로긴 안 했을 때
 			request.setAttribute("msg","로그인 후 이용가능합니다");
-			request.setAttribute("loc", "/");  //나중에 로그인페이지로 이동하게 만들기
+			request.setAttribute("loc", "/views/login/login.jsp");  //나중에 로그인페이지로 이동하게 만들기
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
 			//로그인 시에 doFilter ㄱㄱ 

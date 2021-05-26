@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Servlet Filter implementation class PasswordEncryptFilter
  */
-@WebFilter(servletNames= {
-		"profileEditServlet"
+@WebFilter(servletNames= {   //로그인 & 회원가입&회원정보수정&비밀번호수정? 암튼 "password"쓰는 모든 곳
+		"profileEditServlet","loginServlet"
 })
 public class PasswordEncryptFilter implements Filter {
 

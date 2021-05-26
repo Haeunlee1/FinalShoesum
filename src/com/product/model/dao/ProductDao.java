@@ -42,9 +42,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -75,9 +72,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -108,9 +102,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -141,9 +132,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -175,13 +163,11 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
 				p.setImages4(rs.getString("img_src4"));
+				p.setLikeNo(rs.getInt("like_no"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -193,4 +179,23 @@ public class ProductDao {
 		return list;
 		
 	}
+	
+	public int deleteWish(Connection conn, int userNo, int likeNo) {
+		//관심상품 삭제 => 테이블 버튼 & 체크 삭제
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteWish"));
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, likeNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+	
 }
