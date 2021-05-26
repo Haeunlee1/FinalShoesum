@@ -19,4 +19,13 @@ public class BoardService {
 		close(conn);
 		return list;
 	}
+	
+	public List<Board> boardList() {
+		
+		Connection conn = getConnection();
+		List<Board> list = dao.boardList(conn);
+		close(conn);
+		return list;
+		
+	}
 }

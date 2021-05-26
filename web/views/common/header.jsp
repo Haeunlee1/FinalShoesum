@@ -38,7 +38,7 @@
                 	<li><a href="<%=request.getContextPath() %>/logout">로그아웃<a></a></li>
                 <%} %>
                 <li><a href="">회원가입</a></li>
-                <li><a href="">질문게시판</a></li>
+                <li><a href="<%=request.getContextPath() %>/board/boardList">질문게시판</a></li>
                 <li><a href="">자주묻는질문</a></li>
             </ul>
             <div id="logo" onclick="location.assign('<%=request.getContextPath() %>')"></div>
