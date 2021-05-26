@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.product.model.vo.Product" %>
+<%@ page import="java.util.List,com.product.model.vo.Product,java.text.*" %>
 <%
 	List<Product> recentpd=(List<Product>)request.getAttribute("recentpd");
+
+	//회계표시
+	DecimalFormat df = new DecimalFormat("#,###,###"); 
 %>
 
 	<div id="new_pd">
@@ -20,7 +23,7 @@
 				
                <div>
                    <a href="<%=request.getContextPath() %>/product/productDetail?proNo=<%=recentpd.get(i).getProNo() %>"><img src="<%=request.getContextPath() %>/images/product/<%=type %>/<%=recentpd.get(i).getImages1() %>" alt=""></a>
-                   <p>[슈썸]<%=recentpd.get(i).getProName() %><br><%=recentpd.get(i).getPrice() %></p>
+                   <p>[슈썸]<%=recentpd.get(i).getProName() %><br><%=df.format(recentpd.get(i).getPrice()) %></p>
                </div>
                
                <%}

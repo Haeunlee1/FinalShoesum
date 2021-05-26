@@ -441,7 +441,7 @@ div#pd_info .pd_title {
     height: 80px;
     border-bottom: 1px solid lightgray;
 }
-div#pd_info .pd_title span:first-child {
+div#pd_info .pd_title span {
     height: 60px;
     font-size: 27px;
     line-height: 60px;
@@ -449,12 +449,16 @@ div#pd_info .pd_title span:first-child {
     float: left;
     padding-left: 30px;
 }
-div#pd_info .pd_title span:last-child {
+div#pd_info .pd_title .heart {
     height: 50px;
-    font-size: 23px;
-    line-height: 60px;
+    font-size: 25px;
+    line-height: 63px;
     float: right;
     padding-right: 30px;
+    outline: none;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 div#pd_info .pd_choice {
     height: 225px;
@@ -601,12 +605,12 @@ div#pd_review .review_write button {
     float: right;
     margin-right: 30px;
 }
-div#pd_recommend {
+div#recommend_pd {
     height: 400px;
     margin: 0;
     margin-bottom: 20px;
 }
-div#pd_recommend>p {
+div#recommend_pd>p {
     font-size: 27px;
     font-weight: bold;
 }

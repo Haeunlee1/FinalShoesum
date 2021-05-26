@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		String memberId=request.getParameter("memberId");
 		String memberPw=request.getParameter("memberPw");
 		
@@ -39,20 +39,21 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(memberPw);
 		
 		Member m=new MemberService().login(memberId, memberPw);
-		
+		String msg = "";
 		if(m != null) {
 			HttpSession session=request.getSession();
+			msg = m.getMemberId()+"님 로그인 성공 :)";
 			session.setAttribute("loginMember",  m);
-			
-			System.out.println(m);
-			
-			response.sendRedirect(request.getContextPath());
-			
-			
+			request.setAttribute("loc", "/index.jsp");
 		}else {
-			
+			msg = "로그인 실패 :)";
+			request.setAttribute("loc", "/views/login/login.jsp");
 		}
 		
+		request.setAttribute("msg", msg);
+		
+		//=>가입된 회원이 아니라고 뜨는것 , 쿼리스트링을 추가해주자 왜? jsp에서 쿼리스트링으로 넣어줬었음 => helloMVC참고하기
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);		
 		
 	}
 
@@ -60,7 +61,6 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
