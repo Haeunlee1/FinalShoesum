@@ -77,6 +77,7 @@
    </section>
    
 		<script>
+		
            	$(document).ready((e)=>{
            		// bestproduct Ajax
            		$.ajax({

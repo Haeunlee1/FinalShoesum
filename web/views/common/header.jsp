@@ -4,8 +4,7 @@
 <%
 	//로그인된 객체
 	Member loginMember=(Member)session.getAttribute("loginMember");
-
-
+	
 %>    
 <!DOCTYPE html>
 <html>

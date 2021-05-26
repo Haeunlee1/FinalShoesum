@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%@ page import="java.util.List,com.product.model.vo.*" %>
+<%@ page import="java.util.List,com.product.model.vo.*,java.text.*" %>
 <%
 	List<Product> list = (List<Product>)request.getAttribute("list");
 	int price=list.get(0).getPrice();
+	
+	//회계표시
+	DecimalFormat df = new DecimalFormat("#,###,###");
 %>
 
 	<section>
@@ -70,11 +73,11 @@
 	        			
 		            	price=((int)(price*sale)/100)*100;
 	  			%>
-					<p class="total_price">￦　<%=price %></p>
+					<p class="total_price">￦　<%=df.format(price) %></p>
 					<!-- 백의자리에서 버림구현하기 -->
-					<%}else { %>
-						<p class="total_price">￦　<%=price %></p>
-					<%} %>
+						<%}else { %>
+							<p class="total_price">￦　<%=df.format(price) %></p>
+						<%} %>
 	        </div>
 		        <button>구매하기</button>
 		        <button>장바구니</button>
@@ -107,34 +110,32 @@
 	            <button>등록</button>
 	        </div>
 	    </div>
-	    <div id="pd_recommend">
+	    
+	    <!-- Ajax 처리 -->
+	    <div id="recommend_pd">
 	        <p>이 상품은 어떠신가요?</p>
 	        <div class="product">
 	            <div>
 	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
 	                <p>[슈썸]상품이름<br>가격</p>
 	            </div>
-	            <div>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
-	                <p>[슈썸]상품이름<br>가격</p>
-	            </div>
-	            <div>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
-	                <p>[슈썸]상품이름<br>가격</p>
-	            </div>
-	            <div>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
-	                <p>[슈썸]상품이름<br>가격</p>
-	            </div>
-	            <div>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
-	                <p>[슈썸]상품이름<br>가격</p>
-	            </div>
 	        </div>
 	    </div>
+	    
 	</section>
 	
 	<script>
+		
+		$(document).ready((e)=>{
+			// recommend_pd Ajax -> bestPd Ajax랑 로직 동일하게 구현, 출력창만 다르게!
+			$.ajax({
+				url:"<%=request.getContextPath() %>/product/bestPdAjax",
+				success:data=>{
+					$("#recommend_pd").html(data);
+				}
+			});
+		});
+	
         $(function(){
             
             // 마우스 오버시 이미지 변경 스크립트
@@ -165,7 +166,7 @@
                 const basic_amount = <%=price %>;
               	console.log(typeof(basic_amount));
                 var show_total_amount = basic_amount * num;
-                $('.total_price').html('￦　'+show_total_amount);
+                $('.total_price').html('￦　'+show_total_amount.toLocaleString('ko-KR'));
                 
             });
 
@@ -184,7 +185,7 @@
                 
                 const basic_amount = <%=price %>;
                 var show_total_amount = parseInt(basic_amount) * num;
-                $('.total_price').html('￦　'+show_total_amount);
+                $('.total_price').html('￦　'+show_total_amount.toLocaleString('ko-KR'));
             });
         })
     </script>

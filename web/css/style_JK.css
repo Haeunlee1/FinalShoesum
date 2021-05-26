@@ -601,12 +601,12 @@ div#pd_review .review_write button {
     float: right;
     margin-right: 30px;
 }
-div#pd_recommend {
+div#recommend_pd {
     height: 400px;
     margin: 0;
     margin-bottom: 20px;
 }
-div#pd_recommend>p {
+div#recommend_pd>p {
     font-size: 27px;
     font-weight: bold;
 }
