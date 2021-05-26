@@ -7,6 +7,9 @@ public class Product {
 	private String proNo;
 	private String proName;
 	private int price;
+	private int size;
+	private String color;
+	private int stock;
 	private String images1;	 //이미지주소들
 	private String images2;	 //이미지주소들
 	private String images3;	 //이미지주소들
@@ -45,6 +48,7 @@ public class Product {
 		this.images4 = images4;
 		this.likeNo=likeNo;
 	}
+	
 
 	public String getProNo() {
 		return proNo;
@@ -68,6 +72,30 @@ public class Product {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 	public String getImages1() {
