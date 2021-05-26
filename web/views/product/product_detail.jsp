@@ -75,7 +75,7 @@
 		        <p>수량</p>
 		        <div class="count_box">
 		            <button type="button" id="decreaseQuantity">-</button>
-                    <input type="text" name="pop_out" value="1" readonly="readonly" style="text-align:center;">
+                    <input type="text" name="pop_out" id="pop_out" value="1" readonly="readonly" style="text-align:center;">
                     <input type="hidden" name="pd_count" value="">
                     <button type ="button" id="increaseQuantity">+</button>		        
                 </div>
@@ -94,7 +94,7 @@
 							<p class="total_price">￦　<%=df.format(price) %></p>
 						<%} %>
 	        </div>
-		        <button>구매하기</button>
+		        <button onclick="goCheckout()">구매하기</button>
 		        <button>장바구니</button>
 	    </div>
 		<%		}
@@ -141,6 +141,15 @@
 	
 	<script>
 		
+		// 제품상세 결제페이지 이동 
+		const goCheckout = function(){
+			
+			let getProCount = document.getElementById("pop_out").value;
+			console.log(getProCount);
+			
+			location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=loginMember.getMemberNo() %>&proNo=<%=proNo%>&from=p&proCount='+getProCount);
+		}
+	
 		$(document).ready((e)=>{
 			// recommend_pd Ajax -> bestPd Ajax랑 로직 동일하게 구현, 출력창만 다르게!
 			$.ajax({
