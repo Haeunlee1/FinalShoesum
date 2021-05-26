@@ -1,7 +1,6 @@
 package com.product.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-
 import com.product.model.service.ProductService;
 import com.product.model.vo.Product;
 
 /**
- * Servlet implementation class ProductListServlet
+ * Servlet implementation class BestPdAjax
  */
-@WebServlet("/product/productlist")
-public class ProductListServlet extends HttpServlet {
+@WebServlet("/product/manPdAjax")
+public class ManPdAjax extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductListServlet() {
+    public ManPdAjax() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,12 +32,12 @@ public class ProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String category = request.getParameter("category");
-		request.setAttribute("category", category);
-		
-		
-		// nav bar -> man,woman,kids 클릭시 이동하는 서블렛
-		request.getRequestDispatcher("/views/product/productList.jsp")
+		// 남자 상품 목록 가져오기
+		List<Product> list = new ProductService().manProduct();
+		request.setAttribute("man", list);
+	
+		// nav bar에서 man클릭시 상품리스트 나타나는 jsp로 이동
+		request.getRequestDispatcher("/views/product/productListAjax.jsp")
 		.forward(request, response);
 	
 	}
