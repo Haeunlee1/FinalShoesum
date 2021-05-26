@@ -41,10 +41,14 @@ public class CheckoutServlet extends HttpServlet {
 		
 		// 카트번호
 		String cartNo = request.getParameter("cartNo");
-		
+		System.out.println(cartNo);
+		int proCount ;
 		// 제품 수량
-		String proCount = request.getParameter("proCount");
-		
+		try {
+			proCount = Integer.parseInt(request.getParameter("proCount"));
+		} catch(NumberFormatException e) {
+			proCount = 1;
+		}
 		
 		// 제품번호 
 		String proNo = request.getParameter("proNo");

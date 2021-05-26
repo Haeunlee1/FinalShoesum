@@ -27,7 +27,11 @@
              
              %>
              <tr class="wish_product">
-                 <td><input type="checkbox" class="chk" name="select_products" value="" title="<%=p.getLikeNo()%>"></td>
+                 <td>
+                 <input type="checkbox" class="chk" id="select_products" name="select_products" value="" title="<%=p.getLikeNo()%>">
+				<!-- input prodcut no 받아오기  -->                 
+                 <input type = "hidden" class="ip_proNo" value=<%=p.getProNo() %>>
+                 </td>
                  <td>
                  	<a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=p.getProNo()%>" >
                  	<img title="<%=p.getProName()%>"alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=type %>/<%=p.getImages1()%>" id="product_img" name="product_img">
@@ -46,7 +50,7 @@
                  <td>
                      <ul>
 	                 		<%-- <input type="hidden" name="likeNo" title="<%=p.getLikeNo() %>"> --%>
-	                         <li><input type="button" name="btn_order" title="<%=p.getLikeNo() %>"  value="주문하기" style="background-color : black; color : white"></li>
+	                         <li><input type="button" name="btn_order" title="<%=p.getLikeNo() %>"  value="주문하기" style="background-color : black; color : white" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=memberNo %>&proNo=<%= p.getProNo() %>&from=p&proCount=1');"></li>
 	                         <li><input type="button" name="btn_addCart" title="<%=p.getLikeNo() %>" value="장바구니 담기" style="background-color : #CCCCCC"></li>
 	                         <li><input type="button" name="btn_delete" title="<%=p.getLikeNo() %>" value="삭제" style="background-color : #CCCCCC">
 	                         </li>
@@ -77,11 +81,47 @@
             <button class="left-btn checkwishBtn">삭제하기</button>
             <button class="left-btn" onclick="">장바구니 담기</button>			<!-- json이나 form으로 넘겨주기 -->
             <button class="right-btn allDelBtn" >관심상품 비우기</button>
-            <button class="right-btn" onclick="" style="background-color : black; color : white">전체 상품 주문</button>
+            <input type="button" class="right-btn" onclick="goCheckout()" style="background-color : black; color : white" value="전체 상품 주문">
+            <!-- <button class="right-btn" onclick="goCheckout()" style="background-color : black; color : white">전체 상품 주문</button> -->
         </div>
         <%} %>
      </form>
 <script>
+
+
+	const goCheckout = function(){
+		
+		let getCheck = document.getElementsByClassName('chk');
+		let selProNo = document.getElementsByClassName("ip_proNo");
+		let totalProNo = "";
+		
+		
+		// 체크 여부 분기처리
+		let flag = false;
+		for(i=0;i<getCheck.length;i++){
+			if(getCheck[i].checked == true){
+				flag = true;
+			}
+		}
+		
+		if (flag == false){
+			alert("상품을 선택해주세요");
+		} else {
+			// 구매 실행 
+			for(j=0;j<getCheck.length;j++){
+				if(getCheck[j].checked == true){
+					if(j==0){
+						totalProNo += selProNo[j].value;
+					}
+					totalProNo += " / "+ selProNo[j].value;
+					}
+				}
+					location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=memberNo%>&proNo='+totalProNo+'&from=p&proCount=1');
+				} 
+		}
+	
+
+
 //전체체크
 $("#checkAll").click(e=>{
 	if($("#checkAll").is(":checked")){

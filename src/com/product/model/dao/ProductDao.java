@@ -236,6 +236,7 @@ public class ProductDao {
 			close(rs);
 			close(pstmt);
 		}
+		System.out.println(list.isEmpty());
 		return list;
 		
 	}
