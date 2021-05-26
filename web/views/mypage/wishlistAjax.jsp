@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import="java.util.List, com.member.model.vo.*,com.product.model.vo.*" %>
+    <%@page import="java.util.List, com.member.model.vo.*,com.product.model.vo.*,java.text.*" %>
    <%  List<Product> wishList =(List<Product>)request.getAttribute("wishlist");
     	int count=0;
     	int memberNo=(int)(request.getAttribute("memberNo"));
+    	DecimalFormat df = new DecimalFormat("#,###,###");
    %>
+      <form name="movetoCart" id="movetoCart" method="post">
     	<table id="tbl-wishlist">
 		<%if(!wishList.isEmpty()) {%>
              <tr class="head_tr">
@@ -25,7 +27,7 @@
              
              %>
              <tr class="wish_product">
-                 <td><input type="checkbox" class="chk" name="select_products" value="" title="<%=p.getProNo()%>"></td>
+                 <td><input type="checkbox" class="chk" name="select_products" value="" title="<%=p.getLikeNo()%>"></td>
                  <td>
                  	<a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=p.getProNo()%>" >
                  	<img title="<%=p.getProName()%>"alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=type %>/<%=p.getImages1()%>" id="product_img" name="product_img">
@@ -34,19 +36,24 @@
                  <td>
                      <ul>
                          <li class="product_name"><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=p.getProNo()%>"><%=p.getProName() %></a></li>
-                         <li>[옵션 : <%=p.getColor() %> / <%=p.getSize() %>]</li> 
+                         <li name="option">[옵션 : <%=p.getColor() %> / <%=p.getSize() %>]</li>
                      </ul>
                  </td>
-                 <td ><%=p.getPrice() %></td>
+                 <td ><%=df.format(p.getPrice()) %></td>
                  <td>1</td>
-                 <td>3000</td>
-                 <td><%=p.getPrice()+3000%></td>
+                 <td><%=df.format(3000) %></td>
+                 <td><%=df.format(p.getPrice()+3000)%></td>
                  <td>
                      <ul>
-                         <li><input type="button" name="btn_order" value="주문하기" style="background-color : black; color : white"></li>
-                         <li><input type="button" name="btn_addCart" value="장바구니 담기" style="background-color : #CCCCCC"></li>
-                         <li><input type="button" name="btn_delete" title="<%=p.getProNo() %>" value="삭제" style="background-color : #CCCCCC">
-                         </li>
+	                 		<%-- <input type="hidden" name="likeNo" title="<%=p.getLikeNo() %>"> --%>
+	                         <li><input type="button" name="btn_order" title="<%=p.getLikeNo() %>"  value="주문하기" style="background-color : black; color : white"></li>
+	                         <li><input type="button" name="btn_addCart" title="<%=p.getLikeNo() %>" value="장바구니 담기" style="background-color : #CCCCCC"></li>
+	                         <li><input type="button" name="btn_delete" title="<%=p.getLikeNo() %>" value="삭제" style="background-color : #CCCCCC">
+	                         </li>
+	                         <form name="movetoCart" action="<%=request.getContextPath()%>/member/wishToCart" method="post">
+				             	<input type="hidden" name="likeNo" value="<%=p.getLikeNo() %>">
+				             	<input type="hidden" name="proNo" value="<%=p.getProNo() %>">
+                     		</form>	
                      </ul>
                  </td>
              </tr>
@@ -67,12 +74,13 @@
 		<%if(!wishList.isEmpty()) {%>
 		<div id="wish-btn">
 			선택한 상품을 
-            <button class="left-btn" onclick="fn_checkwish_delete();">삭제하기</button>
-            <button class="left-btn" onclick="">장바구니 담기</button>
-            <button class="right-btn" onclick="fn_allwish_delete();">관심상품 비우기</button>
+            <button class="left-btn checkwishBtn">삭제하기</button>
+            <button class="left-btn" onclick="">장바구니 담기</button>			<!-- json이나 form으로 넘겨주기 -->
+            <button class="right-btn allDelBtn" >관심상품 비우기</button>
             <button class="right-btn" onclick="" style="background-color : black; color : white">전체 상품 주문</button>
         </div>
         <%} %>
+     </form>
 <script>
 //전체체크
 $("#checkAll").click(e=>{
@@ -93,15 +101,36 @@ $(".chk").click(e=>{
 
 $("input[name=btn_delete]").click(e=>{
 	//찜한상품 삭제
-	//회원번호 & 상품번호 넘기기
+	//회원번호 & 찜번호 넘기기
 	if(confirm("해당 상품을 삭제하시겠습니까?")){
-		let proNo=$(e.target).attr("title");
-		console.log(proNo);
-		location.replace("<%=request.getContextPath()%>/member/wishDelete?memberNo="+'<%=memberNo%>'+"&proNo="+proNo);
+		let likeNo=$(e.target).attr("title");
+		console.log(likeNo);
+		location.replace("<%=request.getContextPath()%>/member/wishDelete?memberNo="+'<%=memberNo%>'+"&likeNo="+likeNo);
 	}
 });
 
-const fn_checkwish_delete=()=>{
+$("input[name=btn_addCart]").click(e=>{
+	//찜상품 장바구니로 넘기기 / 찜 db에서 삭제하고 장바구니에 추가하기 
+	//console.dir($("li[name=option]").html());
+	
+	$("form[name=movetoCart]").submit();
+	
+	
+	/* console.log($("input[name=btn_addCart]").attr("title")); */
+	<%-- const url="<%=request.getContextPath()%>/member/wishToCart?memberNo="+'<%=memberNo%>';
+	$("#movetoCart").attr("action",url);
+	$("#movetoCart").submit(); --%>
+	
+	/* let likeNo=$(e.target).attr("title");
+	console.log($(e.target).parent().prev().prev().attr("title"));
+	let p=$(e.target).parent().prev().prev().attr("title"); */
+	/* console.log($("input[type=hidden]").val()); */
+	<%-- location.href="<%=request.getContextPath()%>/member/wishToCart?mNo="+'<%=memberNo%>'+"&likeNo="+likeNo+"&p="+p; --%>
+	
+})
+
+//const fn_checkwish_delete=()=>{
+$(".checkwishBtn").click(()=>{
 	//삭제하기 => 테이블 밑 버튼 / checked된 것만 삭제하기
 	if(confirm("선택한 상품을 삭제하시겠습니까?")){
 		let checkArr=new Array();
@@ -110,9 +139,10 @@ const fn_checkwish_delete=()=>{
 		});
 		location.href="<%=request.getContextPath()%>/member/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+checkArr;
 	}
-}
+})
 
-const fn_allwish_delete=()=>{
+//const fn_allwish_delete=()=>{
+$(".allDelBtn").click(()=>{
 	//관심상품 전체 삭제
 	if(confirm("정말 모든 관심상품을 삭제하시겠습니까?")){
 		let allwishArr=new Array();
@@ -121,7 +151,7 @@ const fn_allwish_delete=()=>{
 		});
 		location.href="<%=request.getContextPath()%>/member/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+allwishArr;
 	}
-}
+});
 
 
 </script>

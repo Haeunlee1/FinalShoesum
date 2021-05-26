@@ -1,4 +1,4 @@
-package com.product.controller;
+package com.cart.controller;
 
 import java.io.IOException;
 
@@ -11,17 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.product.model.service.ProductService;
 
 /**
- * Servlet implementation class WishDeleteServlet
+ * Servlet implementation class WishToCartServlet
  */
-@WebServlet("/member/wishDelete")
-public class WishDeleteServlet extends HttpServlet {
-	//관심상품 지우기
+@WebServlet("/member/wishToCart")
+public class WishToCartServlet extends HttpServlet {
+	//찜한상품에서 장바구니로 이동
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WishDeleteServlet() {
+    public WishToCartServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +30,20 @@ public class WishDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//회원번호, 상품번호로 db에 관심상품 지우기
-		int userNo = Integer.parseInt(request.getParameter("memberNo"));
-		int likeNo =Integer.parseInt(request.getParameter("likeNo"));
-		System.out.println("userNo:"+userNo+" / proNo:"+likeNo);
-		int result = new ProductService().deleteWish(userNo, likeNo);
-		System.out.println("result"+result);
-		String msg=result>0?"관심상품에서 삭제되었습니다":"삭제실패";
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/member/mypage.do?memberNo="+userNo);		//추후에 로그인로직 완성되면 userNo넘기기
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		//찜한상품 장바구니 이동=>갯수는 일단 1개
+		//찜 테이블에서 찜번호로 삭제 후 카트에 담기
+		//int memberNo=Integer.parseInt(request.getParameter("memberNo"));
+		int likeNo=Integer.parseInt(request.getParameter("likeNo"));
+		System.out.println(likeNo);
+		//System.out.println(likeNo);
+		/*
+		 * //카트에 추가하기 int addCart=new CartService().
+		 * 
+		 * //찜테이블에서 삭제하기 int deleteWish = new
+		 * ProductService().deleteWish(memberNo,likeNo);
+		 * System.out.println("찜삭제"+deleteWish);
+		 */
 		
-	
-	
 	}
 
 	/**

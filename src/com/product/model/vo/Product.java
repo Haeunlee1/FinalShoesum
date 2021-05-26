@@ -15,6 +15,8 @@ public class Product {
 	private String images3;	 //이미지주소들
 	private String images4;	 //이미지주소들
 	
+	private int likeNo;		//찜번호 
+	
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
@@ -32,6 +34,22 @@ public class Product {
 		this.images2 = images2;
 		this.images3 = images3;
 		this.images4 = images4;
+	}
+	
+	public Product(String proNo, String proName, int price, int size, String color, int stock, String images1,
+			String images2, String images3, String images4, int likeNo) {
+		super();
+		this.proNo = proNo;
+		this.proName = proName;
+		this.price = price;
+		this.size = size;
+		this.color = color;
+		this.stock = stock;
+		this.images1 = images1;
+		this.images2 = images2;
+		this.images3 = images3;
+		this.images4 = images4;
+		this.likeNo=likeNo;
 	}
 
 	public String getProNo() {
@@ -114,7 +132,18 @@ public class Product {
 		this.images4 = images4;
 	}
 
-	
+	public int getLikeNo() {
+		return likeNo;
+	}
+
+	public void setLikeNo(int likeNo) {
+		this.likeNo = likeNo;
+	}
+
+	public String gettoString() {
+		return this.proNo + "," +this.price + "," + this.size + ","
+				+ this.color + "," + this.stock + "," + this.images1+"," + this.likeNo;
+	}
 	
 	
 }

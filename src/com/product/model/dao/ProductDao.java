@@ -182,6 +182,7 @@ public class ProductDao {
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
 				p.setImages4(rs.getString("img_src4"));
+				p.setLikeNo(rs.getInt("like_no"));
 				list.add(p);
 			}
 		}catch(SQLException e) {
@@ -194,20 +195,21 @@ public class ProductDao {
 		
 	}
 	
-	public int deleteWish(Connection conn, int userNo, String proNo) {
+	public int deleteWish(Connection conn, int userNo, int likeNo) {
 		//관심상품 삭제 => 테이블 버튼 & 체크 삭제
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("deleteWish"));
 			pstmt.setInt(1, userNo);
-			pstmt.setString(2, proNo);
+			pstmt.setInt(2, likeNo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
+		System.out.println(result);
 		return result;
 	}
 	

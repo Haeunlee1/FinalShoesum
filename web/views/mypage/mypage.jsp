@@ -6,7 +6,7 @@
 <%
 	//주문내역리스트
 	List<Ordered> orderList = (List<Ordered>)request.getAttribute("orderList");
-	System.out.println(orderList);
+	DecimalFormat df = new DecimalFormat("#,###,###");
 %>
 
 
@@ -92,16 +92,15 @@
                      </ul>
                  </td>
                  <td><%=orderList.get(i).getAmount() %></td>
-                 <td><%=orderList.get(i).getProPrice() %></td>
+                 <td><%=df.format(orderList.get(i).getProPrice()) %></td>
                  <td><%=orderList.get(i).getState().equals("on")?"배송완료":"배송준비중" %></td>
                  <td>-</td>
              </tr>
              <%
              }%> 
              <%	//회계형식 표현하기
-					DecimalFormat df = new DecimalFormat("#,###,###");
-					int val = price;
-					%>
+					int val=price;
+				%>
                  <tr id="total_price">
                      <td colspan="7"><span>총 주문금액 : <%=df.format(val) %>원</span></td>
 
@@ -154,7 +153,7 @@
                     <tr>
                         <td>아이디<span class="redPoint">*</span></td>
                         <td><input type="text"  name="userId" id="userId" value="<%=loginMember.getMemberId() %>" readonly>
-                        <span class="profile_text">(아이디는 수정불가)</span></td>
+                        <span class="profile_text, redPoint">(아이디는 수정불가)</span></td>
                     </tr>
                     <tr>
                         <td>비밀번호<span class="redPoint">*</span></td>
@@ -294,6 +293,7 @@ $(function(){
 			},
 			type:"post",
 			success:data=>{
+				$("#wishlist_target").html("");
 				$("#wishlist_target").html(data);
 			}
 		})
@@ -323,4 +323,5 @@ const fn_goshopping=()=>{
 
 
 </script>
+
 <%@ include file="/views/common/footer.jsp"%>
