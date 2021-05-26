@@ -100,7 +100,7 @@ $(".chk").click(e=>{
 });
 
 $("input[name=btn_delete]").click(e=>{
-	//찜한상품 삭제
+	//찜한상품 td 삭제버튼
 	//회원번호 & 찜번호 넘기기
 	if(confirm("해당 상품을 삭제하시겠습니까?")){
 		let likeNo=$(e.target).attr("title");

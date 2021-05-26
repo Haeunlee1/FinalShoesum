@@ -18,6 +18,7 @@
 		
 			for(Product p:list){
 				proNo=p.getProNo();
+				System.out.println(proNo);
 				if(p.getProNo().substring(0,1).contains("m")) type="man";
 				else if(p.getProNo().substring(0,1).contains("w")) type="woman";
 				else if(p.getProNo().substring(0,1).contains("k")) type="kids";
@@ -154,27 +155,30 @@
 
         	// 찜버튼 on,off 스크립트
         	$("#heart").click(function(e){
-        		if(<%=loginMember==null%>){
-        			alert("로그인 후 관심상품 등록 가능합니다.")			//로긴페이지로 이동할 지 생각해보기
-        		}else{
+        		if(<%=loginMember!=null%>){
 	        		var icon=["♡","♥"];
 	        		var heart=$(".heart").val();
 			        		
 	        		if(heart=='0') {
 	        			$(".heart").text(icon[1]);
 	        			heart='1';
+		        		alert("관심상품으로 등록되었습니다");
+		        		<%-- location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+&proNo=+'<%=proNo%>'); --%>
+		        		<%-- location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>'); --%>
 	        		}else {
 	        			$(".heart").text(icon[0]);
 	        			heart='0';
 	        		}
 		        	$(".heart").val(heart);
+        		}else{
+        			alert("로그인 후 관심상품 등록 가능합니다.")			//로긴페이지로 이동할 지 생각해보기
 		        	
 		        	//클릭했을 때 val가 1 => 찜하기
-		        	if($(e.target).val()==1){
-		        		alert("관심상품으로 등록되었습니다");
+		        	<%-- if($(e.target).val()==1){
+		        		console.log(location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>'))
 		        		location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>');
 		        		
-		        	}
+		        	} --%>
         		}
 	        	
         	});

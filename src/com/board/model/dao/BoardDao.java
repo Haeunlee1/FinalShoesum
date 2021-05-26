@@ -27,14 +27,14 @@ public class BoardDao {
 		}
 	}
 	
-	public List<Board> allBoards(Connection conn, int memberNo){
+	public List<Board> allMyBoards(Connection conn, int memberNo){
 		//내가쓴 게시글 가져오기
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Board> list=new ArrayList();
 		Board b=null;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("allBoards"));
+			pstmt=conn.prepareStatement(prop.getProperty("allMyBoards"));
 			pstmt.setInt(1, memberNo);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {

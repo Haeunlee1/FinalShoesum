@@ -35,7 +35,7 @@ public class AddWishServlet extends HttpServlet {
 		String proNo=request.getParameter("proNo");
 		int result = new ProductService().addWish(memberNo,proNo);
 		if(result>0) {
-			request.getRequestDispatcher("/product/productDetail").forward(request, response);
+			request.getRequestDispatcher("/product/productDetail?proNo="+proNo).forward(request, response);
 		}else {
 			String msg="관심상품 등록 실패, 재시도 하세요";
 			String loc="/views/product/product_detail.jsp";
