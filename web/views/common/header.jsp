@@ -4,7 +4,6 @@
 <%
 	//로그인된 객체
 	Member loginMember=(Member)session.getAttribute("loginMember");
-	
 %>    
 <!DOCTYPE html>
 <html>
@@ -58,7 +57,7 @@
         </header>
         <nav>
             <ul id="menu_bar">
-                <li><a href="<%=request.getContextPath() %>/product/productlist" value="man">MAN</a>
+                <li><a href="<%=request.getContextPath() %>/product/productlist?category=man">MAN</a>
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
                         <li><a href="">스니커즈</a></li>
@@ -67,7 +66,7 @@
                         <li><a href="">구두</a></li>
                     </ul>
                 </li>
-                <li><a href="<%=request.getContextPath() %>/product/productlist" value="woman">WOMAN</a>
+                <li><a href="<%=request.getContextPath() %>/product/productlist?category=woman">WOMAN</a>
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
                         <li><a href="">스니커즈</a></li>
@@ -76,7 +75,7 @@
                         <li><a href="">구두</a></li>
                     </ul>
                 </li>
-                <li><a href="<%=request.getContextPath() %>/product/productlist" value="kids">KIDS</a>
+                <li><a href="<%=request.getContextPath() %>/product/productlist?category=kids">KIDS</a>
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
                         <li><a href="">스니커즈</a></li>

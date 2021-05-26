@@ -37,24 +37,13 @@
 		        <p>구매정보</p>
 		        <p>사이즈</p>
 		        <select name="size" id="size">
-		            <option value="230">230</option>
+		            <option value="230">170</option>
 		            <option value="240">240</option>
-		            <option value="250">250</option>
-		            <option value="260">260</option>
-		            <option value="270">270</option>
-		            <option value="280">280</option>
+		            <option value="250">280</option>
 		        </select>
 		        <p>색상</p>
 		        <select name="color" id="color">
 		            <option value="white">화이트</option>
-		            <option value="beige">베이지</option>
-		            <option value="brown">브라운</option>
-		            <option value="yellow">옐로우</option>
-		            <option value="red">레드</option>
-		            <option value="pink">핑크</option>
-		            <option value="khaki">카키</option>
-		            <option value="navy">네이비</option>
-		            <option value="gray">그레이</option>
 		            <option value="black">블랙</option>
 		        </select>
 		        <p>수량</p>

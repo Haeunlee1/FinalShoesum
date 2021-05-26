@@ -34,10 +34,13 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		String category = request.getParameter("category");
+		request.setAttribute("category", category);
+		
 		
 		// nav bar -> man,woman,kids 클릭시 이동하는 서블렛
-		request.getRequestDispatcher("/views/product/product.jsp")
+		request.getRequestDispatcher("/views/product/productList.jsp")
 		.forward(request, response);
 	
 	}
