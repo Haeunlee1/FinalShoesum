@@ -1,7 +1,6 @@
 package com.member.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,38 +9,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.member.model.service.MemberService;
-import com.member.model.vo.Ordered;
+import com.member.model.vo.Member;
 
 /**
- * Servlet implementation class OrderedSearchServlet
+ * Servlet implementation class MemberRegiesterServlet
  */
-@WebServlet("/member/orderedSearch")
-public class OrderedSearchServlet extends HttpServlet {
+@WebServlet("/member/pwFind")
+public class MemberPwFindServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public OrderedSearchServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//기간 정해서 주문내역 가져오기
-		String before=request.getParameter("before");
-		String after=request.getParameter("after");
-		System.out.println(before+"/"+after);
-		//일단 아이디값으로 넘겨보기
-		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
-	
-		List<Ordered> list = new MemberService().selectOrdered(memberNo,before,after);
-		request.setAttribute("orderList", list);
-		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);
+		String memberNm = request.getParameter("memberNm");
+		String memberEmail = request.getParameter("memberEmail");
+		String memberId = request.getParameter("memberId");
 		
+		Member m=new MemberService().selectMemberPw(memberNm, memberEmail, memberId);
+		String msg = "";
+		if(m != null) {
+			msg = m.getMemberName()+"님의 비밀번호는 "+m.getMemberPw()+" 입니다.:)";
+			request.setAttribute("loc", "/views/login/login.jsp");
+		}else {
+			msg = "존재하지 않는 회원정보 입니다.:)";
+			request.setAttribute("loc", "/views/member/find.jsp");
+		}
+		request.setAttribute("msg", msg);
+
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

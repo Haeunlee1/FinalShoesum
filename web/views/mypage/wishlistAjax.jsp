@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@page import="java.util.List, com.member.model.vo.*,com.product.model.vo.*" %>
-   <%  List<Product> wishList =(List<Product>)request.getAttribute("wishlist");%>
+   <%  List<Product> wishList =(List<Product>)request.getAttribute("wishlist");
+    	int count=0;
+    	int memberNo=(int)(request.getAttribute("memberNo"));
+   %>
     	<table id="tbl-wishlist">
 		<%if(!wishList.isEmpty()) {%>
              <tr class="head_tr">
@@ -22,10 +25,11 @@
              
              %>
              <tr class="wish_product">
-                 <td><input type="checkbox" class="chk" name="select_products" value=""></td>
+                 <td><input type="checkbox" class="chk" name="select_products" value="" title="<%=p.getProNo()%>"></td>
                  <td>
-                 	<a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=p.getProNo()%>">
-                 	<img title="<%=p.getProName()%>"alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=type %>/<%=p.getImages1()%>" id="product_img" name="product_img"></a>
+                 	<a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=p.getProNo()%>" >
+                 	<img title="<%=p.getProName()%>"alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=type %>/<%=p.getImages1()%>" id="product_img" name="product_img">
+                 	</a>
                  </td>
                  <td>
                      <ul>
@@ -41,12 +45,14 @@
                      <ul>
                          <li><input type="button" name="btn_order" value="주문하기" style="background-color : black; color : white"></li>
                          <li><input type="button" name="btn_addCart" value="장바구니 담기" style="background-color : #CCCCCC"></li>
-                         <li><input type="button" name="btn_delete" value="삭제" onclick="fn_wish_delete();"style="background-color : #CCCCCC">
+                         <li><input type="button" name="btn_delete" title="<%=p.getProNo() %>" value="삭제" style="background-color : #CCCCCC">
                          </li>
                      </ul>
                  </td>
              </tr>
-             <%}
+             <%
+             count++;
+             }
              } else{%>
              <tr id="wish_null">
                  <td colspan="8">
@@ -58,13 +64,17 @@
              </tr>
 		<%} %>
 		</table>
+		<%if(!wishList.isEmpty()) {%>
 		<div id="wish-btn">
-            <button class="left-btn" onclick="fn_wish_delete();">삭제하기</button>
+			선택한 상품을 
+            <button class="left-btn" onclick="fn_checkwish_delete();">삭제하기</button>
             <button class="left-btn" onclick="">장바구니 담기</button>
-            <button class="right-btn" onclick="">관심상품 비우기</button>
+            <button class="right-btn" onclick="fn_allwish_delete();">관심상품 비우기</button>
             <button class="right-btn" onclick="" style="background-color : black; color : white">전체 상품 주문</button>
         </div>
+        <%} %>
 <script>
+//전체체크
 $("#checkAll").click(e=>{
 	if($("#checkAll").is(":checked")){
 		$(".chk").prop("checked",true);
@@ -74,21 +84,46 @@ $("#checkAll").click(e=>{
 });
 //하나라도 체크 빠지면 전체체크 해제
 $(".chk").click(e=>{
-	if($("input[name='select_products']:checked").length==2){
+	if($("input[name='select_products']:checked").length==<%=count%>){
 		$("#checkAll").prop("checked",true);
 	}else{
 		$("#checkAll").prop("checked",false);
 	}
 });
 
-const fn_wish_delete=()=>{
+$("input[name=btn_delete]").click(e=>{
 	//찜한상품 삭제
 	//회원번호 & 상품번호 넘기기
+	if(confirm("해당 상품을 삭제하시겠습니까?")){
+		let proNo=$(e.target).attr("title");
+		console.log(proNo);
+		location.replace("<%=request.getContextPath()%>/member/wishDelete?memberNo="+'<%=memberNo%>'+"&proNo="+proNo);
+	}
+});
+
+const fn_checkwish_delete=()=>{
+	//삭제하기 => 테이블 밑 버튼 / checked된 것만 삭제하기
 	if(confirm("선택한 상품을 삭제하시겠습니까?")){
-		location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1&proNo=");
-		<%-- location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1"+'<%=loginMember.getUserId()%>'); --%>
+		let checkArr=new Array();
+		$("input[class='chk']:checked").each(function(){
+			checkArr.push($(this).attr("title"));
+		});
+		location.href="<%=request.getContextPath()%>/member/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+checkArr;
 	}
 }
+
+const fn_allwish_delete=()=>{
+	//관심상품 전체 삭제
+	if(confirm("정말 모든 관심상품을 삭제하시겠습니까?")){
+		let allwishArr=new Array();
+		$("input[class='chk']").each(function(){
+			allwishArr.push($(this).attr("title"));
+		});
+		location.href="<%=request.getContextPath()%>/member/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+allwishArr;
+	}
+}
+
+
 </script>
 
 

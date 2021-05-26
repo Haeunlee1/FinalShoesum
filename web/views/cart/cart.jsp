@@ -80,7 +80,7 @@
             </div>
         </div>
         <div id="order_end">
-            <button onlclik="location.assign('<%=request.getContextPath() %>/checkout/checkout?userNo=&from=c')">주문하기</button>
+            <button onclick="location.assign('<%=request.getContextPath() %>/checkout/checkout?userNo=<%=loginMember.getMemberNo() %>&from=c')">주문하기</button>
         </div>
         <%} %>
     </div>
@@ -91,8 +91,7 @@
 	<script>
 	
 	
-		
-        // window 객체 생성 제거 후 작동 ? 
+		 
 
         const contAll = function(){
 

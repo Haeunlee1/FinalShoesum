@@ -6,10 +6,7 @@
 <%
 	//주문내역리스트
 	List<Ordered> orderList = (List<Ordered>)request.getAttribute("orderList");
-	//기간 지정한 날짜 값 before
-	String before =(String)request.getAttribute("before");
-	String after=(String) request.getAttribute("after");
-	
+	System.out.println(orderList);
 %>
 
 
@@ -28,9 +25,9 @@
                 <li><button>1개월</button></li>
                 <li><button>3개월</button></li>
                 <li><button>6개월</button></li>
-                <li><input type="date" id="before" value=''></li> <%-- <%=before!=null?before:" " %> --%>
+                <li><input type="date" id="before" ></li> <%-- <%=before!=null?before:" " %> --%>
                 <li><span>&nbsp;&nbsp;~&nbsp;&nbsp; </span></li>
-                <li><input type="date" id="today"></li>
+                <li><input type="date" id="today" ></li>
                 <li><button id="search_ordered">조회</button></li>
             </ul>
             <ul class="ordered_comment">
@@ -74,7 +71,7 @@
            	}
            	price+=(orderList.get(i).getAmount()*orderList.get(i).getProPrice());
            %>
-             <tr><%out.print(pre);out.print(orderList.get(i).getOrderNo()); %>
+             <tr>
                <%if(pre==-1||pre!=orderList.get(i).getOrderNo()){
                  	pre=orderList.get(i).getOrderNo();%>
                    <td rowspan="<%=count%>"><%=orderList.get(i).getOrderDate() %><br>[<%=orderList.get(i).getOrderNo() %>]</td>
@@ -156,7 +153,8 @@
                 <table id="tbl-profile" >
                     <tr>
                         <td>아이디<span class="redPoint">*</span></td>
-                        <td><input type="text"  name="userId" id="userId" value="" readonly></td>
+                        <td><input type="text"  name="userId" id="userId" value="<%=loginMember.getMemberId() %>" readonly>
+                        <span class="profile_text">(아이디는 수정불가)</span></td>
                     </tr>
                     <tr>
                         <td>비밀번호<span class="redPoint">*</span></td>
@@ -175,11 +173,11 @@
                     </tr>
                     <tr>
                         <td>이름<span class="redPoint">*</span></td>
-                        <td><input type="text" name="userName" id="userName" required></td>
+                        <td><input type="text" name="userName" id="userName" value="<%=loginMember.getMemberName()%>"required></td>
                    </tr>
                    <tr>
                         <td>이메일<span class="redPoint">*</span></td>
-                       <td><input type="email" name="email" required></td>
+                       <td><input type="email" name="email" value="<%=loginMember.getEmail()%>"required></td>
                   </tr>
                   <tr>
                         <td>휴대전화<span class="redPoint">*</span></td>
@@ -190,8 +188,8 @@
                                 <option value="018">018</option>
                                 <option value="019">019</option>
                             </select> -
-                            <input type="text" maxlength="4" id="phone2" name="phone2" required> -
-                            <input type="text" maxlength="4" id="phone3" name="phone3" required>
+                            <input type="text" maxlength="4" id="phone2" name="phone2" value="<%=loginMember.getPhone().substring(3,7) %>" required> -
+                            <input type="text" maxlength="4" id="phone3" name="phone3" value="<%=loginMember.getPhone().substring(7,11) %>"required>
                         </td>
                     </tr>
                     <tr>
@@ -199,14 +197,14 @@
                        <td id="address_td">
                               <ul class="profile_address">
                                 <li> 
-                                    <input type="text" name="postcode" id="postcode" size="6" required>&nbsp;&nbsp;
+                                    <input type="text" name="postcode" id="postcode" size="6" value="<%=loginMember.getPostNo()%>"required>&nbsp;&nbsp;
                                     <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
                                 </li>
-                                <li><input type="text" name="address1" id="address1" size="50" required>
+                                <li><input type="text" name="address1" id="address1" size="50" required value="<%=loginMember.getAddress()%>">
                                     <span class="profile_text">&nbsp;&nbsp;기본 주소</span>
                                 </li>
                                 <li>
-                                    <input type="text" name="address2" id="address2" size="50">
+                                    <input type="text" name="address2" id="address2" size="50" value="<%=loginMember.getAddressEnd()%>">
                                     <span class="profile_text">&nbsp;&nbsp;나머지 주소</span>
                                     <input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
                                 </li>
@@ -215,10 +213,10 @@
                     </tr>
                 </table>
                 <div id="profile_btn">
-                    <input type="submit" value="수정" style="background-color : black; color : white" >
-                    <input type="reset" value="취소" onclick=""><!-- 메인으로 돌아가기 -->
+                    <input type="submit" value="수정" style="background-color : black; color : white; cursor:pointer" >
+                    <input type="reset" value="취소" style="cursor:pointer;" onclick=""><!-- 메인으로 돌아가기 -->
                 </div>
-                <input type="hidden" id="memberNo" name="memberNo" value="1"> <!--member_no를 hidden으로 넘기기  -->
+                <input type="hidden" id="memberNo" name="memberNo" value="<%=loginMember.getMemberNo()%>"> <!--member_no를 hidden으로 넘기기  -->
             </form>
         </div>
     </article>
@@ -228,26 +226,74 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 다음지도 api -->
 
 <script>
+$(function(){
+	//현재날짜, 이전날짜 기본 셋팅
+	
+	let nowDate = new Date();
+	let weekDate = nowDate.getTime() - (90*24*60*60*1000);
+	nowDate.setTime(weekDate);
+	
+	let weekYear = nowDate.getFullYear();
+	let weekMonth = nowDate.getMonth() + 1;
+	let weekDay = nowDate.getDate();
+	
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	if(weekDay < 10) {weekDay = "0" + weekDay};
+	
+	let basic = weekYear + "-" + weekMonth + "-" + weekDay;
+	
+	var date=new Date();
+	var today=date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0"+date.getDate()).slice(-2);
+	$("#today").val(today);
+	$("#today").attr("max",today);
+	$("#before").val(basic);
+	console.log($("#today").val());
+	
+	//날짜버튼들 누르면 before 값 변경
+	$("#date_btn li button").click(e=>{
+		let days=0;
+		switch($(e.target).html()){
+			case "오늘" : days=0; break;
+			case "1주일" : days=7*24*60*60*1000; break;
+			case "1개월" : days=30*24*60*60*1000; break;
+			case "3개월" : days=90*24*60*60*1000; break;
+			case "6개월" : days=181*24*60*60*1000; break;
+		};
+		let nowDate = new Date();
+		let weekDate = nowDate.getTime() - (days);
+		nowDate.setTime(weekDate);
+		
+		let weekYear = nowDate.getFullYear();
+		let weekMonth = nowDate.getMonth() + 1;
+		let weekDay = nowDate.getDate();
+		
+		if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+		if(weekDay < 10) {weekDay = "0" + weekDay};
+		
+		let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+		$("#before").val(resultDate);
+		console.log(resultDate);
+	});
+});
 //날짜조회버튼
 $("#search_ordered").click(e=>{
 	//날짜 잘 넘어오는지 체크
 	//alert($("#before").val()+"/"+$("#today").val());
 	let before=$("#before").val();
 	let after=$("#today").val();
-	location.assign("<%= request.getContextPath()%>/member/orderedSearch?before="+before+"&after="+after);
+	location.assign("<%= request.getContextPath()%>/member/orderedSearch?memberNo="+'<%=loginMember.getMemberNo()%>'+"&before="+before+"&after="+after);
 });
 
 //관심상품 ajax
 $(function(){
 	$("#wishlistLi").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/member/wishlist?userNo=1",
-			/* data:{
-				
-			} */
+			url:"<%=request.getContextPath()%>/member/wishlist",
+			data:{
+				"memberNo":"<%=loginMember.getMemberNo()%>"
+			},
 			type:"post",
 			success:data=>{
-				console.log(data);
 				$("#wishlist_target").html(data);
 			}
 		})
@@ -259,12 +305,11 @@ $(function(){
 	$("#boardListLi").click(e=>{
 		$.ajax({
 			url:"<%=request.getContextPath()%>/member/myboardList",
-			/* data:{
-				id //추후에 로그인 아이디 넘겨주기
-			} */
+			data:{
+				"memberNo":"<%=loginMember.getMemberNo()%>"
+			}, 
 			type:"post",
 			success:data=>{
-				console.log(data);				
 				$("#boardTarget").html(data);
 			}
 		})
@@ -276,14 +321,6 @@ const fn_goshopping=()=>{
 	location.assign("<%= request.getContextPath()%>/product/productlist");
 }
 
-const fn_wish_delete=()=>{
-	//찜한상품 삭제
-	//회원번호 & 상품번호 넘기기
-	if(confirm("선택한 상품을 삭제하시겠습니까?")){
-		location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1");
-		<%-- location.replace("<%=request.getContextPath()%>/member/wishDelete?userNo=1"+'<%=loginMember.getUserId()%>'); --%>
-	}
-}
 
 </script>
 <%@ include file="/views/common/footer.jsp"%>

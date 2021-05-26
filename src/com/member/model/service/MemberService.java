@@ -24,18 +24,18 @@ public class MemberService {
 		return m;
 	}
 	
-	public List<Ordered> basicOrdered(String id){
+	public List<Ordered> basicOrdered(int no){
 		//기본 주문내역 페이지
 		Connection conn=getConnection();
-		List<Ordered> list=dao.basicOrdered(conn, id);
+		List<Ordered> list=dao.basicOrdered(conn, no);
 		close(conn);
 		return list;
 	}
 	
-	public List<Ordered> selectOrdered(String id, String before, String after){
+	public List<Ordered> selectOrdered(int memberNo, String before, String after){
 		//기간설정한 후 주문내역 조회
 		Connection conn=getConnection();
-		List<Ordered> list=dao.selectOrdered(conn,id, before, after);
+		List<Ordered> list=dao.selectOrdered(conn,memberNo, before, after);
 		close(conn);
 		return list;
 	}
@@ -49,4 +49,32 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+	public int insertMember(Member m) {
+		//회원가입
+		Connection conn= getConnection();
+		int result = dao.insertMember(conn, m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
+	
+	public Member selectMemberId(String memberNm, String memberEmail) {
+		//로그인
+		Connection conn=getConnection();
+		Member m=dao.findId(conn, memberNm, memberEmail);
+		close(conn);
+		return m;
+	}
+	
+	public Member selectMemberPw(String memberNm, String memberEmail, String memberId) {
+		//로그인
+		Connection conn=getConnection();
+		Member m=dao.findPw(conn, memberNm, memberEmail, memberId);
+		close(conn);
+		return m;
+	}
 }
+

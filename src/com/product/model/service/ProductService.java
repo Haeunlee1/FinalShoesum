@@ -1,6 +1,8 @@
 package com.product.model.service;
 
 import static com.common.JDBCTemplate.close;
+import static com.common.JDBCTemplate.commit;
+import static com.common.JDBCTemplate.rollback;
 import static com.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -51,5 +53,34 @@ public class ProductService {
 		List<Product> list=dao.allWishes(conn,userNo);
 		close(conn);
 		return list;
+	}
+	
+	public int deleteWish(int userNo, String proNo) {
+		//찜한상품삭제=>테이블 삭제버튼
+		Connection conn= getConnection();
+		int result = dao.deleteWish(conn, userNo, proNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int checkDeleteWish(int userNo,String[] checkArr) {
+		//찜한상품삭제=>테이블 밑 버튼(체크박스)
+		Connection conn=getConnection();
+		int result=0;
+		int count=0;
+		for(String pno : checkArr) {	//체크된 배열 반복문 돌면서 지우기
+			result+=dao.deleteWish(conn,userNo,pno);
+			if(result==0) {
+				rollback(conn);
+				close(conn);
+				return 0;
+			}
+			count++;
+		}
+		if(result>=count) commit(conn);
+		close(conn);
+		return result;
 	}
 }

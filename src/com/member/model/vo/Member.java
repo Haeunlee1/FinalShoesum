@@ -101,6 +101,13 @@ public class Member {
 	public void setAddressEnd(String addressEnd) {
 		this.addressEnd = addressEnd;
 	}
+
+	@Override
+	public String toString() {
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberName="
+				+ memberName + ", email=" + email + ", phone=" + phone + ", postNo=" + postNo + ", address=" + address
+				+ ", addressEnd=" + addressEnd + "]";
+	}
 	
 	
 }
