@@ -248,4 +248,47 @@ public class MemberDao {
 		}
 		return m;
 	}
+
+	public int updateMemberFindPw(Connection conn, Member m) {
+		//회원정보수정 (no&id 같으면 수정)
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateMemberFindPw"));
+			pstmt.setString(1, m.getMemberPw());
+			pstmt.setString(2, m.getMemberId());
+			
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public Member selectMemberById(Connection conn, String memberId) {
+		// 로그인  
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberById"));
+			pstmt.setString(1, memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberId(rs.getString("member_email"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
 }

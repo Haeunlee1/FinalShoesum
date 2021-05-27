@@ -5,7 +5,11 @@ import static com.common.JDBCTemplate.commit;
 import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.rollback;
 
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.util.Base64;
 import java.util.List;
 
 import com.member.model.dao.MemberDao;
@@ -74,7 +78,43 @@ public class MemberService {
 		Connection conn=getConnection();
 		Member m=dao.findPw(conn, memberNm, memberEmail, memberId);
 		close(conn);
+		if(m != null) {
+			updateMemberFindPw(m);
+		}
 		return m;
 	}
+	public int updateMemberFindPw(Member m) {
+		//회원정보수정
+		Connection conn= getConnection();
+		m.setMemberPw(getSHA512(m.getMemberPw()));
+		int result = dao.updateMemberFindPw(conn, m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	private String getSHA512(String val) {		
+		String encPwd="";
+		MessageDigest md=null;
+		try {
+			md=MessageDigest.getInstance("SHA-512");		
+		}catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		byte[] bytes=val.getBytes(Charset.forName("utf-8"));
+		md.update(bytes);
+		encPwd=Base64.getEncoder().encodeToString(md.digest());
+		return encPwd;
+	}
+
+	public Member selectMemberIsCheckId(String memberId) {
+		//로그인
+		Connection conn=getConnection();
+		Member m=dao.selectMemberById(conn, memberId);
+		close(conn);
+		return m;
+	}
+	
 }
 

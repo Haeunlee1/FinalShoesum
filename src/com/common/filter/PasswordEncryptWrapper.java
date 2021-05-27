@@ -18,13 +18,15 @@ public class PasswordEncryptWrapper extends HttpServletRequestWrapper {
 	@Override
 	public String getParameter(String name) {
 		String value="";
-		if(name.equals("password") ||name.equals("password_new") || name.equals("memberPwCheck")) {
+		if( name.equals("password") || name.equals("password_new") || 
+			name.equals("memberPw") || name.equals("memberPwCheck") ){
 			value=getSHA512(super.getParameter(name));
-		}else {
+		} else {
 			value=super.getParameter(name);
 		}
 		return value;
 	}
+	
 	private String getSHA512(String val) {		
 		String encPwd="";
 		MessageDigest md=null;

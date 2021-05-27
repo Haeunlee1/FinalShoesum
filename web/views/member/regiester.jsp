@@ -31,6 +31,8 @@
                 <p class="mark-required">*</p>
               </div>
               <input type="text" class="form" maxlength="20" id="memberId" name="memberId">
+              <input type="hidden" id="memberPwYn" name="memberPwYn">
+              <input type="button" value="중복확인" onclick="isCheckId()">
             </div>
             <div class="container">
               <div class="container-label">
@@ -141,9 +143,42 @@
   			return false;
   		} 
   		
+  		if($("#memberPwYn").val() != 'Y'){
+  			alert('이미 사용중인 아이디입니다.');
+  			return false;
+  		}
+  		
+  		
   		$("#memberForm").submit();
   	}
+	function isCheckId(){
+		if($("#memberId").val() != ''){
+			var str = $("#memberForm").serialize();
+		    $.ajax({
+		      type:"POST",
+		      url:"/isCheckId",
+		      contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		      data: str,
+		      datatype:"json",
+		      success: function(data) {
+		    	  
+				  if(data.resultCd == '0000' ){
+					  $("#memberPwYn").val('Y');
+					  alert('사용가능한 아이디입니다.');
+				  }else{
+					  $("#memberPwYn").val('N');
+					  alert('이미 존재하는 아이디 입니다.');
+				  }
+		      },
+		      error: function(e) {
+		        alert("에러발생");
+		      }			
+		    });	
+		}else{
+			alert('아이디를 입력후 진행해주세요')
+		}
 	
+	}
  /*  function daumPostcode(){
 		new daum.Postcode({
 	       oncomplete: function(data) {
@@ -155,9 +190,9 @@
 	           // 예제를 참고하여 다양한 활용법을 확인해 보세요.
 	       }
 	   }).open();	
-	}  */
+	} */
 	 
-	function daumPostcode() {
+	 function daumPostcode() {
 		//다음주소api
 	    new daum.Postcode({
 	        oncomplete: function(data) {
