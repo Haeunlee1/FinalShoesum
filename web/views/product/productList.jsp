@@ -5,7 +5,6 @@
 <%
 	String userType=(String)request.getAttribute("userType");
 	List<Product> userProduct=(List<Product>)request.getAttribute("userProduct");
-	System.out.println(userProduct.size());
 	
 	//회계표시
 	DecimalFormat df = new DecimalFormat("#,###,###"); 
