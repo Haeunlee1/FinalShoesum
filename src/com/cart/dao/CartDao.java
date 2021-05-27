@@ -97,5 +97,27 @@ public class CartDao {
 		return result;
 	}
 	
+	public int insertCart(Connection conn, int userNo , String proNo, int proCount) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		System.out.println(userNo);
+		System.out.println(proNo);
+		System.out.println(proCount);
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertCart"));
+			pstmt.setString(1, proNo);
+			pstmt.setInt(2, userNo);
+			pstmt.setInt(3, proCount);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 }

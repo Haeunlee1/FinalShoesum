@@ -84,7 +84,7 @@
 						<%} %>
 	        </div>
 		        <button onclick="goCheckout()">구매하기</button>
-		        <button>장바구니</button>
+		        <button onclick="goinsertCart()">장바구니</button>
 	    </div>
 		<%		}
 			} %>  
@@ -131,14 +131,30 @@
 	<script>
 		
 		// 제품상세 결제페이지 이동 
-		<%-- const goCheckout = function(){
+		const goCheckout = function(){
+			<%if (loginMember != null){%>
+				let getProCount = document.getElementById("pop_out").value;			
+				location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo<%=loginMember.getMemberNo()%>&proNo=<%=proNo%>&from=p&proCount='+getProCount);
+			<%} else { %>
 			
-			let getProCount = document.getElementById("pop_out").value;
-			console.log(getProCount);
-			
-			location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=loginMember.getMemberNo() %>&proNo=<%=proNo%>&from=p&proCount='+getProCount);
-		} --%>
+				alert('로그인 후 이용가능합니다');				
+				location.assign('<%=request.getContextPath()%>/views/login/login.jsp');
+				
+			<%}%>
+		}
 	
+		// 장바구니 담기 
+		
+		const goinsertCart = function(){
+			<%if(loginMember != null){%>
+				let getProCount = document.getElementById("pop_out").value;
+				location.assign('<%=request.getContextPath()%>/cart/cartPutIn?userNo=<%= loginMember.getMemberNo()%>&proNo=<%=proNo%>&proCount='+getProCount);
+			<%} else {%>
+				alert('로그인 후 이용가능합니다');				
+				location.assign('<%=request.getContextPath()%>/views/login/login.jsp');
+			<%}%>
+		}
+		
 		$(document).ready((e)=>{
 			// recommend_pd Ajax -> bestPd Ajax랑 로직 동일하게 구현, 출력창만 다르게!
 			$.ajax({
