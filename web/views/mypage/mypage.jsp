@@ -11,7 +11,7 @@
 
 
 <section id="HE_section">
-	<p id="mypage_title"><span><%=loginMember.getMemberId() %></span>님의 마이페이지입니다.</p> 
+	<p id="mypage_title">마이페이지</p> 
     <ul id="mypage_nav">
         <li class="selectli">주문내역</li>
         <li id="wishlistLi"class="noselectli">관심상품</li>
