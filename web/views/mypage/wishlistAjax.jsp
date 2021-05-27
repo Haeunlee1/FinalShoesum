@@ -6,7 +6,7 @@
     	int memberNo=(int)(request.getAttribute("memberNo"));
     	DecimalFormat df = new DecimalFormat("#,###,###");
    %>
-      <form name="movetoCart" id="movetoCart" method="post">
+    <!--   <form name="movetoCart" id="movetoCart" method="post"> -->
     	<table id="tbl-wishlist">
 		<%if(!wishList.isEmpty()) {%>
              <tr class="head_tr">
@@ -76,7 +76,7 @@
             <button class="right-btn allDelBtn" >전체상품 비우기</button>
         </div>
         <%} %>
-     </form>
+     <!-- </form> -->
 <script>
 //전체체크
 $("#checkAll").click(e=>{
@@ -101,7 +101,8 @@ $("input[name=btn_delete]").click(e=>{
 	if(confirm("해당 상품을 삭제하시겠습니까?")){
 		let likeNo=$(e.target).attr("title");
 		console.log(likeNo);
-		location.replace("<%=request.getContextPath()%>/mypage/wishDelete?memberNo="+'<%=memberNo%>'+"&likeNo="+likeNo);
+		<%-- location.replace("<%=request.getContextPath()%>/mypage/wishDelete?memberNo="+'<%=memberNo%>'+"&likeNo="+likeNo&type=wish); --%>
+		location.replace("<%=request.getContextPath()%>/mypage/wishDelete?memberNo="+'<%=memberNo%>'+"&likeNo="+likeNo+"&type=wish");
 	}
 });
 
@@ -112,9 +113,9 @@ $(".checkwishBtn").click(()=>{
 		let checkArr=new Array();
 		$("input[class='chk']:checked").each(function(){
 			checkArr.push($(this).attr("title"));
-		})
+		});
 			console.log(checkArr);			
-		location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+checkArr);
+		location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+checkArr+"&type=wish");
 	}
 })
 
@@ -127,7 +128,7 @@ $(".allDelBtn").click(()=>{
 			allwishArr.push($(this).attr("title"));
 		});
 		console.log(allwishArr);
-		<%-- location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+allwishArr); --%>
+		location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+allwishArr+"&type=wish");
 	}
 });
 </script>

@@ -7,7 +7,7 @@
 	//주문내역리스트
 	List<Ordered> orderList = (List<Ordered>)request.getAttribute("orderList");
 	DecimalFormat df = new DecimalFormat("#,###,###");
-%>
+	%>
 
 
 <section id="HE_section">
@@ -287,9 +287,9 @@ $("#search_ordered").click(e=>{
 $(function(){
 	$("#wishlistLi").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/mypage/wishlist",
+			url:"<%=request.getContextPath()%>/mypage/wishlist?",
 			data:{
-				"memberNo":"<%=loginMember.getMemberNo()%>"
+				"memberNo":"<%=loginMember.getMemberNo()%>","type":"wish"
 			},
 			type:"post",
 			success:data=>{
@@ -304,9 +304,9 @@ $(function(){
 	//내가쓴게시글 ajax해보기
 	$("#boardListLi").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/mypage/myboardList",
+			url:"<%=request.getContextPath()%>/mypage/myboardList?",
 			data:{
-				"memberNo":"<%=loginMember.getMemberNo()%>"
+				"memberNo":"<%=loginMember.getMemberNo()%>","type":"board"
 			}, 
 			type:"post",
 			success:data=>{
@@ -321,7 +321,13 @@ const fn_goshopping=()=>{
 	location.assign("<%= request.getContextPath()%>/product/productlist");
 }
 
-
+$(function(){
+	//찜한상품 지우면 mypage가 아닌 관심상품 탭으로 돌아가기 
+	switch('<%=(String)request.getParameter("type")%>'){
+		case "wish" : $("#wishlistLi").click();break;
+		case "board" : $("#boardListLi").click();break;
+	}
+})
 </script>
 
-<%@ include file="/views/common/footer.jsp"%>
+<%@ include file="/views/common/footer.jsp" %>

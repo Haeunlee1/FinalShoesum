@@ -62,9 +62,9 @@ List<Board> list=(List<Board>)request.getAttribute("list");
         <input type="button" style="float:right" value="글쓰기" onclick="fn_boardWirte();">
     </div>
     <script>
-	const fn_boardWrite=()=>{
-		location.assign("<%=request.getContextPath()%>/board/boardForm");
-	}
+		const fn_boardWrite=()=>{
+			location.assign("<%=request.getContextPath()%>/board/boardForm");
+		}
 	</script>
     <!-- 글쓰기 버튼 끝-->
 </body>
