@@ -9,7 +9,6 @@
     text-align: center;
     
 }
-
 .question_board{
 	font-family: 'Noto Sans KR', sans-serif;
     margin:0;
@@ -66,75 +65,70 @@
 
 /* 글쓰기 css 시작 */
     /* 문의하기, 등록 버튼 css*/
+section#board_write{
+    margin:auto;
+    width:1000px;
+}
+section#board_write>div{
+	margin-bottom:10px;
+}
 #write_top_container{
-     margin-top: 60px;
-     width: 1000px;
-     height: 40px;
-     position: relative;
-     left: 50%;
-     transform: translateX(-50%);
-     display: inline-block;
-     border-bottom: 1px solid gray;
- }
-
- #write_top_container>p{
-     font-size: 20px;
-     font-weight: bold;
- }
- #checkBtn{
-     width: 50px;
-     font-weight: bold;
-     margin-top: 12px;
-     float:right;
- }
- 
-    /* 제목, 내용 css */
-#write_container{
-    width: 1000px;
-    height: auto;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    display: inline-block;
+    margin-top: 60px;
+    border-bottom: 1px lightgray solid;
 }
-#write_title{
-    width: 998px;
-    height: 30px;
-    padding: 0px;
+#write_top_container>p{
+    font-size: 20px;
+    font-weight: bold;
+    text-align:left;
 }
-#write_contents{
-    width: 996px;
-    height: 500px;
-    margin-top: 10px;
+/* 제목, 내용 css */
+#write_container, div#write_content{
+   margin: 10px 0 5px 0;
 }
-    /* 비밀번호, 목록 버튼 css*/
-    #write_bottom_container{
-        margin-top: 10px;
-        width: 998px;
-        height: 60px;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    #write_password_container{
-        border:1px solid black;
-        width: 1000px;
-        height: auto;
-        border-collapse: collapse;
-    }
-    #table_container>th,#table_container>td{
-        border:1px solid black;
-    }
-    .td_password{
-        width: 100px;
-    }
-    .back_button{
-        margin-top: 10px;
-        width:100px;
-    }
-    .password_table{
-        margin-left: 4px;
-    }
+div#write_container>span{
+    margin-right:50px;
+}
+select#qab_cate{
+    width:300px;
+    height:25px;
+}
+div#write_content>#qab_content{
+   width: 1000px;
+   height: 500px;
+}
+/* 비밀번호, 목록 버튼 css*/
+#write_bottom_container{
+   height: 50px;
+   border-bottom:1px lightgray solid;
+   text-align: center;
+   line-height: 45px;
+   
+}
+#write_bottom_container>ul li{
+    float:left;
+    margin-right:30px;
+}
+.back_button{
+    width:100px;
+    height:40px;
+    border : none;
+    border-radius : 7%;
+    margin: 10px 5px ;
+    font-size:16px;
+    cursor: pointer;
+}
+#checkBtn{
+    width:100px;
+    height:40px;
+    border : none;
+    border-radius : 7%;
+    margin: 10px 5px ;
+    font-size:16px;
+    cursor: pointer;
+    float:right;
+    background-color: black;
+    color:white;
+}
 /* 글쓰기 css 끝 */
 
 /* 상품문의 css 시작 */
