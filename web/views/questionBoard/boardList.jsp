@@ -37,7 +37,7 @@ List<Board> list=(List<Board>)request.getAttribute("list");
             </tr>
             <tr class="td-color">
                 <td class="td"><b>공지</b></td>
-                <td class="td">주문 상품 배송 전 변경,취소,주소지 변경, 묶음배송 관련 문의는 평일 오전 11시 이전 "배송 전 변경/취소" 게시판 이용 부탁드립니다.</td>
+                <td class="td"><b>주문 상품 배송 전 변경,취소,주소지 변경, 묶음배송 관련 문의는 평일 오전 11시 이전 "배송 전 변경/취소" 게시판 이용 부탁드립니다.</b></td>
                 <td class="td"></td>
                 <td class="td"></td>
                 <td class="td"></td>
@@ -59,11 +59,17 @@ List<Board> list=(List<Board>)request.getAttribute("list");
     <!-- 글쓰기 버튼-->
     <div id="question_bottom_container">
     	<!-- write.jsp로 이동-->
-        <input type="button" style="float:right" value="글쓰기" onclick="fn_boardWirte();">
+        <input type="button" style="float:right" value="글쓰기" onclick="fn_boardWrite();">
     </div>
-    <script>
+    <script>   
 	const fn_boardWrite=()=>{
-		location.assign("<%=request.getContextPath()%>/board/boardForm");
+		<% if(loginMember==null){%>
+			alert("로그인이 필요합니다.");
+			location.assign("<%=request.getContextPath()%>/views/login/login.jsp");
+		<% }else{ %>
+			location.assign("<%=request.getContextPath()%>/board/boardForm");
+		<% } %>
+
 	}
 	</script>
     <!-- 글쓰기 버튼 끝-->

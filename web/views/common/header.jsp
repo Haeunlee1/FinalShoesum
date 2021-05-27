@@ -46,7 +46,7 @@
                 <%} %>
                 <li><a href="<%=request.getContextPath() %>/views/member/regiester.jsp">회원가입</a></li>
                 <li><a href="<%=request.getContextPath() %>/board/boardList">질문게시판</a></li>
-                <li><a href="">자주묻는질문</a></li>
+                <li><a href="views/faq/faq.jsp">자주묻는질문</a></li>
             </ul>
             <div id="logo" onclick="location.assign('<%=request.getContextPath() %>')"></div>
             <div id="search_bar">
