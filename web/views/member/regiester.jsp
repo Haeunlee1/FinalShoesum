@@ -16,7 +16,7 @@
               <p class="mark-required">*</p>
             </div>
           </div>
-          <form action="/member/regiester" id="memberForm" method="post" >
+          <form action="<%=request.getContextPath() %>/member/regiester" id="memberForm" method="post" >
           <div class="wrapper-register">
             <div class="container">
               <div class="container-label">
