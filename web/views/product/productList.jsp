@@ -1,24 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
+<%@ page import="java.util.List,com.product.model.vo.Product,java.text.*" %>
 <%
-	String category=(String)request.getAttribute("category");
+	String userType=(String)request.getAttribute("userType");
+	List<Product> userProduct=(List<Product>)request.getAttribute("userProduct");
+	
+	//회계표시
+	DecimalFormat df = new DecimalFormat("#,###,###"); 
 %>
 
 	<section>
 	    <div id="pd_top">
-	    <%if(category.equals("man")) { %>
-	        <p>MAN</p>
-	    <%}else if(category.equals("woman")) { %>
-	        <p>WOMAN</p>
-	    <%}else { %>  
-	        <p>KIDS</p>
-	    <%} %>
+	        <p><%=userType %></p>
 	        <select name="" id="">
 	            <option value="">최신순</option>
 	            <option value="">높은가격순</option>
 	            <option value="">낮은가격순</option>
-	            <option value="">찜순</option>
 	        </select>
 	    </div>
 	    <div id="pd_left">
@@ -45,63 +43,21 @@
 	        </div>
 	    </div>
 	    
-	    <!-- Ajax 처리 -->
 	    <div id="pd_right">
 	        <ul>
+	        <%if(userProduct!=null) { 
+	        	for(Product p : userProduct) {
+	        %>
 	            <li>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
+	                <a href="<%=request.getContextPath() %>/product/productDetail?proNo=<%=p.getProNo() %>"><img src="<%=request.getContextPath() %>/images/product/<%=userType.toLowerCase() %>/<%=p.getImages1() %>" alt=""></a>
 	                <span>[슈썸]</span>
-	                <span>베이직 컨버스 화이트</span>
-	                <span>69,000</span>
+	                <span><%=p.getProName() %></span>
+	                <span><%=df.format(p.getPrice()) %></span>
 	            </li>
-	            <li>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
-	                <span>[슈썸]</span>
-	                <span>베이직 컨버스 화이트</span>
-	                <span>69,000</span>
-	            </li>
-	            <li>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
-	                <span>[슈썸]</span>
-	                <span>베이직 컨버스 화이트</span>
-	                <span>69,000</span>
-	            </li>
-	            <li>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
-	                <span>[슈썸]</span>
-	                <span>베이직 컨버스 화이트</span>
-	                <span>69,000</span>
-	            </li>
-	            <li>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
-	                <span>[슈썸]</span>
-	                <span>베이직 컨버스 화이트</span>
-	                <span>69,000</span>
-	            </li>
-	            <li>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
-	                <span>[슈썸]</span>
-	                <span>베이직 컨버스 화이트</span>
-	                <span>69,000</span>
-	            </li>
-	            <li>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
-	                <span>[슈썸]</span>
-	                <span>베이직 컨버스 화이트</span>
-	                <span>69,000</span>
-	            </li>
-	            <li>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
-	                <span>[슈썸]</span>
-	                <span>베이직 컨버스 화이트</span>
-	                <span>69,000</span>
-	            </li>
-	            <li>
-	                <a href=""><img src="<%=request.getContextPath() %>/images/product/shose.png" alt=""></a>
-	                <span>[슈썸]</span>
-	                <span>베이직 컨버스 화이트</span>
-	                <span>69,000</span>
-	            </li>
+	        <%	}
+	        }else { %>
+	        	<p>상품 준비중 입니다.</p>
+	        <%} %>
 	        </ul>
 	    </div>
 	    <div id="pageBar">
@@ -119,13 +75,12 @@
 		$(document).ready((e)=>{
 			
 			/* if(category.equals("man")) { */
-				$.ajax({
-		   			url:"<%=request.getContextPath() %>/product/manPdAjax",
-		   			async: false,
+				<%-- $.ajax({
+		   			url:"<%=request.getContextPath() %>/product/userProductAjax",
 		   			success:data=>{
 		   				$("#pd_right").html(data);
 		   			}
-		   		});
+		   		}); --%>
 			<%-- }else if(category.equals("woman")) {
 				$.ajax({
 					url:"<%=request.getContextPath() %>/product/womanPdAjax",

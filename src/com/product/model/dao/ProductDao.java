@@ -129,14 +129,15 @@ public class ProductDao {
 		return list;
 	}
 	
-	public List<Product> manProduct(Connection conn) {
+	public List<Product> userProduct(Connection conn, String userType) {
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
 		List<Product> list = new ArrayList();
 		Product p = null;
 		
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("manProduct"));
+			pstmt=conn.prepareStatement(prop.getProperty("userProduct"));
+			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				p = new Product();

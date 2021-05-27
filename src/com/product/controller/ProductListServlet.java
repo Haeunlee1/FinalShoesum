@@ -35,9 +35,13 @@ public class ProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String category = request.getParameter("category");
-		request.setAttribute("category", category);
+		String userType = request.getParameter("userType").toUpperCase();
+		System.out.println(userType);
+		request.setAttribute("userType", userType);
 		
+		// userType별 상품 목록 가져오기
+		List<Product> list = new ProductService().userProduct(userType);
+		request.setAttribute("userProduct", list);
 		
 		// nav bar -> man,woman,kids 클릭시 이동하는 서블렛
 		request.getRequestDispatcher("/views/product/productList.jsp")

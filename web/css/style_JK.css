@@ -111,6 +111,7 @@ ul#menu_bar>li {
     color: white;
     line-height: 50px;
     position: relative;
+    cursor: pointer;
 }
 ul#menu_bar .menu_sub {
     width: 100%;
