@@ -87,7 +87,7 @@ public class CheckoutDao {
 					cartSql +=cartArray[i] + ",";
 				}
 			}
-			
+			System.out.println(cartSql);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT PRO_NO , PRO_NAME, PRO_PRICE,PRO_COUNT,CART_NUMBER"
 					+ " FROM CART JOIN PRODUCT USING(PRO_NO) WHERE CART_NUMBER in("+cartSql +")");
@@ -136,38 +136,34 @@ public class CheckoutDao {
 	
 	// 상품가져오기 from product
 	
-	public List<Checkout> checkoutPro(Connection conn, String proNo, String proCount) {
+	public List<Checkout> checkoutPro(Connection conn, String proNo, int proCount) {
 		
 		Statement stmt = null;
 		ResultSet rs = null;
 		List<Checkout> list = new ArrayList();
 		
 		String[] proNoArray = proNo.split("/"); 
-		String[] proCountArray = proCount.split("/");
-		
 		String proNoSql = "";
-		String proCountSql = "";
 		
+		System.out.println(proNoArray.length);
 		for(int i = 0; i<proNoArray.length;i++) {
 			if(i==proNoArray.length-1) {
-				proNoSql += proNoArray[i];
+				proNoSql += "'"+proNoArray[i].trim();
 			} else {
-				proNoSql += proNoArray[i] + ",";
+				proNoSql += "'"+proNoArray[i].trim()+"',";
 			}
 		}
 		
-		int i = 0;
-		
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM PRODUCT WHERE PRO_NO IN("+proNoSql+")");
+			System.out.println(proNoSql);
+			rs = stmt.executeQuery("SELECT * FROM PRODUCT WHERE PRO_NO in("+proNoSql+"')");
 			while(rs.next()) {
 				Checkout c = new Checkout();
 				c.setProNo(rs.getString("PRO_NO"));
 				c.setProName(rs.getString("PRO_NAME"));
 				c.setProPrice(rs.getInt("PRO_PRICE"));
-				c.setProCount(Integer.parseInt(proCountArray[i]));
-				i++;
+				c.setProCount(1);
 				list.add(c);
 			}
 		} catch(SQLException e) {

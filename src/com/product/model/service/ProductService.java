@@ -39,10 +39,19 @@ public class ProductService {
 		return list;
 	}
 	
+<<<<<<< HEAD
 	public List<Product> userProduct(String userType) {
 		// userType별 상품 리스트 가져오기
+=======
+	public List<Product> hotProduct() {
+		// 랜덤으로 3가지 상품 가져오기 -> 메인 hotdeal 사용
+>>>>>>> branch 'master' of https://github.com/Haeunlee1/FinalShoesum.git
 		Connection conn=getConnection();
+<<<<<<< HEAD
 		List<Product> list = dao.userProduct(conn,userType);
+=======
+		List<Product> list = dao.hotProduct(conn);
+>>>>>>> branch 'master' of https://github.com/Haeunlee1/FinalShoesum.git
 		close(conn);
 		return list;
 	}

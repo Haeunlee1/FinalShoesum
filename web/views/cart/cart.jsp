@@ -40,6 +40,8 @@
             <tr class="cart_products">
                 <td><input type="checkbox" class="select_products" name="select_products" onclick = "calPrice()">
                 <input type ="hidden" class = "hold_cart_no" value="<%= c.getCartNo() %>">
+                <input type = "hidden" id = "btn_proNo" value="<%=c.getProNo() %>">
+                <input type = "hidden" id = "btn_proCount" value="<%=c.getCartProCount() %>"> 
                 </td>
                 <td><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=c.getProNo()%>"><img src="<%=request.getContextPath() %>/images/product/<%=c.getProCate() %>/<%=c.getProImgSrc() %>" alt=""></a></td>
                 <td>
@@ -57,7 +59,7 @@
                 <td class="cart_total"><%= (c.getProPrice() * c.getCartProCount()) %></td>
                 <td>
                     <ul>
-                        <li><input type="button" name="btn_order" value = "주문하기" style="background-color : black; color : white"></li>
+                        <li><input type="button" name="btn_order" value = "주문하기" style="background-color : black; color : white" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=loginMember.getMemberNo() %>&proNo=<%= c.getProNo() %>&from=p&proCount=<%=c.getCartProCount() %>');"></li>
                         <li><input type="button" name="btn_delete" value="삭제" style="background-color : #CCCCCC" onclick="location.replace('<%=request.getContextPath()%>/cart/cartDelete?cartNo=<%=c.getCartNo()%>&userNo=<%=c.getMemberNo()%>')">
                         </li>
                     </ul> 
@@ -92,8 +94,9 @@
 
 	<script>
 	
+		
 	
-		 // 주문하기 버튼 함수 
+		// 선택된 상품 전부 주문하기 버튼 함수 
 		 
 		 const checkout = function(){
 			 

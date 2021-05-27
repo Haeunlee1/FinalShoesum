@@ -64,7 +64,7 @@
 		        <p>수량</p>
 		        <div class="count_box">
 		            <button type="button" id="decreaseQuantity">-</button>
-                    <input type="text" name="pop_out" value="1" readonly="readonly" style="text-align:center;">
+                    <input type="text" name="pop_out" id="pop_out" value="1" readonly="readonly" style="text-align:center;">
                     <input type="hidden" name="pd_count" value="">
                     <button type ="button" id="increaseQuantity">+</button>		        
                 </div>
@@ -83,7 +83,7 @@
 							<p class="total_price">￦　<%=df.format(price) %></p>
 						<%} %>
 	        </div>
-		        <button>구매하기</button>
+		        <button onclick="goCheckout()">구매하기</button>
 		        <button>장바구니</button>
 	    </div>
 		<%		}
@@ -130,6 +130,15 @@
 	
 	<script>
 		
+		// 제품상세 결제페이지 이동 
+		const goCheckout = function(){
+			
+			let getProCount = document.getElementById("pop_out").value;
+			console.log(getProCount);
+			
+			location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=loginMember.getMemberNo() %>&proNo=<%=proNo%>&from=p&proCount='+getProCount);
+		}
+	
 		$(document).ready((e)=>{
 			// recommend_pd Ajax -> bestPd Ajax랑 로직 동일하게 구현, 출력창만 다르게!
 			$.ajax({
@@ -144,7 +153,8 @@
 
         	// 찜버튼 on,off 스크립트
         	$("#heart").click(function(e){
-        		if(<%=loginMember!=null%>){
+        		<%if(loginMember!=null){%>
+        		<%-- if(<%=loginMember!=null%>){ --%>
 	        		var icon=["♡","♥"];
 	        		var heart=$(".heart").val();
 			        		
@@ -152,24 +162,17 @@
 	        			$(".heart").text(icon[1]);
 	        			heart='1';
 		        		alert("관심상품으로 등록되었습니다");
-		        		<%-- location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+&proNo=+'<%=proNo%>'); --%>
+		        		location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>');
 		        		<%-- location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>'); --%>
 	        		}else {
 	        			$(".heart").text(icon[0]);
 	        			heart='0';
 	        		}
 		        	$(".heart").val(heart);
-        		}else{
+		        <%}else {%>
         			alert("로그인 후 관심상품 등록 가능합니다.")			//로긴페이지로 이동할 지 생각해보기
-		        	
+		        <%}%>
 		        	//클릭했을 때 val가 1 => 찜하기
-		        	<%-- if($(e.target).val()==1){
-		        		console.log(location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>'))
-		        		location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>');
-		        		
-		        	} --%>
-        		}
-	        	
         	});
             
             // 마우스 오버시 이미지 변경 스크립트
