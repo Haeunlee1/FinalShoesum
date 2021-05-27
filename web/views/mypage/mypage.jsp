@@ -118,7 +118,7 @@
     </article>
     <article id="HE_wishlist">
         <div class="wish_content mypage_content">
-            <p>찜한 상품</p>
+            <p>관심상품</p>
             <!-- ajax구현 -->
             <div id="wishlist_target"></div>
             

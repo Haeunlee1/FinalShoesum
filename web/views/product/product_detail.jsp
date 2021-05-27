@@ -175,13 +175,6 @@
         			alert("로그인 후 관심상품 등록 가능합니다.")			//로긴페이지로 이동할 지 생각해보기
 		        <%}%>
 		        	//클릭했을 때 val가 1 => 찜하기
-		        	<%-- if($(e.target).val()==1){
-		        		console.log(location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>'))
-		        		location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>');
-		        		
-		        	} --%>
-        		
-	        	
         	});
             
             // 마우스 오버시 이미지 변경 스크립트
