@@ -29,7 +29,7 @@
                 <td><input type="password" class="password_table"placeholder="4개의 숫자를 입력하세요." maxlength="4" required></td>
             </tr>
         </table>
-        <input type="button" value="목록으로" class="back_button">
+        <button type="button" class="back_button" onclick="location.assign('<%=request.getContextPath()%>/board/boardList')">목록으로</button>
         <input type="submit" id="checkBtn" value="등록">
         
     </div>
