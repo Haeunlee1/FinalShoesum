@@ -37,9 +37,15 @@ public class CheckoutServlet extends HttpServlet {
 		// 파라미터 값 가져오기
 		
 		// 유저번호 
-		
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		int proPrice = Integer.parseInt(request.getParameter("proPrice"));
+		
+		// 제품상세로부터 상품가격 받아오기
+		int proPrice;
+		try {
+		proPrice = Integer.parseInt(request.getParameter("proPrice"));
+		} catch(NumberFormatException e) {
+			proPrice = 0;
+		}
 		// 카트번호
 		String cartNo = request.getParameter("cartNo");
 		

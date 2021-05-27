@@ -76,5 +76,46 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	
+	
+	// 주문 내역 insert
+	public int insertOrder(int userNo, String proNo, String proCount) {
+		
+		int resultOr = 0;
+		Connection conn = getConnection();
+		
+		// 주문 테이블 생성 
+		resultOr = dao.insertOrderTable(conn,userNo);
+		
+		
+		// 주문상세 테이블 생성 
+		String[] proNoArray = proNo.split("/");
+		String[] proCountArray = proCount.split("/");
+		
+		int resultDe = 0;
+		
+		// 단일 상품 와 복수개의 상품 분기처리하기 
+		
+		if(proCountArray.length==1) {
+			for(int i=0;i<proNoArray.length;i++) {
+				resultDe += dao.insertOrderDetail(conn,proNoArray[i].trim(),proCountArray[i].trim());
+			}
+		} else {
+			for(int i=0;i<proNoArray.length-1;i++) {
+				resultDe += dao.insertOrderDetail(conn,proNoArray[i].trim(),proCountArray[i].trim());
+			}
+		}
+		
+		// 결과처리하기 
+		if(resultOr>0 && resultDe >= proNoArray.length-1) {
+			commit(conn);
+		} else {
+			resultOr = 0;
+			rollback(conn);
+		}
+		close(conn);
+		return resultOr;
+	}
+	
 }
 
