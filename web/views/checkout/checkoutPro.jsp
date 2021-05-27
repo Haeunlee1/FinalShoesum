@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "/views/common/header.jsp" %>
+<%@ page import = "java.util.List,com.checkout.model.vo.Checkout" %>
+
+<%
+
+	List<Checkout> list = (List<Checkout>)request.getAttribute("list");
+	Member m = (Member)request.getAttribute("member");
+	String checkPro = " ";
+	int checkPrice = 0;		
+	
+	for (Checkout c : list){
+		
+		checkPro += c.getProName() + " ";
+		checkPrice += (c.getProPrice() * c.getProCount());
+	}
+	
+	
+%>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
@@ -66,15 +83,15 @@
         <table class="order_table">
             <tr>
                 <td>이름</td>
-                <td>양화영</td>
+                <td><%=m.getMemberName() %></td>
             </tr>
             <tr>
                 <td>이메일</td>
-                <td>qoarhfl@gmail.com</td>
+                <td><%=m.getEmail() %></td>
             </tr>
             <tr>
                 <td>휴대전화번호</td>
-                <td>0103849247</td>
+                <td><%=m.getPhone() %></td>
             </tr>
         </table>
     </div>
@@ -87,14 +104,14 @@
             <tr>
                 <td>배송지 선택 <span style="color:#E92E4D;">*</span></td>
                 <td>
-                    <input type="checkbox" name="checkId"> &nbsp;주문자 정보와 동일
-                    <input type="checkbox" name="checkNew"> &nbsp;새로운 배송지
+                    <input type="checkbox" name="checkId" id="checkId" onclick="checkInfo();"> &nbsp;주문자 정보와 동일
+                    <input type="checkbox" name="checkNew" id="checkNew" onclick="clearInfo()"> &nbsp;새로운 배송지
                 </td>
             </tr>
             <tr>
                 <td>받으시는 분<span style="color:#E92E4D;">*</span></td>
                 <td>
-                    <input type="text" name="getName">
+                    <input type="text" name="getName" id = "getName" required>
                 </td>
             </tr>
             <tr id="deli_table_address">
@@ -102,14 +119,14 @@
                 <td>
                         <ul class="profile_address">
                            <li> 
-                               <input type="text" name="postcode" id="postcode" size="6">&nbsp;&nbsp;
-                               <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+                               <input type="text" name="postcode" id="postcode" size="6" required>&nbsp;&nbsp;
+                               <input type="button" onclick="execDaumPostcode()" value="우편번호"><br>
                            </li>
-                           <li><input type="text" name="address1" id="address1" size="50">
+                           <li><input type="text" name="address1" id="address1" size="50" required>
                                <span class="profile_text">&nbsp;&nbsp;기본 주소</span>
                            </li>
                            <li>
-                              <input type="text" name="address2" id="address2" size="50">
+                              <input type="text" name="address2" id="address2" size="50" required>
                                <span class="profile_text">&nbsp;&nbsp;나머지 주소</span>
                                <input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
                            </li>
@@ -119,16 +136,16 @@
             <tr>
                 <td>휴대전화 <span style="color:#E92E4D;">*</span></td>
                 <td>
-                    <select name="selPhone" style="width:56px;">
-                        <option>010</option>
-                        <option>011</option>
-                        <option>018</option>
-                        <option>019</option>
+                    <select name="selPhone" id ="selPhone" style="width:56px;">
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="018">018</option>
+                        <option value="019">019</option>
                         </select>
                         -
-                        <input type="tel" name="selPhoneMid" style="width:56px;">
+                        <input type="tel" name="selPhoneMid" id="selPhoneMid" style="width:56px;" required>
                         -
-                        <input type="tel" name="selPhoneEnd" style="width:56px;">
+                        <input type="tel" name="selPhoneEnd" id="selPhoneEnd" style="width:56px;" required>
                 </td>
             </tr>
             <tr>
@@ -144,11 +161,11 @@
         <table class="order_table">
             <tr>
                 <td>주문상품</td>
-                <td>신발</td>
+                <td><%=checkPro %></td>
             </tr>
             <tr>
                 <td>총상품가격</td>
-                <td>100000</td>
+                <td><%=checkPrice %>원</td>
             </tr>
             <tr>
                 <td>배송비</td>
@@ -156,58 +173,119 @@
             </tr>
             <tr>
                 <td>총 결제금액</td>
-                <td>1000원</td>
+                <td><%=checkPrice %>원</td>
             </tr>
             <tr>
                 <td>결제방법</td>
                 <td>
-                    <input type="checkbox" name="transAccount"> &nbsp;계좌이체
-                    <input type="checkbox" name="virAccount"> &nbsp;무통장입금
+                    <input type="checkbox" id = "payAccountBtn" name="payAccountBtn" onclick = "payAccount()"> &nbsp;계좌이체
+                    <input type="checkbox" id = "virAccountBtn" name="virAccountBtn" onclick="payVirtual()"> &nbsp;무통장입금
                 </td>
             </tr>
-            <tr>
+            <tr id = "payAccount" style = "display : none;">
                 <td>계좌이체</td>
                 <td>
                     <select name="selBank" style="width : 90px;height : 28px;">
                         <option value="">선택</option>
-                        <option value="농협은행">농협은행</option>
-                        <option value="국민은행">국민은행</option>
-                        <option value="신한은행">신한은행</option>
-                        <option value="우리은행">우리은행</option>
-                        <option value="기업은행">기업은행</option>
-                        <option value="카카오뱅크">카카오뱅크</option>
-                        <option value="새마을금고">새마을금고</option>
-                        <option value="우체국">우체국</option>
-                        <option value="대구은행">대구은행</option>
-                        <option value="신협">신협</option>
-                        <option value="케이뱅크">케이뱅크</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
                     </select>
                 </td>
             </tr>
-            <tr>
+            <tr id= "payVirtual" style = "display : none;">
                 <td>무통장입금</td>
                 <td>
                     <select name="selVirBank" id="selVirBank" style="width:90px;height:28px;">
                         <option value="">선택</option>
-                        <option value="농협은행">농협은행</option>
-                        <option value="국민은행">국민은행</option>
-                        <option value="신한은행">신한은행</option>
-                        <option value="우리은행">우리은행</option>
-                        <option value="기업은행">기업은행</option>
-                        <option value="우체국">우체국</option>
-                        <option value="광주은행">광주은행</option>
-                        <option value="수협은행">수협은행</option>
-                        <option value="씨티은행">씨티은행</option>
+						<option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
+                        <option value="카카오페이">카카오페이</option>
                     </select>
                 </td>
             </tr>
         </table>
     </div>
     <div id="btn_order_sub">
-        <input type="submit" value="결제하기">
+        <input type="button" value="결제하기" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkoutEnd?totalPrice=<%=checkPrice %>')">
     </div>
 </section>
 
+<script>
+
+
+	let checkId = document.getElementById("checkId");
+	let checkNew = document.getElementById("checkNew");
+
+	const checkInfo = function(){
+	
+		checkNew.checked = false;
+		
+        if(checkId.checked == true){
+            document.getElementById("getName").value = "<%= m.getMemberName()%>";
+            document.getElementById("postcode").value = "<%= m.getPostNo()%>";
+            document.getElementById("address1").value = "<%= m.getAddress()%>";
+            document.getElementById("address2").value = "<%= m.getAddressEnd()%>";
+			let selOption = document.getElementById("selPhone");
+            for (i=0;i<selOption.options.length;i++){
+            	if(selOption[i].value == "<%=m.getPhone().substring(0,3)%>"){
+            		selOption[i].selected = true; 
+            	 	}
+            }
+            document.getElementById("selPhoneMid").value = "<%= m.getPhone().substring(3,7)%>";
+            document.getElementById("selPhoneEnd").value = "<%= m.getPhone().substring(7,11)%>";
+            
+        } else {
+        	
+        	document.getElementById("getName").value = "";
+        	document.getElementById("postcode").value = "";
+        	document.getElementById("address1").value = "";
+        	document.getElementById("address2").value = "";
+        	document.getElementById("selPhone").value = "";
+        	document.getElementById("selPhoneMid").value = "";
+        	document.getElementById("selPhoneEnd").value = "";	
+        	
+        }
+	}
+        
+	
+   const clearInfo = function(){
+        	
+        	checkId.checked = false;
+        	
+			document.getElementById("getName").value = "";
+    		document.getElementById("postcode").value = "";
+    		document.getElementById("address1").value = "";
+    		document.getElementById("address2").value = "";
+    		document.getElementById("selPhone").value = "";
+    		document.getElementById("selPhoneMid").value = "";
+    		document.getElementById("selPhoneEnd").value = "";	
+        	
+    }
+
+   const payAccount = function(){
+	   
+	   document.getElementById("virAccountBtn").checked = false;
+	   document.getElementById("payAccount").style.display = "table-row";
+	   document.getElementById("payVirtual").style.display = "none";
+	   
+   }
+   
+   const payVirtual = function(){
+	   
+	   document.getElementById("payAccountBtn").checked = false;
+	   document.getElementById("payVirtual").style.display = "table-row";
+	   document.getElementById("payAccount").style.display = "none";
+   }
+
+
+</script>
 
 
 <%@ include file = "/views/common/footer.jsp" %>

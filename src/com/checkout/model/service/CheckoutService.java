@@ -38,10 +38,10 @@ public class CheckoutService {
 	
 	// 상품 가져오기 form product 
 	
-	public List<Checkout> checkoutPro(String proNo, int proCount) {
+	public List<Checkout> checkoutPro(String proNo, int proCount,int proPrice) {
 		
 		Connection conn = getConnection();
-		List<Checkout> list = dao.checkoutPro(conn,proNo,proCount);
+		List<Checkout> list = dao.checkoutPro(conn,proNo,proCount,proPrice);
 		close(conn);
 		return list;
 	}

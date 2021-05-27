@@ -79,9 +79,9 @@
 	        			
 		            	price=((int)(price*sale)/100)*100;
 	  			%>
-					<p class="total_price">￦　<%=df.format(price) %></p>
+					<p class="total_price" id= "total_price">￦　<%=df.format(price) %></p>
 						<%}else { %>
-							<p class="total_price">￦　<%=df.format(price) %></p>
+							<p class="total_price" id="total_price">￦　<%=df.format(price) %></p>
 						<%} %>
 	        </div>
 		        <button onclick="goCheckout()">구매하기</button>
@@ -134,8 +134,8 @@
 		// 제품상세 결제페이지 이동 
 		const goCheckout = function(){
 			<%if (loginMember != null){%>
-				let getProCount = document.getElementById("pop_out").value;			
-				location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo<%=loginMember.getMemberNo()%>&proNo=<%=proNo%>&from=p&proCount='+getProCount);
+				let getProCount = document.getElementById("pop_out").value;		
+				location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=loginMember.getMemberNo()%>&proNo=<%=proNo%>&from=p&proCount='+getProCount+'&proPrice=<%=price %>');
 			<%} else { %>
 			
 				alert('로그인 후 이용가능합니다');				

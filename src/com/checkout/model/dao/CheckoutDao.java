@@ -136,7 +136,7 @@ public class CheckoutDao {
 	
 	// 상품가져오기 from product
 	
-	public List<Checkout> checkoutPro(Connection conn, String proNo, int proCount) {
+	public List<Checkout> checkoutPro(Connection conn, String proNo, int proCount , int proPrice) {
 		
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -162,7 +162,7 @@ public class CheckoutDao {
 				Checkout c = new Checkout();
 				c.setProNo(rs.getString("PRO_NO"));
 				c.setProName(rs.getString("PRO_NAME"));
-				c.setProPrice(rs.getInt("PRO_PRICE"));
+				c.setProPrice(proPrice);
 				c.setProCount(1);
 				list.add(c);
 			}
