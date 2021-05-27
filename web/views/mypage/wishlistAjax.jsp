@@ -45,8 +45,8 @@
                  </td>
                  <td ><%=df.format(p.getPrice()) %></td>
                  <td>1</td>
-                 <td><%=df.format(3000) %></td>
-                 <td><%=df.format(p.getPrice()+3000)%></td>
+                 <td>무료</td>
+                 <td><%=df.format(p.getPrice())%></td>
                  <td>
                      <ul>
                          <li><input type="button" name="btn_delete" title="<%=p.getLikeNo() %>" value="삭제" style="background-color : #CCCCCC">
@@ -159,7 +159,7 @@ table#tbl-wishlist #wish_null td input {
     border-top : 2px solid gray;
     border-bottom : 2px solid gray;
     text-align : center;
-    font-size : 13px;
+    font-size : 14px;
     height:auto;
 }
 
@@ -193,7 +193,7 @@ table#tbl-wishlist tr{
 /*각 상품들 row*/
 table#tbl-wishlist .wish_product {
     height : 120px;
-    font-size : 12px;
+    font-size : 14px;
 }
 
 table#tbl-wishlist .wish_product td:nth-child(2) img {
@@ -203,7 +203,7 @@ table#tbl-wishlist .wish_product td:nth-child(2) img {
 
 table#tbl-wishlist .wish_product td:nth-child(3){
     text-align : left;
-    font-size : 14px;
+    font-size : 16px;
     line-height : 30px;
     padding-top : 0px;
     padding-bottom : 0px;
