@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style_IH.css" type="text/css">
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,13 +15,14 @@
     </div>
     <!--top_container 끝-->
     <!--title_container 시작-->
+    <form method="">
     <div id="write_answer_title_container">
-       <h2>ui구현 개빡치네</h2>
+       <h2>제목</h2>
        <p class="user_id"><b>user_id</b></p>
     </div>
     <!--title_container 끝-->
     <div id="write_content_container">
-        <p class="content">글자 수에 맞춰서 칸이 늘어나거나 줄어들어야함.</p>
+        <p class="content">내용</p>
     </div>
     
 	<div id="write_comment_container">
@@ -34,12 +35,10 @@
                 </div>
         </div>
     </div>
-
-    <form>
         <div id="write_comment">
             <input type="text" id="write_answer_comment" placeholder="댓글을 남겨보세요!!">
             <input type="button" value="등록" class="write_anwser_button"></button>
-            <input type="button" value="목록으로" class="write_anwser_button_back"></button>
+            <button type="button" class="write_anwser_button_back" onclick="location.assign('<%=request.getContextPath()%>/board/boardList')">목록으로</button>
     </div>
     </form>
 </body>

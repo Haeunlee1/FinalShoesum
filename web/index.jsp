@@ -40,7 +40,7 @@
 	               <p>[슈썸]에어맥스SC<br><span class="sale_price">19,500</span></p>
 	           </div>
 	           <div>
-	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=k01_01_white_170&hotpd=hotpd&sale=0.23">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=k01_white_170&hotpd=hotpd&sale=0.23">
 	                   <div class="sale">77%</div>
 	                   <img src="<%=request.getContextPath() %>/images/product/kids/k_01_01.jpg" alt="">
 	                   <div class="time_attack">

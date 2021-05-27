@@ -107,7 +107,7 @@ tr#total_price>td>span{
 }
 table#tbl-ordered tr{
     border-bottom:1px black solid;
-    height:120px;
+    /* height:120px; */
 }
 tbody.ordered_tbody>tr:first-child>td:first-child{
     border-right: 1px black solid;
