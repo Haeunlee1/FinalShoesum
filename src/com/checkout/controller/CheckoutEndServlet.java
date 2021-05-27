@@ -29,11 +29,6 @@ public class CheckoutEndServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		
-		
-		
-			
-		
-		
 		// 결제 정보 
 			
 		int totalPrice;
