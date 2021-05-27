@@ -19,20 +19,19 @@
             <input type="text" name="title" id="write_title" placeholder="제목을 입력해주세요">
             <textarea name="contents" id="write_contents" placeholder="내용을 입력해주세요"></textarea>
         </div>
-
-     <!-- 게시판 제목, 내용, 첨부파일 끝-->
-     <!-- 비밀번호 테이블 시작-->
-    <div id="write_bottom_container">
-        <table id="write_password_container">
-            <tr>
-                <td style="text-align: center;" class="td_password"><b>비밀번호</b></td>
-                <td><input type="password" class="password_table"placeholder="4개의 숫자를 입력하세요." maxlength="4" required></td>
-            </tr>
-        </table>
-        <button type="button" class="back_button" onclick="location.assign('<%=request.getContextPath()%>/board/boardList')">목록으로</button>
-        <input type="submit" id="checkBtn" value="등록">
-        
-    </div>
+	
+	     <!-- 게시판 제목, 내용, 첨부파일 끝-->
+	     <!-- 비밀번호 테이블 시작-->
+	    <div id="write_bottom_container">
+	        <table id="write_password_container">
+	            <tr>
+	                <td style="text-align: center;" class="td_password"><b>비밀번호</b></td>
+	                <td><input type="password" class="password_table"placeholder="4개의 숫자를 입력하세요." maxlength="4" required></td>
+	            </tr>
+	        </table>
+	        <button type="button" class="back_button" onclick="location.assign('<%=request.getContextPath()%>/board/boardList')">목록으로</button>
+	        <input type="submit" id="checkBtn" value="등록">
+	    </div>
     </form>
 </body>
 <%@ include file="/views/common/footer.jsp"%>
