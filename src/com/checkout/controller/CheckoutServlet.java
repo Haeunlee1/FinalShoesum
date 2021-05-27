@@ -37,8 +37,9 @@ public class CheckoutServlet extends HttpServlet {
 		// 파라미터 값 가져오기
 		
 		// 유저번호 
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int proPrice = Integer.parseInt(request.getParameter("proPrice"));
 		// 카트번호
 		String cartNo = request.getParameter("cartNo");
 		
@@ -62,22 +63,25 @@ public class CheckoutServlet extends HttpServlet {
 		Member m = new CheckoutService().memberInfo(userNo);
 		request.setAttribute("member",m);
 		
-		// 분기처리하기 
+		// 분기처리하기
+		
+		List<Checkout> list = null;
 		
 		switch (from) {
 		
+		
 		case "c":
-			List<Checkout> list = new CheckoutService().checkoutPro(cartNo);
+			list = new CheckoutService().checkoutPro(cartNo);
 			
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/views/checkout/checkoutCart.jsp").forward(request, response);
 			break;
 			
-//		case "p":
-//			Checkout c = new CheckoutService().checkoutPro(proNo,proCount);
-//			request.setAttribute("pro", c);
-//			request.getRequestDispatcher("/views/checkout/checkoutPro.jsp").forward(request,response);
-//			break;
+		case "p":
+			list = new CheckoutService().checkoutPro(proNo,proCount,proPrice);
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/views/checkout/checkoutPro.jsp").forward(request,response);
+			break;
 		};
 		
 		

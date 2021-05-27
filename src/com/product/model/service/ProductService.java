@@ -39,10 +39,10 @@ public class ProductService {
 		return list;
 	}
 	
-	public List<Product> userProduct(String userType) {
+	public List<Product> userProduct(String userType, int cPage, int numPerpage) {
 		// userType별 상품 리스트 가져오기
 		Connection conn=getConnection();
-		List<Product> list = dao.userProduct(conn,userType);
+		List<Product> list = dao.userProduct(conn,userType,cPage,numPerpage);
 		close(conn);
 		return list;
 	}
@@ -107,6 +107,13 @@ public class ProductService {
 			count++;
 		}
 		if(result>=count) commit(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int selectProdcutCount(String userType) {
+		Connection conn=getConnection();
+		int result = dao.selectProductCount(conn, userType);
 		close(conn);
 		return result;
 	}
