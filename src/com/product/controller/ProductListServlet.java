@@ -34,10 +34,17 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		String userType = request.getParameter("userType").toUpperCase();
+		System.out.println(userType);
+		request.setAttribute("userType", userType);
+		
+		// userType별 상품 목록 가져오기
+		List<Product> list = new ProductService().userProduct(userType);
+		request.setAttribute("userProduct", list);
 		
 		// nav bar -> man,woman,kids 클릭시 이동하는 서블렛
-		request.getRequestDispatcher("/views/product/product.jsp")
+		request.getRequestDispatcher("/views/product/productList.jsp")
 		.forward(request, response);
 	
 	}
