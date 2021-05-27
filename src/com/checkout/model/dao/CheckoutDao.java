@@ -163,7 +163,7 @@ public class CheckoutDao {
 				c.setProNo(rs.getString("PRO_NO"));
 				c.setProName(rs.getString("PRO_NAME"));
 				c.setProPrice(proPrice);
-				c.setProCount(1);
+				c.setProCount(proCount);
 				list.add(c);
 			}
 		} catch(SQLException e) {
