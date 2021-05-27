@@ -35,18 +35,67 @@ public class ProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int cPage;
+		int numPerpage=9;
+		
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		
 		String userType = request.getParameter("userType").toUpperCase();
 		System.out.println(userType);
 		request.setAttribute("userType", userType);
 		
 		// userType별 상품 목록 가져오기
-		List<Product> list = new ProductService().userProduct(userType);
+		List<Product> list = new ProductService().userProduct(userType,cPage,numPerpage);
 		request.setAttribute("userProduct", list);
+		
+		userType=userType.toLowerCase();
+		int totalData=new ProductService().selectProdcutCount(userType);
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		
+		int pageBarSize=5;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		String pageBar="";
+		
+		if(pageNo==1) {
+			pageBar+="<div class=\"pageBar-icon\">&lt;</div>";
+		}else {
+			pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
+			+"/product/productlist?userType="+userType+"&cPage="+(pageNo-1)+"'>&lt;</div>";
+		}
+	
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(pageNo==cPage) {
+				pageBar+="<div class=\"pageBar-icon\" style=\"background-color:rgb(52, 152, 219);color:white\">"+pageNo+"</div>";
+			}else {
+				pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
+				+"/product/productlist?userType="+userType+"&cPage="+pageNo+"'>"+pageNo+"</div>";
+			}
+			pageNo++;
+		}
+		
+		if(pageNo>totalPage) {
+			pageBar+="<div class=\"pageBar-icon\">&gt;</div>";
+		}
+		else {
+			pageBar+="<a href='"+request.getContextPath()
+			+"/notice/noticelist?cPage="+pageNo+"'>[다음]</a>";
+			
+			pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
+			+"/product/productlist?userType="+userType+"&cPage="+pageNo+"'>&gt;</div>";
+			
+		}
+		
+		request.setAttribute("pageBar", pageBar);
 		
 		// nav bar -> man,woman,kids 클릭시 이동하는 서블렛
 		request.getRequestDispatcher("/views/product/productList.jsp")
 		.forward(request, response);
-	
+
 	}
 
 	/**
