@@ -5,6 +5,7 @@
 <%@ page import="com.product.model.service.*" %>
 <%
 	List<Product> list = (List<Product>)request.getAttribute("list");
+	System.out.println(list.isEmpty());
 	int price=list.get(0).getPrice();
 	String proNo="";
 	//회계표시
