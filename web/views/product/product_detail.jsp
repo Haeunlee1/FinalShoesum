@@ -131,13 +131,13 @@
 	<script>
 		
 		// 제품상세 결제페이지 이동 
-		const goCheckout = function(){
+		<%-- const goCheckout = function(){
 			
 			let getProCount = document.getElementById("pop_out").value;
 			console.log(getProCount);
 			
 			location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=loginMember.getMemberNo() %>&proNo=<%=proNo%>&from=p&proCount='+getProCount);
-		}
+		} --%>
 	
 		$(document).ready((e)=>{
 			// recommend_pd Ajax -> bestPd Ajax랑 로직 동일하게 구현, 출력창만 다르게!

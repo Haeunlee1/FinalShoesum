@@ -18,7 +18,7 @@
 	       <h2>HOT DEAL</h2>
 	       <div class="product">
 	           <div>
-	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=w01_white&hotpd=hotpd&sale=0.8">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=w01_white_170&hotpd=hotpd&sale=0.8">
 	                   <div class="sale">20%</div>
 	                   <img src="<%=request.getContextPath() %>/images/product/woman/w_01_01.jpg" alt="">
 	                   <div class="time_attack">
@@ -29,7 +29,7 @@
 	               <p>[슈썸]블레어뮬<br><span class="sale_price">40,000</span></p>
 	           </div>
 	           <div>
-	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=m01_gray&hotpd=hotpd&sale=0.65">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=m01_white_170&hotpd=hotpd&sale=0.65">
 	                   <div class="sale">35%</div>
 	                   <img src="<%=request.getContextPath() %>/images/product/man/m_01_01.jpg" alt="">
 	                   <div class="time_attack">
@@ -40,7 +40,7 @@
 	               <p>[슈썸]에어맥스SC<br><span class="sale_price">19,500</span></p>
 	           </div>
 	           <div>
-	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=k01_white&hotpd=hotpd&sale=0.23">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=k01_white_170&hotpd=hotpd&sale=0.23">
 	                   <div class="sale">77%</div>
 	                   <img src="<%=request.getContextPath() %>/images/product/kids/k_01_01.jpg" alt="">
 	                   <div class="time_attack">
