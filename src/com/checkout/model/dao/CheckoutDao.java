@@ -87,7 +87,7 @@ public class CheckoutDao {
 					cartSql +=cartArray[i] + ",";
 				}
 			}
-			
+			System.out.println(cartSql);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT PRO_NO , PRO_NAME, PRO_PRICE,PRO_COUNT,CART_NUMBER"
 					+ " FROM CART JOIN PRODUCT USING(PRO_NO) WHERE CART_NUMBER in("+cartSql +")");
@@ -136,29 +136,43 @@ public class CheckoutDao {
 	
 	// 상품가져오기 from product
 	
-	public Checkout checkoutPro(Connection conn, String proNo, int proCount) {
+	public List<Checkout> checkoutPro(Connection conn, String proNo, int proCount) {
 		
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rs = null;
-		Checkout c = new Checkout();
+		List<Checkout> list = new ArrayList();
+		
+		String[] proNoArray = proNo.split("/"); 
+		String proNoSql = "";
+		
+		System.out.println(proNoArray.length);
+		for(int i = 0; i<proNoArray.length;i++) {
+			if(i==proNoArray.length-1) {
+				proNoSql += "'"+proNoArray[i].trim();
+			} else {
+				proNoSql += "'"+proNoArray[i].trim()+"',";
+			}
+		}
 		
 		try {
-			pstmt = conn.prepareStatement(prop.getProperty("checkoutPro"));
-			pstmt.setString(1, proNo);
-			rs = pstmt.executeQuery();
+			stmt = conn.createStatement();
+			System.out.println(proNoSql);
+			rs = stmt.executeQuery("SELECT * FROM PRODUCT WHERE PRO_NO in("+proNoSql+"')");
 			while(rs.next()) {
+				Checkout c = new Checkout();
 				c.setProNo(rs.getString("PRO_NO"));
 				c.setProName(rs.getString("PRO_NAME"));
 				c.setProPrice(rs.getInt("PRO_PRICE"));
-				c.setProCount(proCount);
+				c.setProCount(1);
+				list.add(c);
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(pstmt);
+			close(stmt);
 		}
-		return c;
+		return list;
 	}
 	
 	
