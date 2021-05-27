@@ -41,6 +41,18 @@ public class CartService {
 		return result;
 	}
 	
+	public int insertCart(int userNo, String proNo, int proCount) {
+		
+		Connection conn = getConnection();
+		int result = dao.insertCart(conn,userNo,proNo,proCount);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result; 
+	}
 	
 	
 }
