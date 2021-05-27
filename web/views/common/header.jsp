@@ -23,6 +23,12 @@
     	$("#menu_bar>li").hover(function(){
         	$(this).children(".menu_sub").stop().slideToggle(300);
         });
+    	
+    	$(".userType").click(e=>{
+   			let type=$(e.target).attr("title");
+   			location.assign("<%= request.getContextPath()%>/product/productlist?userType="+type);
+   			
+    	});
     });
 </script>
 
@@ -58,7 +64,7 @@
         </header>
         <nav>
             <ul id="menu_bar">
-                <li><a href="<%=request.getContextPath() %>/product/productlist" value="man">MAN</a>
+                <li class="userType" title="man">MAN
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
                         <li><a href="">스니커즈</a></li>
@@ -67,7 +73,7 @@
                         <li><a href="">구두</a></li>
                     </ul>
                 </li>
-                <li><a href="<%=request.getContextPath() %>/product/productlist" value="woman">WOMAN</a>
+                <li class="userType" title="woman">WOMAN
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
                         <li><a href="">스니커즈</a></li>
@@ -76,7 +82,7 @@
                         <li><a href="">구두</a></li>
                     </ul>
                 </li>
-                <li><a href="<%=request.getContextPath() %>/product/productlist" value="kids">KIDS</a>
+                <li class="userType" title="kids">KIDS
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
                         <li><a href="">스니커즈</a></li>

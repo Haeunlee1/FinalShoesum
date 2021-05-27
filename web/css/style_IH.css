@@ -122,7 +122,7 @@
         height: auto;
         border-collapse: collapse;
     }
-    #table_container>th,td{
+    #table_container>th,#table_container>td{
         border:1px solid black;
     }
     .td_password{
