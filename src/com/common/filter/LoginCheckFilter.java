@@ -29,7 +29,7 @@ public class LoginCheckFilter implements Filter {
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated methowd stub
 	}
 
 	/**

@@ -42,6 +42,7 @@ public class MypageMoveServlet extends HttpServlet {
 		//기본 3개월이내 주문내역 / 주문내역 지정시 그 값 받아서 같이 넘기기
 		List<Ordered> list = new MemberService().basicOrdered(memberNo);
 		request.setAttribute("orderList", list);
+		int index=0;
 		System.out.println("주문내역갯수:"+list.size());		//rs가 없으면 0이 찍힘 jsp에서 0을 기준으로 분기하기
 		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);
 		

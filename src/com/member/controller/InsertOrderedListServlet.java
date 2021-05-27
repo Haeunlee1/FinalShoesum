@@ -1,7 +1,6 @@
-package com.product.controller;
+package com.member.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.product.model.service.ProductService;
-import com.product.model.vo.Product;
+import com.member.model.service.MemberService;
 
 /**
- * Servlet implementation class WIshListServlet
+ * Servlet implementation class InsertOrderedListServlet
  */
-@WebServlet("/mypage/wishlist")
-public class WIshListServlet extends HttpServlet {
-	
+@WebServlet("/mypage/insertOrderedList")
+public class InsertOrderedListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WIshListServlet() {
+    public InsertOrderedListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +29,26 @@ public class WIshListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//찜한 상품 목록 가져오기
-		//아이디가 아닌 넘버로 가져오기
-		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
-		//Product객체로 가져오기
-		List<Product> list = new ProductService().allWishes(memberNo);
-		request.setAttribute("wishlist", list);
-		request.setAttribute("memberNo", memberNo);
-		request.getRequestDispatcher("/views/mypage/wishlistAjax.jsp").forward(request, response);
-	
+		// TODO Auto-generated method stub
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		String proNo = request.getParameter("proNo");
+		String proCount = request.getParameter("proCount");
+		
+		int result = new MemberService().insertOrder(userNo,proNo,proCount);
+		
+		String msg = "";
+		String loc = "";
+		if(result>0) {
+			msg = "구매 성공!";
+		} else {
+			msg = "구매실패";
+		}
+		
+		request.setAttribute("msg",msg);
+		request.setAttribute("loc",loc);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
 	}
 
 	/**

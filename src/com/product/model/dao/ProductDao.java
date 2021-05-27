@@ -118,7 +118,7 @@ public class ProductDao {
 		return list;
 	}
 	
-	public List<Product> userProduct(Connection conn, String userType) {
+	public List<Product> userProduct(Connection conn, String userType, int cPage, int numPerpage) {
 		
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
@@ -128,6 +128,8 @@ public class ProductDao {
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("userProduct"));
 			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				p = new Product();
@@ -273,4 +275,21 @@ public class ProductDao {
 		return result;
 	}
 	
+	public int selectProductCount(Connection conn, String userType) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectProductCount"));
+			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 }

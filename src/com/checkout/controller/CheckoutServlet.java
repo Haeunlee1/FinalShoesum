@@ -39,6 +39,13 @@ public class CheckoutServlet extends HttpServlet {
 		// 유저번호 
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
+		// 제품상세로부터 상품가격 받아오기
+		int proPrice;
+		try {
+		proPrice = Integer.parseInt(request.getParameter("proPrice"));
+		} catch(NumberFormatException e) {
+			proPrice = 0;
+		}
 		// 카트번호
 		String cartNo = request.getParameter("cartNo");
 		
@@ -62,22 +69,25 @@ public class CheckoutServlet extends HttpServlet {
 		Member m = new CheckoutService().memberInfo(userNo);
 		request.setAttribute("member",m);
 		
-		// 분기처리하기 
+		// 분기처리하기
+		
+		List<Checkout> list = null;
 		
 		switch (from) {
 		
+		
 		case "c":
-			List<Checkout> list = new CheckoutService().checkoutPro(cartNo);
+			list = new CheckoutService().checkoutPro(cartNo);
 			
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/views/checkout/checkoutCart.jsp").forward(request, response);
 			break;
 			
-//		case "p":
-//			Checkout c = new CheckoutService().checkoutPro(proNo,proCount);
-//			request.setAttribute("pro", c);
-//			request.getRequestDispatcher("/views/checkout/checkoutPro.jsp").forward(request,response);
-//			break;
+		case "p":
+			list = new CheckoutService().checkoutPro(proNo,proCount,proPrice);
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/views/checkout/checkoutPro.jsp").forward(request,response);
+			break;
 		};
 		
 		

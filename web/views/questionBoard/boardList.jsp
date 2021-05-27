@@ -61,7 +61,7 @@ List<Board> list=(List<Board>)request.getAttribute("list");
     	<!-- write.jsp로 이동-->
         <input type="button" style="float:right" value="글쓰기" onclick="fn_boardWrite();">
     </div>
-    <script>   
+    <script>
 	const fn_boardWrite=()=>{
 		<% if(loginMember==null){%>
 			alert("로그인이 필요합니다.");
@@ -71,6 +71,9 @@ List<Board> list=(List<Board>)request.getAttribute("list");
 		<% } %>
 
 	}
+		const fn_boardWrite=()=>{
+			location.assign("<%=request.getContextPath()%>/board/boardForm");
+		}
 	</script>
     <!-- 글쓰기 버튼 끝-->
 </body>

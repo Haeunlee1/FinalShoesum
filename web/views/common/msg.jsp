@@ -23,7 +23,7 @@
 		//페이지 닫아주기
 		<%=script!=null?script:""%>
 		//페이지이동하는 로직
-		location.replace("<%=request.getContextPath()%><%=loc%>");
+		location.replace("<%=request.getContextPath()%><%=loc%><%=request.getParameter("type")!=null?"&type="+request.getParameter("type"):""%>");
 	</script>
 </body>
 </html>
