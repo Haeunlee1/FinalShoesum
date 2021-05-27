@@ -156,8 +156,8 @@
 			<%}%>
 		}
 		
+		// recommend_pd Ajax -> bestPd Ajax랑 로직 동일하게 구현, 출력창만 다르게!
 		$(document).ready((e)=>{
-			// recommend_pd Ajax -> bestPd Ajax랑 로직 동일하게 구현, 출력창만 다르게!
 			$.ajax({
 				url:"<%=request.getContextPath() %>/product/recommendPdAjax",
 				success:data=>{

@@ -328,7 +328,7 @@ div#pd_top>p {
     font-weight: bolder;
     line-height: 200px;
 }
-div#pd_top>select {
+form#selectSort select {
     width: 120px;
     height: 30px;
     position: absolute;
