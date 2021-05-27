@@ -52,30 +52,19 @@
 		        <p>구매정보</p>
 		        <p>사이즈</p>
 		        <select name="size" id="size">
-		            <option value="230">230</option>
+		            <option value="230">170</option>
 		            <option value="240">240</option>
-		            <option value="250">250</option>
-		            <option value="260">260</option>
-		            <option value="270">270</option>
-		            <option value="280">280</option>
+		            <option value="250">280</option>
 		        </select>
 		        <p>색상</p>
 		        <select name="color" id="color">
 		            <option value="white">화이트</option>
-		            <option value="beige">베이지</option>
-		            <option value="brown">브라운</option>
-		            <option value="yellow">옐로우</option>
-		            <option value="red">레드</option>
-		            <option value="pink">핑크</option>
-		            <option value="khaki">카키</option>
-		            <option value="navy">네이비</option>
-		            <option value="gray">그레이</option>
 		            <option value="black">블랙</option>
 		        </select>
 		        <p>수량</p>
 		        <div class="count_box">
 		            <button type="button" id="decreaseQuantity">-</button>
-                    <input type="text" name="pop_out" value="1" readonly="readonly" style="text-align:center;">
+                    <input type="text" name="pop_out" id="pop_out" value="1" readonly="readonly" style="text-align:center;">
                     <input type="hidden" name="pd_count" value="">
                     <button type ="button" id="increaseQuantity">+</button>		        
                 </div>
@@ -94,7 +83,7 @@
 							<p class="total_price">￦　<%=df.format(price) %></p>
 						<%} %>
 	        </div>
-		        <button>구매하기</button>
+		        <button onclick="goCheckout()">구매하기</button>
 		        <button>장바구니</button>
 	    </div>
 		<%		}
@@ -141,6 +130,15 @@
 	
 	<script>
 		
+		// 제품상세 결제페이지 이동 
+		const goCheckout = function(){
+			
+			let getProCount = document.getElementById("pop_out").value;
+			console.log(getProCount);
+			
+			location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=loginMember.getMemberNo() %>&proNo=<%=proNo%>&from=p&proCount='+getProCount);
+		}
+	
 		$(document).ready((e)=>{
 			// recommend_pd Ajax -> bestPd Ajax랑 로직 동일하게 구현, 출력창만 다르게!
 			$.ajax({

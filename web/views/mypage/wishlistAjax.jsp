@@ -27,7 +27,11 @@
              
              %>
              <tr class="wish_product">
-                 <td><input type="checkbox" class="chk" name="select_products" value="" title="<%=p.getLikeNo()%>"></td>
+                 <td>
+                 <input type="checkbox" class="chk" id="select_products" name="select_products" value="" title="<%=p.getLikeNo()%>">
+				<!-- input prodcut no 받아오기  -->                 
+                 <input type = "hidden" class="ip_proNo" value=<%=p.getProNo() %>>
+                 </td>
                  <td>
                  	<a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=p.getProNo()%>" >
                  	<img title="<%=p.getProName()%>"alt="제품이미지" src="<%=request.getContextPath()%>/images/product/<%=type %>/<%=p.getImages1()%>" id="product_img" name="product_img">
@@ -45,14 +49,8 @@
                  <td><%=df.format(p.getPrice()+3000)%></td>
                  <td>
                      <ul>
-	                         <%-- <li><input type="button" name="btn_order" title="<%=p.getLikeNo() %>"  value="주문하기" style="background-color : black; color : white"></li> --%>
-	                         <%-- <li><input type="button" name="btn_addCart" title="<%=p.getLikeNo() %>" value="장바구니 담기" style="background-color : #CCCCCC"></li> --%>
-	                         <li><input type="button" name="btn_delete" title="<%=p.getLikeNo() %>" value="삭제" style="background-color : #CCCCCC">
-	                         </li>
-	                         <%-- <form name="movetoCart" action="<%=request.getContextPath()%>/mypage/wishToCart" method="post">
-				             	<input type="hidden" name="likeNo" value="<%=p.getLikeNo() %>">
-				             	<input type="hidden" name="proNo" value="<%=p.getProNo() %>">
-                     		</form>	 --%>
+                         <li><input type="button" name="btn_delete" title="<%=p.getLikeNo() %>" value="삭제" style="background-color : #CCCCCC">
+                         </li>
                      </ul>
                  </td>
              </tr>
@@ -75,8 +73,7 @@
 			선택한 상품을 
             <button class="left-btn checkwishBtn">삭제하기</button>
             <!-- <button class="left-btn" onclick="">장바구니 담기</button> -->			<!-- json이나 form으로 넘겨주기 -->
-            <button class="right-btn allDelBtn" >관심상품 비우기</button>
-            <!-- <button class="right-btn" onclick="" style="background-color : black; color : white">전체 상품 주문</button> -->
+            <button class="right-btn allDelBtn" >전체상품 비우기</button>
         </div>
         <%} %>
      </form>
