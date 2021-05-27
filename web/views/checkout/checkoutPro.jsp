@@ -8,12 +8,21 @@
 	List<Checkout> list = (List<Checkout>)request.getAttribute("list");
 	Member m = (Member)request.getAttribute("member");
 	String checkPro = " ";
+	String checkToProNo = "";
+	String checkToProCount = ""; 
 	int checkPrice = 0;		
+	
 	
 	for (Checkout c : list){
 		
 		checkPro += c.getProName() + " ";
 		checkPrice += (c.getProPrice() * c.getProCount());
+		
+		// 결제 페이지로 넘길 상품 
+		
+		checkToProNo += c.getProNo() + "/";
+		checkToProCount += c.getProCount() + "/";
+		
 	}
 	
 	
@@ -213,7 +222,7 @@
         </table>
     </div>
     <div id="btn_order_sub">
-        <input type="button" value="결제하기" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkoutEnd?totalPrice=<%=checkPrice %>')">
+        <input type="button" value="결제하기" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkoutEnd?totalPrice=<%=checkPrice %>&proNo=<%=checkToProNo %>&proCount=<%=checkToProCount%>&memberNo=<%=m.getMemberNo()%>')">
     </div>
 </section>
 

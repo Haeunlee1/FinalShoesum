@@ -1,23 +1,26 @@
-package com.checkout.controller;
+package com.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.member.model.service.MemberService;
+
 /**
- * Servlet implementation class CheckoutEndServlet
+ * Servlet implementation class InsertOrderedListServlet
  */
-@WebServlet("/checkout/checkoutEnd")
-public class CheckoutEndServlet extends HttpServlet {
+@WebServlet("/mypage/insertOrderedList")
+public class InsertOrderedListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckoutEndServlet() {
+    public InsertOrderedListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,36 +30,25 @@ public class CheckoutEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		String proNo = request.getParameter("proNo");
+		String proCount = request.getParameter("proCount");
 		
+		int result = new MemberService().insertOrder(userNo,proNo,proCount);
 		
-		// 결제 정보 
+		String msg = "";
+		String loc = "";
+		if(result>0) {
+			msg = "구매 성공!";
+		} else {
+			msg = "구매실패";
+		}
 		
-			// 1. 총 가격	
-			int totalPrice;
+		request.setAttribute("msg",msg);
+		request.setAttribute("loc",loc);
 		
-			try {
-				totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
-			} catch(NumberFormatException e) {
-				totalPrice = 0;
-			}
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
-			// 2. 회원번호
-			int userNo = Integer.parseInt(request.getParameter("memberNo"));
-			
-			// 3. 상품번호
-			String proNo = request.getParameter("proNo");
-			
-			
-			// 4. 상품수량 
-			String proCount = request.getParameter("proCount");
-			
-		// 결제 정보 보내기
-		request.setAttribute("price", totalPrice);
-		request.setAttribute("userNo", userNo);
-		request.setAttribute("proNo", proNo);
-		request.setAttribute("proCount", proCount);
-		
-		request.getRequestDispatcher("/views/checkout/checkoutEnd.jsp").forward(request, response);
 	}
 
 	/**
