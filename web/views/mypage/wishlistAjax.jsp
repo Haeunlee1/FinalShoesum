@@ -40,7 +40,7 @@
                  <td>
                      <ul>
                          <li class="product_name"><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=p.getProNo()%>"><%=p.getProName() %></a></li>
-                         <li name="option">[옵션 : <%=p.getColor() %> / <%=p.getSize() %>]</li>
+                         <%-- <li name="option">[옵션 : <%=p.getColor() %> / <%=p.getSize() %>]</li> --%>
                      </ul>
                  </td>
                  <td ><%=df.format(p.getPrice()) %></td>
@@ -49,15 +49,8 @@
                  <td><%=df.format(p.getPrice()+3000)%></td>
                  <td>
                      <ul>
-	                 		<%-- <input type="hidden" name="likeNo" title="<%=p.getLikeNo() %>"> --%>
-	                         <li><input type="button" name="btn_order" title="<%=p.getLikeNo() %>"  value="주문하기" style="background-color : black; color : white" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=memberNo %>&proNo=<%= p.getProNo() %>&from=p&proCount=1');"></li>
-	                         <li><input type="button" name="btn_addCart" title="<%=p.getLikeNo() %>" value="장바구니 담기" style="background-color : #CCCCCC"></li>
-	                         <li><input type="button" name="btn_delete" title="<%=p.getLikeNo() %>" value="삭제" style="background-color : #CCCCCC">
-	                         </li>
-	                         <form name="movetoCart" action="<%=request.getContextPath()%>/mypage/wishToCart" method="post">
-				             	<input type="hidden" name="likeNo" value="<%=p.getLikeNo() %>">
-				             	<input type="hidden" name="proNo" value="<%=p.getProNo() %>">
-                     		</form>	
+                         <li><input type="button" name="btn_delete" title="<%=p.getLikeNo() %>" value="삭제" style="background-color : #CCCCCC">
+                         </li>
                      </ul>
                  </td>
              </tr>
@@ -79,49 +72,12 @@
 		<div id="wish-btn">
 			선택한 상품을 
             <button class="left-btn checkwishBtn">삭제하기</button>
-            <button class="left-btn" onclick="">장바구니 담기</button>			<!-- json이나 form으로 넘겨주기 -->
-            <button class="right-btn allDelBtn" >관심상품 비우기</button>
-            <input type="button" class="right-btn" onclick="goCheckout()" style="background-color : black; color : white" value="전체 상품 주문">
-            <!-- <button class="right-btn" onclick="goCheckout()" style="background-color : black; color : white">전체 상품 주문</button> -->
+            <!-- <button class="left-btn" onclick="">장바구니 담기</button> -->			<!-- json이나 form으로 넘겨주기 -->
+            <button class="right-btn allDelBtn" >전체상품 비우기</button>
         </div>
         <%} %>
      </form>
 <script>
-
-
-	const goCheckout = function(){
-		
-		let getCheck = document.getElementsByClassName('chk');
-		let selProNo = document.getElementsByClassName("ip_proNo");
-		let totalProNo = "";
-		
-		
-		// 체크 여부 분기처리
-		let flag = false;
-		for(i=0;i<getCheck.length;i++){
-			if(getCheck[i].checked == true){
-				flag = true;
-			}
-		}
-		
-		if (flag == false){
-			alert("상품을 선택해주세요");
-		} else {
-			// 구매 실행 
-			for(j=0;j<getCheck.length;j++){
-				if(getCheck[j].checked == true){
-					if(j==0){
-						totalProNo += selProNo[j].value;
-					}
-					totalProNo += " / "+ selProNo[j].value;
-					}
-				}
-					location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=memberNo%>&proNo='+totalProNo+'&from=p&proCount=1');
-				} 
-		}
-	
-
-
 //전체체크
 $("#checkAll").click(e=>{
 	if($("#checkAll").is(":checked")){
@@ -149,26 +105,6 @@ $("input[name=btn_delete]").click(e=>{
 	}
 });
 
-<%-- $("input[name=btn_addCart]").click(e=>{
-	//찜상품 장바구니로 넘기기 / 찜 db에서 삭제하고 장바구니에 추가하기 
-	//console.dir($("li[name=option]").html());
-	
-	$("form[name=movetoCart]").submit();
-	
-	
-	/* console.log($("input[name=btn_addCart]").attr("title")); */
-	const url="<%=request.getContextPath()%>/member/wishToCart?memberNo="+'<%=memberNo%>';
-	$("#movetoCart").attr("action",url);
-	$("#movetoCart").submit();
-	
-	/* let likeNo=$(e.target).attr("title");
-	console.log($(e.target).parent().prev().prev().attr("title"));
-	let p=$(e.target).parent().prev().prev().attr("title"); */
-	/* console.log($("input[type=hidden]").val()); */
-	location.href="<%=request.getContextPath()%>/member/wishToCart?mNo="+'<%=memberNo%>'+"&likeNo="+likeNo+"&p="+p;
-	
-})
- --%>
 //const fn_checkwish_delete=()=>{
 $(".checkwishBtn").click(()=>{
 	//삭제하기 => 테이블 밑 버튼 / checked된 것만 삭제하기
@@ -191,7 +127,7 @@ $(".allDelBtn").click(()=>{
 			allwishArr.push($(this).attr("title"));
 		});
 		console.log(allwishArr);
-		location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+allwishArr);
+		<%-- location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+allwishArr); --%>
 	}
 });
 </script>

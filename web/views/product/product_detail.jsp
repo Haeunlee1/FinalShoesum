@@ -170,7 +170,8 @@
 
         	// 찜버튼 on,off 스크립트
         	$("#heart").click(function(e){
-        		if(<%=loginMember!=null%>){
+        		<%if(loginMember!=null){%>
+        		<%-- if(<%=loginMember!=null%>){ --%>
 	        		var icon=["♡","♥"];
 	        		var heart=$(".heart").val();
 			        		
@@ -178,24 +179,17 @@
 	        			$(".heart").text(icon[1]);
 	        			heart='1';
 		        		alert("관심상품으로 등록되었습니다");
-		        		<%-- location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+&proNo=+'<%=proNo%>'); --%>
+		        		location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>');
 		        		<%-- location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>'); --%>
 	        		}else {
 	        			$(".heart").text(icon[0]);
 	        			heart='0';
 	        		}
 		        	$(".heart").val(heart);
-        		}else{
+		        <%}else {%>
         			alert("로그인 후 관심상품 등록 가능합니다.")			//로긴페이지로 이동할 지 생각해보기
-		        	
+		        <%}%>
 		        	//클릭했을 때 val가 1 => 찜하기
-		        	<%-- if($(e.target).val()==1){
-		        		console.log(location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>'))
-		        		location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>');
-		        		
-		        	} --%>
-        		}
-	        	
         	});
             
             // 마우스 오버시 이미지 변경 스크립트

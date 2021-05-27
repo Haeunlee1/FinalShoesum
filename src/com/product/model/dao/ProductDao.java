@@ -42,9 +42,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -62,7 +59,6 @@ public class ProductDao {
 	}
 	
 	public List<Product> allProduct(Connection conn) {
-		// 전체 상품 가져오기 -> 메인페이지 best product에 랜덤을 5개씩 뜨게하는거
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
 		List<Product> list = new ArrayList();
@@ -76,9 +72,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -96,7 +89,6 @@ public class ProductDao {
 	}
 	
 	public List<Product> recentProduct(Connection conn) {
-		// 메인페이지 new product에 5가지 뜨는거
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
 		List<Product> list = new ArrayList();
@@ -110,9 +102,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -129,23 +118,52 @@ public class ProductDao {
 		return list;
 	}
 	
-	public List<Product> manProduct(Connection conn) {
+	public List<Product> userProduct(Connection conn, String userType) {
+		
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
 		List<Product> list = new ArrayList();
 		Product p = null;
 		
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("manProduct"));
+			pstmt=conn.prepareStatement(prop.getProperty("userProduct"));
+			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				p = new Product();
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
+				p.setImages1(rs.getString("img_src1"));
+				p.setImages2(rs.getString("img_src2"));
+				p.setImages3(rs.getString("img_src3"));
+				p.setImages4(rs.getString("img_src4"));
+				
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<Product> hotProduct(Connection conn) {
+		PreparedStatement pstmt= null;
+		ResultSet rs=null;
+		List<Product> list = new ArrayList();
+		Product p = null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("hotProduct"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p = new Product();
+				p.setProNo(rs.getString("pro_no"));
+				p.setProName(rs.getString("pro_name"));
+				p.setPrice(rs.getInt("pro_price"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -220,9 +238,6 @@ public class ProductDao {
 				p.setProNo(rs.getString("pro_no"));
 				p.setProName(rs.getString("pro_name"));
 				p.setPrice(rs.getInt("pro_price"));
-				p.setSize(rs.getInt("pro_size"));
-				p.setColor(rs.getString("pro_color"));
-				p.setStock(rs.getInt("pro_stock"));
 				p.setImages1(rs.getString("img_src1"));
 				p.setImages2(rs.getString("img_src2"));
 				p.setImages3(rs.getString("img_src3"));
@@ -236,7 +251,6 @@ public class ProductDao {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(list.isEmpty());
 		return list;
 		
 	}

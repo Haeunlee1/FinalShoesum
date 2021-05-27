@@ -38,7 +38,6 @@ public class BoardListServlet extends HttpServlet {
 		List<Board> list = new BoardService().boardList();
 		
 		request.setAttribute("list", list);
-		System.out.println(list.isEmpty());
 		
 		request.getRequestDispatcher("/views/questionBoard/boardList.jsp").forward(request, response);
 		
