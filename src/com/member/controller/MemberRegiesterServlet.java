@@ -26,7 +26,6 @@ public class MemberRegiesterServlet extends HttpServlet {
 		
 		String memberId = request.getParameter("memberId");
 		String memberPw = request.getParameter("memberPw");
-		String memberPwCheck = request.getParameter("memberPwCheck");
 		String memberNm = request.getParameter("memberNm");
 		String memberEmail = request.getParameter("memberEmail");
 		String memberPhone = request.getParameter("phone1") + request.getParameter("phone2") + request.getParameter("phone3");
@@ -34,7 +33,7 @@ public class MemberRegiesterServlet extends HttpServlet {
 		String memberAddressEnd =request.getParameter("memberAddressEnd");
 		String memberPostNo = request.getParameter("memberPostNo");
 
-		Member member = new Member(0, memberId, memberPwCheck, memberNm, memberEmail, memberPhone, memberPostNo, memberAddress, memberAddressEnd);	
+		Member member = new Member(0, memberId, memberPw, memberNm, memberEmail, memberPhone, memberPostNo, memberAddress, memberAddressEnd);	
 		
 		int result=new MemberService().insertMember(member);
 		
