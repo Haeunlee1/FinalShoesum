@@ -5,6 +5,7 @@
 <%
 	String userType=(String)request.getAttribute("userType");
 	List<Product> userProduct=(List<Product>)request.getAttribute("userProduct");
+	System.out.println(userProduct.size());
 	
 	//회계표시
 	DecimalFormat df = new DecimalFormat("#,###,###"); 
@@ -69,36 +70,5 @@
             <div class="pageBar-icon">&gt;</div>
         </div>
 	</section>
-	
-	<script>
-	
-		$(document).ready((e)=>{
-			
-			/* if(category.equals("man")) { */
-				<%-- $.ajax({
-		   			url:"<%=request.getContextPath() %>/product/userProductAjax",
-		   			success:data=>{
-		   				$("#pd_right").html(data);
-		   			}
-		   		}); --%>
-			<%-- }else if(category.equals("woman")) {
-				$.ajax({
-					url:"<%=request.getContextPath() %>/product/womanPdAjax",
-					async: false,
-		   			success:data=>{
-		   				$("#pd_right").html(data);
-		   			}
-		   		});
-			}else {
-				$.ajax({
-					url:"<%=request.getContextPath() %>/product/kidsPdAjax",
-					async: false,
-		   			success:data=>{
-		   				$("#pd_right").html(data);
-		   			}
-			} --%>
-	   	});
-   	
-	</script>
 
 <%@ include file="/views/common/footer.jsp" %>

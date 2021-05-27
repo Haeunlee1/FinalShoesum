@@ -118,23 +118,46 @@ public class ProductDao {
 		return list;
 	}
 	
-<<<<<<< HEAD
 	public List<Product> userProduct(Connection conn, String userType) {
-=======
-	public List<Product> hotProduct(Connection conn) {
->>>>>>> branch 'master' of https://github.com/Haeunlee1/FinalShoesum.git
+		
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
 		List<Product> list = new ArrayList();
 		Product p = null;
 		
 		try {
-<<<<<<< HEAD
 			pstmt=conn.prepareStatement(prop.getProperty("userProduct"));
 			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
-=======
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p = new Product();
+				p.setProNo(rs.getString("pro_no"));
+				p.setProName(rs.getString("pro_name"));
+				p.setPrice(rs.getInt("pro_price"));
+				p.setImages1(rs.getString("img_src1"));
+				p.setImages2(rs.getString("img_src2"));
+				p.setImages3(rs.getString("img_src3"));
+				p.setImages4(rs.getString("img_src4"));
+				
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<Product> hotProduct(Connection conn) {
+		PreparedStatement pstmt= null;
+		ResultSet rs=null;
+		List<Product> list = new ArrayList();
+		Product p = null;
+		
+		try {
 			pstmt=conn.prepareStatement(prop.getProperty("hotProduct"));
->>>>>>> branch 'master' of https://github.com/Haeunlee1/FinalShoesum.git
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				p = new Product();

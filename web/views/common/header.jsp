@@ -28,13 +28,6 @@
    			let type=$(e.target).attr("title");
    			location.assign("<%= request.getContextPath()%>/product/productlist?userType="+type);
    			
-   			<%-- $.ajax ({
-   			url: "<%=request.getContextPath() %>/product/productlist",
-   			data: {"type":"type"},
-   			success: data=>{
-   				
-   			} 
-   			}); --%>
     	});
     });
 </script>
@@ -71,11 +64,7 @@
         </header>
         <nav>
             <ul id="menu_bar">
-<<<<<<< HEAD
                 <li class="userType" title="man">MAN
-=======
-                <li><a href="<%=request.getContextPath() %>/product/productlist" value="man">MAN</a>
->>>>>>> branch 'master' of https://github.com/Haeunlee1/FinalShoesum.git
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
                         <li><a href="">스니커즈</a></li>
@@ -84,11 +73,7 @@
                         <li><a href="">구두</a></li>
                     </ul>
                 </li>
-<<<<<<< HEAD
                 <li class="userType" title="woman">WOMAN
-=======
-                <li><a href="<%=request.getContextPath() %>/product/productlist" value="woman">WOMAN</a>
->>>>>>> branch 'master' of https://github.com/Haeunlee1/FinalShoesum.git
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
                         <li><a href="">스니커즈</a></li>
@@ -97,11 +82,7 @@
                         <li><a href="">구두</a></li>
                     </ul>
                 </li>
-<<<<<<< HEAD
                 <li class="userType" title="kids">KIDS
-=======
-                <li><a href="<%=request.getContextPath() %>/product/productlist" value="kids">KIDS</a>
->>>>>>> branch 'master' of https://github.com/Haeunlee1/FinalShoesum.git
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
                         <li><a href="">스니커즈</a></li>
