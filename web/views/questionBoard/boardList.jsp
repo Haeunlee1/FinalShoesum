@@ -46,7 +46,7 @@ List<Board> list=(List<Board>)request.getAttribute("list");
             <tr>
                 <td class="td"><%=b.getQabNo() %></td>
                 <td class="td"><%=b.getQabTitle() %></td>
-                <td class="td"><%=b.getQabState() %></td>
+                <td class="td"><%=b.getCommentNo()!=null?"답변완료":"미답변" %></td>
                 <td class="td"><%=b.getQabWriter() %></td>
                 <td class="td"><%=b.getQabDate() %></td>
             </tr>
@@ -62,18 +62,15 @@ List<Board> list=(List<Board>)request.getAttribute("list");
         <input type="button" style="float:right" value="글쓰기" onclick="fn_boardWrite();">
     </div>
     <script>
-	const fn_boardWrite=()=>{
-		<% if(loginMember==null){%>
-			alert("로그인이 필요합니다.");
-			location.assign("<%=request.getContextPath()%>/views/login/login.jsp");
-		<% }else{ %>
-			location.assign("<%=request.getContextPath()%>/board/boardForm");
-		<% } %>
-
-	}
 		const fn_boardWrite=()=>{
-			location.assign("<%=request.getContextPath()%>/board/boardForm");
+			<% if(loginMember==null){%>
+				alert("로그인이 필요합니다.");
+				location.assign("<%=request.getContextPath()%>/views/login/login.jsp");
+			<% }else{ %>
+				location.assign("<%=request.getContextPath()%>/board/boardForm");
+			<% } %>
 		}
+
 	</script>
     <!-- 글쓰기 버튼 끝-->
 </body>

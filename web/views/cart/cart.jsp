@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file =  "/views/common/header.jsp" %>
-<%@ page import = "com.cart.model.vo.Cart,java.util.List" %>
+<%@ page import = "com.cart.model.vo.Cart,java.util.List,java.text.DecimalFormat" %>
 
 <%
 	
 	List<Cart> list = (List<Cart>)request.getAttribute("list");
-
+	DecimalFormat df = new DecimalFormat("#,###,###");
+	
 %>
 
 <section class="cart_title" id="cart_title">
@@ -53,7 +54,7 @@
                     </ul>
 
                 </td>
-                <td><%= c.getProPrice() %></td>
+                <td><%= df.format(c.getProPrice()) %></td>
                 <td><%= c.getCartProCount() %></td>
                 <td>무료</td>
                 <td class="cart_total"><%= (c.getProPrice() * c.getCartProCount()) %></td>
@@ -94,7 +95,6 @@
 
 	<script>
 	
-		
 	
 		// 선택된 상품 전부 주문하기 버튼 함수 
 		 
@@ -132,9 +132,11 @@
             if (selectAll.checked==true){
 
                 let calCheck = document.getElementsByClassName("select_products");
+                
                 for(i=0;i<calCheck.length;i++){
                     calCheck[i].checked = true;
                 }
+                
                 calPrice();
                 selectAll.checked = false;
 

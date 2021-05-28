@@ -41,7 +41,7 @@ public class CartPutInServlet extends HttpServlet {
 		String loc = null;
 		if(result > 0) {
 		msg = "장바구니에 넣기 성공";
-		loc = "";
+		loc = "/product/productDetail?proNo="+proNo;
 		} else {
 		msg = "장바구니에 넣기 실패";
 		loc = "";

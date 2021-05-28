@@ -45,7 +45,6 @@ public class BoardDao {
 				b.setQabContent(rs.getString("qab_content"));
 				b.setQabDate(rs.getDate("qab_date"));
 				b.setQabPw(rs.getInt("qab_pw"));
-				b.setQabState(rs.getInt("qab_state"));
 				list.add(b);
 			}
 		}catch(SQLException e) {
@@ -72,7 +71,7 @@ public class BoardDao {
 				b.setQabTitle(result.getString("QAB_TITLE"));
 				b.setQabWriter(result.getString("QAB_WRITER"));
 				b.setQabDate(result.getDate("QAB_DATE"));
-				b.setQabState(result.getInt("QAB_STATE"));
+				b.setCommentNo(result.getString("comment_number"));
 				list.add(b);
 			}
 		} catch(SQLException e) {
@@ -86,23 +85,22 @@ public class BoardDao {
 	}
 
 	/* 글쓰기 */
-	public int insertBoard(Connection conn, Board b) {
+	public int insertBoard(Connection conn, Board b, int memberNo) {
 		PreparedStatement pstmt = null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertBoard"));
 			pstmt.setString(1,b.getQabTitle());
-			pstmt.setString(2, b.getQabContent());
-			pstmt.setString(3, b.getQabWriter());
-			pstmt.setInt(4,b.getQabPw());
+			pstmt.setString(2, b.getQabWriter());
+			pstmt.setInt(3,b.getQabPw());
+			pstmt.setString(4, b.getQabContent());
+			pstmt.setInt(5, memberNo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}return result;
-		
-		
 	}
 
 }

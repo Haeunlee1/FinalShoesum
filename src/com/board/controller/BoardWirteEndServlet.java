@@ -31,16 +31,13 @@ public class BoardWirteEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Board b = new Board();
-		b.setQabTitle(request.getParameter("qabTitle"));
-		b.setQabContent(request.getParameter("qabContent"));
-		b.setQabWriter(request.getParameter("qabWriter"));
+		b.setQabTitle(request.getParameter("qab_cate"));
+		b.setQabContent(request.getParameter("qab_content"));
+		b.setQabWriter(request.getParameter("memberId"));
 		b.setQabPw(Integer.parseInt(request.getParameter("qabPw")));
 		
-		Integer.parseInt(request.getParameter("memberNo"));
-		
-		/* member라는 변수에 담아놓은뒤에 쓰기위해서 선언 */
-		int member = Integer.parseInt(request.getParameter("memberNo"));
-		int result = new BoardService().insertBoard(b);
+		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
+		int result = new BoardService().insertBoard(b, memberNo);
 		
 		String msg="";
 		String loc="";
