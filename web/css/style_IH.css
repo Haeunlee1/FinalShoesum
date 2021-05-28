@@ -217,52 +217,48 @@ div#write_content>#qab_content{
 /* 상품문의 css 끝 */
 
 /* 자주 묻는 질문 css 시작 */
-#FAQ_board{
-    width: auto;
-    height: 200px;
-    text-align: center;
-    
+
+/* FAQ Board page section css - 진경수정 */
+#FAQ_container {
+    width: 900px;
+    margin: auto;
+    height: auto;
 }
-.FAQ_board_title{
-	font-family: 'Noto Sans KR', sans-serif;
-    margin:0;
-    font-size:30px;
+#FAQ_container p:first-child {
+    font-size: 35px;
     line-height: 200px;
 }
-#FAQ_table_container{
-    width: 1000px;
-    height: auto;
-    margin-top: 0%;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-#FAQ_table{
-    width: 1000px;
+table#FAQ_table {
+    width: 900px;
     height: auto;
     border-collapse: collapse;
 }
-.td_title{
-    width: 10px;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    text-align: center;
+table#FAQ_table thead th {
+    border-top: 2px solid black;
+    border-bottom: 3px double black;
+    font-size: 18px;
     padding: 15px;
-    font-weight: bold;
-    border-left: none;
-    border-right: none;
 }
-
-.td_content{
-    border-bottom: 1px solid black;
-    padding: 15px;
-    text-align: left;
-    font-size: 16px;
-    font-weight: bold;
-    border-left: none;
-    border-right: none;
-
+table#FAQ_table thead th:first-child {
+    width: 15%;
 }
+table#FAQ_table tbody td {
+    border-bottom: 1px solid rgb(211, 199, 199);
+    font-size: 15px;
+}
+table#FAQ_table tr>td:first-child {
+    width: 15%;
+}
+table#FAQ_table li {
+    padding: 20px;
+}
+table#FAQ_table .FAQ_answer {
+    display: none;
+}
+/* FAQ Board page section css - 진경수정 */
+
+
+
 #FAQ_bottom_container{
     width: 1000px;
     height: 30px;

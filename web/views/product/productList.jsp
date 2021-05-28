@@ -27,9 +27,7 @@
 	            <span class="pd_sort">카테고리</span>
 	            <ul>
 	                <li><input type="checkbox">　　운동화</li>
-	                <li><input type="checkbox">　　스니커즈</li>
 	                <li><input type="checkbox">　　샌들</li>
-	                <li><input type="checkbox">　　부츠</li>
 	                <li><input type="checkbox">　　구두</li>
 	            </ul>
 	        </div>
