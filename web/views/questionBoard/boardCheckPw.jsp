@@ -22,16 +22,32 @@
             <form class="form"action="">
                 <div id="pw_bottom_box">
                      &gt; 비밀번호 
-                     <input type="password" maxlength="4" placeholder="4자리 숫자를 입력하세요." id="input_pw">
+                     <input type="password" maxlength="4" placeholder="4자리 숫자를 입력하세요." id="input_pw" name="input_pw">
                 </div>
                 <div id="pw_bottom_btn">
-                    <input type="button" value="목록으로" >
-                    <input type="button" value="등록" class="password_btn">
+                    <input type="button" value="목록으로" onclick="fn_backToList();">
+                    <input type="button" value="확인" class="password_btn">
                 </div>
             </form> 
         </div>
     </div>
 </section>
+
+<script>
+	const fn_backToList=()=>{
+		location.assign('<%=request.getContextPath()%>/board/boardList');
+	}
+	
+	//비밀번호 숫자만 입력확인
+	$("#input_pw").blur((e)=>{
+		const pw=$(e.target).val();
+		const reg=/^[0-9]{4}/;
+		if(!reg.test(pw)){
+			alert("비밀번호는 4자리 숫자로 입력해주세요.");
+		}
+	})
+</script>
+
 </body>
 <%@ include file="/views/common/footer.jsp"%>
 </html>

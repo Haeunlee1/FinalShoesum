@@ -47,7 +47,7 @@
     	//비밀번호 숫자만 입력확인
     	$(".password_table").blur((e)=>{
     		const pw=$(e.target).val();
-    		const reg=/^[0-9]/g;
+    		const reg=/^[0-9]{4}/;
     		if(!reg.test(pw)){
     			alert("비밀번호는 4자리 숫자로 입력해주세요.");
     		}
