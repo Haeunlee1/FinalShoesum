@@ -68,6 +68,7 @@
 section#board_write{
     margin:auto;
     width:1000px;
+
 }
 section#board_write>div{
 	margin-bottom:10px;
@@ -133,86 +134,80 @@ div#write_content>#qab_content{
 /* 글쓰기 css 끝 */
 
 /* 상품문의 css 시작 */
-
-#write_answer_container{
-    margin-top: 30px;
-    width: 1000px;
-    height: 30px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    border-bottom: 1px solid black;
-}
-#write_answer_container>span>p{
-    font-size: 20px;
-    font-weight: bold;
-    float: left;
+section#boardview_box{
+    width:1000px;
+    text-align:left;
 }
 
-    /* 상품문의 상단 css */
-#write_answer_title_container{
-	margin-top: 20px;
-    width: 1000px;
-    height: 80px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    border-bottom: 1px solid gray;
-	display:inline-block;
-
+div#view_title{
+    border-bottom:1px black solid;
+    font-size:25px;
+    text-align:inherit;
 }
-
-    /* 상품문의 제목, 내용 css */
-#write_content_container{
-	margin-top:15px;
-	margin-bottom:15px;
-	border-bottom: 1px solid gray;
-	display:inline-block;
-    width: 1000px;
-    height: 300px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+div#view_content_title{
+	text-align:inherit
 }
-
-#write_comment_container{
-    width: 1000px; 
-    height: auto;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+div#view_title>p{
+    margin-bottom:10px;
 }
-#content{
-    width: 1000px;
+div#view_content_title p{
+    border-bottom:1px #EAEAEA solid;
     height: 40px;
 }
-
-    /* 댓글등록, 댓글창, 목록버튼, 등록버튼 css*/
-#write_comment{
-    width: 1000px;
-    height: 60px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+div#view_content_title p:nth-child(3){
+    border-bottom:1px black solid;
 }
-#write_answer_comment{
-    width: 992px;
-    height: 60px;
+div#view_content_box{
+    height:400px;
+    border-bottom:1px black solid;
+    text-align:inherit;
 }
-.write_anwser_button{
-    width: 80px;
-    height: 30px;
-    border-radius: 5px;
-    margin-top: 5px;
-    margin-left: 5px;
-    float: right;
+div#comment_write_con{
+    border-bottom:1px black solid;
+    height:120px;
+    text-align:inherit;
 }
-.write_anwser_button_back{
-    width: 80px;
-    height: 30px;
-    border-radius: 5px;
-    margin-top: 5px;
-    float: right;
+div#comment_write_box textarea{
+    width:850px;
+    float:left;
+}
+div#comment_write_con>p, div#comment_view_con>p, div#comment_view_box>p{
+    font-weight: bolder;
+}
+button#comment_btn_insert{
+    background-color: black;
+    color:white;
+    border-radius : 7%;
+    width:90px;
+    font-size:16px;
+    height: 65px;
+    float:right;
+}
+div#comment_view_con{
+    border-bottom: 1px black solid;
+    text-align:inherit
+}
+#comment_view_box ul{
+    margin-top:0;
+}
+#comment_view_box>ul li{
+    display: inline-block;
+    margin-top: 10px;
+}
+.f_right{
+    float:right;
+}
+div#comment_btn{
+    clear:both;
+}
+.backtoList_btn{
+    width:100px;
+    height:40px;
+    border : none;
+    border-radius : 7%;
+    margin: 10px 5px ;
+    font-size:16px;
+    cursor: pointer;
 }
 /* 상품문의 css 끝 */
 
