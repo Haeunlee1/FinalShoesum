@@ -14,11 +14,13 @@
 	<section>
 	    <div id="pd_top">
 	        <p><%=userType %></p>
-	        <select name="" id="">
-	            <option value="">최신순</option>
-	            <option value="">높은가격순</option>
-	            <option value="">낮은가격순</option>
-	        </select>
+	        <form id="selectSort" action="">
+		        <select id="pd_sort">
+		            <option value="recent_sort">최신순</option>
+		            <option value="high_sort">높은가격순</option>
+		            <option value="low_sort">낮은가격순</option>
+		        </select>
+	        </form>
 	    </div>
 	    <div id="pd_left">
 	        <div class="category">
@@ -62,8 +64,10 @@
 	        <%} %>
 	        </ul>
 	    </div>
+	    
 	    <div id="pageBar">
 	    	<%=pageBar %>
+	    	<!-- 기본 페이지 바 html -->
             <!-- <div class="pageBar-icon">&lt;</div>
             <div class="pageBar-icon"><a href="">1</a></div>
             <div class="pageBar-icon"><a href="">2</a></div>
@@ -72,5 +76,22 @@
             <div class="pageBar-icon">&gt;</div> -->
         </div>
 	</section>
+	
+	
+	<script>
+		$("#selectSort").change((e)=>{
+			
+			$.ajax({
+				url:"<%=request.getContextPath() %>/product/productlistAjax",
+				data:{
+					"userType":"<%=userType.toLowerCase() %>",
+					"sort":$(e.target).val()
+					},
+				success:data=>{
+					$("#pd_right").html(data);
+				}
+			});
+		});
+	</script>
 
 <%@ include file="/views/common/footer.jsp" %>

@@ -47,14 +47,6 @@ public class ProductService {
 		return list;
 	}
 
-	public List<Product> hotProduct() {
-		// 랜덤으로 3가지 상품 가져오기 -> 메인 hotdeal 사용
-		Connection conn=getConnection();
-		List<Product> list = dao.hotProduct(conn);
-		close(conn);
-		return list;
-	}
-
 	public boolean selectWish(int memberNo, String proNo) {
 		//상품디테일 눌렀을 때 그 유저의 찜한 상품인지 아닌지 확인하는 로직
 		Connection conn=getConnection();
@@ -116,5 +108,12 @@ public class ProductService {
 		int result = dao.selectProductCount(conn, userType);
 		close(conn);
 		return result;
+	}
+	
+	public List<Product> sortProduct(String sort, String userType, int cPage, int numPerpage) {
+		Connection conn = getConnection();
+		List<Product> list = dao.sortProduct(conn,sort,userType,cPage,numPerpage);
+		close(conn);
+		return list;
 	}
 }
