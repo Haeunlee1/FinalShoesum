@@ -23,7 +23,7 @@ List <Faq> list=(List<Faq>)request.getAttribute("list");
 	            	<td><%=q.getFaqNo() %></td>
 	                <td>
 	                    <ul>
-	                        <li class="FAQ_question">Q. <%=q.getFaqTitle() %></li>
+	                        <li class="FAQ_question menu_list">Q. <%=q.getFaqTitle() %></li>
 	                        <ul class="FAQ_answer">
 	                            <li style="border-top: 1px solid lightgray;background:#eaeaea;font-weight: bold;">
 	                            	A. <%=q.getFaqContent() %>

@@ -93,7 +93,7 @@
                      </ul>
                  </td>
                  <td><%=orderList.get(i).getAmount() %></td>
-                 <td><%=df.format(orderList.get(i).getProPrice()) %></td>
+                 <td><%=df.format(orderList.get(i).getProPrice()*orderList.get(i).getAmount()) %></td>
                  <td><%=orderList.get(i).getState().equals("on")?"배송완료":"배송준비중" %></td>
                  <td>-</td>
              </tr>
@@ -319,7 +319,7 @@ $(function(){
 
 const fn_goshopping=()=>{
 	//찜한상품 없을 때 쇼핑하러가기 / 메인이 아닌 상품목록페이지로 이동하기
-	location.assign("<%= request.getContextPath()%>/product/productlist");
+	location.assign("<%= request.getContextPath()%>");
 }
 
 $(function(){
