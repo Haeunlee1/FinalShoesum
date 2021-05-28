@@ -214,35 +214,59 @@ div#comment_btn{
 /* 자주 묻는 질문 css 시작 */
 
 /* FAQ Board page section css - 진경수정 */
-#FAQ_container {
+/* Board_question page section css - FAQ랑 통일되는 부분 있으니까 css 수정 시 유의할 것 */
+#FAQ_container,#board_container {
     width: 900px;
     margin: auto;
     height: auto;
 }
-#FAQ_container p:first-child {
+#FAQ_container p:first-child,
+#board_container p:first-child {
     font-size: 35px;
     line-height: 200px;
 }
-table#FAQ_table {
+table#FAQ_table, #board_table {
     width: 900px;
     height: auto;
     border-collapse: collapse;
 }
-table#FAQ_table thead th {
+table#FAQ_table thead th,
+table#board_table thead th {
     border-top: 2px solid black;
     border-bottom: 3px double black;
     font-size: 18px;
     padding: 15px;
 }
-table#FAQ_table thead th:first-child {
+table#board_table tbody th {
+    padding: 15px;
+}
+table#FAQ_table thead th:first-child,
+table#FAQ_table tr>td:first-child,
+table#board_table thead th:first-child,
+table#board_table tr>td:first-child {
+    width: 10%;
+}
+table#board_table thead th:nth-child(2),
+table#board_table tr>td:nth-child(2)
+ {
+    width: 55%;
+}
+table#board_table thead th:nth-child(3),
+table#board_table tr>td:nth-child(3) {
+    width: 10%;
+}
+table#board_table thead th:nth-child(4),
+table#board_table tr>td:nth-child(4) {
+    width: 10%;
+}
+table#board_table thead th:last-child,
+table#board_table tr>td:last-child {
     width: 15%;
 }
-table#FAQ_table tbody td {
+table#FAQ_table tbody td,
+table#board_table tbody td {
     border-bottom: 1px solid rgb(211, 199, 199);
     font-size: 15px;
-}
-table#FAQ_table tr>td:first-child {
-    width: 15%;
 }
 table#FAQ_table li {
     padding: 20px;
@@ -250,10 +274,6 @@ table#FAQ_table li {
 table#FAQ_table .FAQ_answer {
     display: none;
 }
-/* FAQ Board page section css - 진경수정 */
-
-
-
 #FAQ_bottom_container{
     width: 1000px;
     height: 30px;
@@ -263,6 +283,8 @@ table#FAQ_table .FAQ_answer {
     left: 50%;
     transform: translateX(-50%);
 }
+
+
 /* 자주 묻는 질문 css 끝 */
 
 /* 비밀번호 입력창 css 시작 */
