@@ -31,13 +31,13 @@ public class BoardWirteEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Board b = new Board();
-		b.setQabTitle(request.getParameter("qab_title"));
+		b.setQabTitle(request.getParameter("qab_cate"));
 		b.setQabContent(request.getParameter("qab_content"));
-		b.setQabWriter(request.getParameter("qabWriter"));
+		b.setQabWriter(request.getParameter("memberId"));
 		b.setQabPw(Integer.parseInt(request.getParameter("qabPw")));
-//		memberNo
-//		memberId
-		int result = new BoardService().insertBoard(b);
+		
+		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
+		int result = new BoardService().insertBoard(b, memberNo);
 		
 		String msg="";
 		String loc="";

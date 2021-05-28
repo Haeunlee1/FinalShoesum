@@ -86,23 +86,22 @@ public class BoardDao {
 	}
 
 	/* 글쓰기 */
-	public int insertBoard(Connection conn, Board b) {
+	public int insertBoard(Connection conn, Board b, int memberNo) {
 		PreparedStatement pstmt = null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertBoard"));
 			pstmt.setString(1,b.getQabTitle());
-			pstmt.setString(2, b.getQabContent());
-			pstmt.setString(3, b.getQabWriter());
-			pstmt.setInt(4,b.getQabPw());
+			pstmt.setString(2, b.getQabWriter());
+			pstmt.setInt(3,b.getQabPw());
+			pstmt.setString(4, b.getQabContent());
+			pstmt.setInt(5, memberNo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}return result;
-		
-		
 	}
 
 }

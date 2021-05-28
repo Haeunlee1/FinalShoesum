@@ -31,10 +31,10 @@ public class BoardService {
 		
 	}
 
-	public int insertBoard(Board b) {
-		
+	public int insertBoard(Board b, int memberNo) {
+		//글작성
 		Connection conn=getConnection();
-		int result=dao.insertBoard(conn, b);
+		int result=dao.insertBoard(conn, b, memberNo);
 		
 		if(result>0) commit(conn);
 		else rollback(conn);

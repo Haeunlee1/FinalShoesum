@@ -68,6 +68,8 @@
 section#board_write{
     margin:auto;
     width:1000px;
+    background-color:#FAFAFA;
+
 }
 section#board_write>div{
 	margin-bottom:10px;
@@ -77,9 +79,11 @@ section#board_write>div{
     border-bottom: 1px lightgray solid;
 }
 #write_top_container>p{
+	margin-top:50px;
     font-size: 20px;
     font-weight: bold;
     text-align:left;
+    margin-bottom:10px;
 }
 /* 제목, 내용 css */
 #write_container, div#write_content{
@@ -102,7 +106,7 @@ div#write_content>#qab_content{
    border-bottom:1px lightgray solid;
    text-align: center;
    line-height: 45px;
-   
+   margin-bottom:10px;
 }
 #write_bottom_container>ul li{
     float:left;
