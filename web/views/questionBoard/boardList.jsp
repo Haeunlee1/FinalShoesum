@@ -45,7 +45,9 @@ List<Board> list=(List<Board>)request.getAttribute("list");
             <% for (Board b : list){ %>
             <tr>
                 <td class="td"><%=b.getQabNo() %></td>
-                <td class="td"><%=b.getQabTitle() %></td>
+                <td class="td">
+                	<a href="<%=request.getContextPath()%>/board/checkPw.do"><%=b.getQabTitle() %></a>
+                </td>
                 <td class="td"><%=b.getCommentNo()!=null?"답변완료":"미답변" %></td>
                 <td class="td"><%=b.getQabWriter() %></td>
                 <td class="td"><%=b.getQabDate() %></td>
