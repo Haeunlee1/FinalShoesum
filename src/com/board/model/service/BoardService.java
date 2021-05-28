@@ -2,6 +2,8 @@ package com.board.model.service;
 
 import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.close;
+import static com.common.JDBCTemplate.commit;
+import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -26,6 +28,19 @@ public class BoardService {
 		List<Board> list = dao.boardList(conn);
 		close(conn);
 		return list;
+		
+	}
+
+	public int insertBoard(Board b) {
+		
+		Connection conn=getConnection();
+		int result=dao.insertBoard(conn, b);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
 		
 	}
 }

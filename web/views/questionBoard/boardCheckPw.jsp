@@ -18,7 +18,7 @@
                 <p class="p_content">이 글은 비밀글입니다. 비밀번호를 입력해주세요.</p>
             </div>
         <div id="search_form">
-            <form class="form"action="" method=post>
+            <form class="form"action="">
                 <input type="password" maxlength="4" placeholder="4개의 숫자를 입력하세요.">
                 <input type="button" value="목록" class="password_btn">
                 <input type="button" value="등록" class="password_btn">

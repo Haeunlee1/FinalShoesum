@@ -4,7 +4,7 @@ section#HE_section{
 }
 /*마이페이지 상단 메뉴*/
 ul#mypage_nav{
-    margin:100px 0 60px 0;
+    margin:50px 0 60px 0;
     height:40px;
 }
 ul#mypage_nav li{
@@ -31,6 +31,16 @@ ul#mypage_nav li:hover{
     background-color: rgb(214, 214, 214);
     cursor:pointer;
 }
+p#mypage_title{
+	height: 200px;
+	color:lightgray;
+	font-size:40px;
+	text-align: center;
+	line-height: 200px;
+	color:black;
+	font-weight:border;
+}
+
 /*처음엔 주문내역 화면만 보이게 하기*/
 #HE_wishlist,#HE_myboard,#HE_profile{
 	display:none;
@@ -64,7 +74,7 @@ ul.ordered_comment{
     clear: both;
     color:rgb(147, 147, 147);
     padding-top:20px;
-    font-size: 12px;
+    font-size: 14px;
 }
 div.mypage_content>p{
     clear: both;
@@ -84,7 +94,7 @@ table#tbl-ordered{
     border-top : 2px solid gray;
     border-bottom : 2px solid gray;
     text-align : center;
-    font-size : 13px;
+    font-size : 14px;
 }
 .head_tr {
     height : 40px;
@@ -109,9 +119,9 @@ table#tbl-ordered tr{
     border-bottom:1px black solid;
     /* height:120px; */
 }
-tbody.ordered_tbody>tr:first-child>td:first-child{
+/* tbody.ordered_tbody>tr:first-child>td:first-child{
     border-right: 1px black solid;
-}
+} */
 td.display_none{
     display:none;
 }

@@ -35,7 +35,6 @@ public class WIshListServlet extends HttpServlet {
 		//찜한 상품 목록 가져오기
 		//아이디가 아닌 넘버로 가져오기
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
-		
 		//Product객체로 가져오기
 		List<Product> list = new ProductService().allWishes(memberNo);
 		request.setAttribute("wishlist", list);
