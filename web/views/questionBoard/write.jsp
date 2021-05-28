@@ -2,13 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>글쓰기, 슈썸 Shoesum</title>
-</head>
-<body>
 	 <section id="board_write">
         <div id="write_top_container"> 
             <p>문의하기</p>
@@ -59,6 +52,4 @@
     	}
     		
     </script>
-</body>
 <%@ include file="/views/common/footer.jsp"%>
-</html>
