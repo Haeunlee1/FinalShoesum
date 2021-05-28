@@ -68,27 +68,21 @@
                 <li class="userType" title="man">MAN
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
-                        <li><a href="">스니커즈</a></li>
                         <li><a href="">샌들</a></li>
-                        <li><a href="">부츠</a></li>
                         <li><a href="">구두</a></li>
                     </ul>
                 </li>
                 <li class="userType" title="woman">WOMAN
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
-                        <li><a href="">스니커즈</a></li>
                         <li><a href="">샌들</a></li>
-                        <li><a href="">부츠</a></li>
                         <li><a href="">구두</a></li>
                     </ul>
                 </li>
                 <li class="userType" title="kids">KIDS
                     <ul class="menu_sub">
                         <li><a href="">운동화</a></li>
-                        <li><a href="">스니커즈</a></li>
                         <li><a href="">샌들</a></li>
-                        <li><a href="">부츠</a></li>
                         <li><a href="">구두</a></li>
                     </ul>
                 </li>

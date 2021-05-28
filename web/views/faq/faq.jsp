@@ -6,41 +6,47 @@
 <%
 List <Faq> list=(List<Faq>)request.getAttribute("list");
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>자주 묻는 질문, 슈썸 Shoesum</title>
-</head>
-<body>
-<div id="FAQ_board">
-        <p class="FAQ_board_title">자주 묻는 질문</p>
+
+	<section>
+		<div id="FAQ_container">
+	        <p>자주묻는질문</p>
+	        <table id="FAQ_table">
+		        <thead>
+		            <tr>
+		                <th>번호</th>
+		                <th>제목</th>
+		            </tr>
+		        </thead>
+	            <tbody>
+	            <%for (Faq q : list){ %>
+	            <tr>
+	            	<td><%=q.getFaqNo() %></td>
+	                <td>
+	                    <ul>
+	                        <li class="FAQ_question">Q. <%=q.getFaqTitle() %></li>
+	                        <ul class="FAQ_answer">
+	                            <li style="border-top: 1px solid lightgray;background:#eaeaea;font-weight: bold;">
+	                            	A. <%=q.getFaqContent() %>
+	                            </li>
+	                        </ul>
+	                    </ul>
+	                </td>
+	            </tr>
+	            <%} %>
+	            </tbody>
+	        </table>
+	    </div>
+	</section>
+    
+    <!-- table_container 끝-->
+    <div id="FAQ_bottom_container">
+        <form style="text-align: center;">
+            <input type="text" placeholder="찾고자 하는 내용을 적으세요."><input type="button" value="검색">
+        </form>
     </div>
-    <!-- table_container 시작-->
-    <div id=FAQ_table_container>
-        <table id="FAQ_table">
-            <tr>
-                <th class="td_title">번호</th>
-                <th class="td_title">제목</th>
-            </tr>
-            <%for (Faq q : list){ %>
-            <tr>
-                <td class="menu" style="text-align: center;"><%=q.getFaqNo() %></td>
-                <td class="menu">
-                    <ul class>
-                        <li class="menu_list"><%=q.getFaqTitle() %></li>
-                            <ul class="hide">
-                                <li class="FAQ_list">Q. <%=q.getFaqTitle() %></li>
-                                <li class="FAQ_list2">A. <%=q.getFaqContent() %></li>
-                            </ul>
-                    </ul>
-                </td>
-            </tr>
-            <%} %>
-       
-        </table>
-    </div>
-     <script>
+    
+    
+    <script>
      
         $(document).ready(function(){
         	
@@ -55,13 +61,9 @@ List <Faq> list=(List<Faq>)request.getAttribute("list");
             });
         });
     </script>
-    <!-- table_container 끝-->
-    <div id="FAQ_bottom_container">
-        <form style="text-align: center;">
-            <input type="text" placeholder="찾고자 하는 내용을 적으세요."><input type="button" value="검색">
-        </form>
-    </div>
-</body>
-</body>
+
+    
+    
+
 <%@ include file="/views/common/footer.jsp"%>
 </html>
