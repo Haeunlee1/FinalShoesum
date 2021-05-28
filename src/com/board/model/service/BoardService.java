@@ -41,6 +41,13 @@ public class BoardService {
 		
 		close(conn);
 		return result;
-		
+	}
+	
+	public Board selectBoard(int boardNo, int qabPw) {
+		//비번 맞는 글 찾아오기
+		Connection conn= getConnection();
+		Board b = dao.selectBoard(conn, boardNo,qabPw);
+		close(conn);
+		return b;
 	}
 }

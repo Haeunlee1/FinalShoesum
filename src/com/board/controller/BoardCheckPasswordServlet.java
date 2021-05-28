@@ -28,6 +28,8 @@ public class BoardCheckPasswordServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//게시판 상세보기 전 비번체크 화면이동하는 서블릿
+		int boardNo=Integer.parseInt(request.getParameter("boardNo"));
+		request.setAttribute("boardNo", boardNo);
 		request.getRequestDispatcher("/views/questionBoard/boardCheckPw.jsp").forward(request, response);
 	
 	

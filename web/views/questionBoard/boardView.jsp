@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<%@page import="com.board.model.vo.*" %>
+<%
+	Board b = (Board)request.getAttribute("board");
+%>
 <body>
 	<!--top_container 시작-->
     <div id="write_answer_container">

@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="/views/common/header.jsp"%>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style_IH.css" type="text/css">
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>비밀번호 입력, 슈썸 ShoeSum</title>
-</head>
-<body>
+
 <section id="board_pw_check">
     <div id="password_container">
         <div id="pw_title_box">
@@ -19,15 +12,21 @@
             <span>관리자는 확인버튼만 누르면 됩니다.</span>
         </div>
         <div id="search_form">
-            <form class="form"action="">
+            <form class="form" action="<%=request.getContextPath() %>/board/boardView.do" >
                 <div id="pw_bottom_box">
                      &gt; 비밀번호 
-                     <input type="password" maxlength="4" placeholder="4자리 숫자를 입력하세요." id="input_pw" name="input_pw">
+                    <%if(loginMember!=null) {%>
+                     <input type="password" maxlength="4" placeholder="4자리 숫자를 입력하세요." id="input_pw" name="input_pw" <%=loginMember.getMemberId().equals("admin")?"": "required" %>>
+                	<input type="hidden" name="admin_check" value="admin">
+                	<%}else {%>
+                	<input type="password" maxlength="4" placeholder="4자리 숫자를 입력하세요." id="input_pw" name="input_pw" required>
+                	<%} %>
                 </div>
                 <div id="pw_bottom_btn">
                     <input type="button" value="목록으로" onclick="fn_backToList();">
-                    <input type="button" value="확인" class="password_btn">
+                    <input type="submit" value="확인" class="password_btn">
                 </div>
+                <input type="hidden" name="boardNo" value="<%=request.getAttribute("boardNo") %>">
             </form> 
         </div>
     </div>
@@ -46,8 +45,6 @@
 			alert("비밀번호는 4자리 숫자로 입력해주세요.");
 		}
 	})
-</script>
 
-</body>
+</script>
 <%@ include file="/views/common/footer.jsp"%>
-</html>
