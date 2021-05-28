@@ -310,7 +310,7 @@ div#pw_bottom_btn input {
     border-radius : 7%;
     margin: 10px 5px ;
     cursor: pointer;
-    margin-left:30px;
+    margin: 0 30px 0 30px;
 
 }
 input.password_btn{
