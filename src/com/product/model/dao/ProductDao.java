@@ -118,8 +118,8 @@ public class ProductDao {
 		return list;
 	}
 	
-	public List<Product> userProduct(Connection conn, String userType) {
-		
+	public List<Product> userProduct(Connection conn, String userType, int cPage, int numPerpage) {
+		// userType에 따른 상품가져오기 -> man, woman, kidss
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
 		List<Product> list = new ArrayList();
@@ -128,36 +128,8 @@ public class ProductDao {
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("userProduct"));
 			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				p = new Product();
-				p.setProNo(rs.getString("pro_no"));
-				p.setProName(rs.getString("pro_name"));
-				p.setPrice(rs.getInt("pro_price"));
-				p.setImages1(rs.getString("img_src1"));
-				p.setImages2(rs.getString("img_src2"));
-				p.setImages3(rs.getString("img_src3"));
-				p.setImages4(rs.getString("img_src4"));
-				
-				list.add(p);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return list;
-	}
-
-	public List<Product> hotProduct(Connection conn) {
-		PreparedStatement pstmt= null;
-		ResultSet rs=null;
-		List<Product> list = new ArrayList();
-		Product p = null;
-		
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("hotProduct"));
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				p = new Product();
@@ -273,4 +245,59 @@ public class ProductDao {
 		return result;
 	}
 	
+	public int selectProductCount(Connection conn, String userType) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectProductCount"));
+			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<Product> sortProduct(Connection conn, String sort, String userType, int cPage, int numPerpage) {
+		
+		PreparedStatement pstmt= null;
+		ResultSet rs=null;
+		List<Product> list = new ArrayList();
+		Product p = null;
+		
+		try {
+			String sql=prop.getProperty("sortProduct");
+			sql=sql.replace("#", sort);
+			System.out.println(sql);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+//			쿼리문에 문장을 넣으면 ''생기는데 이걸 이스케이프 처리할 방법이 있나? 일단 하은이한테도 질문해둠
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p = new Product();
+				p.setProNo(rs.getString("pro_no"));
+				p.setProName(rs.getString("pro_name"));
+				p.setPrice(rs.getInt("pro_price"));
+				p.setImages1(rs.getString("img_src1"));
+				p.setImages2(rs.getString("img_src2"));
+				p.setImages3(rs.getString("img_src3"));
+				p.setImages4(rs.getString("img_src4"));
+				
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 }

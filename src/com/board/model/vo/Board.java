@@ -9,14 +9,14 @@ public class Board {
 	private String qabContent;
 	private Date qabDate;
 	private int qabPw;
-	private int qabState;
+	private String commentNo;
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Board(int qabNo, String qabTitle, String qabWriter, String qabContent, Date qabDate, int qabPw,
-			int qabState) {
+			String commentNo) {
 		super();
 		this.qabNo = qabNo;
 		this.qabTitle = qabTitle;
@@ -24,17 +24,7 @@ public class Board {
 		this.qabContent = qabContent;
 		this.qabDate = qabDate;
 		this.qabPw = qabPw;
-		this.qabState = qabState;
-	}
-	
-	public Board(int qabNo, String qabTitle, String qabWriter, Date qabDate, int qabPw, int qabState) {
-		super();
-		this.qabNo = qabNo;
-		this.qabTitle = qabTitle;
-		this.qabWriter = qabWriter;
-		this.qabDate = qabDate;
-		this.qabPw = qabPw;
-		this.qabState = qabState;
+		this.commentNo = commentNo;
 	}
 
 	public int getQabNo() {
@@ -85,13 +75,14 @@ public class Board {
 		this.qabPw = qabPw;
 	}
 
-	public int getQabState() {
-		return qabState;
+	public String getCommentNo() {
+		return commentNo;
 	}
 
-	public void setQabState(int qabState) {
-		this.qabState = qabState;
+	public void setCommentNo(String commentNo) {
+		this.commentNo = commentNo;
 	}
+
 	
-	
+
 }

@@ -2,6 +2,8 @@ package com.board.model.service;
 
 import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.close;
+import static com.common.JDBCTemplate.commit;
+import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -27,5 +29,25 @@ public class BoardService {
 		close(conn);
 		return list;
 		
+	}
+
+	public int insertBoard(Board b, int memberNo) {
+		//글작성
+		Connection conn=getConnection();
+		int result=dao.insertBoard(conn, b, memberNo);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
+	}
+	
+	public Board selectBoard(int boardNo, int qabPw) {
+		//비번 맞는 글 찾아오기
+		Connection conn= getConnection();
+		Board b = dao.selectBoard(conn, boardNo,qabPw);
+		close(conn);
+		return b;
 	}
 }

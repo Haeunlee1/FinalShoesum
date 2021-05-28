@@ -248,6 +248,7 @@ public class MemberDao {
 		}
 		return m;
 	}
+//HEAD
 
 	public int updateMemberFindPw(Connection conn, Member m) {
 		//회원정보수정 (no&id 같으면 수정)
@@ -290,5 +291,52 @@ public class MemberDao {
 		}
 		return m;
 	}
+
+	
+	
+	// 주문 테이블
+	
+	public int insertOrderTable(Connection conn,int userNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("insertOrder"));
+			pstmt.setInt(1, userNo);
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	// 주문 상세테이블
+	public int insertOrderDetail(Connection conn,String proNo,String proCount) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			
+			pstmt=conn.prepareStatement(prop.getProperty("insertOrderDetail"));
+			pstmt.setInt(1,Integer.parseInt(proCount));
+			pstmt.setString(2, proNo);
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+// branch 'master' of https://github.com/Haeunlee1/FinalShoesum.git
 	
 }

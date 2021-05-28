@@ -6,7 +6,7 @@
     	int memberNo=(int)(request.getAttribute("memberNo"));
     	DecimalFormat df = new DecimalFormat("#,###,###");
    %>
-      <form name="movetoCart" id="movetoCart" method="post">
+    <!--   <form name="movetoCart" id="movetoCart" method="post"> -->
     	<table id="tbl-wishlist">
 		<%if(!wishList.isEmpty()) {%>
              <tr class="head_tr">
@@ -45,8 +45,8 @@
                  </td>
                  <td ><%=df.format(p.getPrice()) %></td>
                  <td>1</td>
-                 <td><%=df.format(3000) %></td>
-                 <td><%=df.format(p.getPrice()+3000)%></td>
+                 <td>무료</td>
+                 <td><%=df.format(p.getPrice())%></td>
                  <td>
                      <ul>
                          <li><input type="button" name="btn_delete" title="<%=p.getLikeNo() %>" value="삭제" style="background-color : #CCCCCC">
@@ -76,7 +76,7 @@
             <button class="right-btn allDelBtn" >전체상품 비우기</button>
         </div>
         <%} %>
-     </form>
+     <!-- </form> -->
 <script>
 //전체체크
 $("#checkAll").click(e=>{
@@ -101,7 +101,8 @@ $("input[name=btn_delete]").click(e=>{
 	if(confirm("해당 상품을 삭제하시겠습니까?")){
 		let likeNo=$(e.target).attr("title");
 		console.log(likeNo);
-		location.replace("<%=request.getContextPath()%>/mypage/wishDelete?memberNo="+'<%=memberNo%>'+"&likeNo="+likeNo);
+		<%-- location.replace("<%=request.getContextPath()%>/mypage/wishDelete?memberNo="+'<%=memberNo%>'+"&likeNo="+likeNo&type=wish); --%>
+		location.replace("<%=request.getContextPath()%>/mypage/wishDelete?memberNo="+'<%=memberNo%>'+"&likeNo="+likeNo+"&type=wish");
 	}
 });
 
@@ -112,9 +113,9 @@ $(".checkwishBtn").click(()=>{
 		let checkArr=new Array();
 		$("input[class='chk']:checked").each(function(){
 			checkArr.push($(this).attr("title"));
-		})
+		});
 			console.log(checkArr);			
-		location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+checkArr);
+		location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+checkArr+"&type=wish");
 	}
 })
 
@@ -127,7 +128,7 @@ $(".allDelBtn").click(()=>{
 			allwishArr.push($(this).attr("title"));
 		});
 		console.log(allwishArr);
-		<%-- location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+allwishArr); --%>
+		location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+allwishArr+"&type=wish");
 	}
 });
 </script>
@@ -158,7 +159,7 @@ table#tbl-wishlist #wish_null td input {
     border-top : 2px solid gray;
     border-bottom : 2px solid gray;
     text-align : center;
-    font-size : 13px;
+    font-size : 14px;
     height:auto;
 }
 
@@ -192,7 +193,7 @@ table#tbl-wishlist tr{
 /*각 상품들 row*/
 table#tbl-wishlist .wish_product {
     height : 120px;
-    font-size : 12px;
+    font-size : 14px;
 }
 
 table#tbl-wishlist .wish_product td:nth-child(2) img {
@@ -202,7 +203,7 @@ table#tbl-wishlist .wish_product td:nth-child(2) img {
 
 table#tbl-wishlist .wish_product td:nth-child(3){
     text-align : left;
-    font-size : 14px;
+    font-size : 16px;
     line-height : 30px;
     padding-top : 0px;
     padding-bottom : 0px;

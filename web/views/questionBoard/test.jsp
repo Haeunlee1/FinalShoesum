@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ include file="/views/common/header.jsp"%>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style_IH.css" type="text/css">
+
 <script src="/js/jquery-3.6.0.min.js"></script>
 <!DOCTYPE html>
 <html>
@@ -55,13 +55,11 @@
         </table>
     </div>
     <script>
-        // html dom 이 다 로딩된 후 실행된다.
         $(document).ready(function(){
-            // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+        	
             $(".menu_list").click(function(){
                 var sublist = $(this).next("ul");
-     
-                // sublist 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+
                 if( sublist.is(":visible") ){
                     sublist.slideUp();
                 }else{

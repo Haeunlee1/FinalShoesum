@@ -28,7 +28,7 @@
         </tr>
         <%} %>
         <%}else{ %>
-        <tr>
+        <tr id="myboard_is_null">
             <td colspan="3">작성한 게시글이 없습니다.</td>
         </tr>
         <%} %>
@@ -55,7 +55,7 @@ table#tbl-myboard th{
     text-align: center;
     height:40px;
 }
-table#tbl-myboard tr>td:first-child{
+table#tbl-myboard tr>td:first-child, table#tbl-myboard tr>th:first-child{
     text-align: center;
     width:8%;
 }
@@ -72,5 +72,9 @@ table#tbl-myboard td:nth-child(3), table#tbl-myboard th:nth-child(3){
 table#tbl-myboard td:nth-child(2){
     padding-left: 20px;
 }
+tr#myboard_is_null>td{
+	border-right:none;
+}
+
 
 </style>

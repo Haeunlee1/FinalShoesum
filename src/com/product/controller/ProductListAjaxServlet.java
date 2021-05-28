@@ -1,7 +1,6 @@
 package com.product.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-
 import com.product.model.service.ProductService;
 import com.product.model.vo.Product;
 
 /**
- * Servlet implementation class ProductListServlet
+ * Servlet implementation class ProductListAjaxServlet
  */
-@WebServlet("/product/productlist")
-public class ProductListServlet extends HttpServlet {
+@WebServlet("/product/productlistAjax")
+public class ProductListAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductListServlet() {
+    public ProductListAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +31,7 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		int cPage;
 		int numPerpage=9;
 		
@@ -44,16 +41,25 @@ public class ProductListServlet extends HttpServlet {
 			cPage=1;
 		}
 		
-		String userType = request.getParameter("userType").toUpperCase();
-		request.setAttribute("userType", userType);
+		String sort = request.getParameter("sort");
+		System.out.println(sort);
+		if(sort.substring(0,1).contains("r")) {
+			sort = "IMG_NO DESC";
+		}else if(sort.substring(0,1).contains("h")) {
+			sort = "PRO_PRICE DESC";
+		}else {
+			sort = "PRO_PRICE ASC";
+		}
 		
-		
-		// userType별 상품 목록 가져오기
-		List<Product> userProduct = new ProductService().userProduct(userType,cPage,numPerpage);
-		request.setAttribute("userProduct", userProduct);
-		
+		String userType = request.getParameter("userType");
 		userType=userType.toLowerCase();
-		int totalData=new ProductService().selectProdcutCount(userType);
+	
+		// userType별 상품 목록 가져오기
+		List<Product> sortProduct = new ProductService().sortProduct(sort,userType,cPage,numPerpage);
+		request.setAttribute("sortProduct", sortProduct);
+		request.setAttribute("userType", userType);
+	
+		int totalData=new ProductService().selectProdcutCount(sort);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		
 		int pageBarSize=5;
@@ -65,7 +71,7 @@ public class ProductListServlet extends HttpServlet {
 			pageBar+="<div class=\"pageBar-icon\">&lt;</div>";
 		}else {
 			pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
-			+"/product/productlist?userType="+userType+"&cPage="+(pageNo-1)+"'>&lt;</div>";
+			+"/product/productlist?userType="+sort+"&cPage="+(pageNo-1)+"'>&lt;</div>";
 		}
 	
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
@@ -73,7 +79,7 @@ public class ProductListServlet extends HttpServlet {
 				pageBar+="<div class=\"pageBar-icon\" style=\"background-color:rgb(52, 152, 219);color:white\">"+pageNo+"</div>";
 			}else {
 				pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
-				+"/product/productlist?userType="+userType+"&cPage="+pageNo+"'>"+pageNo+"</div>";
+				+"/product/productlist?userType="+sort+"&cPage="+pageNo+"'>"+pageNo+"</div>";
 			}
 			pageNo++;
 		}
@@ -86,16 +92,16 @@ public class ProductListServlet extends HttpServlet {
 			+"/notice/noticelist?cPage="+pageNo+"'>[다음]</a>";
 			
 			pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
-			+"/product/productlist?userType="+userType+"&cPage="+pageNo+"'>&gt;</div>";
+			+"/product/productlist?userType="+sort+"&cPage="+pageNo+"'>&gt;</div>";
 			
 		}
 		
 		request.setAttribute("pageBar", pageBar);
-		
-		// nav bar -> man,woman,kids 클릭시 이동하는 서블렛
-		request.getRequestDispatcher("/views/product/productList.jsp")
+	
+		request.getRequestDispatcher("/views/product/productListAjax.jsp")
 		.forward(request, response);
-
+	
+	
 	}
 
 	/**

@@ -45,7 +45,6 @@ public class BoardDao {
 				b.setQabContent(rs.getString("qab_content"));
 				b.setQabDate(rs.getDate("qab_date"));
 				b.setQabPw(rs.getInt("qab_pw"));
-				b.setQabState(rs.getInt("qab_state"));
 				list.add(b);
 			}
 		}catch(SQLException e) {
@@ -72,7 +71,7 @@ public class BoardDao {
 				b.setQabTitle(result.getString("QAB_TITLE"));
 				b.setQabWriter(result.getString("QAB_WRITER"));
 				b.setQabDate(result.getDate("QAB_DATE"));
-				b.setQabState(result.getInt("QAB_STATE"));
+				b.setCommentNo(result.getString("comment_number"));
 				list.add(b);
 			}
 		} catch(SQLException e) {
@@ -82,6 +81,60 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return list;
+
 	}
 
+	/* 글쓰기 */
+	public int insertBoard(Connection conn, Board b, int memberNo) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertBoard"));
+			pstmt.setString(1,b.getQabTitle());
+			pstmt.setString(2, b.getQabWriter());
+			pstmt.setInt(3,b.getQabPw());
+			pstmt.setString(4, b.getQabContent());
+			pstmt.setInt(5, memberNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+
+	public Board selectBoard(Connection conn, int boardNo,int qabPw) {
+		//비번으로 게시글 불러오기
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Board b=null;
+		try {
+			if(qabPw==0) {
+				//관리자라면
+				pstmt=conn.prepareStatement(prop.getProperty("selectBoardAdmin"));
+				pstmt.setInt(1, boardNo);
+			}else {
+				pstmt=conn.prepareStatement(prop.getProperty("selectBoard"));
+				pstmt.setInt(1, boardNo);
+				pstmt.setInt(2, qabPw);
+			}
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				b=new Board();
+				b.setQabNo(rs.getInt("qab_number"));
+				b.setQabTitle(rs.getString("qab_title"));
+				b.setQabWriter(rs.getString("qab_writer"));
+				b.setQabDate(rs.getDate("qab_date"));
+				b.setQabPw(rs.getInt("qab_pw"));
+				b.setQabContent(rs.getString("qab_content"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return b;
+		
+	}
 }

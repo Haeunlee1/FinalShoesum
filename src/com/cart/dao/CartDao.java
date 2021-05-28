@@ -35,7 +35,6 @@ public class CartDao {
 		List<Cart> list = new ArrayList();
 		
 		try {
-			
 			pstmt = conn.prepareStatement(prop.getProperty("cartListView"));
 			pstmt.setInt(1, userNo);
 			rs = pstmt.executeQuery();

@@ -30,15 +30,32 @@ public class CheckoutEndServlet extends HttpServlet {
 		
 		
 		// 결제 정보 
-			
-		int totalPrice;
 		
-		try {
-			totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
-		} catch(NumberFormatException e) {
-			totalPrice = 0;
-		}
+			// 1. 총 가격	
+			int totalPrice;
+		
+			try {
+				totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
+			} catch(NumberFormatException e) {
+				totalPrice = 0;
+			}
+		
+			// 2. 회원번호
+			int userNo = Integer.parseInt(request.getParameter("memberNo"));
+			
+			// 3. 상품번호
+			String proNo = request.getParameter("proNo");
+			
+			
+			// 4. 상품수량 
+			String proCount = request.getParameter("proCount");
+			
+		// 결제 정보 보내기
 		request.setAttribute("price", totalPrice);
+		request.setAttribute("userNo", userNo);
+		request.setAttribute("proNo", proNo);
+		request.setAttribute("proCount", proCount);
+		
 		request.getRequestDispatcher("/views/checkout/checkoutEnd.jsp").forward(request, response);
 	}
 

@@ -17,7 +17,7 @@
        <div id="hot_pd">
 	       <h2>HOT DEAL</h2>
 	       <div class="product">
-	           <div>
+	           <div>	
 	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=w01_white_170&hotpd=hotpd&sale=0.8">
 	                   <div class="sale">20%</div>
 	                   <img src="<%=request.getContextPath() %>/images/product/woman/w_01_01.jpg" alt="">

@@ -1,38 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style_IH.css" type="text/css">
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>글쓰기, 슈썸 Shoesum</title>
-</head>
-<body>
-	 <div id="write_top_container"> 
-        <span style="float: left; margin-top:15px"><p>문의하기</p></span>
-    </div>
-    <!--문의하기, 등록 버튼 끝-->
-    <!-- 게시판 제목, 내용, 첨부파일 시작-->
-    <form method="POST">
-        <div id="write_container">
-            <input type="text" name="title" id="write_title" placeholder="제목을 입력해주세요">
-            <textarea name="contents" id="write_contents" placeholder="내용을 입력해주세요"></textarea>
+
+	 <section id="board_write">
+        <div id="write_top_container"> 
+            <p>문의하기</p>
         </div>
-	
-	     <!-- 게시판 제목, 내용, 첨부파일 끝-->
-	     <!-- 비밀번호 테이블 시작-->
-	    <div id="write_bottom_container">
-	        <table id="write_password_container">
-	            <tr>
-	                <td style="text-align: center;" class="td_password"><b>비밀번호</b></td>
-	                <td><input type="password" class="password_table"placeholder="4개의 숫자를 입력하세요." maxlength="4" required></td>
-	            </tr>
-	        </table>
-	        <button type="button" class="back_button" onclick="location.assign('<%=request.getContextPath()%>/board/boardList')">목록으로</button>
-	        <input type="submit" id="checkBtn" value="등록">
-	    </div>
-    </form>
-</body>
+        <!--문의하기, 등록 버튼 끝-->
+        <!-- 게시판 제목, 내용, 첨부파일 시작-->
+        <form action='<%=request.getContextPath()%>/board/boardWriteEnd'>
+            <div id="write_container">
+                <span id="qab_title">제목</span>
+                <select name="qab_cate" id="qab_cate">
+                    <option value="상품/배송문의">상품/배송문의</option>
+                    <option value="교환/반품문의">교환/반품문의</option>
+                    <option value="기타문의">기타문의</option>
+                </select>
+            </div>
+            <div id="write_content">
+                <textarea rows="50" cols="50"name="qab_content" id="qab_content" placeholder="내용을 입력해주세요."></textarea>
+                <!-- 게시판 제목, 내용, 첨부파일 끝-->
+            </div>
+            <!-- 비밀번호 테이블 시작-->
+            <div id="write_bottom_container">
+                <ul>
+                    <li>비밀번호</li>
+                    <li><input type="password" name="qabPw" class="password_table" placeholder="4자리 숫자를 입력하세요." maxlength="4" required></li>
+                </ul>
+            </div>
+            <button type="button" class="back_button" onclick="fn_backToList();">목록으로</button>
+            <input type="submit" id="checkBtn" value="등록">
+            
+            <input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo()%>">
+            <input type="hidden" name="memberId" value="<%=loginMember.getMemberId() %>">
+        </form>
+    </section>
+    
+    <script>
+    	//비밀번호 숫자만 입력확인
+    	$(".password_table").blur((e)=>{
+    		const pw=$(e.target).val();
+    		const reg=/^[0-9]{4}/;
+    		if(!reg.test(pw)){
+    			alert("비밀번호는 4자리 숫자로 입력해주세요.");
+    		}
+    	})
+    	
+    	const fn_backToList=()=>{
+    		alert('글 작성을 취소하시겠습니까?');
+    		location.assign('<%=request.getContextPath()%>/board/boardList');
+    	}
+    		
+    </script>
 <%@ include file="/views/common/footer.jsp"%>
-</html>
