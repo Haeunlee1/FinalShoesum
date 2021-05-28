@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="/views/common/header.jsp"%>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style_IH.css" type="text/css">
+<%@ include file="/views/common/header.jsp"%>
+<%@ page import="java.util.List, com.faq.model.vo.Faq" %>
+
+<%
+List <Faq> list=(List<Faq>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자주 묻는 질문, 슈썸 Shoesum</title>
 </head>
 <body>
 <div id="FAQ_board">
@@ -19,40 +23,38 @@
                 <th class="td_title">번호</th>
                 <th class="td_title">제목</th>
             </tr>
+            <%for (Faq q : list){ %>
             <tr>
-                <td class="td_title">32</td>
-                <td class="td_content">택배외 다른 수령 방법도 있나요?</td>
+                <td class="menu" style="text-align: center;"><%=q.getFaqNo() %></td>
+                <td class="menu">
+                    <ul class>
+                        <li class="menu_list"><%=q.getFaqTitle() %></li>
+                            <ul class="hide">
+                                <li class="FAQ_list">Q. <%=q.getFaqTitle() %></li>
+                                <li class="FAQ_list2">A. <%=q.getFaqContent() %></li>
+                            </ul>
+                    </ul>
+                </td>
             </tr>
-            <tr>
-                <td class="td_title">31</td>
-                <td class="td_content">배송 기간은 얼마나 걸리나요?</td>
-            </tr>
-            <tr>
-                <td class="td_title">30</td>
-                <td class="td_content">적립금은 소멸기간이 있나요?</td>
-            </tr>
-            <tr>
-                <td class="td_title">29</td>
-                <td class="td_content">입금했는데 확인이 안돼요.</td>
-            </tr>
-            <tr>
-                <td class="td_title">28</td>
-                <td class="td_content">주문을 했는데 주문건이 취소되었어요!</td>
-            </tr>
-            <tr>
-                <td class="td_title">27</td>
-                <td class="td_content">주문서 및 장바구니 오류</td>
-            </tr>
-            <tr>
-                <td class="td_title">25</td>
-                <td class="td_content">적립금과 예치금의 차이가 있나요?</td>
-            </tr>
-            <tr>
-                <td class="td_title">24</td>
-                <td class="td_content">비회원은 결제 어떻게 하나요?</td>
-            </tr>
+            <%} %>
+       
         </table>
     </div>
+     <script>
+     
+        $(document).ready(function(){
+        	
+            $(".menu_list").click(function(){
+                var sublist = $(this).next("ul");
+
+                if( sublist.is(":visible") ){
+                    sublist.slideUp();
+                }else{
+                    sublist.slideDown();
+                }
+            });
+        });
+    </script>
     <!-- table_container 끝-->
     <div id="FAQ_bottom_container">
         <form style="text-align: center;">
