@@ -103,4 +103,38 @@ public class BoardDao {
 		}return result;
 	}
 
+	public Board selectBoard(Connection conn, int boardNo,int qabPw) {
+		//비번으로 게시글 불러오기
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Board b=null;
+		try {
+			if(qabPw==0) {
+				//관리자라면
+				pstmt=conn.prepareStatement(prop.getProperty("selectBoardAdmin"));
+				pstmt.setInt(1, boardNo);
+			}else {
+				pstmt=conn.prepareStatement(prop.getProperty("selectBoard"));
+				pstmt.setInt(1, boardNo);
+				pstmt.setInt(2, qabPw);
+			}
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				b=new Board();
+				b.setQabNo(rs.getInt("qab_number"));
+				b.setQabTitle(rs.getString("qab_title"));
+				b.setQabWriter(rs.getString("qab_writer"));
+				b.setQabDate(rs.getDate("qab_date"));
+				b.setQabPw(rs.getInt("qab_pw"));
+				b.setQabContent(rs.getString("qab_content"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return b;
+		
+	}
 }

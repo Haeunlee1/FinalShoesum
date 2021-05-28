@@ -1,46 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<!--top_container 시작-->
-    <div id="write_answer_container">
-        <span style="float: left; border-bottom:1px soild gray"><p>상품문의</p></span>
-    </div>
-    <!--top_container 끝-->
-    <!--title_container 시작-->
-    <form method="">
-    <div id="write_answer_title_container">
-       <h2>제목</h2>
-       <p class="user_id"><b>user_id</b></p>
-    </div>
-    <!--title_container 끝-->
-    <div id="write_content_container">
-        <p class="content">내용</p>
-    </div>
-    
-	<div id="write_comment_container">
-        <h4>댓글</h4>
-        <div id="comment">
-            <span style="float: left;"><p class="user_id"><b>user_id</b></p></span>
-            <span style="float: right;"><p class="date">2021-05-16</p></span>
-                <div id="content" style="display: inline-block;">
-                    <p>내용입니다.</p>
-                </div>
+<%@page import="com.board.model.vo.*" %>
+<%
+	Board b = (Board)request.getAttribute("board");
+%>
+	<section id="boardview_box">
+        <div id="view_title">
+            <p>질문게시판</p>
         </div>
-    </div>
-        <div id="write_comment">
-            <input type="text" id="write_answer_comment" placeholder="댓글을 남겨보세요!!">
-            <input type="button" value="등록" class="write_anwser_button"></button>
-            <button type="button" class="write_anwser_button_back" onclick="location.assign('<%=request.getContextPath()%>/board/boardList')">목록으로</button>
-    </div>
-    </form>
-</body>
+        <div id="view_content_title">
+            <p>제목 <%=b.getQabTitle() %></p>
+            <p>작성자 <%=b.getQabWriter() %></p>
+            <p>작성일 <%=b.getQabDate() %></p>
+        </div>
+        <div id="view_content_box">
+            내용 <%=b.getQabContent() %>
+        </div>      
+        <div id="comment_write_con">
+            <p>댓글작성</p>
+            <div id="comment_write_box">
+                <form action="">
+                    <textarea name="content" rows="4" placeholder="관리자만 댓글 작성이 가능합니다."></textarea>
+                    <button type="submit" id="comment_btn_insert">확인</button>
+                </form>
+            </div>
+        </div>
+        <div id="comment_view_con">
+            <p>댓글</p>
+            <div id="comment_view_box">
+                <ul>
+                    <li class="f_right"id="comment_view_dsate">날짜</li>
+                    <li class="f_left">관리자</li><Br>
+                    <li class="f_left" id="comment_view_content">관리자 댓글 내용</li>
+                </ul>
+            </div>
+        </div>
+        <div id="comment_btn">
+            <button type="button" class="backtoList_btn" onclick="location.assign('<%=request.getContextPath()%>/board/boardList')">목록으로</button>  
+        </div>      
+    </section>
 <%@ include file="/views/common/footer.jsp"%>
-</html>

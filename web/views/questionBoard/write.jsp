@@ -2,13 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>글쓰기, 슈썸 Shoesum</title>
-</head>
-<body>
 	 <section id="board_write">
         <div id="write_top_container"> 
             <p>문의하기</p>
@@ -47,7 +40,7 @@
     	//비밀번호 숫자만 입력확인
     	$(".password_table").blur((e)=>{
     		const pw=$(e.target).val();
-    		const reg=/^[0-9]/g;
+    		const reg=/^[0-9]{4}/;
     		if(!reg.test(pw)){
     			alert("비밀번호는 4자리 숫자로 입력해주세요.");
     		}
@@ -59,6 +52,4 @@
     	}
     		
     </script>
-</body>
 <%@ include file="/views/common/footer.jsp"%>
-</html>
