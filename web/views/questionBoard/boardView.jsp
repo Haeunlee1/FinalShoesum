@@ -10,12 +10,12 @@
             <p>질문게시판</p>
         </div>
         <div id="view_content_title">
-            <p>제목</p>
-            <p>작성자</p>
-            <p>작성일</p>
+            <p>제목 <%=b.getQabTitle() %></p>
+            <p>작성자 <%=b.getQabWriter() %></p>
+            <p>작성일 <%=b.getQabDate() %></p>
         </div>
         <div id="view_content_box">
-            내용
+            내용 <%=b.getQabContent() %>
         </div>      
         <div id="comment_write_con">
             <p>댓글작성</p>
