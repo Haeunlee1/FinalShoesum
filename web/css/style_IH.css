@@ -68,8 +68,6 @@
 section#board_write{
     margin:auto;
     width:1000px;
-    background-color:#FAFAFA;
-
 }
 section#board_write>div{
 	margin-bottom:10px;
@@ -80,21 +78,20 @@ section#board_write>div{
 }
 #write_top_container>p{
 	margin-top:50px;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
-    text-align:left;
     margin-bottom:10px;
 }
 /* 제목, 내용 css */
 #write_container, div#write_content{
-   margin: 10px 0 5px 0;
+   margin: 20px 0 5px 0;
 }
 div#write_container>span{
     margin-right:50px;
 }
 select#qab_cate{
     width:300px;
-    height:25px;
+    height:30px;
 }
 div#write_content>#qab_content{
    width: 1000px;

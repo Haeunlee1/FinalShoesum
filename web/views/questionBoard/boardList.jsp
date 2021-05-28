@@ -46,7 +46,7 @@ List<Board> list=(List<Board>)request.getAttribute("list");
             <tr>
                 <td class="td"><%=b.getQabNo() %></td>
                 <td class="td"><%=b.getQabTitle() %></td>
-                <td class="td"><%=b.getQabState() %></td>
+                <td class="td"><%=b.getCommentNo()!=null?"답변완료":"미답변" %></td>
                 <td class="td"><%=b.getQabWriter() %></td>
                 <td class="td"><%=b.getQabDate() %></td>
             </tr>

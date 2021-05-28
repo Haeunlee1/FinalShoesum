@@ -45,7 +45,6 @@ public class BoardDao {
 				b.setQabContent(rs.getString("qab_content"));
 				b.setQabDate(rs.getDate("qab_date"));
 				b.setQabPw(rs.getInt("qab_pw"));
-				b.setQabState(rs.getInt("qab_state"));
 				list.add(b);
 			}
 		}catch(SQLException e) {
@@ -72,7 +71,7 @@ public class BoardDao {
 				b.setQabTitle(result.getString("QAB_TITLE"));
 				b.setQabWriter(result.getString("QAB_WRITER"));
 				b.setQabDate(result.getDate("QAB_DATE"));
-				b.setQabState(result.getInt("QAB_STATE"));
+				b.setCommentNo(result.getString("comment_number"));
 				list.add(b);
 			}
 		} catch(SQLException e) {
