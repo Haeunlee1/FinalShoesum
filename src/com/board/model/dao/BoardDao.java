@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.board.model.vo.Board;
+import com.board.model.vo.BoardComment;
 import com.member.model.dao.MemberDao;
 
 public class BoardDao {
@@ -127,6 +128,8 @@ public class BoardDao {
 				b.setQabDate(rs.getDate("qab_date"));
 				b.setQabPw(rs.getString("qab_pw"));
 				b.setQabContent(rs.getString("qab_content"));
+			}else {
+				b=null;
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -135,6 +138,63 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return b;
-		
+	}
+	
+	public int insertComment(Connection conn, int qabNo, String content) {
+		//댓글등록
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertComment"));
+			pstmt.setString(1, content);
+			pstmt.setInt(2, qabNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public BoardComment selectComment(Connection conn, int boardNo) {
+		//게시글 번호로 댓글 불러오기
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		BoardComment bc=null;
+		try {
+			System.out.println(boardNo);
+			pstmt=conn.prepareStatement(prop.getProperty("selectComment"));
+			pstmt.setInt(1, boardNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				bc=new BoardComment();
+				bc.setCommentNo(rs.getInt("comment_number"));
+				bc.setCommentContent(rs.getString("comment_content"));
+				bc.setCommentDate(rs.getDate("comment_date"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return bc;
+	}
+	
+	public int deleteComment(Connection conn, int qabNo) {
+		//게시글번호로 댓글 지우기
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteComment"));
+			pstmt.setInt(1, qabNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

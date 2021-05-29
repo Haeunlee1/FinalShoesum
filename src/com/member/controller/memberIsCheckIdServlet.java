@@ -7,7 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 
 import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
@@ -15,14 +16,14 @@ import com.member.model.vo.Member;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet(name="loginServlet",urlPatterns = "/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet(name="memberIsCheckIdServlet",urlPatterns = "/isCheckId")
+public class memberIsCheckIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public memberIsCheckIdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,28 +34,17 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String memberId=request.getParameter("memberId");
-		String memberPw=request.getParameter("memberPw");
 		
-		System.out.println(memberId);
-		System.out.println(memberPw);
 		
-		Member m=new MemberService().login(memberId, memberPw);
-		String msg = "";
-		if(m != null) {
-			HttpSession session=request.getSession();
-			msg = m.getMemberId()+"님 환영합니다 :)";
-			session.setAttribute("loginMember",  m);
-			request.setAttribute("loc", "/index.jsp");
+		Member m=new MemberService().selectMemberIsCheckId(memberId);
+		JSONObject obj = new JSONObject();
+  		if(m == null) {
+			obj.put("resultCd", "0000");
 		}else {
-			msg = "로그인 실패 :)";
-			request.setAttribute("loc", "/views/login/login.jsp");
+			obj.put("resultCd", "9999");
 		}
-		
-		request.setAttribute("msg", msg);
-		
-		//=>가입된 회원이 아니라고 뜨는것 , 쿼리스트링을 추가해주자 왜? jsp에서 쿼리스트링으로 넣어줬었음 => helloMVC참고하기
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);		
-		
+		response.setContentType("application/x-json; charset=UTF-8");
+		response.getWriter().print(obj);
 	}
 
 	/**

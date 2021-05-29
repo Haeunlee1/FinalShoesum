@@ -1,6 +1,10 @@
 package com.common.filter;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -50,5 +54,21 @@ public class PasswordEncryptFilter implements Filter {
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
 	}
+	public static void main(String[] args) {
 
+		
+			String val = "1234";
+			
+			String encPwd="";
+			MessageDigest md=null;
+			try {
+				md=MessageDigest.getInstance("SHA-512");		
+			}catch(NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			}
+			byte[] bytes=val.getBytes(Charset.forName("utf-8"));
+			md.update(bytes);
+			encPwd=Base64.getEncoder().encodeToString(md.digest());
+			System.out.println(encPwd);
+	}
 }

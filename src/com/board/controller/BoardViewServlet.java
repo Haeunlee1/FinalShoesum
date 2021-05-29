@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
+import com.board.model.vo.BoardComment;
 
 /**
  * Servlet implementation class BoardViewServlet
@@ -38,15 +39,25 @@ public class BoardViewServlet extends HttpServlet {
 			//관리자라면
 			qabPw ="0";
 		}
-		
-		System.out.println(request.getParameter("admin_check"));
-		System.out.println(qabPw);
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		Board b = new BoardService().selectBoard(boardNo,qabPw);
+
+		if(b!=null) { //게시글 불러오기
+			//댓글도 같이 불러오기
+			BoardComment bc=new BoardService().selectComment(boardNo);
+			request.setAttribute("comment", bc);
+			request.setAttribute("board", b);
+			request.getRequestDispatcher("/views/questionBoard/boardView.jsp").forward(request, response);
+		}else {
+			//비번 틀렸다면
+			String msg="비밀번호가 일치하지 않습니다.";
+			String loc="/board/checkPw.do?boardNo="+boardNo;
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 		
-		request.setAttribute("board", b);
-		request.getRequestDispatcher("/views/questionBoard/boardView.jsp").forward(request, response);
-//		
+		
 	}
 
 	/**

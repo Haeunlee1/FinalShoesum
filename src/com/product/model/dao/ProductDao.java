@@ -228,14 +228,14 @@ public class ProductDao {
 		
 	}
 	
-	public int deleteWish(Connection conn, int userNo, int likeNo) {
+	public int deleteWish(Connection conn, int userNo, String proNo) {
 		//관심상품 삭제 => 테이블 버튼 & 체크 삭제
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("deleteWish"));
 			pstmt.setInt(1, userNo);
-			pstmt.setInt(2, likeNo);
+			pstmt.setString(2, proNo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -247,6 +247,7 @@ public class ProductDao {
 	}
 	
 	public int selectProductCount(Connection conn, String userType) {
+		// 상품 리스트 페이징 처리
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
@@ -265,7 +266,7 @@ public class ProductDao {
 	}
 	
 	public List<Product> sortProduct(Connection conn, String sort, String userType, int cPage, int numPerpage) {
-		
+		// 최신순, 높은가격순, 낮은가격순 가져오기
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
 		List<Product> list = new ArrayList();
@@ -303,6 +304,222 @@ public class ProductDao {
 	}
 	
 	// review 리스트 가져오기 
+	public List<Product> categoryProduct(Connection conn, String userType, String category, int cPage, int numPerpage) {
+		PreparedStatement pstmt= null;
+		ResultSet rs=null;
+		List<Product> list = new ArrayList();
+		Product p = null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("categoryProduct"));
+			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+			pstmt.setString(2, category);
+			pstmt.setInt(3, (cPage-1)*numPerpage+1);
+			pstmt.setInt(4, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p = new Product();
+				p.setProNo(rs.getString("pro_no"));
+				p.setProName(rs.getString("pro_name"));
+				p.setPrice(rs.getInt("pro_price"));
+				p.setImages1(rs.getString("img_src1"));
+				p.setImages2(rs.getString("img_src2"));
+				p.setImages3(rs.getString("img_src3"));
+				p.setImages4(rs.getString("img_src4"));
+				
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public List<Product> categorySortProduct(Connection conn, String sort, String userType, String category, int cPage, int numPerpage) {
+		// userType+category별 최신순, 높은가격순, 낮은가격순 가져오기
+		PreparedStatement pstmt= null;
+		ResultSet rs=null;
+		List<Product> list = new ArrayList();
+		Product p = null;
+		
+		try {
+			String sql=prop.getProperty("sortProduct");
+			sql=sql.replace("#", sort);
+			System.out.println(sql);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+			pstmt.setString(2, category);
+			pstmt.setInt(3, (cPage-1)*numPerpage+1);
+			pstmt.setInt(4, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p = new Product();
+				p.setProNo(rs.getString("pro_no"));
+				p.setProName(rs.getString("pro_name"));
+				p.setPrice(rs.getInt("pro_price"));
+				p.setImages1(rs.getString("img_src1"));
+				p.setImages2(rs.getString("img_src2"));
+				p.setImages3(rs.getString("img_src3"));
+				p.setImages4(rs.getString("img_src4"));
+				
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public List<Product> categoryProduct(Connection conn, String userType, String category, int cPage, int numPerpage) {
+		PreparedStatement pstmt= null;
+		ResultSet rs=null;
+		List<Product> list = new ArrayList();
+		Product p = null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("categoryProduct"));
+			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+			pstmt.setString(2, category);
+			pstmt.setInt(3, (cPage-1)*numPerpage+1);
+			pstmt.setInt(4, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p = new Product();
+				p.setProNo(rs.getString("pro_no"));
+				p.setProName(rs.getString("pro_name"));
+				p.setPrice(rs.getInt("pro_price"));
+				p.setImages1(rs.getString("img_src1"));
+				p.setImages2(rs.getString("img_src2"));
+				p.setImages3(rs.getString("img_src3"));
+				p.setImages4(rs.getString("img_src4"));
+				
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public List<Product> categorySortProduct(Connection conn, String sort, String userType, String category, int cPage, int numPerpage) {
+		// userType+category별 최신순, 높은가격순, 낮은가격순 가져오기
+		PreparedStatement pstmt= null;
+		ResultSet rs=null;
+		List<Product> list = new ArrayList();
+		Product p = null;
+		
+		try {
+			String sql=prop.getProperty("sortProduct");
+			sql=sql.replace("#", sort);
+			System.out.println(sql);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+			pstmt.setString(2, category);
+			pstmt.setInt(3, (cPage-1)*numPerpage+1);
+			pstmt.setInt(4, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p = new Product();
+				p.setProNo(rs.getString("pro_no"));
+				p.setProName(rs.getString("pro_name"));
+				p.setPrice(rs.getInt("pro_price"));
+				p.setImages1(rs.getString("img_src1"));
+				p.setImages2(rs.getString("img_src2"));
+				p.setImages3(rs.getString("img_src3"));
+				p.setImages4(rs.getString("img_src4"));
+				
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public List<Product> categoryProduct(Connection conn, String userType, String category, int cPage, int numPerpage) {
+		PreparedStatement pstmt= null;
+		ResultSet rs=null;
+		List<Product> list = new ArrayList();
+		Product p = null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("categoryProduct"));
+			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+			pstmt.setString(2, category);
+			pstmt.setInt(3, (cPage-1)*numPerpage+1);
+			pstmt.setInt(4, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p = new Product();
+				p.setProNo(rs.getString("pro_no"));
+				p.setProName(rs.getString("pro_name"));
+				p.setPrice(rs.getInt("pro_price"));
+				p.setImages1(rs.getString("img_src1"));
+				p.setImages2(rs.getString("img_src2"));
+				p.setImages3(rs.getString("img_src3"));
+				p.setImages4(rs.getString("img_src4"));
+				
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public List<Product> categorySortProduct(Connection conn, String sort, String userType, String category, int cPage, int numPerpage) {
+		// userType+category별 최신순, 높은가격순, 낮은가격순 가져오기
+		PreparedStatement pstmt= null;
+		ResultSet rs=null;
+		List<Product> list = new ArrayList();
+		Product p = null;
+		
+		try {
+			String sql=prop.getProperty("sortProduct");
+			sql=sql.replace("#", sort);
+			System.out.println(sql);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+			pstmt.setString(2, category);
+			pstmt.setInt(3, (cPage-1)*numPerpage+1);
+			pstmt.setInt(4, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p = new Product();
+				p.setProNo(rs.getString("pro_no"));
+				p.setProName(rs.getString("pro_name"));
+				p.setPrice(rs.getInt("pro_price"));
+				p.setImages1(rs.getString("img_src1"));
+				p.setImages2(rs.getString("img_src2"));
+				p.setImages3(rs.getString("img_src3"));
+				p.setImages4(rs.getString("img_src4"));
+				
+				list.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 	public List<Review> selectReviewList(Connection conn,String proNo){
 		
 		PreparedStatement pstmt = null;

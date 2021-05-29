@@ -4,17 +4,28 @@
 <%
 	String userType=(String)request.getAttribute("userType");
 	List<Product> sortProduct=(List<Product>)request.getAttribute("sortProduct");
-	System.out.println(sortProduct.get(0).getProNo());
+	List<Product> categorySortProduct=(List<Product>)request.getAttribute("categorySortProduct");
 	
 	//회계표시
 	DecimalFormat df = new DecimalFormat("#,###,###"); 
 %>
     
 	        <ul>
-	        <%if(sortProduct!=null) { 
+	        <%if(sortProduct!=null&&categorySortProduct==null) { 
 	        	for(Product p : sortProduct) {
 	        %>
 	            <li>
+	                <a href="<%=request.getContextPath() %>/product/productDetail?proNo=<%=p.getProNo() %>"><img src="<%=request.getContextPath() %>/images/product/<%=userType.toLowerCase() %>/<%=p.getImages1() %>" alt=""></a>
+	                <span>[슈썸]</span>
+	                <span><%=p.getProName() %></span>
+	                <span><%=df.format(p.getPrice()) %></span>
+	            </li>
+	        <%	}
+	        }else if(categorySortProduct!=null) {
+	        	// 운동화, 샌들, 구두 클릭시
+	        	for(Product p : categorySortProduct) {
+	        %> 
+	        	<li>
 	                <a href="<%=request.getContextPath() %>/product/productDetail?proNo=<%=p.getProNo() %>"><img src="<%=request.getContextPath() %>/images/product/<%=userType.toLowerCase() %>/<%=p.getImages1() %>" alt=""></a>
 	                <span>[슈썸]</span>
 	                <span><%=p.getProName() %></span>

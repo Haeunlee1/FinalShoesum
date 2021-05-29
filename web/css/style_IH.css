@@ -138,41 +138,48 @@ section#boardview_box{
     width:1000px;
     text-align:left;
 }
-
-div#view_title{
-    border-bottom:1px black solid;
-    font-size:25px;
-    text-align:inherit;
-}
 div#view_content_title{
-	text-align:inherit
-}
-div#view_title>p{
-    margin-bottom:10px;
+	text-align:inherit;	
+	border-top:1px black solid;
+	border-bottom:1px black solid;
 }
 div#view_content_title p{
     border-bottom:1px #EAEAEA solid;
-    height: 40px;
+    height: 50px;
+    line-height:50px;
+    padding-left:20px;
 }
-div#view_content_title p:nth-child(3){
-    border-bottom:1px black solid;
+div#view_content_title .view_span{
+	margin-left:50px;
+}
+div#view_content_title .view_span1{
+	margin-left:65px;
 }
 div#view_content_box{
-    height:400px;
+    height:300px;
     border-bottom:1px black solid;
     text-align:inherit;
+    padding-left:20px;
+    padding-right:20px;
+    margin-bottom:0px;
 }
 div#comment_write_con{
     border-bottom:1px black solid;
-    height:120px;
+    padding-top:15px;
+    height:150px;
     text-align:inherit;
+    margin-bottom:0px;
+    padding-left:20px;
 }
 div#comment_write_box textarea{
-    width:850px;
+	margin-top:10px;
+    width:800px;
     float:left;
+    height:65px;
 }
-div#comment_write_con>p, div#comment_view_con>p, div#comment_view_box>p{
+.text_border{
     font-weight: bolder;
+    font-size:18px;
 }
 button#comment_btn_insert{
     background-color: black;
@@ -182,10 +189,16 @@ button#comment_btn_insert{
     font-size:16px;
     height: 65px;
     float:right;
+    margin-top:10px;
+    margin-right:20px;
 }
 div#comment_view_con{
     border-bottom: 1px black solid;
-    text-align:inherit
+    padding-top:15px;
+    height:150px;
+    text-align:inherit;
+    margin-bottom:0px;
+    padding-left:20px;
 }
 #comment_view_box ul{
     margin-top:0;
@@ -193,12 +206,30 @@ div#comment_view_con{
 #comment_view_box>ul li{
     display: inline-block;
     margin-top: 10px;
+    padding-left:20px;
 }
 .f_right{
     float:right;
+    padding-right:50px;
 }
 div#comment_btn{
     clear:both;
+    margin-top:50px;
+}
+li#comment_edit{
+	padding-right:0px;
+}
+#comment_edit_btn{
+	background-color:black;
+	color:white;
+}
+#comment_del_btn, #comment_edit_btn{
+    border-radius :7%;
+    width:60px;
+    height:30px;
+    border:none;
+    cursor:pointer;
+    margin-right:0;
 }
 .backtoList_btn{
     width:100px;
@@ -215,13 +246,15 @@ div#comment_btn{
 
 /* FAQ Board page section css - 진경수정 */
 /* Board_question page section css - FAQ랑 통일되는 부분 있으니까 css 수정 시 유의할 것 */
-#FAQ_container,#board_container {
+#FAQ_container,#board_container,#view_title {
+	/*view_title=게시판상세view, 여기에 좀 낄께 ㅎㅅㅎ -하은-*/
     width: 900px;
     margin: auto;
     height: auto;
 }
 #FAQ_container p:first-child,
-#board_container p:first-child {
+#board_container p:first-child,
+#view_title p:first-child {
     font-size: 35px;
     line-height: 200px;
 }
