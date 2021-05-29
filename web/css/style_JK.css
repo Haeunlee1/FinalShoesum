@@ -546,6 +546,7 @@ div#pd_info>button {
     color: white;
     font-size: 18px;
     margin-top: 20px;
+    cursor: pointer;
 }
 div#pd_review {
   /*   clear: both;

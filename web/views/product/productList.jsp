@@ -4,7 +4,9 @@
 <%@ page import="java.util.List,com.product.model.vo.Product,java.text.*" %>
 <%
 	String userType=(String)request.getAttribute("userType");
+	String category=(String)request.getAttribute("category");
 	List<Product> userProduct=(List<Product>)request.getAttribute("userProduct");
+	List<Product> categoryProduct=(List<Product>)request.getAttribute("categoryProduct");
 	String pageBar=(String)request.getAttribute("pageBar");
 	
 	//회계표시
@@ -31,26 +33,26 @@
 	                <li><input type="checkbox">　　구두</li>
 	            </ul>
 	        </div>
-	        <!-- 사이즈 3가지로 통일하여 주석처리 -->
-	        <!-- <div class="size">
-	            <span class="pd_sort">사이즈</span>
-	            <ul>
-	                <li><a href="">230대</a></li>
-	                <li><a href="">240대</a></li>
-	                <li><a href="">250대</a></li>
-	                <li><a href="">260대</a></li>
-	                <li><a href="">270대</a></li>
-	                <li><a href="">280대</a></li>
-	            </ul>
-	        </div> -->
 	    </div>
 	    
 	    <div id="pd_right">
 	        <ul>
-	        <%if(userProduct!=null) { 
+	        <%if(userProduct!=null&&categoryProduct==null) { 
+	        	// man, woman, kids 클릭시
 	        	for(Product p : userProduct) {
 	        %>
 	            <li>
+	                <a href="<%=request.getContextPath() %>/product/productDetail?proNo=<%=p.getProNo() %>"><img src="<%=request.getContextPath() %>/images/product/<%=userType.toLowerCase() %>/<%=p.getImages1() %>" alt=""></a>
+	                <span>[슈썸]</span>
+	                <span><%=p.getProName() %></span>
+	                <span><%=df.format(p.getPrice()) %></span>
+	            </li>
+	        <%	}
+	        }else if(categoryProduct!=null) {
+	        	// 운동화, 샌들, 구두 클릭시
+	        	for(Product p : categoryProduct) {
+	        %> 
+	        	<li>
 	                <a href="<%=request.getContextPath() %>/product/productDetail?proNo=<%=p.getProNo() %>"><img src="<%=request.getContextPath() %>/images/product/<%=userType.toLowerCase() %>/<%=p.getImages1() %>" alt=""></a>
 	                <span>[슈썸]</span>
 	                <span><%=p.getProName() %></span>
@@ -82,8 +84,9 @@
 			$.ajax({
 				url:"<%=request.getContextPath() %>/product/productlistAjax",
 				data:{
-					"userType":"<%=userType.toLowerCase() %>",
-					"sort":$(e.target).val()
+						"userType":"<%=userType.toLowerCase() %>",
+						"ctegory":"<%=category %>",
+						"sort":$(e.target).val()
 					},
 				success:data=>{
 					$("#pd_right").html(data);
