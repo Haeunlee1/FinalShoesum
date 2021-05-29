@@ -1,8 +1,8 @@
 package com.board.model.service;
 
-import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.close;
 import static com.common.JDBCTemplate.commit;
+import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.board.model.dao.BoardDao;
 import com.board.model.vo.Board;
+import com.board.model.vo.BoardComment;
 
 public class BoardService {
 	private BoardDao dao= new BoardDao();
@@ -49,5 +50,15 @@ public class BoardService {
 		Board b = dao.selectBoard(conn, boardNo,qabPw);
 		close(conn);
 		return b;
+	}
+	
+	public int insertComment(int qabNo, String content) {
+		//댓글 등록
+		Connection conn =getConnection();
+		int result=dao.insertComment(conn,qabNo,content);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 }

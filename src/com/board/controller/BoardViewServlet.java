@@ -38,9 +38,6 @@ public class BoardViewServlet extends HttpServlet {
 			//관리자라면
 			qabPw ="0";
 		}
-		
-		System.out.println(request.getParameter("admin_check"));
-		System.out.println(qabPw);
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		Board b = new BoardService().selectBoard(boardNo,qabPw);
 		if(b!=null) {
@@ -54,6 +51,9 @@ public class BoardViewServlet extends HttpServlet {
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
+		
+		//댓글도 같이 불러오기
+		//BoardComment bc=new BoardService().selectComment();
 	}
 
 	/**

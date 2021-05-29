@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.board.model.vo.Board;
+import com.board.model.vo.BoardComment;
 import com.member.model.dao.MemberDao;
 
 public class BoardDao {
@@ -137,6 +138,22 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return b;
-		
+	}
+	
+	public int insertComment(Connection conn, int qabNo, String content) {
+		//댓글등록
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertComment"));
+			pstmt.setString(1, content);
+			pstmt.setInt(2, qabNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

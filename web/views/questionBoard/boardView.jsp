@@ -21,8 +21,9 @@
         <div id="comment_write_con">
             <p>댓글작성</p>
             <div id="comment_write_box">
-                <form action="">
-                    <textarea name="content" id="content" rows="4" placeholder="관리자만 댓글 작성이 가능합니다."></textarea>
+                <form action="<%=request.getContextPath()%>/board/commentInsert">
+                	<input type="hidden" name=qabNo value="<%=b.getQabNo()%>">
+                    <textarea name="content" id="content" rows="4" placeholder="<%=loginMember.getMemberId().equals("admin")?"":"관리자만 댓글 작성 가능합니다." %>" <%=loginMember.getMemberId().equals("admin")?"":"readonly" %>></textarea>
                     <button type="submit" id="comment_btn_insert">확인</button>
                 </form>
             </div>
@@ -44,15 +45,5 @@
     </section>
     
     <script>
-    	$("#content").focus(e=>{
-    		//댓글작성칸에 포커스 됐을 때 관리자 인지 아닌지 확인하고 alert
-    		<%if (loginMember==null || !loginMember.getMemberId().equals("admin")){%>
-    			//로그인 안했거나 관리자가 아닐 때
-    			alert('관리자만 작성 할 수 있습니다');
-    		<%}else {%>
-    			//관리자일때
-    			
-    		<%}%>
-    	})
     </script>
 <%@ include file="/views/common/footer.jsp"%>
