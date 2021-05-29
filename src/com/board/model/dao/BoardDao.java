@@ -156,4 +156,29 @@ public class BoardDao {
 		}
 		return result;
 	}
+	
+	public BoardComment selectComment(Connection conn, int boardNo) {
+		//게시글 번호로 댓글 불러오기
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		BoardComment bc=null;
+		try {
+			System.out.println(boardNo);
+			pstmt=conn.prepareStatement(prop.getProperty("selectComment"));
+			pstmt.setInt(1, boardNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				bc=new BoardComment();
+				bc.setCommentNo(rs.getInt("comment_number"));
+				bc.setCommentContent(rs.getString("comment_content"));
+				bc.setCommentDate(rs.getDate("comment_date"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return bc;
+	}
 }

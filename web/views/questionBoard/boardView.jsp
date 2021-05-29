@@ -4,6 +4,7 @@
 <%@page import="com.board.model.vo.*" %>
 <%
 	Board b = (Board)request.getAttribute("board");
+	BoardComment bc=(BoardComment)request.getAttribute("comment");
 %>
 	<section id="boardview_box">
         <div id="view_title">
@@ -18,32 +19,41 @@
             <%=b.getQabContent() %>
         </div>      
         <!-- 댓글 작성 하는 것 -->
+        <%if (bc==null){ %>
         <div id="comment_write_con">
-            <p>댓글작성</p>
+            <p class="text_border">댓글작성</p>
             <div id="comment_write_box">
                 <form action="<%=request.getContextPath()%>/board/commentInsert">
                 	<input type="hidden" name=qabNo value="<%=b.getQabNo()%>">
-                    <textarea name="content" id="content" rows="4" placeholder="<%=loginMember.getMemberId().equals("admin")?"":"관리자만 댓글 작성 가능합니다." %>" <%=loginMember.getMemberId().equals("admin")?"":"readonly" %>></textarea>
+                	<%if (loginMember!=null&&loginMember.getMemberId().equals("admin")){ %>
+                    <textarea name="content" id="content" rows="4" ></textarea>
                     <button type="submit" id="comment_btn_insert">확인</button>
+                    <%}else { %>
+                    <textarea name="content" id="content" rows="4" placeholder="관리자만 댓글 작성 가능합니다." readonly></textarea>
+                    <%} %>
                 </form>
             </div>
         </div>
+        <%} else { %>
         <!-- 이미 있는 댓글 가져오는 것 -->
         <div id="comment_view_con">
-            <p>댓글</p>
+            <p class="text_border">댓글</p>
             <div id="comment_view_box">
                 <ul>
-                    <li class="f_right"id="comment_view_date">날짜</li>
-                    <li class="f_left" id="comment_admin">관리자</li><Br>
-                    <li class="f_left" id="comment_view_content">관리자 댓글 내용</li>
+                    <li class="f_right text_border"><%=bc.getCommentDate() %></li>
+                    <li class="f_left text_border">관리자</li><br>
+                    <li class="f_left" id="comment_view_content"><%=bc.getCommentContent() %></li>
+                    <%if (loginMember!=null&&loginMember.getMemberId().equals("admin")){ %>
+                    <li class="f_right"><input type="button" id="comment_del_btn" value="삭제"></li>
+                    <li class="f_right" id="comment_edit"><input type="button" value="수정" id="comment_edit_btn"></li>
+                    <%} %>
                 </ul>
             </div>
         </div>
+        <%} %>
         <div id="comment_btn">
             <button type="button" class="backtoList_btn" onclick="location.assign('<%=request.getContextPath()%>/board/boardList')">목록으로</button>  
         </div>      
     </section>
     
-    <script>
-    </script>
 <%@ include file="/views/common/footer.jsp"%>

@@ -177,10 +177,7 @@ div#comment_write_box textarea{
     float:left;
     height:65px;
 }
-div#comment_write_con>p, 
-div#comment_view_con>p, 
-li#comment_admin,
-li#comment_view_date{
+.text_border{
     font-weight: bolder;
     font-size:18px;
 }
@@ -218,6 +215,21 @@ div#comment_view_con{
 div#comment_btn{
     clear:both;
     margin-top:50px;
+}
+li#comment_edit{
+	padding-right:0px;
+}
+#comment_edit_btn{
+	background-color:black;
+	color:white;
+}
+#comment_del_btn, #comment_edit_btn{
+    border-radius :7%;
+    width:60px;
+    height:30px;
+    border:none;
+    cursor:pointer;
+    margin-right:0;
 }
 .backtoList_btn{
     width:100px;

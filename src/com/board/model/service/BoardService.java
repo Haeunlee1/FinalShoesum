@@ -61,4 +61,12 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	public BoardComment selectComment(int boardNo) {
+		//댓글 불러오기
+		Connection conn=getConnection();
+		BoardComment bc=dao.selectComment(conn,boardNo);
+		close(conn);
+		return bc;
+	}
 }
