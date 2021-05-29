@@ -57,7 +57,9 @@
                 <td><%= df.format(c.getProPrice()) %></td>
                 <td><%= c.getCartProCount() %></td>
                 <td>무료</td>
-                <td class="cart_total"><%= (c.getProPrice() * c.getCartProCount()) %></td>
+                <td><%= df.format(c.getProPrice() * c.getCartProCount()) %>
+                	<input type = "hidden" class = "cart_total" value=<%= (c.getProPrice() * c.getCartProCount())%>>
+                </td>
                 <td>
                     <ul>
                         <li><input type="button" name="btn_order" value = "주문하기" style="background-color : black; color : white" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=loginMember.getMemberNo() %>&proNo=<%= c.getProNo() %>&from=p&proCount=<%=c.getCartProCount() %>');"></li>
@@ -102,7 +104,6 @@
 			 
 			let getPrice = document.getElementById('price_body_wrap').children;
 			
-			console.log(getPrice[0].innerText == 0);
 			
 			if(getPrice[0].innerText == 0){
 				
@@ -157,17 +158,33 @@
             	
                  if(calCheck[i].checked == true){
 
-                     total += (Number)(getPrice[i].innerHTML);
-
+                     total += (Number)(getPrice[i].value);
+                     
                  }
 
             }
             
     	    let putTotal = document.getElementById("price_body_wrap").children;
-    	    putTotal[0].innerText = total;
-    	    putTotal[4].innerText = total;
+    	    putTotal[0].innerText = commify(total);
+    	    putTotal[4].innerText = commify(total);
 
 		    } 
+        
+        // 상품 가격 , 표시 
+        
+        function commify(n) {
+
+				var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
+
+					n += '';                          // 숫자를 문자열로 변환
+
+					while (reg.test(n)){
+
+							n = n.replace(reg, '$1' + ',' + '$2');
+
+                         }
+                         return n;
+                  }
 	
 	</script>
 
