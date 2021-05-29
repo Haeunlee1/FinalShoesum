@@ -140,4 +140,28 @@ public class ProductService {
 		close(conn);
 		return list;
 	}
+	
+	// review 구매여부 확인
+	public boolean checkOrdered(int userNo, String proNo) {
+		
+		Connection conn = getConnection();
+		boolean flag = dao.checkOrdered(conn,userNo,proNo);
+		close(conn);
+		return flag;
+	}
+	
+	// review insert
+	public int insertReview(Review r) {
+		Connection conn = getConnection();
+		int result = dao.insertReview(conn,r);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	
 }

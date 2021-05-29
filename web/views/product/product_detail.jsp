@@ -3,12 +3,26 @@
 <%@ include file="/views/common/header.jsp" %>
 <%@ page import="java.util.List,com.product.model.vo.*,java.text.*" %>
 <%@ page import="com.product.model.service.*" %>
+<%@ page import="com.product.model.vo.Review" %>
 <%
 	List<Product> list = (List<Product>)request.getAttribute("list");
 	int price=list.get(0).getPrice(); 
 	String proNo="";
 	//회계표시
 	DecimalFormat df = new DecimalFormat("#,###,###");
+	
+	// 리뷰 리스트 값 받아오기
+	List<Review> relist = (List<Review>)request.getAttribute("relist");
+
+	// 별모양 만들기
+	String getStar = "";
+	int memberNo;
+	if(loginMember == null){
+		memberNo = -1;
+	} else {
+		memberNo = loginMember.getMemberNo();
+	}
+	
 %>
 
 	<section>
@@ -89,10 +103,69 @@
 		<%		}
 			} %>  
 	    
-	    
+		<!-- 리뷰 -->
+		
 	    <div id="pd_review">
-	    	
+	    	<div id="pd_review_content">
+	       <p id = review_head>구매후기</p>
+	       <%if(!relist.isEmpty()){ %>
+			    <%for (Review r : relist){ %>
+				        <div class="review_box">
+				        <%
+				        	switch(r.getReviewRating()){
+				        	case 1 :
+				        		getStar = "★☆☆☆☆"; 
+				        	break;
+				        	case 2 : 
+				        		getStar = "★★☆☆☆";
+				        	break;
+				        	case 3 :
+				        		getStar = "★★★☆☆";
+				        	break;
+				        	case 4 :
+				        		getStar = "★★★★☆";
+				        	break;
+				        	case 5 :
+				        		getStar = "★★★★★";
+				        	break;
+				        	default :
+				        		getStar = "☆☆☆☆☆";
+				        		break;
+				        }
+				        %>
+				            <p>평점 : <%=getStar %></p>
+				            <div>
+				                <%=r.getReviewCont() %>
+				            </div>
+				            <p><%=r.getReviewMemId() %>　|　<%=r.getReviewDate() %></p>
+				        </div>
+				<%}%>
+	    <%} else { %>
+	    	<div id = "review_null">
+	    		등록된 리뷰가 없습니다
+	    	</div>
+	   <% } %>
+	   <form name = "insertReview" action="<%=request.getContextPath()%>/review/insertReview?proNo=<%=proNo %>&memberNo=<%=memberNo %>" method = "post" onsubmit="return fn_checkLoing()">
+	    <div class="review_write">
+	    	<div id = "review_rating_wrapper">
+	            <p>리뷰</p>
+	            	<div id="review_rating">
+	            		<span><i class="far fa-star"></i></span>
+	            		<span><i class="far fa-star"></i></span>
+	            		<span><i class="far fa-star"></i></span>
+	            		<span><i class="far fa-star"></i></span>
+	            		<span><i class="far fa-star"></i></span>
+	            	</div>
+	            </div>
+	            <textarea name="review_content" id="review_content" cols="110" rows="5" placeholder="상품에 대한 리뷰를 남겨주세요."></textarea>
+	            <input type = "hidden" id= "getRating" name="getRating">
+	            <button type="submit">등록</button>
+	        </div>
+	        </form>
+	</div>
 	    </div>
+	    
+	<!-- 리뷰  끝 -->	    
 	    
 	    <!-- Ajax 처리 -->
 	    <div id="recommend_pd">
@@ -133,16 +206,6 @@
 				location.assign('<%=request.getContextPath()%>/views/login/login.jsp');
 			<%}%>
 		}
-		
-		// Review 불러오기 ! 
-		$(document).ready((e)=>{
-			$.ajax({
-				url : "<%=request.getContextPath()%>/product/reviewPdAjax?proNo=<%=proNo%>",
-				success : data=>{
-					$("#pd_review").html(data);
-				}
-			});
-		});
 		
 		
 		// recommend_pd Ajax -> bestPd Ajax랑 로직 동일하게 구현, 출력창만 다르게!
@@ -233,6 +296,56 @@
             });
             
         })
+        
+		// review part		
+    	
+		// 리뷰 평점 주기  
+		
+		let totalStar = document.getElementById("review_rating").children;
+		
+		for(i=0;i<totalStar.length;i++){
+			totalStar[i].addEventListener("click",(e)=>{
+				
+				// even 객체 가져오기 
+				let child = e.target.parentNode;
+				let parent = child.parentNode;
+				let index = Array.prototype.indexOf.call(parent.children, child);
+				
+				for(j=0;j<totalStar.length;j++){
+					totalStar[j].children[0].className = "far fa-star";
+					totalStar[j].children[0].style.cursor = "pointer";
+					
+				}
+				
+				for(k=0;k<index+1;k++){
+					totalStar[k].children[0].className = "fas fa-star";
+				}
+				
+				
+				let count = 0
+				for (q =0;q<totalStar.length;q++){
+					if(totalStar[q].children[0].className == "fas fa-star"){
+						count++;
+					}
+				}
+				document.getElementById("getRating").value = count;				
+				})
+			} 
+		
+		
+		// 리뷰 로그인 여부 확인 
+		
+		const fn_checkLoing = function(){
+			
+			<%if(memberNo == -1){%>
+				alert("로그인 후 이용해주세요");
+				return false;
+			<%}%>
+				return true; 				
+		} 
+			
+		
+		
     </script>
 
 <%@ include file="/views/common/footer.jsp" %>

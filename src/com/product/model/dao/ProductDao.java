@@ -28,7 +28,7 @@ public class ProductDao {
 	}
 
 	public List<Product> selectProduct(Connection conn, String proNo) {
-		// 각 상품 가져오기
+		// 상품 가져오기
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
 		List<Product> list = new ArrayList();
@@ -60,7 +60,6 @@ public class ProductDao {
 	}
 	
 	public List<Product> allProduct(Connection conn) {
-		// 전체 상품 가져오기 -> 메인페이지 bestproduct 에서 사용
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
 		List<Product> list = new ArrayList();
@@ -91,7 +90,6 @@ public class ProductDao {
 	}
 	
 	public List<Product> recentProduct(Connection conn) {
-		// 최근 상품 불러오기 -> 메인페이지 newproduct에서 사용
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
 		List<Product> list = new ArrayList();
@@ -280,6 +278,7 @@ public class ProductDao {
 			System.out.println(sql);
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+//			쿼리문에 문장을 넣으면 ''생기는데 이걸 이스케이프 처리할 방법이 있나? 일단 하은이한테도 질문해둠
 			pstmt.setInt(2, (cPage-1)*numPerpage+1);
 			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
@@ -304,6 +303,7 @@ public class ProductDao {
 		return list;
 	}
 	
+	// review 리스트 가져오기 
 	public List<Product> categoryProduct(Connection conn, String userType, String category, int cPage, int numPerpage) {
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
@@ -337,6 +337,10 @@ public class ProductDao {
 		}
 		return list;
 	}
+	
+	
+	
+	
 	
 	public List<Product> categorySortProduct(Connection conn, String sort, String userType, String category, int cPage, int numPerpage) {
 		// userType+category별 최신순, 높은가격순, 낮은가격순 가져오기
@@ -376,6 +380,9 @@ public class ProductDao {
 		return list;
 	}
 	
+	
+	
+	
 	public List<Review> selectReviewList(Connection conn,String proNo){
 		
 		PreparedStatement pstmt = null;
@@ -395,6 +402,7 @@ public class ProductDao {
 				r.setReviewMemId(rs.getString("MEMBER_ID"));
 				r.setReviewProNo(rs.getString("PRO_NO"));
 				r.setReviewDate(rs.getDate("REVIEW_DATE"));
+				r.setReviewMemNo(rs.getInt("MEMBER_NO"));
 				list.add(r);
 			}
 		} catch(SQLException e) {
@@ -405,4 +413,55 @@ public class ProductDao {
 		}
 			return list;
 	}
+	
+	// review 구매여부 확인 
+	public boolean checkOrdered(Connection conn, int userNo, String proNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean flag = false;
+		
+		try {
+			
+			pstmt=conn.prepareStatement(prop.getProperty("checkOrdered"));
+			pstmt.setInt(1, userNo);
+			pstmt.setString(2, proNo);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				flag = true;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} 
+		return flag;
+	}
+	
+	public int insertReview(Connection conn,Review r) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		System.out.println(r.getReviewCont());
+		System.out.println(r.getReviewMemNo());
+		System.out.println( r.getReviewProNo());
+		System.out.println(r.getReviewRating());
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("insertReview"));
+			pstmt.setString(1, r.getReviewCont());
+			pstmt.setInt(2, r.getReviewRating());
+			pstmt.setInt(3, r.getReviewMemNo());
+			pstmt.setString(4, r.getReviewProNo());
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
 }
