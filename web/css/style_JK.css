@@ -549,12 +549,18 @@ div#pd_info>button {
     cursor: pointer;
 }
 div#pd_review {
+  /*   clear: both;
+    height: 750px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray; */
+}
+div#pd_review_content {
     clear: both;
     height: 750px;
     border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
 }
-div#pd_review>p {
+div#pd_review_content>p {
     font-size: 27px;
     font-weight: bold;
     padding: 50px 0;

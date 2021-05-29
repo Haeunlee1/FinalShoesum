@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.board.model.vo.Board;
+import com.board.model.vo.BoardComment;
 import com.member.model.dao.MemberDao;
 
 public class BoardDao {
@@ -44,7 +45,7 @@ public class BoardDao {
 				b.setQabWriter(rs.getString("qab_writer"));
 				b.setQabContent(rs.getString("qab_content"));
 				b.setQabDate(rs.getDate("qab_date"));
-				b.setQabPw(rs.getInt("qab_pw"));
+				b.setQabPw(rs.getString("qab_pw"));
 				list.add(b);
 			}
 		}catch(SQLException e) {
@@ -92,7 +93,7 @@ public class BoardDao {
 			pstmt=conn.prepareStatement(prop.getProperty("insertBoard"));
 			pstmt.setString(1,b.getQabTitle());
 			pstmt.setString(2, b.getQabWriter());
-			pstmt.setInt(3,b.getQabPw());
+			pstmt.setString(3,b.getQabPw());
 			pstmt.setString(4, b.getQabContent());
 			pstmt.setInt(5, memberNo);
 			result=pstmt.executeUpdate();
@@ -103,20 +104,20 @@ public class BoardDao {
 		}return result;
 	}
 
-	public Board selectBoard(Connection conn, int boardNo,int qabPw) {
+	public Board selectBoard(Connection conn, int boardNo,String qabPw) {
 		//비번으로 게시글 불러오기
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Board b=null;
 		try {
-			if(qabPw==0) {
+			if(qabPw.equals("0")) {
 				//관리자라면
 				pstmt=conn.prepareStatement(prop.getProperty("selectBoardAdmin"));
 				pstmt.setInt(1, boardNo);
 			}else {
 				pstmt=conn.prepareStatement(prop.getProperty("selectBoard"));
 				pstmt.setInt(1, boardNo);
-				pstmt.setInt(2, qabPw);
+				pstmt.setString(2, qabPw);
 			}
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
@@ -125,8 +126,10 @@ public class BoardDao {
 				b.setQabTitle(rs.getString("qab_title"));
 				b.setQabWriter(rs.getString("qab_writer"));
 				b.setQabDate(rs.getDate("qab_date"));
-				b.setQabPw(rs.getInt("qab_pw"));
+				b.setQabPw(rs.getString("qab_pw"));
 				b.setQabContent(rs.getString("qab_content"));
+			}else {
+				b=null;
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -135,6 +138,22 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return b;
-		
+	}
+	
+	public int insertComment(Connection conn, int qabNo, String content) {
+		//댓글등록
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertComment"));
+			pstmt.setString(1, content);
+			pstmt.setInt(2, qabNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

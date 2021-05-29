@@ -2,14 +2,15 @@ package com.product.model.service;
 
 import static com.common.JDBCTemplate.close;
 import static com.common.JDBCTemplate.commit;
-import static com.common.JDBCTemplate.rollback;
 import static com.common.JDBCTemplate.getConnection;
+import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.product.model.dao.ProductDao;
 import com.product.model.vo.Product;
+import com.product.model.vo.Review;
 
 public class ProductService {
 
@@ -73,10 +74,10 @@ public class ProductService {
 		return list;
 	}
 	
-	public int deleteWish(int userNo, int likeNo) {
+	public int deleteWish(int userNo, String proNo) {
 		//찜한상품삭제=>테이블 삭제버튼
 		Connection conn= getConnection();
-		int result = dao.deleteWish(conn, userNo, likeNo);
+		int result = dao.deleteWish(conn, userNo, proNo);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
@@ -89,8 +90,7 @@ public class ProductService {
 		int result=0;
 		int count=0;
 		for(String pno : checkArr) {	//체크된 배열 반복문 돌면서 지우기
-			int likeNo=Integer.parseInt(pno);
-			result+=dao.deleteWish(conn,userNo,likeNo);
+			result+=dao.deleteWish(conn,userNo,pno);
 			if(result==0) {
 				rollback(conn);
 				close(conn);
@@ -129,6 +129,14 @@ public class ProductService {
 	public List<Product> categorySortProduct(String sort, String userType, String category, int cPage, int numPerpage) {
 		Connection conn=getConnection();
 		List<Product> list = dao.categorySortProduct(conn,sort,userType,category,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	
+	// review 리스트 
+	public List<Review> selectReviewList(String proNo){
+		Connection conn = getConnection();
+		List<Review> list = dao.selectReviewList(conn,proNo);
 		close(conn);
 		return list;
 	}

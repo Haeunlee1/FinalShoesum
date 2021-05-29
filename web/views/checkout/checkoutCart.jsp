@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "/views/common/header.jsp" %>
-<%@ page import = "java.util.List,com.checkout.model.vo.Checkout" %>
+<%@ page import = "java.util.List,com.checkout.model.vo.Checkout,java.text.DecimalFormat" %>
 
 <%
 
 	List<Checkout> list = (List<Checkout>)request.getAttribute("list");
 	Member m = (Member)request.getAttribute("member");
-
+	DecimalFormat df = new DecimalFormat("#,###,###");
+	
 	String checkPro = "";
 	int checkPrice = 0;		
 	String checkToProNo = "";
@@ -113,7 +114,7 @@
                 <td>배송지 선택 <span style="color:#E92E4D;">*</span></td>
                 <td>
                     <input type="checkbox" name="checkId" id="checkId" onclick="checkInfo();"> &nbsp;주문자 정보와 동일
-                    <input type="checkbox" name="checkNew" id="checkNew" onclick="clearInfo()"> &nbsp;새로운 배송지
+                    <input type="checkbox" name="checkNew" id="checkNew" onclick="clearInfo();"> &nbsp;새로운 배송지
                 </td>
             </tr>
             <tr>
@@ -158,7 +159,7 @@
             </tr>
             <tr>
                 <td>배송메세지 <span style="color:#E92E4D;">*</span></td>
-                <td><textarea rows="5" cols="40" style="width:600px;height:80px;resize:none;">12</textarea></td>
+                <td><textarea rows="5" cols="40" style="width:600px;height:80px;resize:none;"></textarea></td>
             </tr>
         </table>
     </div>
@@ -173,7 +174,7 @@
             </tr>
             <tr>
                 <td>총상품가격</td>
-                <td><%=checkPrice %>원</td>
+                <td><%=df.format(checkPrice) %>원</td>
             </tr>
             <tr>
                 <td>배송비</td>
@@ -181,7 +182,7 @@
             </tr>
             <tr>
                 <td>총 결제금액</td>
-                <td><%=checkPrice %>원</td>
+                <td><%=df.format(checkPrice) %>원</td>
             </tr>
             <tr>
                 <td>결제방법</td>
@@ -226,12 +227,30 @@
 </section>
 
 <script>
+	
+		// 배송지 default 설정 
+		
+		document.getElementById("checkId").checked = true;
+		document.getElementById("getName").value = "<%= m.getMemberName()%>";
+		document.getElementById("postcode").value = "<%= m.getPostNo()%>";
+		document.getElementById("address1").value = "<%= m.getAddress()%>";
+		document.getElementById("address2").value = "<%= m.getAddressEnd()%>";
+		let selOption = document.getElementById("selPhone");
+		
+		for (i=0;i<selOption.options.length;i++){
+		if(selOption[i].value == "<%=m.getPhone().substring(0,3)%>"){
+			selOption[i].selected = true; 
+	 			}
+			}
+		document.getElementById("selPhoneMid").value = "<%= m.getPhone().substring(3,7)%>";
+		document.getElementById("selPhoneEnd").value = "<%= m.getPhone().substring(7,11)%>";
 
+		let checkId = document.getElementById("checkId");
+		let checkNew = document.getElementById("checkNew");
 
-	let checkId = document.getElementById("checkId");
-	let checkNew = document.getElementById("checkNew");
-
-	const checkInfo = function(){
+		// 주문자 정보 체크 
+		
+		const checkInfo = function(){
 	
 		checkNew.checked = false;
 		
@@ -259,9 +278,11 @@
         	document.getElementById("selPhoneMid").value = "";
         	document.getElementById("selPhoneEnd").value = "";	
         	
-        }
-	}
+        	}
+		}
         
+		
+		// 새로운 배송지 
 	
    const clearInfo = function(){
         	

@@ -6,7 +6,6 @@
     	int memberNo=(int)(request.getAttribute("memberNo"));
     	DecimalFormat df = new DecimalFormat("#,###,###");
    %>
-    <!--   <form name="movetoCart" id="movetoCart" method="post"> -->
     	<table id="tbl-wishlist">
 		<%if(!wishList.isEmpty()) {%>
              <tr class="head_tr">
@@ -28,7 +27,7 @@
              %>
              <tr class="wish_product">
                  <td>
-                 <input type="checkbox" class="chk" id="select_products" name="select_products" value="" title="<%=p.getLikeNo()%>">
+                 <input type="checkbox" class="chk" id="select_products" name="select_products" value="" title="<%=p.getProNo()%>">
 				<!-- input prodcut no 받아오기  -->                 
                  <input type = "hidden" class="ip_proNo" value=<%=p.getProNo() %>>
                  </td>
@@ -40,7 +39,6 @@
                  <td>
                      <ul>
                          <li class="product_name"><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=p.getProNo()%>"><%=p.getProName() %></a></li>
-                         <%-- <li name="option">[옵션 : <%=p.getColor() %> / <%=p.getSize() %>]</li> --%>
                      </ul>
                  </td>
                  <td ><%=df.format(p.getPrice()) %></td>
@@ -49,7 +47,7 @@
                  <td><%=df.format(p.getPrice())%></td>
                  <td>
                      <ul>
-                         <li><input type="button" name="btn_delete" title="<%=p.getLikeNo() %>" value="삭제" style="background-color : #CCCCCC">
+                         <li><input type="button" name="btn_delete" title="<%=p.getProNo() %>" value="삭제" style="background-color : #CCCCCC">
                          </li>
                      </ul>
                  </td>
@@ -72,11 +70,9 @@
 		<div id="wish-btn">
 			선택한 상품을 
             <button class="left-btn checkwishBtn">삭제하기</button>
-            <!-- <button class="left-btn" onclick="">장바구니 담기</button> -->			<!-- json이나 form으로 넘겨주기 -->
             <button class="right-btn allDelBtn" >전체상품 비우기</button>
         </div>
         <%} %>
-     <!-- </form> -->
 <script>
 //전체체크
 $("#checkAll").click(e=>{
@@ -97,12 +93,11 @@ $(".chk").click(e=>{
 
 $("input[name=btn_delete]").click(e=>{
 	//찜한상품 td 삭제버튼
-	//회원번호 & 찜번호 넘기기
+	//회원번호 & 상품번호 넘기기
 	if(confirm("해당 상품을 삭제하시겠습니까?")){
-		let likeNo=$(e.target).attr("title");
-		console.log(likeNo);
-		<%-- location.replace("<%=request.getContextPath()%>/mypage/wishDelete?memberNo="+'<%=memberNo%>'+"&likeNo="+likeNo&type=wish); --%>
-		location.replace("<%=request.getContextPath()%>/mypage/wishDelete?memberNo="+'<%=memberNo%>'+"&likeNo="+likeNo+"&type=wish");
+		let proNo=$(e.target).attr("title");
+		console.log(proNo);
+		location.replace("<%=request.getContextPath()%>/mypage/wishDelete?memberNo="+'<%=memberNo%>'+"&proNo="+proNo+"&type=wish");
 	}
 });
 

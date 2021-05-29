@@ -1,6 +1,7 @@
 package com.product.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.product.model.service.ProductService;
+import com.product.model.vo.Review;
 
 /**
- * Servlet implementation class WishDeleteServlet
+ * Servlet implementation class ReviewPdAjaxServlet
  */
-@WebServlet("/mypage/wishDelete")
-public class WishDeleteServlet extends HttpServlet {
-	//관심상품 지우기
+@WebServlet("/product/reviewPdAjax")
+public class ReviewPdAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WishDeleteServlet() {
+    public ReviewPdAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +31,16 @@ public class WishDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//회원번호, 상품번호로 db에 관심상품 지우기
-		String proNo =request.getParameter("proNo");
-		int userNo = Integer.parseInt(request.getParameter("memberNo"));
-		int result = new ProductService().deleteWish(userNo, proNo);
-		if(request.getParameter("pd")!=null&&result>0) {
-			//상품디테일에서 넘어왔다면
-			request.getRequestDispatcher("/product/productDetail?proNo="+proNo).forward(request, response);
-		}else{
-			String msg=result>0?"관심상품에서 삭제되었습니다.":"삭제실패";
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", "/mypage/mypage.do?memberNo="+userNo);
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-		}
+		// TODO Auto-generated method stub
+		
+		String proNo = request.getParameter("proNo");
+		List<Review> list = new ProductService().selectReviewList(proNo);
+		
+		request.setAttribute("list", list);
+		
+		request.getRequestDispatcher("/views/product/reviewPdAjax.jsp").forward(request, response);
+		
+		
 	}
 
 	/**
