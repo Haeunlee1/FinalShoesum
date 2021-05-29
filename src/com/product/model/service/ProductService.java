@@ -104,6 +104,7 @@ public class ProductService {
 	}
 	
 	public int selectProdcutCount(String userType) {
+		// 상품리스트 페이징 처리
 		Connection conn=getConnection();
 		int result = dao.selectProductCount(conn, userType);
 		close(conn);
@@ -111,8 +112,23 @@ public class ProductService {
 	}
 	
 	public List<Product> sortProduct(String sort, String userType, int cPage, int numPerpage) {
+		// 최신순, 높은가격순, 낮은가격순 가져오기
 		Connection conn = getConnection();
 		List<Product> list = dao.sortProduct(conn,sort,userType,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	
+	public List<Product> categoryProduct(String userType, String category, int cPage, int numPerpage) {
+		Connection conn=getConnection();
+		List<Product> list = dao.categoryProduct(conn,userType,category,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	
+	public List<Product> categorySortProduct(String sort, String userType, String category, int cPage, int numPerpage) {
+		Connection conn=getConnection();
+		List<Product> list = dao.categorySortProduct(conn,sort,userType,category,cPage,numPerpage);
 		close(conn);
 		return list;
 	}

@@ -21,16 +21,38 @@
 
 <script>
 	$(function(){
-    	$("#menu_bar>li").hover(function(){
-        	$(this).children(".menu_sub").stop().slideToggle(300);
+    	
+    	$(".userType").mouseover(function(){
+        	$(this).find(".menu_sub").stop().slideDown(300);
         });
     	
-    	$(".userType").click(e=>{
+    	$(".userType").mouseleave(function(){
+        	$(this).find(".menu_sub").stop().slideUp(300);
+        });
+    	
+    	$(document).on('click','.userType' ,function(e) { 	   
+    	    e.stopPropagation(); 
+    	    var type=$(e.target).attr("title");
+   			location.assign("<%= request.getContextPath()%>/product/productlist?userType="+type);
+    	}); 
+    	
+    	$(document).on('click','.menu_sub>li' ,function(e) { 	   
+    	    e.stopPropagation();
+    	    var type=$(e.target).parents().parents().attr("title");
+    	    var category=$(e.target).attr("title");
+   			location.assign("<%= request.getContextPath()%>/product/productlist?userType="+type+"&category="+category);
+    	});
+    	
+    	
+    	
+    	<%-- $(".userType").click(e=>{
    			let type=$(e.target).attr("title");
    			location.assign("<%= request.getContextPath()%>/product/productlist?userType="+type);
    			
-    	});
+    	}); --%>
+    	
     });
+    	
 </script>
 
 </head>
@@ -67,23 +89,23 @@
             <ul id="menu_bar">
                 <li class="userType" title="man">MAN
                     <ul class="menu_sub">
-                        <li><a href="">운동화</a></li>
-                        <li><a href="">샌들</a></li>
-                        <li><a href="">구두</a></li>
+                        <li title="R">운동화</li>
+                        <li title="S">샌들</li>
+                        <li title="B">구두</li>
                     </ul>
                 </li>
                 <li class="userType" title="woman">WOMAN
                     <ul class="menu_sub">
-                        <li><a href="">운동화</a></li>
-                        <li><a href="">샌들</a></li>
-                        <li><a href="">구두</a></li>
+                        <li title="R">운동화</li>
+                        <li title="S">샌들</li>
+                        <li title="B">구두</li>
                     </ul>
                 </li>
                 <li class="userType" title="kids">KIDS
                     <ul class="menu_sub">
-                        <li><a href="">운동화</a></li>
-                        <li><a href="">샌들</a></li>
-                        <li><a href="">구두</a></li>
+                        <li title="R">운동화</li>
+                        <li title="S">샌들</li>
+                        <li title="B">구두</li>
                     </ul>
                 </li>
             </ul>
