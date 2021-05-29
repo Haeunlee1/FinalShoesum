@@ -69,4 +69,14 @@ public class BoardService {
 		close(conn);
 		return bc;
 	}
+	
+	public int deleteComment(int qabNo) {
+		//댓글 삭제
+		Connection conn=getConnection();
+		int result=dao.deleteComment(conn,qabNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }

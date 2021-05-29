@@ -181,4 +181,20 @@ public class BoardDao {
 		}
 		return bc;
 	}
+	
+	public int deleteComment(Connection conn, int qabNo) {
+		//게시글번호로 댓글 지우기
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteComment"));
+			pstmt.setInt(1, qabNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

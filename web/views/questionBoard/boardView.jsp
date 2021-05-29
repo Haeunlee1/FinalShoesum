@@ -36,24 +36,45 @@
         </div>
         <%} else { %>
         <!-- 이미 있는 댓글 가져오는 것 -->
-        <div id="comment_view_con">
-            <p class="text_border">댓글</p>
-            <div id="comment_view_box">
-                <ul>
-                    <li class="f_right text_border"><%=bc.getCommentDate() %></li>
-                    <li class="f_left text_border">관리자</li><br>
-                    <li class="f_left" id="comment_view_content"><%=bc.getCommentContent() %></li>
-                    <%if (loginMember!=null&&loginMember.getMemberId().equals("admin")){ %>
-                    <li class="f_right"><input type="button" id="comment_del_btn" value="삭제"></li>
-                    <li class="f_right" id="comment_edit"><input type="button" value="수정" id="comment_edit_btn"></li>
-                    <%} %>
-                </ul>
-            </div>
-        </div>
+        <form action="<%=request.getContentType() %>/board/updateComment" method="post">
+	        <div id="comment_view_con">
+	            <p class="text_border">댓글</p>
+	            <div id="comment_view_box">
+	                <ul>
+	                    <li class="f_right text_border"><%=bc.getCommentDate() %></li>
+	                    <li class="f_left text_border">관리자</li><br>
+	                    <li class="f_left" id="comment_view_content"><%=bc.getCommentContent() %></li>
+	                    <%if (loginMember!=null&&loginMember.getMemberId().equals("admin")){ %>
+	                    <li class="f_right">
+	                    	<input type="button" id="comment_del_btn" value="삭제">
+	                    </li>
+	                    <li class="f_right" id="comment_edit">
+	                    	<input type="button" value="수정" id="comment_edit_btn">
+	                    </li>
+	                    <%} %>
+	                </ul>
+	            </div>
+	        </div>
+        </form>
         <%} %>
         <div id="comment_btn">
             <button type="button" class="backtoList_btn" onclick="location.assign('<%=request.getContextPath()%>/board/boardList')">목록으로</button>  
         </div>      
     </section>
+    <script>
+    	$("#comment_del_btn").click(e=>{
+    		//댓글 삭제
+    		if(confirm("댓글을 삭제하시겠습니까?")){
+    			alert('해당 댓글을 삭제하였습니다.');
+    			location.assign("<%= request.getContextPath()%>/board/deleteComment?qabNo="+'<%=b.getQabNo()%>');
+    		};
+    	});
+    	
+    	<%-- $("#comment_edit_btn").click(e=>{
+    		//댓글 수정
+    		alert('댓글이 수정되었습니다.');
+    		location.assign("<%=request.getContextPath()%>/board/updateComment?qabNo="+'<%=b.getQabNo()%>');
+    	}) --%>
     
+    </script>
 <%@ include file="/views/common/footer.jsp"%>
