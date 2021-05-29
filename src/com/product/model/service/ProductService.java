@@ -74,10 +74,10 @@ public class ProductService {
 		return list;
 	}
 	
-	public int deleteWish(int userNo, int likeNo) {
+	public int deleteWish(int userNo, String proNo) {
 		//찜한상품삭제=>테이블 삭제버튼
 		Connection conn= getConnection();
-		int result = dao.deleteWish(conn, userNo, likeNo);
+		int result = dao.deleteWish(conn, userNo, proNo);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
@@ -90,8 +90,7 @@ public class ProductService {
 		int result=0;
 		int count=0;
 		for(String pno : checkArr) {	//체크된 배열 반복문 돌면서 지우기
-			int likeNo=Integer.parseInt(pno);
-			result+=dao.deleteWish(conn,userNo,likeNo);
+			result+=dao.deleteWish(conn,userNo,pno);
 			if(result==0) {
 				rollback(conn);
 				close(conn);

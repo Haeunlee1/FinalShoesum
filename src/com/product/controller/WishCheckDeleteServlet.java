@@ -32,10 +32,9 @@ public class WishCheckDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		String[] checkArr=request.getParameter("checkArr").split(",");
-		//String checkArr=String.join(",",request.getParameter("checkArr"));
 		int result=new ProductService().checkDeleteWish(memberNo,checkArr);
 		System.out.println(checkArr);
-		String msg=result>0?"선택한 상품이 삭제되었습니다.":"삭제실패";
+		String msg=result>0?"관심상품이 삭제되었습니다.":"삭제실패";
 		request.setAttribute("loc", "/mypage/mypage.do?memberNo="+memberNo);
 		request.setAttribute("msg", msg);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
