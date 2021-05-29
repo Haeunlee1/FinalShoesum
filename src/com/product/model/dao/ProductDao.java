@@ -338,77 +338,9 @@ public class ProductDao {
 		return list;
 	}
 	
-	public List<Product> categorySortProduct(Connection conn, String sort, String userType, String category, int cPage, int numPerpage) {
-		// userType+category별 최신순, 높은가격순, 낮은가격순 가져오기
-		PreparedStatement pstmt= null;
-		ResultSet rs=null;
-		List<Product> list = new ArrayList();
-		Product p = null;
-		
-		try {
-			String sql=prop.getProperty("sortProduct");
-			sql=sql.replace("#", sort);
-			System.out.println(sql);
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
-			pstmt.setString(2, category);
-			pstmt.setInt(3, (cPage-1)*numPerpage+1);
-			pstmt.setInt(4, cPage*numPerpage);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				p = new Product();
-				p.setProNo(rs.getString("pro_no"));
-				p.setProName(rs.getString("pro_name"));
-				p.setPrice(rs.getInt("pro_price"));
-				p.setImages1(rs.getString("img_src1"));
-				p.setImages2(rs.getString("img_src2"));
-				p.setImages3(rs.getString("img_src3"));
-				p.setImages4(rs.getString("img_src4"));
-				
-				list.add(p);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return list;
-	}
 	
-	public List<Product> categoryProduct(Connection conn, String userType, String category, int cPage, int numPerpage) {
-		PreparedStatement pstmt= null;
-		ResultSet rs=null;
-		List<Product> list = new ArrayList();
-		Product p = null;
-		
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("categoryProduct"));
-			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
-			pstmt.setString(2, category);
-			pstmt.setInt(3, (cPage-1)*numPerpage+1);
-			pstmt.setInt(4, cPage*numPerpage);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				p = new Product();
-				p.setProNo(rs.getString("pro_no"));
-				p.setProName(rs.getString("pro_name"));
-				p.setPrice(rs.getInt("pro_price"));
-				p.setImages1(rs.getString("img_src1"));
-				p.setImages2(rs.getString("img_src2"));
-				p.setImages3(rs.getString("img_src3"));
-				p.setImages4(rs.getString("img_src4"));
-				
-				list.add(p);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return list;
-	}
+	
+	
 	
 	public List<Product> categorySortProduct(Connection conn, String sort, String userType, String category, int cPage, int numPerpage) {
 		// userType+category별 최신순, 높은가격순, 낮은가격순 가져오기
@@ -448,77 +380,8 @@ public class ProductDao {
 		return list;
 	}
 	
-	public List<Product> categoryProduct(Connection conn, String userType, String category, int cPage, int numPerpage) {
-		PreparedStatement pstmt= null;
-		ResultSet rs=null;
-		List<Product> list = new ArrayList();
-		Product p = null;
-		
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("categoryProduct"));
-			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
-			pstmt.setString(2, category);
-			pstmt.setInt(3, (cPage-1)*numPerpage+1);
-			pstmt.setInt(4, cPage*numPerpage);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				p = new Product();
-				p.setProNo(rs.getString("pro_no"));
-				p.setProName(rs.getString("pro_name"));
-				p.setPrice(rs.getInt("pro_price"));
-				p.setImages1(rs.getString("img_src1"));
-				p.setImages2(rs.getString("img_src2"));
-				p.setImages3(rs.getString("img_src3"));
-				p.setImages4(rs.getString("img_src4"));
-				
-				list.add(p);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return list;
-	}
 	
-	public List<Product> categorySortProduct(Connection conn, String sort, String userType, String category, int cPage, int numPerpage) {
-		// userType+category별 최신순, 높은가격순, 낮은가격순 가져오기
-		PreparedStatement pstmt= null;
-		ResultSet rs=null;
-		List<Product> list = new ArrayList();
-		Product p = null;
-		
-		try {
-			String sql=prop.getProperty("sortProduct");
-			sql=sql.replace("#", sort);
-			System.out.println(sql);
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
-			pstmt.setString(2, category);
-			pstmt.setInt(3, (cPage-1)*numPerpage+1);
-			pstmt.setInt(4, cPage*numPerpage);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				p = new Product();
-				p.setProNo(rs.getString("pro_no"));
-				p.setProName(rs.getString("pro_name"));
-				p.setPrice(rs.getInt("pro_price"));
-				p.setImages1(rs.getString("img_src1"));
-				p.setImages2(rs.getString("img_src2"));
-				p.setImages3(rs.getString("img_src3"));
-				p.setImages4(rs.getString("img_src4"));
-				
-				list.add(p);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return list;
-	}
+	
 	
 	public List<Review> selectReviewList(Connection conn,String proNo){
 		
@@ -588,9 +451,9 @@ public class ProductDao {
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("insertReview"));
 			pstmt.setString(1, r.getReviewCont());
-			pstmt.setInt(2, r.getReviewMemNo());
-			pstmt.setString(3, r.getReviewProNo());
-			pstmt.setInt(4, r.getReviewRating());
+			pstmt.setInt(2, r.getReviewRating());
+			pstmt.setInt(3, r.getReviewMemNo());
+			pstmt.setString(4, r.getReviewProNo());
 			result = pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
