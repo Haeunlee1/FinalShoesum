@@ -127,6 +127,8 @@ public class BoardDao {
 				b.setQabDate(rs.getDate("qab_date"));
 				b.setQabPw(rs.getString("qab_pw"));
 				b.setQabContent(rs.getString("qab_content"));
+			}else {
+				b=null;
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 		String msg = "";
 		if(m != null) {
 			HttpSession session=request.getSession();
-			msg = m.getMemberId()+"님 로그인 성공 :)";
+			msg = m.getMemberId()+"님 환영합니다 :)";
 			session.setAttribute("loginMember",  m);
 			request.setAttribute("loc", "/index.jsp");
 		}else {

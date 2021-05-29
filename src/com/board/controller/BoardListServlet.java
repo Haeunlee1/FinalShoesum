@@ -32,9 +32,6 @@ public class BoardListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//int userNo = Integer.parseInt(request.getParameter("userNo"));
-		
-		
 		List<Board> list = new BoardService().boardList();
 		
 		request.setAttribute("list", list);

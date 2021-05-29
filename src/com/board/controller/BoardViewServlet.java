@@ -43,10 +43,17 @@ public class BoardViewServlet extends HttpServlet {
 		System.out.println(qabPw);
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		Board b = new BoardService().selectBoard(boardNo,qabPw);
-		
-		request.setAttribute("board", b);
-		request.getRequestDispatcher("/views/questionBoard/boardView.jsp").forward(request, response);
-//		
+		if(b!=null) {
+			request.setAttribute("board", b);
+			request.getRequestDispatcher("/views/questionBoard/boardView.jsp").forward(request, response);
+		}else {
+			//비번 틀렸다면
+			String msg="비밀번호가 일치하지 않습니다.";
+			String loc="/board/boardList";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**
