@@ -547,11 +547,13 @@ div#pd_info>button {
     font-size: 18px;
     margin-top: 20px;
 }
+/*  											REVIEW                                             */
 div#pd_review {
-  /*   clear: both;
+    clear: both;
     height: 750px;
     border-top: 1px solid lightgray;
-    border-bottom: 1px solid lightgray; */
+    border-bottom: 1px solid lightgray;
+  
 }
 div#pd_review_content {
     clear: both;
@@ -564,13 +566,34 @@ div#pd_review_content>p {
     font-weight: bold;
     padding: 50px 0;
 }
-div#pd_review .review_box {
+div#pd_review_content .review_box {
     width: 1000px;
-    height: 200px;
+    height: 180px;
     background: #eaeaea;
     margin-bottom: 20px;
 }
-div#pd_review .review_box p:first-child, .review_write>p {
+
+div#review_null {
+	width : 1000px;
+	height : 400px;
+	font-size : 30px;
+}
+
+ul#review_rating {
+	/* display : flex; */
+}
+
+div#review_rating_wrapper {
+	display : flex;
+	align-items : center;
+}
+
+div#review_rating {
+	margin-left : 5px;
+	font-size : 25px;
+}
+/* -------------------------------------------------------------------------------------------------- */
+div#pd_review .review_box p:first-child, #review_rating_wrapper>p {
     height: 65px;
     line-height: 65px;
     font-size: 25px;
@@ -588,7 +611,7 @@ div#pd_review .review_box div {
 div#pd_review .review_box p:last-child {
     text-align: left;
     padding-left: 30px;
-    padding-top: 7px;
+    padding-top: 13px;
 }
 div#pd_review .review_write {
     width: 1000px;

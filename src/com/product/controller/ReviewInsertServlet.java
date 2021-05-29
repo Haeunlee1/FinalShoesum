@@ -1,7 +1,6 @@
 package com.product.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import com.product.model.service.ProductService;
 import com.product.model.vo.Review;
 
 /**
- * Servlet implementation class ReviewPdAjaxServlet
+ * Servlet implementation class ReviewInsertServlet
  */
-@WebServlet("/product/reviewPdAjax")
-public class ReviewPdAjaxServlet extends HttpServlet {
+@WebServlet("/review/insertReview")
+public class ReviewInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewPdAjaxServlet() {
+    public ReviewInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +30,30 @@ public class ReviewPdAjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+
+		int userNo = Integer.parseInt(request.getParameter("memberNo")); 
 		String proNo = request.getParameter("proNo");
-		List<Review> list = new ProductService().selectReviewList(proNo);
+		String content = request.getParameter("review_content");
+		int rating = Integer.parseInt(request.getParameter("getRating"));
 		
-		request.setAttribute("list", list);
+		Review r = new Review();
+		r.setReviewCont(content);
+		r.setReviewProNo(proNo);
+		r.setReviewRating(rating);
+		r.setReviewMemNo(userNo);
 		
-		request.getRequestDispatcher("/views/product/reviewPdAjax.jsp").forward(request, response);
+		int result = new ProductService().insertReview(r);
+		String msg = "";
+		if(result>0) {
+			msg = "리뷰 등록 성공!";
+		} else {
+			msg = "리뷰 등록 실패!";
+		}
+		String loc = "/product/productDetail?proNo="+proNo;
 		
-		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc",loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

@@ -302,6 +302,7 @@ public class ProductDao {
 		return list;
 	}
 	
+	// review 리스트 가져오기 
 	public List<Review> selectReviewList(Connection conn,String proNo){
 		
 		PreparedStatement pstmt = null;
@@ -321,6 +322,7 @@ public class ProductDao {
 				r.setReviewMemId(rs.getString("MEMBER_ID"));
 				r.setReviewProNo(rs.getString("PRO_NO"));
 				r.setReviewDate(rs.getDate("REVIEW_DATE"));
+				r.setReviewMemNo(rs.getInt("MEMBER_NO"));
 				list.add(r);
 			}
 		} catch(SQLException e) {
@@ -331,4 +333,55 @@ public class ProductDao {
 		}
 			return list;
 	}
+	
+	// review 구매여부 확인 
+	public boolean checkOrdered(Connection conn, int userNo, String proNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean flag = false;
+		
+		try {
+			
+			pstmt=conn.prepareStatement(prop.getProperty("checkOrdered"));
+			pstmt.setInt(1, userNo);
+			pstmt.setString(2, proNo);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				flag = true;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} 
+		return flag;
+	}
+	
+	public int insertReview(Connection conn,Review r) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		System.out.println(r.getReviewCont());
+		System.out.println(r.getReviewMemNo());
+		System.out.println( r.getReviewProNo());
+		System.out.println(r.getReviewRating());
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("insertReview"));
+			pstmt.setString(1, r.getReviewCont());
+			pstmt.setInt(2, r.getReviewMemNo());
+			pstmt.setString(3, r.getReviewProNo());
+			pstmt.setInt(4, r.getReviewRating());
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
 }
