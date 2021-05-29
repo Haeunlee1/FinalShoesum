@@ -5,8 +5,7 @@
 <%@ page import="com.product.model.service.*" %>
 <%
 	List<Product> list = (List<Product>)request.getAttribute("list");
-	System.out.println(list.isEmpty());
-	int price=list.get(0).getPrice();
+	int price=list.get(0).getPrice(); 
 	String proNo="";
 	//회계표시
 	DecimalFormat df = new DecimalFormat("#,###,###");
@@ -92,28 +91,7 @@
 	    
 	    
 	    <div id="pd_review">
-	        <p>구매후기</p>
-	        <!-- <div class="review_box">
-	            <p>★★★★☆</p>
-	            <div>
-	                신발자체는 이뻐요.<br>
-	                근데 앞에 많이 남네요ㅠㅠ
-	            </div>
-	            <p>user_id　|　2021-05-15</p>
-	        </div>
-	        <div class="review_box">
-	            <p>★★★★☆</p>
-	            <div>
-	                신발자체는 이뻐요.<br>
-	                근데 앞에 많이 남네요ㅠㅠ
-	            </div>
-	            <p>user_id　|　2021-05-15</p>
-	        </div>
-	        <div class="review_write">
-	            <p>상품만족도　☆☆☆☆☆</p>
-	            <textarea name="" id="" cols="110" rows="5" placeholder="  상품에 대한 리뷰를 남겨주세요."></textarea>
-	            <button>등록</button>
-	        </div> -->
+	    	
 	    </div>
 	    
 	    <!-- Ajax 처리 -->
@@ -155,6 +133,17 @@
 				location.assign('<%=request.getContextPath()%>/views/login/login.jsp');
 			<%}%>
 		}
+		
+		// Review 불러오기 ! 
+		$(document).ready((e)=>{
+			$.ajax({
+				url : "<%=request.getContextPath()%>/product/reviewPdAjax?proNo=<%=proNo%>",
+				success : data=>{
+					$("#pd_review").html(data);
+				}
+			});
+		});
+		
 		
 		// recommend_pd Ajax -> bestPd Ajax랑 로직 동일하게 구현, 출력창만 다르게!
 		$(document).ready((e)=>{

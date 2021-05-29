@@ -160,7 +160,7 @@
             </tr>
             <tr>
                 <td>배송메세지 <span style="color:#E92E4D;">*</span></td>
-                <td><textarea rows="5" cols="40" style="width:600px;height:80px;resize:none;">12</textarea></td>
+                <td><textarea rows="5" cols="40" style="width:600px;height:80px;resize:none;"></textarea></td>
             </tr>
         </table>
     </div>

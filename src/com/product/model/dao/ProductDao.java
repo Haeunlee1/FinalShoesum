@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.member.model.dao.MemberDao;
 import com.product.model.vo.Product;
+import com.product.model.vo.Review;
 
 public class ProductDao {
 	private Properties prop= new Properties();
@@ -299,5 +300,35 @@ public class ProductDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	public List<Review> selectReviewList(Connection conn,String proNo){
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Review> list = new ArrayList();
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("selectReviewList"));
+			pstmt.setString(1, proNo);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Review r = new Review();
+				r.setReviewNo(rs.getInt("REVIEW_NO"));
+				r.setReviewCont(rs.getString("REVIEW_CONTENT"));
+				r.setReviewRating(rs.getInt("REVIEW_RATING"));
+				r.setReviewMemId(rs.getString("MEMBER_ID"));
+				r.setReviewProNo(rs.getString("PRO_NO"));
+				r.setReviewDate(rs.getDate("REVIEW_DATE"));
+				list.add(r);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+			return list;
 	}
 }

@@ -2,14 +2,15 @@ package com.product.model.service;
 
 import static com.common.JDBCTemplate.close;
 import static com.common.JDBCTemplate.commit;
-import static com.common.JDBCTemplate.rollback;
 import static com.common.JDBCTemplate.getConnection;
+import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.product.model.dao.ProductDao;
 import com.product.model.vo.Product;
+import com.product.model.vo.Review;
 
 public class ProductService {
 
@@ -113,6 +114,15 @@ public class ProductService {
 	public List<Product> sortProduct(String sort, String userType, int cPage, int numPerpage) {
 		Connection conn = getConnection();
 		List<Product> list = dao.sortProduct(conn,sort,userType,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	
+	
+	// review 리스트 
+	public List<Review> selectReviewList(String proNo){
+		Connection conn = getConnection();
+		List<Review> list = dao.selectReviewList(conn,proNo);
 		close(conn);
 		return list;
 	}
