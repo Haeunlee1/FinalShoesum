@@ -197,4 +197,41 @@ public class BoardDao {
 		}
 		return result;
 	}
+	
+	public int updateComment(Connection conn, int qabNo, String content) {
+		//댓글 수정
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateComment"));
+			pstmt.setString(1, content);
+			pstmt.setInt(2, qabNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateBoard(Connection conn, Board b, int qabNo) {
+		//게시글수정
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateBoard"));
+			pstmt.setString(1, b.getQabTitle());
+			pstmt.setString(2, b.getQabContent());
+			pstmt.setString(3, b.getQabPw());
+			pstmt.setInt(4, qabNo);
+			pstmt.setString(5, b.getQabWriter());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

@@ -163,7 +163,7 @@ div#view_content_box{
     padding-right:20px;
     margin-bottom:0px;
 }
-div#comment_write_con{
+div#comment_write_con, div#comment_edit_con{
     border-bottom:1px black solid;
     padding-top:15px;
     height:150px;
@@ -171,7 +171,8 @@ div#comment_write_con{
     margin-bottom:0px;
     padding-left:20px;
 }
-div#comment_write_box textarea{
+div#comment_write_con textarea,
+div#comment_edit_con textarea{
 	margin-top:10px;
     width:800px;
     float:left;
@@ -181,7 +182,7 @@ div#comment_write_box textarea{
     font-weight: bolder;
     font-size:18px;
 }
-button#comment_btn_insert{
+button.comment_btn_insert{
     background-color: black;
     color:white;
     border-radius : 7%;
@@ -215,6 +216,8 @@ div#comment_view_con{
 div#comment_btn{
     clear:both;
     margin-top:50px;
+    text-align:inherit;
+	height:100px;
 }
 li#comment_edit{
 	padding-right:0px;
@@ -232,6 +235,7 @@ li#comment_edit{
     margin-right:0;
 }
 .backtoList_btn{
+	float:left;
     width:100px;
     height:40px;
     border : none;
@@ -239,6 +243,26 @@ li#comment_edit{
     margin: 10px 5px ;
     font-size:16px;
     cursor: pointer;
+}
+.board_del_btn{
+	width:100px;
+    height:40px;
+    border : none;
+    border-radius : 7%;
+    margin: 10px 5px ;
+    font-size:16px;
+    cursor: pointer;
+}
+.board_edit_btn{
+	width:100px;
+    height:40px;
+    border : none;
+    border-radius : 7%;
+    margin: 10px 5px ;
+    font-size:16px;
+    cursor: pointer;
+	background-color:black;
+	color:white;
 }
 /* 상품문의 css 끝 */
 

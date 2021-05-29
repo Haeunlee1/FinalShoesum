@@ -79,4 +79,24 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	public int updateComment(int qabNo, String content) {
+		//댓글 수정
+		Connection conn=getConnection();
+		int result=dao.updateComment(conn,qabNo,content);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int updateBoard(Board b, int qabNo) {
+		//게시글수정
+		Connection conn=getConnection();
+		int result=dao.updateBoard(conn, b, qabNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }

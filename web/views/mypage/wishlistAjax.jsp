@@ -101,20 +101,21 @@ $("input[name=btn_delete]").click(e=>{
 	}
 });
 
-//const fn_checkwish_delete=()=>{
 $(".checkwishBtn").click(()=>{
 	//삭제하기 => 테이블 밑 버튼 / checked된 것만 삭제하기
-	if(confirm("선택한 상품을 삭제하시겠습니까?")){
+	if(confirm("상품을 삭제하시겠습니까?")){
 		let checkArr=new Array();
 		$("input[class='chk']:checked").each(function(){
 			checkArr.push($(this).attr("title"));
 		});
-			console.log(checkArr);			
-		location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+checkArr+"&type=wish");
+		if(checkArr!=0){
+			location.replace("<%=request.getContextPath()%>/mypage/wishCheckDelete?memberNo="+'<%=memberNo%>'+"&checkArr="+checkArr+"&type=wish");
+		}else{
+			alert('삭제할 상품을 선택하여주세요.');
+		}
 	}
 })
 
-//const fn_allwish_delete=()=>{
 $(".allDelBtn").click(()=>{
 	//관심상품 전체 삭제
 	if(confirm("정말 모든 관심상품을 삭제하시겠습니까?")){
