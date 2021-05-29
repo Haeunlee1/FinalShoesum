@@ -63,12 +63,13 @@
             <ul id="header_top">
             	<%if(loginMember==null) { %>
                 	<li><a href="<%=request.getContextPath() %>/views/login/login.jsp">로그인</a></li>
+                	<li><a href="<%=request.getContextPath() %>/views/member/regiester.jsp">회원가입</a></li>
                 <%}else { %>
                 	<li><a href="<%=request.getContextPath() %>/logout">로그아웃<a></a></li>
+                	<li><a href="<%=request.getContextPath()%>/mypage/mypage.do?memberNo=<%=loginMember.getMemberNo()%>">마이페이지</a></li>
                 <%} %>
-                <li><a href="<%=request.getContextPath() %>/views/member/regiester.jsp">회원가입</a></li>
                 <li><a href="<%=request.getContextPath() %>/board/boardList">질문게시판</a></li>
-                <li><a href="<%=request.getContextPath() %>/faq/faqList">자주묻는질문</a></li>
+                <li><a href="">자주묻는질문</a></li>
             </ul>
             <div id="logo" onclick="location.assign('<%=request.getContextPath() %>')"></div>
             <div id="search_bar">
@@ -78,10 +79,10 @@
             <div id="direct_ui">
             <%if(loginMember!=null){ %>
                 <a href="<%=request.getContextPath()%>/mypage/mypage.do?memberNo=<%=loginMember.getMemberNo()%>"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
-                <a href="<%=request.getContextPath()%>/cart/cartView?userNo=<%=loginMember.getMemberNo() %>"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
+                <a href="<%=request.getContextPath()%>/cart/cartView?userNo=0"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
             <%}else{ %>
             	<a href="<%=request.getContextPath()%>/mypage/mypage.do"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
-                <a href="<%=request.getContextPath()%>/cart/cartView?"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
+                <a href="<%=request.getContextPath()%>/cart/cartView?userNo=0"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
             <%} %>
             </div>
         </header>
@@ -89,23 +90,29 @@
             <ul id="menu_bar">
                 <li class="userType" title="man">MAN
                     <ul class="menu_sub">
+
                         <li title="R">운동화</li>
                         <li title="S">샌들</li>
                         <li title="B">구두</li>
+
                     </ul>
                 </li>
                 <li class="userType" title="woman">WOMAN
                     <ul class="menu_sub">
+
                         <li title="R">운동화</li>
                         <li title="S">샌들</li>
                         <li title="B">구두</li>
+
                     </ul>
                 </li>
                 <li class="userType" title="kids">KIDS
                     <ul class="menu_sub">
+
                         <li title="R">운동화</li>
                         <li title="S">샌들</li>
                         <li title="B">구두</li>
+
                     </ul>
                 </li>
             </ul>
