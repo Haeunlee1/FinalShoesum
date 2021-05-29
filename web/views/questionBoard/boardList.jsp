@@ -31,13 +31,13 @@ List<Board> list=(List<Board>)request.getAttribute("list");
                     </tr>
 
                     <!-- 상품 문의 게시글 -->
-                    <% int count=0;			//만약 게시글 삭제해도 게시글 번호 순서대로 나오게 하고 싶은데 일단 보류 ( db에 no를 보낼 방법 다시 생각해야함)
+                    <% int count=0;			
                     for(int i=0;i<list.size();i++){
                     	count++;
                     }%>
                     <% for (Board b : list){ %> 
                     <tr>
-                        <td><%=b.getQabNo() %></td>
+                        <td><%=count-- %></td>
                         <td><a href="<%=request.getContextPath()%>/board/checkPw.do?boardNo=<%=b.getQabNo()%>"><%=b.getQabTitle() %></a></td>
                         <td><%=b.getCommentNo()!=null?"답변완료":"미답변" %></td>
                         <td><%=b.getQabWriter() %></td>

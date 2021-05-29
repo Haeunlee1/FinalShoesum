@@ -10,12 +10,12 @@
             <p>질문게시판</p>
         </div>
         <div id="view_content_title">
-            <p>제목 <%=b.getQabTitle() %></p>
-            <p>작성자 <%=b.getQabWriter() %></p>
-            <p>작성일 <%=b.getQabDate() %></p>
+            <p>제목 <span class="view_span1">|&nbsp;&nbsp;&nbsp;<%=b.getQabTitle() %></span></p>
+            <p>작성자 <span class="view_span">|&nbsp;&nbsp;&nbsp;<%=b.getQabWriter() %></span></p>
+            <p>작성일 <span class="view_span">|&nbsp;&nbsp;&nbsp;<%=b.getQabDate() %></span></p>
         </div>
         <div id="view_content_box">
-            내용 <%=b.getQabContent() %>
+            <%=b.getQabContent() %>
         </div>      
         <!-- 댓글 작성 하는 것 -->
         <div id="comment_write_con">
@@ -32,8 +32,8 @@
             <p>댓글</p>
             <div id="comment_view_box">
                 <ul>
-                    <li class="f_right"id="comment_view_dsate">날짜</li>
-                    <li class="f_left">관리자</li><Br>
+                    <li class="f_right"id="comment_view_date">날짜</li>
+                    <li class="f_left" id="comment_admin">관리자</li><Br>
                     <li class="f_left" id="comment_view_content">관리자 댓글 내용</li>
                 </ul>
             </div>
