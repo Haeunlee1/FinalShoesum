@@ -31,19 +31,22 @@ public class BoardViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//비밀번호만 넘겨서 맞는 게시글 보여주기
-		int qabPw=0;
+		String qabPw="";
 		if(request.getParameter("admin_check")==null) {
-			qabPw = Integer.parseInt(request.getParameter("input_pw"));
+			qabPw =request.getParameter("input_pw");
 		}else {
 			//관리자라면
-			qabPw =0;
+			qabPw ="0";
 		}
+		
+		System.out.println(request.getParameter("admin_check"));
+		System.out.println(qabPw);
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		Board b = new BoardService().selectBoard(boardNo,qabPw);
 		
 		request.setAttribute("board", b);
 		request.getRequestDispatcher("/views/questionBoard/boardView.jsp").forward(request, response);
-		
+//		
 	}
 
 	/**

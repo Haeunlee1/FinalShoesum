@@ -43,7 +43,7 @@ public class BoardService {
 		return result;
 	}
 	
-	public Board selectBoard(int boardNo, int qabPw) {
+	public Board selectBoard(int boardNo, String qabPw) {
 		//비번 맞는 글 찾아오기
 		Connection conn= getConnection();
 		Board b = dao.selectBoard(conn, boardNo,qabPw);

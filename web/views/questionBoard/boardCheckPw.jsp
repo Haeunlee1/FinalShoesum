@@ -15,10 +15,16 @@
             <form class="form" action="<%=request.getContextPath() %>/board/boardView.do" >
                 <div id="pw_bottom_box">
                      &gt; 비밀번호 
-                    <%if(loginMember!=null) {%>
-                     <input type="password" maxlength="4" placeholder="4자리 숫자를 입력하세요." id="input_pw" name="input_pw" <%=loginMember.getMemberId().equals("admin")?"": "required" %>>
+                    <%if(loginMember!=null) {
+                    	if(loginMember.getMemberId().equals("admin")){
+                    %>
+                     <input type="password" maxlength="4" placeholder="4자리 숫자를 입력하세요." id="input_pw" name="input_pw">
                 	<input type="hidden" name="admin_check" value="admin">
-                	<%}else {%>
+                	<%	}else{%>
+                     <input type="password" maxlength="4" placeholder="4자리 숫자를 입력하세요." id="input_pw" name="input_pw" required>
+                    	
+                    <%}
+                    }else {%>
                 	<input type="password" maxlength="4" placeholder="4자리 숫자를 입력하세요." id="input_pw" name="input_pw" required>
                 	<%} %>
                 </div>
