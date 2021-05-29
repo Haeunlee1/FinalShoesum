@@ -34,7 +34,7 @@ public class BoardWirteEndServlet extends HttpServlet {
 		b.setQabTitle(request.getParameter("qab_cate"));
 		b.setQabContent(request.getParameter("qab_content"));
 		b.setQabWriter(request.getParameter("memberId"));
-		b.setQabPw(Integer.parseInt(request.getParameter("qabPw")));
+		b.setQabPw(request.getParameter("qabPw"));
 		
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		int result = new BoardService().insertBoard(b, memberNo);

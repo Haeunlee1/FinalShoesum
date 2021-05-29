@@ -31,18 +31,18 @@ public class WishDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//회원번호, 상품번호로 db에 관심상품 지우기
+		String proNo =request.getParameter("proNo");
 		int userNo = Integer.parseInt(request.getParameter("memberNo"));
-		int likeNo =Integer.parseInt(request.getParameter("likeNo"));
-		System.out.println("userNo:"+userNo+" / likeNo:"+likeNo);
-		int result = new ProductService().deleteWish(userNo, likeNo);
-		System.out.println("result"+result);
-		String msg=result>0?"관심상품에서 삭제되었습니다.":"삭제실패";
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/mypage/mypage.do?memberNo="+userNo);		//추후에 로그인로직 완성되면 userNo넘기기
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-		
-	
-	
+		int result = new ProductService().deleteWish(userNo, proNo);
+		if(request.getParameter("pd")!=null&&result>0) {
+			//상품디테일에서 넘어왔다면
+			request.getRequestDispatcher("/product/productDetail?proNo="+proNo).forward(request, response);
+		}else{
+			String msg=result>0?"관심상품에서 삭제되었습니다.":"삭제실패";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", "/mypage/mypage.do?memberNo="+userNo);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**

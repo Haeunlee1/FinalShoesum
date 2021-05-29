@@ -5,8 +5,7 @@
 <%@ page import="com.product.model.service.*" %>
 <%
 	List<Product> list = (List<Product>)request.getAttribute("list");
-	System.out.println(list.isEmpty());
-	int price=list.get(0).getPrice();
+	int price=list.get(0).getPrice(); 
 	String proNo="";
 	//회계표시
 	DecimalFormat df = new DecimalFormat("#,###,###");
@@ -92,28 +91,7 @@
 	    
 	    
 	    <div id="pd_review">
-	        <p>구매후기</p>
-	        <!-- <div class="review_box">
-	            <p>★★★★☆</p>
-	            <div>
-	                신발자체는 이뻐요.<br>
-	                근데 앞에 많이 남네요ㅠㅠ
-	            </div>
-	            <p>user_id　|　2021-05-15</p>
-	        </div>
-	        <div class="review_box">
-	            <p>★★★★☆</p>
-	            <div>
-	                신발자체는 이뻐요.<br>
-	                근데 앞에 많이 남네요ㅠㅠ
-	            </div>
-	            <p>user_id　|　2021-05-15</p>
-	        </div>
-	        <div class="review_write">
-	            <p>상품만족도　☆☆☆☆☆</p>
-	            <textarea name="" id="" cols="110" rows="5" placeholder="  상품에 대한 리뷰를 남겨주세요."></textarea>
-	            <button>등록</button>
-	        </div> -->
+	    	
 	    </div>
 	    
 	    <!-- Ajax 처리 -->
@@ -156,6 +134,17 @@
 			<%}%>
 		}
 		
+		// Review 불러오기 ! 
+		$(document).ready((e)=>{
+			$.ajax({
+				url : "<%=request.getContextPath()%>/product/reviewPdAjax?proNo=<%=proNo%>",
+				success : data=>{
+					$("#pd_review").html(data);
+				}
+			});
+		});
+		
+		
 		// recommend_pd Ajax -> bestPd Ajax랑 로직 동일하게 구현, 출력창만 다르게!
 		$(document).ready((e)=>{
 			$.ajax({
@@ -171,25 +160,24 @@
         	// 찜버튼 on,off 스크립트
         	$("#heart").click(function(e){
         		<%if(loginMember!=null){%>
-        		<%-- if(<%=loginMember!=null%>){ --%>
 	        		var icon=["♡","♥"];
 	        		var heart=$(".heart").val();
 			        		
 	        		if(heart=='0') {
 	        			$(".heart").text(icon[1]);
 	        			heart='1';
-		        		alert("관심상품으로 등록되었습니다");
+		        		alert("관심상품으로 등록되었습니다.");
 		        		location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>');
-		        		<%-- location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>'); --%>
 	        		}else {
 	        			$(".heart").text(icon[0]);
 	        			heart='0';
+						alert('관심상품에서 삭제되었습니다.');	        			
+						location.assign("<%=request.getContextPath()%>/mypage/wishDelete?pd=pd&memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>');
 	        		}
 		        	$(".heart").val(heart);
 		        <%}else {%>
-        			alert("로그인 후 관심상품 등록 가능합니다.")			//로긴페이지로 이동할 지 생각해보기
+        			alert("로그인 후 관심상품 등록 가능합니다.");
 		        <%}%>
-		        	//클릭했을 때 val가 1 => 찜하기
         	});
             
             // 마우스 오버시 이미지 변경 스크립트

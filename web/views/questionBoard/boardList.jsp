@@ -31,10 +31,14 @@ List<Board> list=(List<Board>)request.getAttribute("list");
                     </tr>
 
                     <!-- 상품 문의 게시글 -->
+                    <% int count=0;			
+                    for(int i=0;i<list.size();i++){
+                    	count++;
+                    }%>
                     <% for (Board b : list){ %> 
                     <tr>
-                        <td><%=b.getQabNo() %></td>
-                        <td><%=b.getQabTitle() %></td>
+                        <td><%=count-- %></td>
+                        <td><a href="<%=request.getContextPath()%>/board/checkPw.do?boardNo=<%=b.getQabNo()%>"><%=b.getQabTitle() %></a></td>
                         <td><%=b.getCommentNo()!=null?"답변완료":"미답변" %></td>
                         <td><%=b.getQabWriter() %></td>
                         <td><%=b.getQabDate() %></td>

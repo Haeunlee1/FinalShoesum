@@ -31,19 +31,29 @@ public class BoardViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//비밀번호만 넘겨서 맞는 게시글 보여주기
-		int qabPw=0;
+		String qabPw="";
 		if(request.getParameter("admin_check")==null) {
-			qabPw = Integer.parseInt(request.getParameter("input_pw"));
+			qabPw =request.getParameter("input_pw");
 		}else {
 			//관리자라면
-			qabPw =0;
+			qabPw ="0";
 		}
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		Board b = new BoardService().selectBoard(boardNo,qabPw);
+		if(b!=null) {
+			request.setAttribute("board", b);
+			request.getRequestDispatcher("/views/questionBoard/boardView.jsp").forward(request, response);
+		}else {
+			//비번 틀렸다면
+			String msg="비밀번호가 일치하지 않습니다.";
+			String loc="/board/boardList";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 		
-		request.setAttribute("board", b);
-		request.getRequestDispatcher("/views/questionBoard/boardView.jsp").forward(request, response);
-		
+		//댓글도 같이 불러오기
+		//BoardComment bc=new BoardService().selectComment();
 	}
 
 	/**

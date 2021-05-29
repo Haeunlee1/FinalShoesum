@@ -7,6 +7,7 @@
 	//주문내역리스트
 	List<Ordered> orderList = (List<Ordered>)request.getAttribute("orderList");
 	DecimalFormat df = new DecimalFormat("#,###,###");
+	SimpleDateFormat sf=new SimpleDateFormat("yyyyMMdd");
 	%>
 
 
@@ -75,7 +76,10 @@
              <tr>
                <%if(pre==-1||pre!=orderList.get(i).getOrderNo()){
                  	pre=orderList.get(i).getOrderNo();%>
-                   <td rowspan="<%=count%>"><%=orderList.get(i).getOrderDate() %><br>[<%=orderList.get(i).getOrderNo() %>]</td>
+                   <td rowspan="<%=count%>"><%=orderList.get(i).getOrderDate() %><br>
+                   <%String day=sf.format(orderList.get(i).getOrderDate()); %>
+                   				[<%=day+"-000"+orderList.get(i).getOrderNo()%>]
+                   	</td>
                <%}else if(pre!=-1||pre!=orderList.get(i).getOrderNo()){
                  	row=true;
                }%>
@@ -93,7 +97,7 @@
                      </ul>
                  </td>
                  <td><%=orderList.get(i).getAmount() %></td>
-                 <td><%=df.format(orderList.get(i).getProPrice()) %></td>
+                 <td><%=df.format(orderList.get(i).getProPrice()*orderList.get(i).getAmount()) %></td>
                  <td><%=orderList.get(i).getState().equals("on")?"배송완료":"배송준비중" %></td>
                  <td>-</td>
              </tr>
@@ -131,14 +135,7 @@
             <!-- ajax해보기 -->
             <div id="boardTarget"></div>
         </div>
-        <div id="pageBar">
-            <div class="pageBar-icon">&lt;</div>
-            <div class="pageBar-icon"><a href="">1</a></div>
-            <div class="pageBar-icon"><a href="">2</a></div>
-            <div class="pageBar-icon"><a href="">3</a></div>
-            <div class="pageBar-icon"><a href="">4</a></div>
-            <div class="pageBar-icon">&gt;</div>
-        </div>
+        <div id="pageBar"></div>
     </article>
     <article id="HE_profile">
         <div id="profile_title" >
@@ -319,7 +316,7 @@ $(function(){
 
 const fn_goshopping=()=>{
 	//찜한상품 없을 때 쇼핑하러가기 / 메인이 아닌 상품목록페이지로 이동하기
-	location.assign("<%= request.getContextPath()%>/product/productlist");
+	location.assign("<%= request.getContextPath()%>");
 }
 
 $(function(){

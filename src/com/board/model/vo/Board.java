@@ -8,14 +8,14 @@ public class Board {
 	private String qabWriter;
 	private String qabContent;
 	private Date qabDate;
-	private int qabPw;
+	private String qabPw;
 	private String commentNo;
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Board(int qabNo, String qabTitle, String qabWriter, String qabContent, Date qabDate, int qabPw,
+	public Board(int qabNo, String qabTitle, String qabWriter, String qabContent, Date qabDate, String qabPw,
 			String commentNo) {
 		super();
 		this.qabNo = qabNo;
@@ -67,11 +67,11 @@ public class Board {
 		this.qabDate = qabDate;
 	}
 
-	public int getQabPw() {
+	public String getQabPw() {
 		return qabPw;
 	}
 
-	public void setQabPw(int qabPw) {
+	public void setQabPw(String qabPw) {
 		this.qabPw = qabPw;
 	}
 
