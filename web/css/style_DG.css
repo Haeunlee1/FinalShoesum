@@ -1,12 +1,18 @@
-.login_wrapper {
+/* ----------------- 로그인페이지 ---------------------*/
+
+html,
+body {
+  height: 100%;
+}
+
+.login-wrapper {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top:180px;
 }
 
-.logo {
+.login-logo {
   width: 160px;
   height: 80px;
   background: url(../images/ui/logo.png) no-repeat center;
@@ -15,7 +21,7 @@
   margin-bottom: 50px;
 }
 
-.form.login {
+.login-form.login {
   width: 250px;
 }
 
@@ -46,89 +52,68 @@
   border-right: 1px solid gray;
 }
 
-.container.link {
+.login-container.link {
   margin-bottom: 50px;
 }
 
-.container-register {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-.wrapper-register {
-  border-top: gray 2px solid;
-  border-bottom: gray 2px solid;
-  padding: 25px 40px;
-  margin-bottom: 30px;
-}
-
-.container-label {
+.login-container {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  width: 200px;
-}
-
-.form.address {
-  width: 300px;
-  margin-right: 5px;
-}
-
-.phone {
-  width: 56px;
-  height: 30px;
-}
-
-.postal-code {
-  width: 56px;
-  margin-right: 5px;
-}
-
-.email {
-  width: 250px;
-}
-
-.container-button {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.title-register {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 50px;
-}
-
-.title-register>p {
-  font-size: 26px;
-}
-
-.subtitle-register {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   margin-bottom: 15px;
 }
 
-.subtitle-register p {
-  font-size: 14px;
+.login-container.center {
+  justify-content: center;
 }
 
-.mark-required {
-  color: rgb(237, 48, 14);
+.login-container.around {
+  justify-content: space-around;
 }
 
+.login-container-no-margin {
+  display: flex;
+  align-items: center;
+}
+
+.login-guide {
+  font-size: 11px;
+  color: gray;
+}
+
+.login-btn-frame.basic {
+  color: white;
+  background-color: rgba(128, 128, 128, 1);
+}
+
+.login-btn-frame.basic:hover {
+  background-color: rgba(128, 128, 128, 0.7);
+}
+
+.login-btn-frame {
+  height: 30px;
+  padding: 4px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-form {
+  height: 30px;
+}
+
+/* -------------------------------------------------------- */
+
+
+
+
+
+/* -----------아이디 비밀번호 찾기 페이지-------------------------- */
 html,
 body {
   height: 100%;
 }
 
-.wrapper {
+.recovery-wrapper {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -147,34 +132,214 @@ body {
   align-items: center;
 }
 
-.container.hint {
+.recovery-container.hint {
   width: 300px;
   justify-content: space-between;
 }
 
-.container-pw {
+.container-pw-recovery {
   background-color: rgba(230, 230, 230, 1);
   border: 1px solid rgba(230, 230, 230, 1);
   padding: 20px 30px;
 }
 
-.container-id {
+.container-id-recovery {
   border: 1px solid rgba(230, 230, 230, 1);
   padding: 20px 30px;
 }
 
-.container.title {
+.recovery-container.title {
   margin-bottom: 30px;
 }
 
-.container.title>p {
+.recovery-container.title>p {
   font-size: 20px;
 }
 
-.container.blank {
+.recovery-container.blank {
   margin-bottom: 60px;
 }
 
-.form.recovery {
+.recovery-form.recovery {
   width: 200px;
+}
+
+.recovery-btn-frame {
+  height: 30px;
+  padding: 4px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.recovery-btn-frame.small {
+  height: 25px;
+  padding: 2.5px 9px;
+  font-size: 11px;
+}
+
+.recovery-btn-frame.basic {
+  color: white;
+  background-color: rgba(128, 128, 128, 1);
+}
+
+.recovery-btn-frame.basic:hover {
+  background-color: rgba(128, 128, 128, 0.7);
+}
+
+.recovery-btn-frame.primary {
+  color: white;
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.recovery-btn-frame.primary:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.recovery-guide {
+  font-size: 11px;
+  color: gray;
+}
+
+.recovery-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.recovery-container.center {
+  justify-content: center;
+}
+
+.recovery-form {
+  height: 30px;
+}
+
+/*----------------------------------------------------------------*/
+/*---------------------회원가입--------------------------------------*/
+.container-regiester {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.wrapper-regiester {
+  border-top: gray 2px solid;
+  border-bottom: gray 2px solid;
+  padding: 25px 40px;
+  margin-bottom: 30px;
+}
+
+.container-label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 200px;
+}
+
+.regiester-form.address {
+  width: 300px;
+  margin-right: 5px;
+}
+
+.regiester-phone {
+  width: 56px;
+  height: 30px;
+}
+
+
+.regiester-email {
+  width: 250px;
+}
+
+.regiester-container-button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title-regiester {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.title-regiester>p {
+  font-size: 26px;
+}
+
+.subtitle-regiester {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.subtitle-regiester p {
+  font-size: 14px;
+}
+
+.mark-required {
+  color: rgb(237, 48, 14);
+}
+
+.regiester-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.regiester-container-address {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.regiester-form {
+  height: 30px;
+  margin: 5px;
+}
+
+.regiester-container-no-margin {
+  display: flex;
+  align-items: center;
+}
+
+.regiester-guide {
+  font-size: 11px;
+  color: gray;
+}
+
+.regiester-btn-frame {
+  height: 30px;
+  padding: 4px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.regiester-btn-frame.basic {
+  color: white;
+  background-color: rgba(128, 128, 128, 1);
+}
+
+.regiester-btn-frame.basic:hover {
+  background-color: rgba(128, 128, 128, 0.7);
+}
+
+.regiester-btn-frame.primary {
+  color: white;
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.regiester-btn-frame.primary:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.postal-code {
+  width: 56px;
+  margin-right: 5px;
 }

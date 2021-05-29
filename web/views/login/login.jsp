@@ -11,6 +11,7 @@
 <head>
   <meta charset="utf-8">
   <title>슈썸 : 로그인</title>
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style_JK.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style_DG.css">
 	<style>
 		.memberBtn{
@@ -21,27 +22,27 @@
 </head>
 
 <body>
-  <div class="login_wrapper">
+  <div class="login-wrapper">
     <div>
-      <a href="<%=request.getContextPath()  %>/index.jsp"><div class="logo"></div></a>
+      <a href="<%=request.getContextPath()  %>/index.jsp"><div class="login-logo"></div></a>
       <form id="loginFrm" action="<%=request.getContextPath() %>/login" method="get" onsubmit="return fn_login validate();">
-	      <div class="container center">
-	        <input type="text" name="memberId" class="form login" placeholder="아이디 입력">
+	      <div class="login-container center">
+	        <input type="text" name="memberId" class="login-form login" placeholder="아이디 입력">
 	      </div>
-	      <div class="container center blank">
-	        <input type="password" name="memberPw" class="form login" placeholder="비밀번호 입력">
+	      <div class="login-container center blank">
+	        <input type="password" name="memberPw" class="login-form login" placeholder="비밀번호 입력">
 	      </div>
-	      <div class="container around">
+	      <div class="login-container around">
 	        <button type="button" class="button-social google"></button>
 	        <button type="button" class="button-social facebook"></button>
 	      </div>
-	      <div class="container around link">
-	         <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/find.jsp"><span class="link border guide">아이디 찾기</span></a>
-	         <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/find.jsp"><span class="link border guide">비밀번호 찾기</span></a>
-	         <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/regiester.jsp"><span class="link guide">회원 가입</span></a>
+	      <div class="login-container around link">
+	         <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/find.jsp"><span class="link border login-guide">아이디 찾기</span></a>
+	         <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/find.jsp"><span class="link border login-guide">비밀번호 찾기</span></a>
+	         <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/regiester.jsp"><span class="link login-guide">회원 가입</span></a>
 	      </div>
-	      <div class="container center">
-	        <input type="submit" value="로그인" class="btn-frame basic">
+	      <div class="login-container center">
+	        <input type="submit" value="로그인" class="login-btn-frame basic">
 	      </div>
 	   </form>
     </div>
