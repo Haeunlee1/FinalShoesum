@@ -35,6 +35,11 @@ body {
   background-size: contain;
 }
 
+.memberBtn{
+	display: inline;
+	text-decoration: none;
+}
+		
 .button-social {
   width: 25px;
   height: 25px;
@@ -118,6 +123,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
 }
 
 .container-recovery {
@@ -141,11 +147,13 @@ body {
   background-color: rgba(230, 230, 230, 1);
   border: 1px solid rgba(230, 230, 230, 1);
   padding: 20px 30px;
+  margin:40px;
 }
 
 .container-id-recovery {
   border: 1px solid rgba(230, 230, 230, 1);
   padding: 20px 30px;
+  margin:40px;
 }
 
 .recovery-container.title {
@@ -342,4 +350,39 @@ body {
 .postal-code {
   width: 56px;
   margin-right: 5px;
+}
+
+ .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 50; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */                          
+}
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
