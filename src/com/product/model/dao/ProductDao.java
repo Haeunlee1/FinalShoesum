@@ -118,40 +118,6 @@ public class ProductDao {
 		}
 		return list;
 	}
-	
-	public List<Product> userProduct(Connection conn, String userType, int cPage, int numPerpage) {
-		// userType에 따른 상품가져오기 -> man, woman, kidss
-		PreparedStatement pstmt= null;
-		ResultSet rs=null;
-		List<Product> list = new ArrayList();
-		Product p = null;
-		
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("userProduct"));
-			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
-			pstmt.setInt(2, (cPage-1)*numPerpage+1);
-			pstmt.setInt(3, cPage*numPerpage);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				p = new Product();
-				p.setProNo(rs.getString("pro_no"));
-				p.setProName(rs.getString("pro_name"));
-				p.setPrice(rs.getInt("pro_price"));
-				p.setImages1(rs.getString("img_src1"));
-				p.setImages2(rs.getString("img_src2"));
-				p.setImages3(rs.getString("img_src3"));
-				p.setImages4(rs.getString("img_src4"));
-				
-				list.add(p);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return list;
-	}
 
 	public boolean selectWish(Connection conn, int memberNo, String proNo) {
 		//상품no와 회원no로 찜테이블에 있는지 없는지 확인하기
@@ -265,22 +231,34 @@ public class ProductDao {
 		return result;
 	}
 	
-	public List<Product> sortProduct(Connection conn, String sort, String userType, int cPage, int numPerpage) {
-		// 최신순, 높은가격순, 낮은가격순 가져오기
+	public List<Product> sortProduct(Connection conn, String sort, String userType, String category, int cPage, int numPerpage) {
+		// 최신순, 높은가격순, 낮은가격순 가져오기(userType, category 경우에 따라 분기처리)
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
 		List<Product> list = new ArrayList();
 		Product p = null;
 		
+		System.out.println("Dao :"+category);
+		
 		try {
-			String sql=prop.getProperty("sortProduct");
-			sql=sql.replace("#", sort);
-			System.out.println(sql);
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
-//			쿼리문에 문장을 넣으면 ''생기는데 이걸 이스케이프 처리할 방법이 있나? 일단 하은이한테도 질문해둠
-			pstmt.setInt(2, (cPage-1)*numPerpage+1);
-			pstmt.setInt(3, cPage*numPerpage);
+			if(category.equals("A")) {
+				String sql=prop.getProperty("sortProduct");
+				sql=sql.replace("#", sort);
+				System.out.println(sql);
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+				pstmt.setInt(2, (cPage-1)*numPerpage+1);
+				pstmt.setInt(3, cPage*numPerpage);
+			}else {
+				String sql=prop.getProperty("categorySortProduct");
+				sql=sql.replace("#", sort);
+				System.out.println(sql);
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+				pstmt.setString(2, category);
+				pstmt.setInt(3, (cPage-1)*numPerpage+1);
+				pstmt.setInt(4, cPage*numPerpage);
+			}
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				p = new Product();
@@ -338,26 +316,26 @@ public class ProductDao {
 		return list;
 	}
 	
-	
-	
-	
-	
-	public List<Product> categorySortProduct(Connection conn, String sort, String userType, String category, int cPage, int numPerpage) {
-		// userType+category별 최신순, 높은가격순, 낮은가격순 가져오기
+	public List<Product> userCategoryProduct(Connection conn, String userType, String category, int cPage, int numPerpage) {
+		// userType, category 별 상품 가져오기
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
 		List<Product> list = new ArrayList();
 		Product p = null;
 		
 		try {
-			String sql=prop.getProperty("sortProduct");
-			sql=sql.replace("#", sort);
-			System.out.println(sql);
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
-			pstmt.setString(2, category);
-			pstmt.setInt(3, (cPage-1)*numPerpage+1);
-			pstmt.setInt(4, cPage*numPerpage);
+			if(category.equals("A")) {
+				pstmt=conn.prepareStatement(prop.getProperty("userProduct"));
+				pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+				pstmt.setInt(2, (cPage-1)*numPerpage+1);
+				pstmt.setInt(3, cPage*numPerpage);
+			}else {
+				pstmt=conn.prepareStatement(prop.getProperty("categoryProduct"));
+				pstmt.setString(1, userType.substring(0,1).toLowerCase()+"%");
+				pstmt.setString(2, category);
+				pstmt.setInt(3, (cPage-1)*numPerpage+1);
+				pstmt.setInt(4, cPage*numPerpage);
+			}
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				p = new Product();
@@ -379,9 +357,6 @@ public class ProductDao {
 		}
 		return list;
 	}
-	
-	
-	
 	
 	public List<Review> selectReviewList(Connection conn,String proNo){
 		

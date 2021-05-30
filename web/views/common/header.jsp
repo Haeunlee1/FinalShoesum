@@ -34,7 +34,7 @@
     	$(document).on('click','.userType' ,function(e) { 	   
     	    e.stopPropagation(); 
     	    var type=$(e.target).attr("title");
-   			location.assign("<%= request.getContextPath()%>/product/productlist?userType="+type);
+   			location.assign("<%= request.getContextPath()%>/product/productlist?userType="+type+"&category=A");
     	}); 
     	
     	$(document).on('click','.menu_sub>li' ,function(e) { 	   
@@ -43,14 +43,6 @@
     	    var category=$(e.target).attr("title");
    			location.assign("<%= request.getContextPath()%>/product/productlist?userType="+type+"&category="+category);
     	});
-    	
-    	
-    	
-    	<%-- $(".userType").click(e=>{
-   			let type=$(e.target).attr("title");
-   			location.assign("<%= request.getContextPath()%>/product/productlist?userType="+type);
-   			
-    	}); --%>
     	
     });
     	
@@ -173,29 +165,23 @@
             <ul id="menu_bar">
                 <li class="userType" title="man">MAN
                     <ul class="menu_sub">
-
                         <li title="R">운동화</li>
                         <li title="S">샌들</li>
                         <li title="B">구두</li>
-
                     </ul>
                 </li>
                 <li class="userType" title="woman">WOMAN
                     <ul class="menu_sub">
-
                         <li title="R">운동화</li>
                         <li title="S">샌들</li>
                         <li title="B">구두</li>
-
                     </ul>
                 </li>
                 <li class="userType" title="kids">KIDS
                     <ul class="menu_sub">
-
                         <li title="R">운동화</li>
                         <li title="S">샌들</li>
                         <li title="B">구두</li>
-
                     </ul>
                 </li>
             </ul>
