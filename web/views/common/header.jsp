@@ -19,6 +19,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style_DG.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!-- 카카오 스크립트 -->
 
 <script>
 	$(function(){
@@ -47,6 +48,33 @@
     });
     	
 </script>
+
+<!-- 카카오 api 받아오기 -->
+  <script>
+ 	 
+ 	window.Kakao.init("462c45986fe0724889adef5543ad6782");
+ 	
+ 	const kaLogin = function(){
+        window.Kakao.Auth.login({
+ 		scope:'profile, account_email, gender',
+ 		success:function(authObj){
+ 			console.log(authObj);
+ 			window.Kakao.API.request({
+ 				url:'/v2/user/me',
+ 				success : res =>{
+ 					const kakao_account = res.kakao_account;
+ 					let kakaoName = kakao_account.profile.nickname;
+ 					let kakaoEmail = kakao_account.email;
+ 					console.log(kakaoName);
+ 					console.log(kakaoEmail);
+ 					location.replace('<%=request.getContextPath()%>/kakao/kakaoCheck?kakaoName='+kakaoName+'&kakaoEmail='+kakaoEmail);
+ 				    }
+ 			    });
+ 		    }
+        })
+ 	}
+  
+  </script>
 
 </head>
 <body>
@@ -81,7 +109,7 @@
 	        <input type="password" name="memberPw" class="login-form login" placeholder="비밀번호 입력">
 	      </div>
 	      <div class="login-container around">
-	        <button type="button" class="button-social google"></button>
+	        <button type="button" class="button-social google" onclick="kaLogin()"></button>
 	        <button type="button" class="button-social facebook"></button>
 	      </div>
 	      <div class="login-container around link">
@@ -95,6 +123,7 @@
 	   </form>
     </div>
   </div>
+  
   
   <script>
 			const fn_login_validate=()=>{

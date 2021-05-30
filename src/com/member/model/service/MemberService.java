@@ -158,5 +158,28 @@ public class MemberService {
 
 	}
 	
+	// kakao 체크 
+	
+	public Member kakaoCheck(String userName,String email) {
+		
+		Connection conn = getConnection();
+		Member m = dao.kakaoCheck(conn,userName,email);
+		close(conn);
+		return m;
+	}
+	
+	// Kakao 회원가입
+	
+	public int kakaoRegister(String userName, String email) {
+		Connection conn = getConnection();
+		int result = dao.kakaoRegister(conn,userName,email);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+	
 }
 
