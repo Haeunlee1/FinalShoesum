@@ -46,115 +46,60 @@ public class ProductListAjaxServlet extends HttpServlet {
 		request.setAttribute("userType", userType);
 		
 		String category = request.getParameter("category");
-		System.out.println(category);
+		System.out.println("AjaxServlet :"+category);
 		
-		if(category==null) {
-			
-			int cPage;
-			int numPerpage=9;
-			
-			try {
-				cPage=Integer.parseInt(request.getParameter("cPage"));
-			}catch(NumberFormatException e) {
-				cPage=1;
-			}
-			
-			// man, woman, kids 전체상품에서 최신순, 높은가격순, 낮은가격순 sort 로직
-			List<Product> sortProduct = new ProductService().sortProduct(sort,userType,cPage,numPerpage);
-			request.setAttribute("sortProduct", sortProduct);
-			
-			int totalData=new ProductService().selectProdcutCount(sort);
-			int totalPage=(int)Math.ceil((double)totalData/numPerpage);
-			
-			int pageBarSize=5;
-			int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
-			int pageEnd=pageNo+pageBarSize-1;
-			String pageBar="";
-			
-			if(pageNo==1) {
-				pageBar+="<div class=\"pageBar-icon\">&lt;</div>";
-			}else {
-				pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
-				+"/product/productlist?userType="+sort+"&cPage="+(pageNo-1)+"'>&lt;</div>";
-			}
-			
-			while(!(pageNo>pageEnd||pageNo>totalPage)) {
-				if(pageNo==cPage) {
-					pageBar+="<div class=\"pageBar-icon\" style=\"background-color:rgb(52, 152, 219);color:white\">"+pageNo+"</div>";
-				}else {
-					pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
-					+"/product/productlist?userType="+sort+"&cPage="+pageNo+"'>"+pageNo+"</div>";
-				}
-				pageNo++;
-			}
-			
-			if(pageNo>totalPage) {
-				pageBar+="<div class=\"pageBar-icon\">&gt;</div>";
-			}
-			else {
-				pageBar+="<a href='"+request.getContextPath()
-				+"/notice/noticelist?cPage="+pageNo+"'>[다음]</a>";
-				
-				pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
-				+"/product/productlist?userType="+sort+"&cPage="+pageNo+"'>&gt;</div>";
-				
-			}
-			
-			request.setAttribute("pageBar", pageBar);
-			
-		}else {
-			int cPage;
-			int numPerpage=9;
-			
-			try {
-				cPage=Integer.parseInt(request.getParameter("cPage"));
-			}catch(NumberFormatException e) {
-				cPage=1;
-			}
-			
-			// man, woman, kids 각 카테고리에서 최신순, 높은가격순, 낮은가격순 sort 로직
-			List<Product> categorySortProduct = new ProductService().categorySortProduct(sort,userType,category,cPage,numPerpage);
-			request.setAttribute("categorySortProduct", categorySortProduct);
-			
-			int totalData=new ProductService().selectProdcutCount(sort);
-			int totalPage=(int)Math.ceil((double)totalData/numPerpage);
-			
-			int pageBarSize=5;
-			int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
-			int pageEnd=pageNo+pageBarSize-1;
-			String pageBar="";
-			
-			if(pageNo==1) {
-				pageBar+="<div class=\"pageBar-icon\">&lt;</div>";
-			}else {
-				pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
-				+"/product/productlist?userType="+sort+"&cPage="+(pageNo-1)+"'>&lt;</div>";
-			}
-			
-			while(!(pageNo>pageEnd||pageNo>totalPage)) {
-				if(pageNo==cPage) {
-					pageBar+="<div class=\"pageBar-icon\" style=\"background-color:rgb(52, 152, 219);color:white\">"+pageNo+"</div>";
-				}else {
-					pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
-					+"/product/productlist?userType="+sort+"&cPage="+pageNo+"'>"+pageNo+"</div>";
-				}
-				pageNo++;
-			}
-			
-			if(pageNo>totalPage) {
-				pageBar+="<div class=\"pageBar-icon\">&gt;</div>";
-			}
-			else {
-				pageBar+="<a href='"+request.getContextPath()
-				+"/notice/noticelist?cPage="+pageNo+"'>[다음]</a>";
-				
-				pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
-				+"/product/productlist?userType="+sort+"&cPage="+pageNo+"'>&gt;</div>";
-				
-			}
-			
-			request.setAttribute("pageBar", pageBar);
+		
+		int cPage;
+		int numPerpage=9;
+		
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
 		}
+		
+		// 최신순, 높은가격순, 낮은가격순 가져오기(userType, category 경우에 따라 분기처리)
+		List<Product> sortProduct = new ProductService().sortProduct(sort,userType,category,cPage,numPerpage);
+		request.setAttribute("sortProduct", sortProduct);
+		
+		int totalData=new ProductService().selectProdcutCount(sort);
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		
+		int pageBarSize=5;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		String pageBar="";
+		
+		if(pageNo==1) {
+			pageBar+="<div class=\"pageBar-icon\">&lt;</div>";
+		}else {
+			pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
+			+"/product/productlist?userType="+sort+"&cPage="+(pageNo-1)+"'>&lt;</div>";
+		}
+		
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(pageNo==cPage) {
+				pageBar+="<div class=\"pageBar-icon\" style=\"background-color:rgb(52, 152, 219);color:white\">"+pageNo+"</div>";
+			}else {
+				pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
+				+"/product/productlist?userType="+sort+"&cPage="+pageNo+"'>"+pageNo+"</div>";
+			}
+			pageNo++;
+		}
+		
+		if(pageNo>totalPage) {
+			pageBar+="<div class=\"pageBar-icon\">&gt;</div>";
+		}
+		else {
+			pageBar+="<a href='"+request.getContextPath()
+			+"/notice/noticelist?cPage="+pageNo+"'>[다음]</a>";
+			
+			pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
+			+"/product/productlist?userType="+sort+"&cPage="+pageNo+"'>&gt;</div>";
+			
+		}
+		
+		request.setAttribute("pageBar", pageBar);
 	
 		request.getRequestDispatcher("/views/product/productListAjax.jsp")
 		.forward(request, response);

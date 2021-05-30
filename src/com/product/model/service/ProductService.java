@@ -40,14 +40,6 @@ public class ProductService {
 		return list;
 	}
 	
-	public List<Product> userProduct(String userType, int cPage, int numPerpage) {
-		// userType별 상품 리스트 가져오기
-		Connection conn=getConnection();
-		List<Product> list = dao.userProduct(conn,userType,cPage,numPerpage);
-		close(conn);
-		return list;
-	}
-
 	public boolean selectWish(int memberNo, String proNo) {
 		//상품디테일 눌렀을 때 그 유저의 찜한 상품인지 아닌지 확인하는 로직
 		Connection conn=getConnection();
@@ -111,27 +103,29 @@ public class ProductService {
 		return result;
 	}
 	
-	public List<Product> sortProduct(String sort, String userType, int cPage, int numPerpage) {
-		// 최신순, 높은가격순, 낮은가격순 가져오기
+	public List<Product> sortProduct(String sort, String userType, String category, int cPage, int numPerpage) {
+		// 최신순, 높은가격순, 낮은가격순 가져오기(userType, category 경우에 따라 분기처리)
 		Connection conn = getConnection();
-		List<Product> list = dao.sortProduct(conn,sort,userType,cPage,numPerpage);
+		List<Product> list = dao.sortProduct(conn,sort,userType,category,cPage,numPerpage);
 		close(conn);
 		return list;
 	}
 	
-	public List<Product> categoryProduct(String userType, String category, int cPage, int numPerpage) {
+	public List<Product> userCategoryProduct(String userType, String category, int cPage, int numPerpage) {
+		// userType, category 별 상품 가져오기
 		Connection conn=getConnection();
-		List<Product> list = dao.categoryProduct(conn,userType,category,cPage,numPerpage);
+		List<Product> list = dao.userCategoryProduct(conn,userType,category,cPage,numPerpage);
 		close(conn);
 		return list;
 	}
 	
-	public List<Product> categorySortProduct(String sort, String userType, String category, int cPage, int numPerpage) {
-		Connection conn=getConnection();
-		List<Product> list = dao.categorySortProduct(conn,sort,userType,category,cPage,numPerpage);
-		close(conn);
-		return list;
-	}
+	/*
+	 * public List<Product> categorySortProduct(String sort, String userType, String
+	 * category, int cPage, int numPerpage) { Connection conn=getConnection();
+	 * List<Product> list =
+	 * dao.categorySortProduct(conn,sort,userType,category,cPage,numPerpage);
+	 * close(conn); return list; }
+	 */
 	
 	// review 리스트 
 	public List<Review> selectReviewList(String proNo){

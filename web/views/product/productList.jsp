@@ -1,12 +1,11 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
 <%@ page import="java.util.List,com.product.model.vo.Product,java.text.*" %>
 <%
 	String userType=(String)request.getAttribute("userType");
 	String category=(String)request.getAttribute("category");
-	List<Product> userProduct=(List<Product>)request.getAttribute("userProduct");
-	List<Product> categoryProduct=(List<Product>)request.getAttribute("categoryProduct");
+	List<Product> userCategoryProduct=(List<Product>)request.getAttribute("userCategoryProduct");
 	String pageBar=(String)request.getAttribute("pageBar");
 	
 	//회계표시
@@ -25,21 +24,18 @@
 	        </form>
 	    </div>
 	    <div id="pd_left">
-	        <div class="category">
-	            <span class="pd_sort">카테고리</span>
-	            <ul>
-	                <li><input type="checkbox">　　운동화</li>
-	                <li><input type="checkbox">　　샌들</li>
-	                <li><input type="checkbox">　　구두</li>
-	            </ul>
-	        </div>
+            <ul class="category">
+                <li title="A">전체상품</li>
+                <li title="R">운동화</li>
+                <li title="S">샌들</li>
+                <li title="B">구두</li>
+            </ul>
 	    </div>
 	    
 	    <div id="pd_right">
 	        <ul>
-	        <%if(userProduct!=null&&categoryProduct==null) { 
-	        	// man, woman, kids 클릭시
-	        	for(Product p : userProduct) {
+	        <%if(userCategoryProduct!=null) { 
+	        	for(Product p : userCategoryProduct) {
 	        %>
 	            <li>
 	                <a href="<%=request.getContextPath() %>/product/productDetail?proNo=<%=p.getProNo() %>"><img src="<%=request.getContextPath() %>/images/product/<%=userType.toLowerCase() %>/<%=p.getImages1() %>" alt=""></a>
@@ -47,18 +43,7 @@
 	                <span><%=p.getProName() %></span>
 	                <span><%=df.format(p.getPrice()) %></span>
 	            </li>
-	        <%	}
-	        }else if(categoryProduct!=null) {
-	        	// 운동화, 샌들, 구두 클릭시
-	        	for(Product p : categoryProduct) {
-	        %> 
-	        	<li>
-	                <a href="<%=request.getContextPath() %>/product/productDetail?proNo=<%=p.getProNo() %>"><img src="<%=request.getContextPath() %>/images/product/<%=userType.toLowerCase() %>/<%=p.getImages1() %>" alt=""></a>
-	                <span>[슈썸]</span>
-	                <span><%=p.getProName() %></span>
-	                <span><%=df.format(p.getPrice()) %></span>
-	            </li>
-	        <%	}
+	        <%	} 
 	        }else { %>
 	        	<p>상품 준비중 입니다.</p>
 	        <%} %>
@@ -79,13 +64,33 @@
 	
 	
 	<script>
-		$("#selectSort").change((e)=>{
+	
+		// pd_left 박스 카테고리 클릭시 이동
+		$(document).on('click','.category>li' ,function(e) { 
+    	    e.stopPropagation();
+    	    var type="<%=userType.toLowerCase() %>";
+    	    var category=$(e.target).attr("title");
+   			location.assign("<%= request.getContextPath()%>/product/productlist?userType="+type+"&category="+category);
+   			
+    	});
+		
+   		<%if(category.equals("A")) { %>
+			$(".category>li:eq(0)").addClass("cate_clicked");
+		<%}else if(category.equals("R")) { %>
+			$(".category>li:eq(1)").addClass("cate_clicked");
+		<%}else if(category.equals("S")) { %>
+			$(".category>li:eq(2)").addClass("cate_clicked");
+		<%}else { %>
+			$(".category>li:eq(3)").addClass("cate_clicked");
+		<%} %>
 			
+		// 최신순, 높은가격순, 낮은가격순 셀렉트 박스 선택시 Ajax
+		$("#selectSort").change((e)=>{
 			$.ajax({
 				url:"<%=request.getContextPath() %>/product/productlistAjax",
 				data:{
 						"userType":"<%=userType.toLowerCase() %>",
-						"ctegory":"<%=category %>",
+						"category":"<%=category %>",
 						"sort":$(e.target).val()
 					},
 				success:data=>{
@@ -93,6 +98,7 @@
 				}
 			});
 		});
+		
 	</script>
 
 <%@ include file="/views/common/footer.jsp" %>

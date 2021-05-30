@@ -4,7 +4,7 @@
 
 	<section>
        <div id="main_slide">
-           <div class="slide_button">
+           <div class="slide_button">`
                <button type="button" id="prev"></button>
                <button type="button" id="next"></button>
            </div>
