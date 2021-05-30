@@ -55,7 +55,7 @@
         <header>
             <ul id="header_top">
             	<%if(loginMember==null) { %>
-                	<li><a id="myBtn">로그인</a></li>
+                	<li><a id="myBtn" style="cursor:pointer;">로그인</a></li>
                 	<li><a href="<%=request.getContextPath() %>/views/member/regiester.jsp">회원가입</a></li>
                 <%}else { %>
                 	<li><a href="<%=request.getContextPath() %>/logout">로그아웃<a></a></li>
@@ -120,16 +120,24 @@
     <script>
     var modal = document.getElementById('myModal');
     
+    // btn 분기처리 
+    
+    <%if(loginMember==null){%>
+    	
     // Get the button that opens the modal
+    
     var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];                                          
-
+    
     // When the user clicks on the button, open the modal 
     btn.onclick = function() {
         modal.style.display = "block";
     }
+ 
+    <%}%>
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];                                          
+
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
@@ -154,10 +162,10 @@
             <div id="direct_ui">
             <%if(loginMember!=null){ %>
                 <a href="<%=request.getContextPath()%>/mypage/mypage.do?memberNo=<%=loginMember.getMemberNo()%>"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
-                <a href="<%=request.getContextPath()%>/cart/cartView?userNo=0"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
+                <a href="<%=request.getContextPath()%>/cart/cartView?userNo=<%=loginMember.getMemberNo()%>"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
             <%}else{ %>
             	<a href="<%=request.getContextPath()%>/mypage/mypage.do"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
-                <a href="<%=request.getContextPath()%>/cart/cartView?userNo=0"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
+                <a href="<%=request.getContextPath()%>/cart/cartView"><img src="<%=request.getContextPath() %>/images/ui/cart_ui.png" alt=""></a>
             <%} %>
             </div>
         </header>
