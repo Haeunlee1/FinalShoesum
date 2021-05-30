@@ -53,7 +53,7 @@
         <div class="recovery-container center title">
           <p>아이디 찾기</p>
         </div>
-        <form action="/member/idFind" id="idFindForm" method="post" >
+        <form action="<%=request.getContextPath() %>/member/idFind" id="idFindForm" method="post" >
 	        <div class="recovery-container center">
 	          <input type="text" class="recovery-form recovery" name="memberNm" id="memberNm" placeholder="이름 입력">
 	        </div> 
@@ -76,7 +76,7 @@
         <div class="recovery-container center title">
           <p>비밀번호 찾기</p>
         </div>
-        <form action="/member/pwFind" id="pwFindForm" method="post" >
+        <form action="<%=request.getContextPath() %>/member/pwFind" id="pwFindForm" method="post" >
 	        <div class="recovery-container center">
 	          <input type="text" class="recovery-form recovery" name="memberId" id="memberId" placeholder="아이디 입력">
 	        </div>
