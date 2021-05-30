@@ -19,29 +19,32 @@ List<Board> list=(List<Board>)request.getAttribute("list");
                           <th>작성날짜</th>
                       </tr>
                   </thead>
-                  <tbody>
-                      <!-- 공지사항 -->
+                 <%for(int i=0;i<2;i++){ %>
+                  <tbody id="notice_box">
                     <tr>
                         <th>공지</th>
-                        <th>배송 전 문의사항 관련 공지</th>
-                        <!-- <th>주문 상품 배송 전 변경,취소,주소지 변경, 묶음배송 관련 문의는 평일 오전 11시 이전 "배송 전 변경/취소" 게시판 이용 부탁드립니다.<th> -->
-                        <th>N</th>
+                        <th><a href="<%=request.getContextPath()%>/board/boardView.do?admin_check=a&boardNo=<%=i+1%>"><%=list.get(i).getQabTitle() %></a></th>
+                        <th>공지사항</th>
                         <th>슈썸</th>
-                        <th>2021-05-28</th>
+                        <th><%=list.get(i).getQabDate() %></th>
                     </tr>
-
+				</tbody>
+                <%} %>
+				<tbody>
                     <!-- 상품 문의 게시글 -->
                     <% int count=0;			
-                    for(int i=0;i<list.size();i++){
+                    for(Board b: list){
                     	count++;
-                    }%>
-                    <% for (Board b : list){ %> 
+                    }
+                    %>
+                    <% count=count-2; 
+                    for (int i=2;i<list.size();i++){ %> 
                     <tr>
                         <td><%=count-- %></td>
-                        <td><a href="<%=request.getContextPath()%>/board/checkPw.do?boardNo=<%=b.getQabNo()%>"><%=b.getQabTitle() %></a></td>
-                        <td><%=b.getCommentNo()!=null?"답변완료":"미답변" %></td>
-                        <td><%=b.getQabWriter() %></td>
-                        <td><%=b.getQabDate() %></td>
+                        <td><a href="<%=request.getContextPath()%>/board/checkPw.do?boardNo=<%=list.get(i).getQabNo()%>"><%=list.get(i).getQabTitle() %></a></td>
+                        <td><%=list.get(i).getCommentNo()!=null?"답변완료":"미답변" %></td>
+                        <td><%=list.get(i).getQabWriter() %></td>
+                        <td><%=list.get(i).getQabDate() %></td>
                     </tr>
                     <% } %>
                 </tbody>
@@ -50,6 +53,9 @@ List<Board> list=(List<Board>)request.getAttribute("list");
             <!-- 글쓰기 버튼-->
             <div id="question_bottom_container">
                 <input type="button" style="float:right" value="글쓰기" onclick="fn_boardWrite();">
+            </div>
+            <div id="pageBar">
+            	<%=request.getAttribute("pageBar") %>
             </div>
         </div>
     </section>

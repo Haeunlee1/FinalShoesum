@@ -23,10 +23,10 @@ public class BoardService {
 		return list;
 	}
 	
-	public List<Board> boardList() {
+	public List<Board> boardList(int cPage, int numPerpage) {
 		
 		Connection conn = getConnection();
-		List<Board> list = dao.boardList(conn);
+		List<Board> list = dao.boardList(conn,cPage, numPerpage);
 		close(conn);
 		return list;
 		
@@ -74,6 +74,49 @@ public class BoardService {
 		//댓글 삭제
 		Connection conn=getConnection();
 		int result=dao.deleteComment(conn,qabNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int updateComment(int qabNo, String content) {
+		//댓글 수정
+		Connection conn=getConnection();
+		int result=dao.updateComment(conn,qabNo,content);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int updateBoard(Board b, int qabNo) {
+		//게시글수정
+		Connection conn=getConnection();
+		int result=dao.updateBoard(conn, b, qabNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int deleteBoard(int qabNo) {
+		//게시글 삭제
+		Connection conn=getConnection();
+		int result=dao.deleteBoard(conn,qabNo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int allBoardCount() {
+		//총 게시글 세기
+		Connection conn=getConnection();
+		int result=dao.allBoardCount(conn);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

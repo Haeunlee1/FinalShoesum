@@ -1,7 +1,8 @@
 @charset "UTF-8";
 /* font-family: 'Noto Sans KR', sans-serif; */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
-/* 질문 게시판 css 시작 */
+
+/* 질문 게시판 리스트 css 시작 */
 
 #question_board_container{
     width: auto;
@@ -133,7 +134,7 @@ div#write_content>#qab_content{
 }
 /* 글쓰기 css 끝 */
 
-/* 상품문의 css 시작 */
+/* 게시글view css 시작 */
 section#boardview_box{
     width:1000px;
     text-align:left;
@@ -156,14 +157,17 @@ div#view_content_title .view_span1{
 	margin-left:65px;
 }
 div#view_content_box{
-    height:300px;
+    height:400px;
     border-bottom:1px black solid;
     text-align:inherit;
     padding-left:20px;
     padding-right:20px;
+    padding-bottom:20px;
     margin-bottom:0px;
+    overflow:auto;
+    width:100%;
 }
-div#comment_write_con{
+div#comment_write_con, div#comment_edit_con{
     border-bottom:1px black solid;
     padding-top:15px;
     height:150px;
@@ -171,7 +175,8 @@ div#comment_write_con{
     margin-bottom:0px;
     padding-left:20px;
 }
-div#comment_write_box textarea{
+div#comment_write_con textarea,
+div#comment_edit_con textarea{
 	margin-top:10px;
     width:800px;
     float:left;
@@ -181,7 +186,7 @@ div#comment_write_box textarea{
     font-weight: bolder;
     font-size:18px;
 }
-button#comment_btn_insert{
+button.comment_btn_insert{
     background-color: black;
     color:white;
     border-radius : 7%;
@@ -195,7 +200,7 @@ button#comment_btn_insert{
 div#comment_view_con{
     border-bottom: 1px black solid;
     padding-top:15px;
-    height:150px;
+    height:200px;
     text-align:inherit;
     margin-bottom:0px;
     padding-left:20px;
@@ -213,8 +218,10 @@ div#comment_view_con{
     padding-right:50px;
 }
 div#comment_btn{
-    clear:both;
+    /* clear:both; */
     margin-top:50px;
+    text-align:inherit;
+	height:100px;
 }
 li#comment_edit{
 	padding-right:0px;
@@ -232,6 +239,7 @@ li#comment_edit{
     margin-right:0;
 }
 .backtoList_btn{
+	float:left;
     width:100px;
     height:40px;
     border : none;
@@ -240,7 +248,29 @@ li#comment_edit{
     font-size:16px;
     cursor: pointer;
 }
-/* 상품문의 css 끝 */
+.board_del_btn{
+	width:100px;
+    height:40px;
+    border : none;
+    border-radius : 7%;
+    margin: 10px 5px ;
+    font-size:16px;
+    cursor: pointer;
+    text-align:center;
+}
+.board_edit_btn{
+	width:100px;
+    height:40px;
+    border : none;
+    border-radius : 7%;
+    margin: 10px 5px ;
+    font-size:16px;
+    cursor: pointer;
+	background-color:black;
+	color:white;
+	text-align:inherit;
+}
+/* 게시글view css 끝 */
 
 /* 자주 묻는 질문 css 시작 */
 
