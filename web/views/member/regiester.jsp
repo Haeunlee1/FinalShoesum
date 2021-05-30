@@ -156,7 +156,7 @@
 			var str = $("#memberForm").serialize();
 		    $.ajax({
 		      type:"POST",
-		      url:"/isCheckId",
+		      url:"<%=request.getContextPath() %>/isCheckId",
 		      contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		      data: str,
 		      datatype:"json",
