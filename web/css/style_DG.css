@@ -35,6 +35,11 @@ body {
   background-size: contain;
 }
 
+.memberBtn{
+	display: inline;
+	text-decoration: none;
+}
+		
 .button-social {
   width: 25px;
   height: 25px;
@@ -118,6 +123,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
 }
 
 .container-recovery {
@@ -141,11 +147,13 @@ body {
   background-color: rgba(230, 230, 230, 1);
   border: 1px solid rgba(230, 230, 230, 1);
   padding: 20px 30px;
+  margin:40px;
 }
 
 .container-id-recovery {
   border: 1px solid rgba(230, 230, 230, 1);
   padding: 20px 30px;
+  margin:40px;
 }
 
 .recovery-container.title {
@@ -347,7 +355,7 @@ body {
  .modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
+            z-index: 50; /* Sit on top */
             left: 0;
             top: 0;
             width: 100%; /* Full width */

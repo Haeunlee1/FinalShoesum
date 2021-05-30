@@ -70,7 +70,7 @@
                 	<li><a href="<%=request.getContextPath()%>/mypage/mypage.do?memberNo=<%=loginMember.getMemberNo()%>">마이페이지</a></li>
                 <%} %>
                 <li><a href="<%=request.getContextPath() %>/board/boardList">질문게시판</a></li>
-                <li><a href="">자주묻는질문</a></li>
+                <li><a href="<%=request.getContextPath()%>/faq/faqList">자주묻는질문</a></li>
             </ul>
             
             <div id="myModal" class="modal">

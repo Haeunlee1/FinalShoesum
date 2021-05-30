@@ -282,6 +282,11 @@ li#comment_edit{
     margin: auto;
     height: auto;
 }
+
+div#FAQ_container {
+	margin-bottom : 100px;
+}
+
 #FAQ_container p:first-child,
 #board_container p:first-child,
 #view_title p:first-child {
@@ -333,6 +338,7 @@ table#board_table tbody td {
 }
 table#FAQ_table li {
     padding: 20px;
+    text-align : left;
 }
 table#FAQ_table .FAQ_answer {
     display: none;
