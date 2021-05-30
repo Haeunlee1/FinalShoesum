@@ -20,13 +20,13 @@ List <Faq> list=(List<Faq>)request.getAttribute("list");
 	            <tbody>
 	            <%for (Faq q : list){ %>
 	            <tr>
-	            	<td><%=q.getFaqNo() %></td>
+	            	<td>Q</td>
 	                <td>
 	                    <ul>
-	                        <li class="FAQ_question menu_list">Q. <%=q.getFaqTitle() %></li>
+	                        <li class="FAQ_question menu_list"><%=q.getFaqTitle() %></li>
 	                        <ul class="FAQ_answer">
 	                            <li style="border-top: 1px solid lightgray;background:#eaeaea;font-weight: bold;">
-	                            	A. <%=q.getFaqContent() %>
+	                            	<%=q.getFaqContent() %>
 	                            </li>
 	                        </ul>
 	                    </ul>
@@ -39,11 +39,11 @@ List <Faq> list=(List<Faq>)request.getAttribute("list");
 	</section>
     
     <!-- table_container 끝-->
-    <div id="FAQ_bottom_container">
+    <!-- <div id="FAQ_bottom_container">
         <form style="text-align: center;">
             <input type="text" placeholder="찾고자 하는 내용을 적으세요."><input type="button" value="검색">
         </form>
-    </div>
+    </div> -->
     
     
     <script>
@@ -52,7 +52,9 @@ List <Faq> list=(List<Faq>)request.getAttribute("list");
         	
             $(".menu_list").click(function(){
                 var sublist = $(this).next("ul");
-
+				
+                $(".FAQ_answer").slideUp();
+                
                 if( sublist.is(":visible") ){
                     sublist.slideUp();
                 }else{
