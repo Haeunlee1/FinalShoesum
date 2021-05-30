@@ -548,17 +548,18 @@ div#pd_info>button {
     margin-top: 20px;
     cursor: pointer;
 }
+
 /*  											REVIEW                                             */
 div#pd_review {
     clear: both;
-    height: 750px;
+    /* height: 750px; */
     border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
   
 }
 div#pd_review_content {
     clear: both;
-    height: 750px;
+/*     height: 750px; */
     border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
 }
@@ -576,12 +577,10 @@ div#pd_review_content .review_box {
 
 div#review_null {
 	width : 1000px;
-	height : 400px;
+	height : 200px;
 	font-size : 30px;
-}
-
-ul#review_rating {
-	/* display : flex; */
+	line-height : 150px;
+	text-align : center;
 }
 
 div#review_rating_wrapper {
