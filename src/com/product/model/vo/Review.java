@@ -9,6 +9,7 @@ public class Review {
 	private int reviewRating;
 	private String reviewProNo;
 	private String reviewMemId;
+	private int reviewMemNo;
 	private Date reviewDate;
 	
 	public Review() {
@@ -16,13 +17,14 @@ public class Review {
 	}
 
 	public Review(int reviewNo, String reviewCont, int reviewRating, String reviewProNo, String reviewMemId,
-			Date reviewDate) {
+			int reviewMemNo, Date reviewDate) {
 		super();
 		this.reviewNo = reviewNo;
 		this.reviewCont = reviewCont;
 		this.reviewRating = reviewRating;
 		this.reviewProNo = reviewProNo;
 		this.reviewMemId = reviewMemId;
+		this.reviewMemNo = reviewMemNo;
 		this.reviewDate = reviewDate;
 	}
 
@@ -64,6 +66,14 @@ public class Review {
 
 	public void setReviewMemId(String reviewMemId) {
 		this.reviewMemId = reviewMemId;
+	}
+
+	public int getReviewMemNo() {
+		return reviewMemNo;
+	}
+
+	public void setReviewMemNo(int reviewMemNo) {
+		this.reviewMemNo = reviewMemNo;
 	}
 
 	public Date getReviewDate() {

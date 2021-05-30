@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.product.model.service.ProductService;
 import com.product.model.vo.Product;
+import com.product.model.vo.Review;
 
 /**
  * Servlet implementation class ProductDetailServlet
@@ -54,6 +55,12 @@ public class ProductDetailServlet extends HttpServlet {
 		
 		List<Product> list = new ProductService().selectProduct(proNo);
 		request.setAttribute("list",list );
+		
+		
+		// review 리스트 받기 
+		List<Review> relist = new ProductService().selectReviewList(proNo);
+		request.setAttribute("relist",relist);
+		
 		request.getRequestDispatcher("/views/product/product_detail.jsp").forward(request, response);
 	
 	}
