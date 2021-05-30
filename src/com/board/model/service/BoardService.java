@@ -112,4 +112,14 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	public int allBoardCount() {
+		//총 게시글 세기
+		Connection conn=getConnection();
+		int result=dao.allBoardCount(conn);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }

@@ -252,4 +252,26 @@ public class BoardDao {
 		}
 		return result;
 	}
+	
+	public int allBoardCount(Connection conn) {
+		//게시글 전체 갯수 조회
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("allBoardCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+
+
+
 }

@@ -39,10 +39,11 @@ public class BoardListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerpage=10;
+		int numPerpage=12;
+		System.out.println("cPage"+cPage);
 		List<Board> list = new BoardService().boardList(cPage,numPerpage);
 		
-		int totalData=list.size();
+		int totalData=new BoardService().allBoardCount();
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -70,12 +71,8 @@ public class BoardListServlet extends HttpServlet {
 			pageBar+="<div class=\"pageBar-icon\">&gt;</div>";
 		}
 		else {
-			pageBar+="<a href='"+request.getContextPath()
-			+"/board/boardList?cPage="+pageNo+"'>[다음]</a>";
-			
-//			pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
-//			+"/product/productlist?userType="+sort+"&cPage="+pageNo+"'>&gt;</div>";
-//			
+			pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
+			+"/board/boardList?cPage="+pageNo+"'>&gt;</div>";
 		}
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("list", list);

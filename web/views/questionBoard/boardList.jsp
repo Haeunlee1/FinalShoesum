@@ -35,9 +35,10 @@ List<Board> list=(List<Board>)request.getAttribute("list");
                     <% int count=0;			
                     for(Board b: list){
                     	count++;
-                    }%>
+                    }
+                    %>
                     <% count=count-2; 
-                    for (int i=0;i<list.size()-2;i++){ %> 
+                    for (int i=2;i<list.size();i++){ %> 
                     <tr>
                         <td><%=count-- %></td>
                         <td><a href="<%=request.getContextPath()%>/board/checkPw.do?boardNo=<%=list.get(i).getQabNo()%>"><%=list.get(i).getQabTitle() %></a></td>
