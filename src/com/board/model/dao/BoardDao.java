@@ -234,4 +234,20 @@ public class BoardDao {
 		}
 		return result;
 	}
+	
+	public int deleteBoard(Connection conn, int qabNo) {
+		//게시글 삭제
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteBoard"));
+			pstmt.setInt(1, qabNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

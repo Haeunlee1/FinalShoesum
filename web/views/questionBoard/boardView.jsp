@@ -74,18 +74,33 @@
         <div id="comment_btn">
             <button type="button" class="backtoList_btn" onclick="location.assign('<%=request.getContextPath()%>/board/boardList')">목록으로</button>  
         	<%if(loginMember!=null&&(loginMember.getMemberId().equals(b.getQabWriter())||loginMember.getMemberId().equals("admin"))){ %>
-        	<button type="button" class="f_right board_del_btn">삭제</button>
+        	<button type="button" class="f_right board_del_btn" onclick="fn_board_delete();">삭제</button>
         	<button type="button" class="f_right board_edit_btn" onclick="fn_board_edit();">수정</button>
         	<%} %>
         </div>      
     </section>
     <script>
+    	const fn_board_delete=()=>{
+    		//게시글 삭제
+    		
+    		if(confirm("게시글을 삭제하시겠습니까?")){
+    			<%if(bc!=null){%> //게시글에 댓글이 있으면 bcNo넘기기
+    			location.assign("<%=request.getContextPath() %>/board/boardDelete?qabNo="+'<%=b.getQabNo()%>'+'&bcNo='+'<%=bc.getCommentNo()%>');
+    			<%}else{%>		//게시글에 댓글 없으면 bcNo 안 넘김
+    			location.assign("<%=request.getContextPath()%>/board/boardDelete?qabNo="+'<%=b.getQabNo()%>');
+    			<%}%>
+    		};
+    	};
+    	
     	const fn_board_edit=()=>{
-    		//게시글 수정
-    		location.assign("<%=request.getContextPath()%>/board/boardEdit?qabNo="+'<%=b.getQabNo()%>');
-    	}
-    
-    
+    		//게시글수정 		
+    		<%if (bc==null){%>	//댓글이 없을 경우에만 게시글 수정 가능
+ 				location.assign("<%=request.getContextPath()%>/board/boardEdit?qabNo="+'<%=b.getQabNo()%>');
+    		<%} else {%> 	//댓글이 있을 땐 수정 불가
+    			alert('관리자의 댓글이 달린 경우, 게시글을 수정할 수 없습니다.');
+    		<%}%>
+    	};
+    	
     	$("#comment_del_btn").click(e=>{
     		//댓글 삭제
     		if(confirm("댓글을 삭제하시겠습니까?")){
@@ -97,7 +112,6 @@
     		/* 댓글 수정클릭시 css */ 
     		$("#comment_view_con").hide();
     		$("#comment_edit_con").show();
-    	})
-    
+    	});
     </script>
 <%@ include file="/views/common/footer.jsp"%>

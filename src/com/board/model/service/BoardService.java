@@ -99,4 +99,17 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	public int deleteBoard(int qabNo) {
+		//게시글 삭제
+		Connection conn=getConnection();
+		int result=dao.deleteBoard(conn,qabNo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }

@@ -196,7 +196,7 @@ button.comment_btn_insert{
 div#comment_view_con{
     border-bottom: 1px black solid;
     padding-top:15px;
-    height:150px;
+    height:200px;
     text-align:inherit;
     margin-bottom:0px;
     padding-left:20px;
@@ -214,7 +214,7 @@ div#comment_view_con{
     padding-right:50px;
 }
 div#comment_btn{
-    clear:both;
+    /* clear:both; */
     margin-top:50px;
     text-align:inherit;
 	height:100px;
@@ -252,6 +252,7 @@ li#comment_edit{
     margin: 10px 5px ;
     font-size:16px;
     cursor: pointer;
+    text-align:center;
 }
 .board_edit_btn{
 	width:100px;
@@ -263,6 +264,7 @@ li#comment_edit{
     cursor: pointer;
 	background-color:black;
 	color:white;
+	text-align:inherit;
 }
 /* 상품문의 css 끝 */
 

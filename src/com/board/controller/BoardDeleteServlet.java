@@ -1,6 +1,7 @@
 package com.board.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.board.model.service.BoardService;
-import com.board.model.vo.Board;
 
 /**
- * Servlet implementation class BoardUpdateEndServlet
+ * Servlet implementation class BoardDeleteServlet
  */
-@WebServlet("/board/boardUpdateEnd")
-public class BoardUpdateEndServlet extends HttpServlet {
+@WebServlet("/board/boardDelete")
+public class BoardDeleteServlet extends HttpServlet {
+	//게시글 삭제
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardUpdateEndServlet() {
+    public BoardDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,32 +30,19 @@ public class BoardUpdateEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//게시글번호,회원번호 일치하는지 확인 후 수정하기
-		Board b = new Board();
-		b.setQabTitle(request.getParameter("qab_cate"));
-		b.setQabContent(request.getParameter("qab_content"));
-		b.setQabWriter(request.getParameter("memberId"));
-		b.setQabPw(request.getParameter("qabPw"));
+		//게시글 삭제 => 게시글 번호로 받아서 지우기
 		int qabNo=Integer.parseInt(request.getParameter("qabNo"));
-		int result = new BoardService().updateBoard(b, qabNo);
-		
-		String msg="";
-		String loc="";
-		if(result>0) {
-			msg="게시글이 수정되었습니다.";
-			loc="/board/boardView.do?admin_check=a&boardNo="+qabNo;
-		}else {
-			msg="게시글 수정에 실패했습니다. 다시 시도해주세요.";
-			loc="/board/boardEdit?qabNo="+qabNo;
+		//게시글삭제
+		int result=new BoardService().deleteBoard(qabNo);
+		//게시글의 댓글이 있으면 댓글도 테이블에서 삭제
+		if(request.getParameter("bcNo")!=null) {
+			result=new BoardService().deleteComment(qabNo);
 		}
-		request.setAttribute("msg",msg);
-		request.setAttribute("loc", loc);
-		
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 
-		//댓글 달린 상태면 수정 안되게 해보기
-	
-	
+		String msg=result>0?"게시글이 삭제되었습니다":"게시글 삭제에 실패하였습니다";
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", "/board/boardList");
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**
