@@ -72,6 +72,11 @@
             <% } %>
         </table>
             <% if (!list.isEmpty()){ %>
+        <div id="select-btn"> 
+            <button class="left-btn checkwishBtn">선택삭제</button>
+            <button class="right-btn allDelBtn" >전체상품 비우기</button>
+        </div>
+        
         <div id="order_price">
             <div id="price_head_wrap">
                 <div>총상품가격</div>
