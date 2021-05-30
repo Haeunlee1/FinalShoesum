@@ -1,7 +1,8 @@
 @charset "UTF-8";
 /* font-family: 'Noto Sans KR', sans-serif; */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
-/* 질문 게시판 css 시작 */
+
+/* 질문 게시판 리스트 css 시작 */
 
 #question_board_container{
     width: auto;
@@ -133,7 +134,7 @@ div#write_content>#qab_content{
 }
 /* 글쓰기 css 끝 */
 
-/* 상품문의 css 시작 */
+/* 게시글view css 시작 */
 section#boardview_box{
     width:1000px;
     text-align:left;
@@ -156,12 +157,15 @@ div#view_content_title .view_span1{
 	margin-left:65px;
 }
 div#view_content_box{
-    height:300px;
+    height:400px;
     border-bottom:1px black solid;
     text-align:inherit;
     padding-left:20px;
     padding-right:20px;
+    padding-bottom:20px;
     margin-bottom:0px;
+    overflow:auto;
+    width:100%;
 }
 div#comment_write_con, div#comment_edit_con{
     border-bottom:1px black solid;
@@ -266,7 +270,7 @@ li#comment_edit{
 	color:white;
 	text-align:inherit;
 }
-/* 상품문의 css 끝 */
+/* 게시글view css 끝 */
 
 /* 자주 묻는 질문 css 시작 */
 

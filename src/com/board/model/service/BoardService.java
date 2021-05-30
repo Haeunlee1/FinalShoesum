@@ -23,10 +23,10 @@ public class BoardService {
 		return list;
 	}
 	
-	public List<Board> boardList() {
+	public List<Board> boardList(int cPage, int numPerpage) {
 		
 		Connection conn = getConnection();
-		List<Board> list = dao.boardList(conn);
+		List<Board> list = dao.boardList(conn,cPage, numPerpage);
 		close(conn);
 		return list;
 		

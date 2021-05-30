@@ -10,7 +10,7 @@
         <div id="write_top_container"> 
             <p>문의하기</p>
         </div>
-        <form action='<%=request.getContextPath()%>/board/boardUpdateEnd'>
+        <form action='<%=request.getContextPath()%>/board/boardUpdateEnd' method="post">
             <div id="write_container">
                 <span id="qab_title">제목</span>
                 <select name="qab_cate" id="qab_cate" >

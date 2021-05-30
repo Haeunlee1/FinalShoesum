@@ -58,13 +58,15 @@ public class BoardDao {
 	}
 	
 	/* 질문게시판 가져오기 */
-	public List<Board> boardList(Connection conn){
+	public List<Board> boardList(Connection conn, int cPage, int numPerpage){
 		PreparedStatement pstmt = null;
 		ResultSet result = null;
 		List<Board> list = new ArrayList();
 		Board b=null;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("boardList"));
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
 			result = pstmt.executeQuery();
 			while(result.next()) {
 				b = new Board();

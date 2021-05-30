@@ -14,7 +14,7 @@
         </div>
         <div id="view_content_title">
             <p>제목 <span class="view_span1">|&nbsp;&nbsp;&nbsp;<%=b.getQabTitle() %></span></p>
-            <p>작성자 <span class="view_span">|&nbsp;&nbsp;&nbsp;<%=b.getQabWriter() %></span></p>
+            <p>작성자 <span class="view_span">|&nbsp;&nbsp;&nbsp;<%=b.getQabWriter().equals("admin")?"슈썸":b.getQabWriter() %></span></p>
             <p>작성일 <span class="view_span">|&nbsp;&nbsp;&nbsp;<%=b.getQabDate() %></span></p>
         </div>
         <div id="view_content_box">
