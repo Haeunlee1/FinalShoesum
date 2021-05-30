@@ -4,9 +4,11 @@
 <%@ include file="/views/common/header.jsp"%>
 <% 
 List<Board> list=(List<Board>)request.getAttribute("list");
+int total =(int)request.getAttribute("total");
+int cPage=Integer.parseInt(request.getParameter("cPage"));
 %>
 
-<section>
+	<section>
           <div id="board_container">
               <p>질문게시판</p>
               <table id="board_table">
@@ -19,28 +21,27 @@ List<Board> list=(List<Board>)request.getAttribute("list");
                           <th>작성날짜</th>
                       </tr>
                   </thead>
-                 <%for(int i=0;i<2;i++){ %>
-                  <tbody id="notice_box">
+                  <tbody>
                     <tr>
                         <th>공지</th>
-                        <th><a href="<%=request.getContextPath()%>/board/boardView.do?admin_check=a&boardNo=<%=i+1%>"><%=list.get(i).getQabTitle() %></a></th>
+                        <th><a href="<%=request.getContextPath()%>/board/boardView.do?admin_check=a&boardNo=1">슈썸 배송비 무료 이벤트!</a></th>
                         <th>공지사항</th>
                         <th>슈썸</th>
-                        <th><%=list.get(i).getQabDate() %></th>
+                        <th>2021-05-30</th>
+                    </tr>
+                    <tr>
+                        <th>공지</th>
+                        <th><a href="<%=request.getContextPath()%>/board/boardView.do?admin_check=a&boardNo=2">상품 교환 및 반품 안내</a></th>
+                        <th>공지사항</th>
+                        <th>슈썸</th>
+                        <th>2021-05-30</th>
                     </tr>
 				</tbody>
-                <%} %>
 				<tbody>
-                    <!-- 상품 문의 게시글 -->
-                    <% int count=0;			
-                    for(Board b: list){
-                    	count++;
-                    }
-                    %>
-                    <% count=count-2; 
-                    for (int i=2;i<list.size();i++){ %> 
+                    <%total=total-(cPage*10);
+                    for (int i=0;i<list.size();i++){ %> 
                     <tr>
-                        <td><%=count-- %></td>
+                        <td><%=total-- %></td>
                         <td><a href="<%=request.getContextPath()%>/board/checkPw.do?boardNo=<%=list.get(i).getQabNo()%>"><%=list.get(i).getQabTitle() %></a></td>
                         <td><%=list.get(i).getCommentNo()!=null?"답변완료":"미답변" %></td>
                         <td><%=list.get(i).getQabWriter() %></td>
