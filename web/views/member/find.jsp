@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
 
-<head>
-  <meta charset="utf-8">
-  <title>슈썸 : 아이디 찾기</title>
-  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style_JK.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style_DG.css">
-	<script src="<%=request.getContextPath()%>/js/jquery-3.6.0.min.js"></script>
+<%@ include file="/views/common/header.jsp"%>
+
 	<script>
 	
 		function findId(){
@@ -43,9 +37,19 @@
 			$("#pwFindForm").submit();
 		}
 	</script>
-</head>
-
-<body>
+	
+	<div class="container-regiester">
+        <div>
+          <div class="title-regiester">
+            <p>아이디/비밀번호 찾기</p>
+          </div>
+          <div class="subtitle-regiester">
+            <p></p>
+            <div class="container-no-margin">
+              <p></p>
+              <p class="mark-required"></p>
+            </div>
+          </div>
   <div class="recovery-wrapper">
     <div class="container-recovery">
     
@@ -98,6 +102,4 @@
       
     </div>
   </div>
-</body>
-
-</html>
+<%@ include file="/views/common/footer.jsp"%>
