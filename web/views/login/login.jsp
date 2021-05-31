@@ -13,6 +13,7 @@
   <title>슈썸 : 로그인</title>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style_JK.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style_DG.css">
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<style>
 		.memberBtn{
 			display: inline;
@@ -80,6 +81,34 @@
 			}
 			
 		</script>
+		
+		<!-- 카카오 api 받아오기 -->
+  <script>
+ 	 
+ 	window.Kakao.init("462c45986fe0724889adef5543ad6782");
+ 	
+ 	const kaLogin = function(){
+        window.Kakao.Auth.login({
+ 		scope:'profile, account_email, gender',
+ 		success:function(authObj){
+ 			console.log(authObj);
+ 			window.Kakao.API.request({
+ 				url:'/v2/user/me',
+ 				success : res =>{
+ 					const kakao_account = res.kakao_account;
+ 					let kakaoName = kakao_account.profile.nickname;
+ 					let kakaoEmail = kakao_account.email;
+ 					console.log(kakaoName);
+ 					console.log(kakaoEmail);
+ 					location.replace('<%=request.getContextPath()%>/kakao/kakaoCheck?kakaoName='+kakaoName+'&kakaoEmail='+kakaoEmail);
+ 				    }
+ 			    });
+ 		    }
+        })
+ 	}
+  
+  </script>
+		
 </body>
 
 </html>
