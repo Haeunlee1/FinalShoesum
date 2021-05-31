@@ -1,9 +1,6 @@
 package com.member.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,9 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
 import com.member.model.vo.Ordered;
 
 /**
@@ -40,8 +37,10 @@ public class MypageMoveServlet extends HttpServlet {
 
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		//기본 3개월이내 주문내역 / 주문내역 지정시 그 값 받아서 같이 넘기기
+		Member m = new MemberService().checkMember(memberNo);
 		List<Ordered> list = new MemberService().basicOrdered(memberNo);
 		request.setAttribute("orderList", list);
+		request.setAttribute("member", m);
 		int index=0;
 		System.out.println("주문내역갯수:"+list.size());		//rs가 없으면 0이 찍힘 jsp에서 0을 기준으로 분기하기
 		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);

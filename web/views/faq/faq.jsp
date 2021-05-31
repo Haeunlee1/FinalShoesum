@@ -13,7 +13,7 @@ List <Faq> list=(List<Faq>)request.getAttribute("list");
 	        <table id="FAQ_table">
 		        <thead>
 		            <tr>
-		                <th>번호</th>
+		                <th>Q</th>
 		                <th>제목</th>
 		            </tr>
 		        </thead>

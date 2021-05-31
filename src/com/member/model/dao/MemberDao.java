@@ -389,7 +389,34 @@ public class MemberDao {
 		return result;
 	}
 	
-	
-// branch 'master' of https://github.com/Haeunlee1/FinalShoesum.git
+	public Member checkMember(Connection conn, int memberNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			System.out.println(memberNo);
+			pstmt=conn.prepareStatement(prop.getProperty("checkMember"));
+			pstmt.setInt(1, memberNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberNo(rs.getInt("member_no"));
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPw(rs.getString("member_pw"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setEmail(rs.getString("member_email"));
+				m.setPhone(rs.getString("member_phone"));
+				m.setPostNo(rs.getString("member_post_no"));
+				m.setAddress(rs.getString("member_address"));
+				m.setAddressEnd(rs.getString("member_address_end"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
 	
 }

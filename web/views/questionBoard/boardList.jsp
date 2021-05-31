@@ -3,10 +3,24 @@
 <%@ page import="java.util.List, com.board.model.vo.Board" %>
 <%@ include file="/views/common/header.jsp"%>
 <% 
-List<Board> list=(List<Board>)request.getAttribute("list");
+	List<Board> list=(List<Board>)request.getAttribute("list");
+	int total =(int)request.getAttribute("total");
+	
+	int cPage;
+	try {
+		cPage=Integer.parseInt(request.getParameter("cPage"));
+	}catch(NumberFormatException e) {
+		cPage=1;
+	}
+	int no=total-(10*(cPage-1));
+	if(total!=10){
+		total=10;
+	}
+
+	//int cPage=Integer.parseInt(request.getParameter("cPage"));
 %>
 
-<section>
+	<section>
           <div id="board_container">
               <p>질문게시판</p>
               <table id="board_table">
@@ -19,41 +33,41 @@ List<Board> list=(List<Board>)request.getAttribute("list");
                           <th>작성날짜</th>
                       </tr>
                   </thead>
-                 <%for(int i=0;i<2;i++){ %>
-                  <tbody id="notice_box">
+                  <tbody>
                     <tr>
                         <th>공지</th>
-                        <th><a href="<%=request.getContextPath()%>/board/boardView.do?admin_check=a&boardNo=<%=i+1%>"><%=list.get(i).getQabTitle() %></a></th>
+                        <th><a href="<%=request.getContextPath()%>/board/boardView.do?admin_check=a&boardNo=1">슈썸 배송비 무료 이벤트!</a></th>
                         <th>공지사항</th>
                         <th>슈썸</th>
-                        <th><%=list.get(i).getQabDate() %></th>
+                        <th>2021-05-30</th>
+                    </tr>
+                    <tr>
+                        <th>공지</th>
+                        <th><a href="<%=request.getContextPath()%>/board/boardView.do?admin_check=a&boardNo=2">상품 교환 및 반품 안내</a></th>
+                        <th>공지사항</th>
+                        <th>슈썸</th>
+                        <th>2021-05-30</th>
                     </tr>
 				</tbody>
-                <%} %>
 				<tbody>
-                    <!-- 상품 문의 게시글 -->
-                    <% int count=0;			
-                    for(Board b: list){
-                    	count++;
-                    }
-                    %>
-                    <% count=count-2; 
-                    for (int i=2;i<list.size();i++){ %> 
+                    <% 	if(no<=0){
+                		
+                	}else{
+	                    for (int i=0;i<list.size();i++){%>
                     <tr>
-                        <td><%=count-- %></td>
+                        <td><%=no-- %></td>
                         <td><a href="<%=request.getContextPath()%>/board/checkPw.do?boardNo=<%=list.get(i).getQabNo()%>"><%=list.get(i).getQabTitle() %></a></td>
                         <td><%=list.get(i).getCommentNo()!=null?"답변완료":"미답변" %></td>
                         <td><%=list.get(i).getQabWriter() %></td>
                         <td><%=list.get(i).getQabDate() %></td>
                     </tr>
-                    <% } %>
+                    <% } 
+                    }%>
                 </tbody>
             </table>
 
             <!-- 글쓰기 버튼-->
-            <div id="question_bottom_container">
-                <input type="button" style="float:right" value="글쓰기" onclick="fn_boardWrite();">
-            </div>
+            <input type="button" class="write_button" value="글쓰기" onclick="fn_boardWrite();">
             <div id="pageBar">
             	<%=request.getAttribute("pageBar") %>
             </div>

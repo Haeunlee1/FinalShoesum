@@ -31,10 +31,19 @@ public class AddWishServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		double sale = 0;
 		int memberNo =Integer.parseInt(request.getParameter("memberNo"));
 		String proNo=request.getParameter("proNo");
 		int result = new ProductService().addWish(memberNo,proNo);
-		if(result>0) {
+		
+		if(request.getParameter("hotpd")!=null&&request.getParameter("sale")!=null) {
+			String hotpd=request.getParameter("hotpd");
+			sale=Double.parseDouble(request.getParameter("sale"));
+			
+			request.setAttribute("hotpd", hotpd);
+			request.setAttribute("sale", sale);
+			request.getRequestDispatcher("/product/productDetail?proNo="+proNo+"&hotpd=hotpd&sale="+sale).forward(request, response);
+		}else if(result>0) {
 			request.getRequestDispatcher("/product/productDetail?proNo="+proNo).forward(request, response);
 		}else {
 			String msg="관심상품 등록 실패, 재시도 하세요";

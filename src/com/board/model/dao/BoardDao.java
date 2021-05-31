@@ -28,7 +28,7 @@ public class BoardDao {
 		}
 	}
 	
-	public List<Board> allMyBoards(Connection conn, int memberNo){
+	public List<Board> allMyBoards(Connection conn, int memberNo, int cPage, int numPerpage){
 		//내가쓴 게시글 가져오기
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -37,6 +37,8 @@ public class BoardDao {
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("allMyBoards"));
 			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				b= new Board();
@@ -271,7 +273,24 @@ public class BoardDao {
 		return result;
 	}
 	
-
+	public int allMyBoardCount(Connection conn, int memberNo) {
+		//내가 쓴 게시글 전체 갯수 조회
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("allMyBoardCount"));
+			pstmt.setInt(1, memberNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 
 
 }

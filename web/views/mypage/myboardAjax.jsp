@@ -2,8 +2,21 @@
     pageEncoding="UTF-8"%>
     <%@page import = "java.util.List,com.board.model.vo.*" %>
    <%
-   		List<Board> list = (List<Board>)request.getAttribute("boardList");
-   
+   		List<Board> list = (List<Board>)request.getAttribute("list");
+	    int total =(int)request.getAttribute("total");
+		int numPerpage=10;
+		int cPage;
+		try {
+			cPage=(int)request.getAttribute("cPage");
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		int no=total-(10*(cPage-1));
+		
+		if(total!=10){
+			total=10;
+		}
+		int memberNo=(int)request.getAttribute("memberNo");
     %>
     
 <table id="tbl-myboard">
@@ -16,25 +29,45 @@
     </thead>
     <tbody id="myboard_tbody">
     <%if(!list.isEmpty()) {
-    	int count=0;
-    	for(int i=0;i<list.size();i++){
-    		count++;
-    	}
-    	for(Board b : list){%>
-        <tr>
-            <td><%=count-- %></td>
-            <td><a href="<%=request.getContextPath()%>/board/boardView.do?boardNo=<%=b.getQabNo()%>&admin_check=a"><%=b.getQabTitle() %></a></td>
-            <td><%=b.getQabDate() %></td>
-        </tr>
-        <%} %>
-        <%}else{ %>
+    	if(no<=0){
+    		
+    	}else{
+    		for(Board b : list){%>
+	        <tr>
+	            <td><%=no-- %></td>
+	            <td><a href="<%=request.getContextPath()%>/board/boardView.do?boardNo=<%=b.getQabNo()%>&admin_check=a"><%=b.getQabTitle() %></a></td>
+	            <td><%=b.getQabDate() %></td>
+	        </tr>
+	        <%}
+    	}%>
+   <%}else{ %>
         <tr id="myboard_is_null">
             <td colspan="3">작성한 게시글이 없습니다.</td>
         </tr>
-        <%} %>
+   <%} %>
     </tbody>
 </table>
-
+ <div id="pageBar">
+  	<%=request.getAttribute("pageBar") %>
+  </div>
+  <script>
+  function fn_ajax(cPage){
+	//내가쓴게시글 ajax해보기
+	$.ajax({
+		url:"<%=request.getContextPath()%>/mypage/myboardList?",
+		data:{
+			"memberNo":"<%=memberNo%>",
+			"type":"board",
+			"cPage":cPage,
+			"numPerpage":'<%=numPerpage%>'
+		}, 
+		type:"post",
+		success:data=>{
+			$("#boardTarget").html(data);
+		}
+	});
+  }
+  </script>
 <style>
 table#tbl-myboard{
     width:1000px;

@@ -22,7 +22,7 @@
 	} else {
 		memberNo = loginMember.getMemberNo();
 	}
-	
+	double sale=0;
 %>
 
 	<section>
@@ -88,7 +88,7 @@
 	            <%
 	            	if(request.getAttribute("hotpd")!=null) {
 	        			String hotpd = (String)request.getAttribute("hotpd");
-	        			double sale = (double)request.getAttribute("sale");
+	        			sale = (double)request.getAttribute("sale");
 	        			
 		            	price=((int)(price*sale)/100)*100;
 	  			%>
@@ -230,13 +230,21 @@
 	        			$(".heart").text(icon[1]);
 	        			heart='1';
 		        		alert("관심상품으로 등록되었습니다.");
-		        		location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>');
-	        		}else {
+		        		<%if(request.getAttribute("hotpd")!=null){%>
+		        		location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>'+'&hotpd=hotpd&sale='+'<%=sale%>');
+	        			<%} else{%>
+	        			location.assign("<%=request.getContextPath()%>/mypage/addWish?memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>');
+	        			<%}%>
+		        	}else {
 	        			$(".heart").text(icon[0]);
 	        			heart='0';
-						alert('관심상품에서 삭제되었습니다.');	        			
-						location.assign("<%=request.getContextPath()%>/mypage/wishDelete?pd=pd&memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>');
-	        		}
+						alert('관심상품에서 삭제되었습니다.');	 
+						<%if(request.getAttribute("hotpd")!=null){%>      			
+						location.assign("<%=request.getContextPath()%>/mypage/wishDelete?pd=pd&memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>'+'&hotpd=hotpd&sale='+'<%=sale%>');
+						<%} else{%>
+	        			location.assign("<%=request.getContextPath()%>/mypage/wishDelete?pd=pd&memberNo="+'<%=loginMember.getMemberNo()%>'+'&proNo='+'<%=proNo%>');
+	        			<%}%>
+					}
 		        	$(".heart").val(heart);
 		        <%}else {%>
         			alert("로그인 후 관심상품 등록 가능합니다.");
