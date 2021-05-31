@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
 import com.member.model.vo.Ordered;
 
 /**
@@ -39,7 +40,9 @@ public class OrderedSearchServlet extends HttpServlet {
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 	
 		List<Ordered> list = new MemberService().selectOrdered(memberNo,before,after);
+		Member m = new MemberService().checkMember(memberNo);
 		request.setAttribute("orderList", list);
+		request.setAttribute("member", m);
 		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);
 		
 	}

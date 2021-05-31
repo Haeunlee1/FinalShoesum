@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
 import com.board.model.vo.BoardComment;
+import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
 
 /**
  * Servlet implementation class BoardViewServlet
@@ -42,6 +44,13 @@ public class BoardViewServlet extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		Board b = new BoardService().selectBoard(boardNo,qabPw);
 
+		//마이페이지에서 접근이면 다시 마이페이지로 돌아가기
+		Member m=null;
+		if(request.getParameter("my")!=null) {
+			m = new MemberService().checkMember(b.getQabWriter());
+			request.setAttribute("member", m);
+		}
+		
 		if(b!=null) { //게시글 불러오기
 			//댓글도 같이 불러오기
 			BoardComment bc=new BoardService().selectComment(boardNo);
@@ -56,8 +65,6 @@ public class BoardViewServlet extends HttpServlet {
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
-		
-		
 	}
 
 	/**
