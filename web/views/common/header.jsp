@@ -83,7 +83,7 @@
         <header>
             <ul id="header_top">
             	<%if(loginMember==null) { %>
-                	<li><a id="myBtn" style="cursor:pointer;">로그인</a></li>
+                	<li><a id="loginBtn" style="cursor:pointer;">로그인</a></li>
                 	<li><a href="<%=request.getContextPath() %>/views/member/regiester.jsp">회원가입</a></li>
                 <%}else { %>
                 	<li><a href="<%=request.getContextPath() %>/logout">로그아웃<a></a></li>
@@ -93,12 +93,12 @@
                 <li><a href="<%=request.getContextPath()%>/faq/faqList">자주묻는질문</a></li>
             </ul>
             
-            <div id="myModal" class="modal">
+            <div id="loginModal" class="modal">
  
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>                                                               
-        <div class="login-wrapper">
+       <div class="login-wrapper">
     <div>
       <a href="<%=request.getContextPath()  %>/index.jsp"><div class="login-logo"></div></a>
       <form id="loginFrm" action="<%=request.getContextPath() %>/login" method="get" onsubmit="return fn_login validate();">
@@ -109,7 +109,7 @@
 	        <input type="password" name="memberPw" class="login-form login" placeholder="비밀번호 입력">
 	      </div>
 	      <div class="login-container around">
-	        <button type="button" class="button-social google" onclick="kaLogin()"></button>
+	        <button type="button" class="button-social google"></button>
 	        <button type="button" class="button-social facebook"></button>
 	      </div>
 	      <div class="login-container around link">
@@ -123,7 +123,6 @@
 	   </form>
     </div>
   </div>
-  
   
   <script>
 			const fn_login_validate=()=>{
@@ -147,7 +146,7 @@
     </div>
     
     <script>
-    var modal = document.getElementById('myModal');
+    var modal = document.getElementById('loginModal');
     
     // btn 분기처리 
     
@@ -155,7 +154,7 @@
     	
     // Get the button that opens the modal
     
-    var btn = document.getElementById("myBtn");
+    var btn = document.getElementById("loginBtn");
     
     // When the user clicks on the button, open the modal 
     btn.onclick = function() {
