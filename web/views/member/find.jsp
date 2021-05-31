@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/views/common/header.jsp" %>
 
 	<script>
 	
@@ -37,32 +38,27 @@
 	</script>
 	
 	<div class="container-regiester">
-        <div>
-          <div class="title-regiester">
-            <p>아이디/비밀번호 찾기</p>
-          </div>
-          <div class="subtitle-regiester">
+        <div class="title-regiester">
+        	<p>아이디/비밀번호 찾기</p>
+        </div>
+          <!-- <div class="subtitle-regiester">
             <p></p>
             <div class="container-no-margin">
               <p></p>
               <p class="mark-required"></p>
             </div>
-          </div>
-  <div class="recovery-wrapper">
-    <div class="container-recovery">
-    
-      <div class="container-id-recovery">
-        <div class="recovery-container center title">
-          <p>아이디 찾기</p>
-        </div>
-        <form action="<%=request.getContextPath() %>/member/idFind" id="idFindForm" method="post" >
-	        <div class="recovery-container center">
-	          <input type="text" class="recovery-form recovery" name="memberNm" id="memberNm" placeholder="이름 입력">
-	        </div> 
-	        <div class="recovery-container center blank">
-	          <input type="email" class="recovery-form recovery" name="memberEmail" id="memberEmail" placeholder="이메일 입력">
-	        </div>
-        </form>
+          </div> -->
+      	<div class="container-recovery">
+        	<p>아이디 찾기</p>
+	        <form action="<%=request.getContextPath() %>/member/idFind" id="idFindForm" method="post" >
+		        <div class="recovery-container center">
+		          <input type="text" class="recovery-form recovery" name="memberNm" id="memberNm" placeholder="이름 입력">
+		        </div> 
+		        <div class="recovery-container center blank">
+		          <input type="email" class="recovery-form recovery" name="memberEmail" id="memberEmail" placeholder="이메일 입력">
+		        </div>
+	        </form>
+	    </div>
         <div class="recovery-container center">
           <button class="recovery-btn-frame small basic" onclick="findId()">아이디 찾기</button>
         </div>
@@ -100,3 +96,5 @@
       
     </div>
   </div>
+
+<%@ include file="/views/common/footer.jsp" %>

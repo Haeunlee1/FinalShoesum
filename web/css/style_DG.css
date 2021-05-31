@@ -104,11 +104,15 @@ body {
 }
 
 .container-recovery {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	width:400px;
+	height: 400px;
+	border: 1px solid lightgray;
 }
-
+.container-recover>p {
+	width : 100%;
+	font-size : 20px;
+	text-align : center;
+}
 .container-title {
   display: flex;
   justify-content: center;
@@ -246,14 +250,16 @@ body {
 }
 
 .title-regiester {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 50px;
+	width:1000px;
+ 	height: 200px;
 }
 
 .title-regiester>p {
-  font-size: 26px;
+	width:900px;
+	margin: auto;
+ 	font-size: 35px;
+ 	line-height:200px;
+ 	text-align: center;
 }
 
 .subtitle-regiester {
