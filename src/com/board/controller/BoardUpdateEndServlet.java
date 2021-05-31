@@ -37,24 +37,29 @@ public class BoardUpdateEndServlet extends HttpServlet {
 		b.setQabPw(request.getParameter("qabPw"));
 		int qabNo=Integer.parseInt(request.getParameter("qabNo"));
 		int result = new BoardService().updateBoard(b, qabNo);
-		
-		String msg="";
+
+		String msg=result>0?"게시글이 수정되었습니다.":"게시글 수정에 실패했습니다. 다시 시도해주세요.";
 		String loc="";
+		int memberNo=0;
 		if(result>0) {
-			msg="게시글이 수정되었습니다.";
-			loc="/board/boardView.do?admin_check=a&boardNo="+qabNo;
+			if(request.getParameter("memberNo")!=null) {		//수정 성공 & 마이페이지 접근
+				memberNo=Integer.parseInt(request.getParameter("memberNo"));
+				loc="/mypage/mypage.do?memberNo="+memberNo+"&type=board";
+			}else {
+				loc="/board/boardView.do?admin_check=a&boardNo="+qabNo;
+			}
 		}else {
-			msg="게시글 수정에 실패했습니다. 다시 시도해주세요.";
-			loc="/board/boardEdit?qabNo="+qabNo;
+			if(request.getParameter("memberNo")!=null) {		//수정 실패 & 마이페이지 접근
+				memberNo=Integer.parseInt(request.getParameter("memberNo"));
+				loc="/mypage/mypage.do?memberNo="+memberNo+"&type=board";
+			}else {
+				loc="/board/boardEdit?qabNo="+qabNo;
+			}
 		}
+		System.out.println(memberNo==0);
 		request.setAttribute("msg",msg);
 		request.setAttribute("loc", loc);
-		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-
-		//댓글 달린 상태면 수정 안되게 해보기
-	
-	
 	}
 
 	/**

@@ -4,7 +4,7 @@
 <%@page import="com.board.model.vo.*" %>
 <%
 	Board b = (Board)request.getAttribute("board");
-
+	int memberNo=(int)request.getAttribute("memberNo");
 %>
 	<section id="board_write">
         <div id="write_top_container"> 
@@ -33,6 +33,7 @@
             
             <input type="hidden" name="memberId" value="<%=loginMember.getMemberId() %>">
             <input type="hidden" name="qabNo" value="<%=b.getQabNo() %>">
+			<input type="hidden" name="memberNo" value="<%=memberNo%>">		<!-- 마이페이지에서 넘어왔는지 확인하는 값 -->            
         </form>
     </section>
     

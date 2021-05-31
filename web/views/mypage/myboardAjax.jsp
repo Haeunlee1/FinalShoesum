@@ -35,7 +35,7 @@
     		for(Board b : list){%>
 	        <tr>
 	            <td><%=no-- %></td>
-	            <td><a href="<%=request.getContextPath()%>/board/boardView.do?boardNo=<%=b.getQabNo()%>&admin_check=a"><%=b.getQabTitle() %></a></td>
+	            <td><a href="<%=request.getContextPath()%>/board/boardView.do?my=my&boardNo=<%=b.getQabNo()%>&admin_check=a"><%=b.getQabTitle() %></a></td>
 	            <td><%=b.getQabDate() %></td>
 	        </tr>
 	        <%}

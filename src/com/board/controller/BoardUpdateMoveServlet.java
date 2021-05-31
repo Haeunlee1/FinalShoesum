@@ -35,8 +35,13 @@ public class BoardUpdateMoveServlet extends HttpServlet {
 		String qabPw="0";
 		Board b = new BoardService().selectBoard(qabNo,qabPw);
 		BoardComment bc=new BoardService().selectComment(qabNo);
+		int memberNo=0;
+		if(request.getParameter("memberNo")!=null) {
+			memberNo=Integer.parseInt(request.getParameter("memberNo"));
+		}
 		request.setAttribute("comment", bc);
 		request.setAttribute("board", b);
+		request.setAttribute("memberNo", memberNo);
 		request.getRequestDispatcher("/views/questionBoard/boardEdit.jsp").forward(request, response);
 	}
 

@@ -5,7 +5,6 @@
 <%@ page import="java.text.*"%>
 <%
 	Member m = (Member)request.getAttribute("member");
-
 	//주문내역리스트
 	List<Ordered> orderList = (List<Ordered>)request.getAttribute("orderList");
 	DecimalFormat df = new DecimalFormat("#,###,###");
@@ -19,7 +18,6 @@
 	int numPerpage=10;
 	
 	%>
-
 
 <section id="HE_section">
 	<p id="mypage_title">마이페이지</p> 
