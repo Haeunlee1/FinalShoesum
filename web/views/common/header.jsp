@@ -83,7 +83,7 @@
         <header>
             <ul id="header_top">
             	<%if(loginMember==null) { %>
-                	<li><a id="myBtn" onclick="sampleModalPopup" style="cursor:pointer;">로그인</a></li>
+                	<li><a id="myBtn" style="cursor:pointer;">로그인</a></li>
                 	<li><a href="<%=request.getContextPath() %>/views/member/regiester.jsp">회원가입</a></li>
                 <%}else { %>
                 	<li><a href="<%=request.getContextPath() %>/logout">로그아웃<a></a></li>
@@ -92,9 +92,8 @@
                 <li><a href="<%=request.getContextPath() %>/board/boardList">질문게시판</a></li>
                 <li><a href="<%=request.getContextPath()%>/faq/faqList">자주묻는질문</a></li>
             </ul>
-			
 
-    <div id="myModal" class="modal">
+      <div id="myModal" class="modal">
       	<div class="modal-content">
         	<span class="close">&times;</span>                                                               
 	      	<div class="login-wrapper">
