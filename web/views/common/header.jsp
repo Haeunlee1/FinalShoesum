@@ -11,12 +11,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>shoesum</title>
+<title>Shoesum</title>
+<!-- css 링크 -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style_JK.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style_HY.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style_HE.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style_IH.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style_DG.css">
+<!-- 파비콘 -->
+<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath() %>/images/ui/favi_shoesum.ico">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!-- 카카오 스크립트 -->

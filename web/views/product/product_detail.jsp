@@ -107,62 +107,62 @@
 		
 	    <div id="pd_review">
 	    	<div id="pd_review_content">
-	       <p id = review_head>구매후기</p>
-	       <%if(!relist.isEmpty()){ %>
-			    <%for (Review r : relist){ %>
+	       		<p id = review_head>구매후기</p>
+	        	<%if(!relist.isEmpty()){ %>
+			    	<%for (Review r : relist){ %>
 				        <div class="review_box">
-				        <%
-				        	switch(r.getReviewRating()){
-				        	case 1 :
-				        		getStar = "★☆☆☆☆"; 
-				        	break;
-				        	case 2 : 
-				        		getStar = "★★☆☆☆";
-				        	break;
-				        	case 3 :
-				        		getStar = "★★★☆☆";
-				        	break;
-				        	case 4 :
-				        		getStar = "★★★★☆";
-				        	break;
-				        	case 5 :
-				        		getStar = "★★★★★";
-				        	break;
-				        	default :
-				        		getStar = "☆☆☆☆☆";
-				        		break;
-				        }
-				        %>
+					        <%
+					        	switch(r.getReviewRating()){
+					        	case 1 :
+					        		getStar = "★☆☆☆☆"; 
+					        	break;
+					        	case 2 : 
+					        		getStar = "★★☆☆☆";
+					        	break;
+					        	case 3 :
+					        		getStar = "★★★☆☆";
+					        	break;
+					        	case 4 :
+					        		getStar = "★★★★☆";
+					        	break;
+					        	case 5 :
+					        		getStar = "★★★★★";
+					        	break;
+					        	default :
+					        		getStar = "☆☆☆☆☆";
+					        		break;
+					        }
+					        %>
 				            <p>평점 : <%=getStar %></p>
 				            <div>
 				                <%=r.getReviewCont() %>
 				            </div>
 				            <p><%=r.getReviewMemId() %>　|　<%=r.getReviewDate() %></p>
 				        </div>
-				<%}%>
-	    <%} else { %>
-	    	<div id = "review_null">
-	    		등록된 리뷰가 없습니다
-	    	</div>
-	   <% } %>
-	   <form name = "insertReview" action="<%=request.getContextPath()%>/review/insertReview?proNo=<%=proNo %>&memberNo=<%=memberNo %>" method = "post" onsubmit="return fn_checkLoing()">
-	    <div class="review_write">
-	    	<div id = "review_rating_wrapper">
-	            <p>리뷰</p>
-	            	<div id="review_rating">
-	            		<span><i class="far fa-star"></i></span>
-	            		<span><i class="far fa-star"></i></span>
-	            		<span><i class="far fa-star"></i></span>
-	            		<span><i class="far fa-star"></i></span>
-	            		<span><i class="far fa-star"></i></span>
-	            	</div>
-	            </div>
-	            <textarea name="review_content" id="review_content" cols="110" rows="5" placeholder="상품에 대한 리뷰를 남겨주세요."></textarea>
-	            <input type = "hidden" id= "getRating" name="getRating">
-	            <button type="submit">등록</button>
-	        </div>
-	        </form>
-	</div>
+					<%}%>
+	    	<%} else { %>
+		    	<div id = "review_null">
+		    		아직 등록된 리뷰가 없습니다.
+		    	</div>
+	   		<% } %>
+		   		<form name = "insertReview" action="<%=request.getContextPath()%>/review/insertReview?proNo=<%=proNo %>&memberNo=<%=memberNo %>" method = "post" onsubmit="return fn_checkLoing()">
+			    	<div class="review_write">
+			    		<div id = "review_rating_wrapper">
+			            	<p>리뷰</p>
+			            	<div id="review_rating">
+			            		<span><i class="far fa-star"></i></span>
+			            		<span><i class="far fa-star"></i></span>
+			            		<span><i class="far fa-star"></i></span>
+			            		<span><i class="far fa-star"></i></span>
+			            		<span><i class="far fa-star"></i></span>
+			            	</div>
+			            </div>
+			            <textarea name="review_content" id="review_content" cols="110" rows="5" placeholder="상품에 대한 리뷰를 남겨주세요."></textarea>
+			            <input type = "hidden" id= "getRating" name="getRating">
+			            <button type="submit">등록</button>
+			        </div>
+		        </form>
+			</div>
 	    </div>
 	    
 	<!-- 리뷰  끝 -->	    
