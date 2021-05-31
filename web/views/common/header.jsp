@@ -172,10 +172,11 @@
             
             
             <div id="logo" onclick="location.assign('<%=request.getContextPath() %>')"></div>
-            <div id="search_bar">
+            <!-- 검색창은 나중에.....ㅠㅠ -->
+            <!-- <div id="search_bar">
                 <input type="text" placeholder="검색어를 입력하세요">
                 <button></button>
-            </div>
+            </div> -->
             <div id="direct_ui">
             <%if(loginMember!=null){ %>
                 <a href="<%=request.getContextPath()%>/mypage/mypage.do?memberNo=<%=loginMember.getMemberNo()%>"><img src="<%=request.getContextPath() %>/images/ui/mypage_ui.png" alt=""></a>
