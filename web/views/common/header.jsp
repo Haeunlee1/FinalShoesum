@@ -92,9 +92,7 @@
                 <li><a href="<%=request.getContextPath() %>/board/boardList">질문게시판</a></li>
                 <li><a href="<%=request.getContextPath()%>/faq/faqList">자주묻는질문</a></li>
             </ul>
-            
- 
-      <!-- Modal content -->
+
       <div id="myModal" class="modal">
       	<div class="modal-content">
         	<span class="close">&times;</span>                                                               
@@ -114,7 +112,6 @@
 	        </div>
     	</div>
 	</div>
-  
   
   <script>
 			const fn_login_validate=()=>{
