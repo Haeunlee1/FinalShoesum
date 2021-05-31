@@ -5,6 +5,18 @@
 <% 
 	List<Board> list=(List<Board>)request.getAttribute("list");
 	int total =(int)request.getAttribute("total");
+	
+	int cPage;
+	try {
+		cPage=Integer.parseInt(request.getParameter("cPage"));
+	}catch(NumberFormatException e) {
+		cPage=1;
+	}
+	int no=total-(10*(cPage-1));
+	if(total!=10){
+		total=10;
+	}
+
 	//int cPage=Integer.parseInt(request.getParameter("cPage"));
 %>
 
@@ -38,16 +50,19 @@
                     </tr>
 				</tbody>
 				<tbody>
-                    <%
-                    for (int i=0;i<list.size();i++){ %> 
+                    <% 	if(no<=0){
+                		
+                	}else{
+	                    for (int i=0;i<list.size();i++){%>
                     <tr>
-                        <td><%=total-- %></td>
+                        <td><%=no-- %></td>
                         <td><a href="<%=request.getContextPath()%>/board/checkPw.do?boardNo=<%=list.get(i).getQabNo()%>"><%=list.get(i).getQabTitle() %></a></td>
                         <td><%=list.get(i).getCommentNo()!=null?"답변완료":"미답변" %></td>
                         <td><%=list.get(i).getQabWriter() %></td>
                         <td><%=list.get(i).getQabDate() %></td>
                     </tr>
-                    <% } %>
+                    <% } 
+                    }%>
                 </tbody>
             </table>
 

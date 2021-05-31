@@ -257,6 +257,7 @@ li#comment_edit{
     font-size:16px;
     cursor: pointer;
     text-align:center;
+    padding:0 !important;
 }
 .board_edit_btn{
 	width:100px;
@@ -268,7 +269,8 @@ li#comment_edit{
     cursor: pointer;
 	background-color:black;
 	color:white;
-	text-align:inherit;
+	text-align:center;
+	padding:0 !important;
 }
 /* 게시글view css 끝 */
 

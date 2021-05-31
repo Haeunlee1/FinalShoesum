@@ -31,10 +31,21 @@ public class WishDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//회원번호, 상품번호로 db에 관심상품 지우기
+		double sale = 0;
+		
 		String proNo =request.getParameter("proNo");
 		int userNo = Integer.parseInt(request.getParameter("memberNo"));
 		int result = new ProductService().deleteWish(userNo, proNo);
-		if(request.getParameter("pd")!=null&&result>0) {
+		
+		if(request.getParameter("hotpd")!=null&&request.getParameter("sale")!=null) {
+			//핫딜일때
+			String hotpd=request.getParameter("hotpd");
+			sale=Double.parseDouble(request.getParameter("sale"));
+			
+			request.setAttribute("hotpd", hotpd);
+			request.setAttribute("sale", sale);
+			request.getRequestDispatcher("/product/productDetail?proNo="+proNo+"&hotpd=hotpd&sale="+sale).forward(request, response);
+		}else if(request.getParameter("pd")!=null&&result>0) {
 			//상품디테일에서 넘어왔다면
 			request.getRequestDispatcher("/product/productDetail?proNo="+proNo).forward(request, response);
 		}else{

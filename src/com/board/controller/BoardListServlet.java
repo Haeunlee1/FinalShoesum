@@ -49,7 +49,6 @@ public class BoardListServlet extends HttpServlet {
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
-		
 		String pageBar="";
 		if(pageNo==1) {
 			pageBar+="<div class=\"pageBar-icon\">&lt;</div>";

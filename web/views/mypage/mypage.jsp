@@ -8,6 +8,14 @@
 	List<Ordered> orderList = (List<Ordered>)request.getAttribute("orderList");
 	DecimalFormat df = new DecimalFormat("#,###,###");
 	SimpleDateFormat sf=new SimpleDateFormat("yyyyMMdd");
+	int cPage;
+	try {
+		cPage=Integer.parseInt(request.getParameter("cPage"));
+	}catch(NumberFormatException e) {
+		cPage=1;
+	}
+	int numPerpage=10;
+	
 	%>
 
 
@@ -135,7 +143,7 @@
             <!-- ajax해보기 -->
             <div id="boardTarget"></div>
         </div>
-        <div id="pageBar"></div>
+        
     </article>
     <article id="HE_profile">
         <div id="profile_title" >
@@ -287,7 +295,9 @@ $(function(){
 		$.ajax({
 			url:"<%=request.getContextPath()%>/mypage/wishlist?",
 			data:{
-				"memberNo":"<%=loginMember.getMemberNo()%>","type":"wish"
+				"memberNo":"<%=loginMember.getMemberNo()%>",
+				"type":"wish",
+				
 			},
 			type:"post",
 			success:data=>{
@@ -304,13 +314,15 @@ $(function(){
 		$.ajax({
 			url:"<%=request.getContextPath()%>/mypage/myboardList?",
 			data:{
-				"memberNo":"<%=loginMember.getMemberNo()%>","type":"board"
+				"memberNo":"<%=loginMember.getMemberNo()%>","type":"board",
+				"cPage":"<%=cPage%>",
+				"numPerpage":'<%=numPerpage%>'
 			}, 
 			type:"post",
 			success:data=>{
 				$("#boardTarget").html(data);
 			}
-		})
+		});
 	});
 });
 

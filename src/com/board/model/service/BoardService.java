@@ -15,10 +15,10 @@ import com.board.model.vo.BoardComment;
 public class BoardService {
 	private BoardDao dao= new BoardDao();
 	
-	public List<Board> allMyBoards(int memberNo){
+	public List<Board> allMyBoards(int memberNo, int cPage, int numPerpage){
 		//내가쓴게시글 가져오기
 		Connection conn = getConnection();
-		List<Board> list = dao.allMyBoards(conn,memberNo);
+		List<Board> list = dao.allMyBoards(conn,memberNo, cPage, numPerpage);
 		close(conn);
 		return list;
 	}
@@ -117,6 +117,16 @@ public class BoardService {
 		//총 게시글 세기
 		Connection conn=getConnection();
 		int result=dao.allBoardCount(conn);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int allMyBoardCount(int memberNo) {
+		//총 내가쓴 게시글 세기
+		Connection conn=getConnection();
+		int result=dao.allMyBoardCount(conn,memberNo);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
