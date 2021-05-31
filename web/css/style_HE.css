@@ -191,10 +191,10 @@ div.pageBar-icon a {
 	height:100%;
 }
 div.pageBar-icon:hover{
-    background-color: rgb(52, 152, 219);
+    background-color: rgb(255, 166, 0);
     color:white;
 }
-div#pageBar span.cPage{color: #0066ff;}
+div#pageBar span.cPage{color: rgb(255, 166, 0);}
 /*---내가 쓴 게시글 끝 ---*/
 
 /*---회원정보수정 시작----*/

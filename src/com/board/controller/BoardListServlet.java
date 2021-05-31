@@ -59,7 +59,7 @@ public class BoardListServlet extends HttpServlet {
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
-				pageBar+="<div class=\"pageBar-icon\" style=\"background-color:rgb(52, 152, 219);color:white\">"+pageNo+"</div>";
+				pageBar+="<div class=\"pageBar-icon\" style=\"background-color:rgb(255, 166, 0);color:white\">"+pageNo+"</div>";
 			}else {
 				pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
 				+"/board/boardList?cPage="+pageNo+"'>"+pageNo+"</div>";

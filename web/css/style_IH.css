@@ -2,121 +2,78 @@
 /* font-family: 'Noto Sans KR', sans-serif; */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
-/* 질문 게시판 리스트 css 시작 */
-
-#question_board_container{
-    width: auto;
-    height: 200px;
-    text-align: center;
-    
-}
-.question_board{
-	font-family: 'Noto Sans KR', sans-serif;
-    margin:0;
-    font-size:30px;
-    line-height: 200px;
-}
-#question_table_container{
-    width: 1000px;
-    height: auto;
-    margin-top: 0%;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.question_table{
-    width: 100%;
-    height: auto;
-    border-collapse: collapse;
-}
-
-.th{
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    border-left: none;
-    border-right: none;
-    text-align: center;
-    padding: 15px;
-}
-
-.td{
-    border-left: none;
-    border-right: none;
-    border-bottom: 1px solid black;
-    padding: 15px;
-    text-align: center;
-    font-size: 16px;
-}
-
-.td-color{
-    background-color: rgb(252, 255, 53);
-}
-#question_bottom_container{
-    margin-top: 30px;
-    width: 1000px;
-    height: 40px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    display: inline-block;
-}
-
-/* 질문게시판 css 끝 */
 
 /* 글쓰기 css 시작 */
-    /* 문의하기, 등록 버튼 css*/
 section#board_write{
-    margin:auto;
     width:1000px;
-
 }
 section#board_write>div{
 	margin-bottom:10px;
 }
 #write_top_container{
-    margin-top: 60px;
-    border-bottom: 1px lightgray solid;
+	width:1000px;
+	height:200px;
+	border-bottom: 1px solid lightgray;
 }
-#write_top_container>p{
-	margin-top:50px;
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom:10px;
+#write_top_container>p {
+	width:900px;
+	margin: auto;
+	line-height:200px;
+	font-size: 35px;
 }
+
 /* 제목, 내용 css */
-#write_container, div#write_content{
-   margin: 20px 0 5px 0;
+#write_container {
+	width: 900px;
+	margin: 15px auto;
 }
-div#write_container>span{
-    margin-right:50px;
+div#write_content {
+	width: 900px;
+	margin: auto;
+}
+div#write_content>textarea {
+	padding: 15px;
+}
+div#write_container>span,
+div#write_bottom_container>span {
+	display: inline-block;
+	font-size: 20px;
+	padding: 0 15px 0 10px;
 }
 select#qab_cate{
     width:300px;
     height:30px;
 }
 div#write_content>#qab_content{
-   width: 1000px;
+   width: 900px;
    height: 500px;
 }
+
 /* 비밀번호, 목록 버튼 css*/
 #write_bottom_container{
-   height: 50px;
-   border-bottom:1px lightgray solid;
-   text-align: center;
-   line-height: 45px;
-   margin-bottom:10px;
+	width:900px;
+	margin: auto;
+    border-bottom:1px lightgray solid;
+    text-align: left;
+    line-height: 45px;
+    padding-bottom: 10px;
 }
-#write_bottom_container>ul li{
-    float:left;
-    margin-right:30px;
+input.password_table {
+	width:200px;
+    height:30px;
+    padding: 5px;
+}
+div.write_server_button {
+	width:900px;
+	margin:auto;
+	padding: 20px 0 50px 330px;
 }
 .back_button{
     width:100px;
     height:40px;
     border : none;
     border-radius : 7%;
-    margin: 10px 5px ;
+    margin: 10px;
     font-size:16px;
     cursor: pointer;
 }
@@ -125,10 +82,9 @@ div#write_content>#qab_content{
     height:40px;
     border : none;
     border-radius : 7%;
-    margin: 10px 5px ;
+    margin: 10px;
     font-size:16px;
     cursor: pointer;
-    float:right;
     background-color: black;
     color:white;
 }
@@ -272,8 +228,6 @@ li#comment_edit{
 }
 /* 게시글view css 끝 */
 
-/* 자주 묻는 질문 css 시작 */
-
 /* FAQ Board page section css - 진경수정 */
 /* Board_question page section css - FAQ랑 통일되는 부분 있으니까 css 수정 시 유의할 것 */
 #FAQ_container,#board_container,#view_title {
@@ -283,7 +237,8 @@ li#comment_edit{
     height: auto;
 }
 
-div#FAQ_container {
+div#FAQ_container,
+#board_container {
 	margin-bottom : 100px;
 }
 
@@ -303,9 +258,6 @@ table#board_table thead th {
     border-top: 2px solid black;
     border-bottom: 3px double black;
     font-size: 18px;
-    padding: 15px;
-}
-table#board_table tbody th {
     padding: 15px;
 }
 table#FAQ_table thead th:first-child,
@@ -331,13 +283,23 @@ table#board_table thead th:last-child,
 table#board_table tr>td:last-child {
     width: 15%;
 }
+table#board_table tbody th {
+	border-bottom: 1px solid rgb(211, 199, 199);
+    padding: 13px;
+    background: rgb(243, 243, 243);
+    font-size: 17px;
+}
 table#FAQ_table tbody td,
 table#board_table tbody td {
     border-bottom: 1px solid rgb(211, 199, 199);
     font-size: 15px;
 }
+table#board_table tbody td {
+	padding: 7px;
+	
+}
 table#FAQ_table li {
-    padding: 20px;
+    padding: 13px;
     text-align : left;
 }
 table#FAQ_table .FAQ_answer {
@@ -353,8 +315,19 @@ table#FAQ_table .FAQ_answer {
     transform: translateX(-50%);
 }
 
+#board_container .write_button {
+	width: 80px;
+	height: 30px;
+	border-radius: 7%;
+	background: black;
+	color: white;
+	float: right;
+	margin-top: 15px;
+	margin-right: 7px;
+	cursor: pointer;
+}
+/* 자주 묻는 질문 + 질문게시판 css 끝 */
 
-/* 자주 묻는 질문 css 끝 */
 
 /* 비밀번호 입력창 css 시작 */
 section#board_pw_check{

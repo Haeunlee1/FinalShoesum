@@ -18,18 +18,18 @@
                 </select>
             </div>
             <div id="write_content">
-                <textarea rows="50" cols="50"name="qab_content" id="qab_content" placeholder="내용을 입력해주세요."></textarea>
+                <textarea rows="50" cols="50" name="qab_content" id="qab_content" placeholder="내용을 입력해주세요."></textarea>
                 <!-- 게시판 제목, 내용, 첨부파일 끝-->
             </div>
             <!-- 비밀번호 테이블 시작-->
             <div id="write_bottom_container">
-                <ul>
-                    <li>비밀번호</li>
-                    <li><input type="password" name="qabPw" class="password_table" placeholder="4자리 숫자를 입력하세요." maxlength="4" required></li>
-                </ul>
+                <span>비밀번호</span>
+                <input type="password" name="qabPw" class="password_table" placeholder="4자리 숫자를 입력하세요." maxlength="4" required>
             </div>
-            <button type="button" class="back_button" onclick="fn_backToList();">목록으로</button>
-            <input type="submit" id="checkBtn" value="등록">
+            <div class="write_server_button">
+	            <button type="button" class="back_button" onclick="fn_backToList();">목록으로</button>
+	            <input type="submit" id="checkBtn" value="등록">
+            </div>
             
             <input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo()%>">
             <input type="hidden" name="memberId" value="<%=loginMember.getMemberId() %>">
