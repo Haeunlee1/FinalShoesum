@@ -3,9 +3,9 @@
 <%@ page import="java.util.List, com.board.model.vo.Board" %>
 <%@ include file="/views/common/header.jsp"%>
 <% 
-List<Board> list=(List<Board>)request.getAttribute("list");
-int total =(int)request.getAttribute("total");
-int cPage=Integer.parseInt(request.getParameter("cPage"));
+	List<Board> list=(List<Board>)request.getAttribute("list");
+	int total =(int)request.getAttribute("total");
+	//int cPage=Integer.parseInt(request.getParameter("cPage"));
 %>
 
 	<section>
@@ -38,7 +38,7 @@ int cPage=Integer.parseInt(request.getParameter("cPage"));
                     </tr>
 				</tbody>
 				<tbody>
-                    <%total=total-(cPage*10);
+                    <%
                     for (int i=0;i<list.size();i++){ %> 
                     <tr>
                         <td><%=total-- %></td>
