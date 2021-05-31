@@ -48,7 +48,7 @@ ul#header_top>li {
 ul#header_top>li:first-of-type {
     border: none;
 }
-div#logo {
+header div#logo {
     width: 160px;
     height: 80px;
     position: absolute;

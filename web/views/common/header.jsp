@@ -93,36 +93,27 @@
                 <li><a href="<%=request.getContextPath()%>/faq/faqList">자주묻는질문</a></li>
             </ul>
             
-            <div id="myModal" class="modal">
  
       <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>                                                               
-        <div class="login-wrapper">
-    <div>
-      <a href="<%=request.getContextPath()  %>/index.jsp"><div class="login-logo"></div></a>
-      <form id="loginFrm" action="<%=request.getContextPath() %>/login" method="get" onsubmit="return fn_login validate();">
-	      <div class="login-container center">
-	        <input type="text" name="memberId" class="login-form login" placeholder="아이디 입력">
-	      </div>
-	      <div class="login-container center blank">
-	        <input type="password" name="memberPw" class="login-form login" placeholder="비밀번호 입력">
-	      </div>
-	      <div class="login-container around">
-	        <button type="button" class="button-social google" onclick="kaLogin()"></button>
-	        <button type="button" class="button-social facebook"></button>
-	      </div>
-	      <div class="login-container around link">
-	         <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/find.jsp"><span class="link border login-guide">아이디 찾기</span></a>
-	         <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/find.jsp"><span class="link border login-guide">비밀번호 찾기</span></a>
-	         <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/regiester.jsp"><span class="link login-guide">회원 가입</span></a>
-	      </div>
-	      <div class="login-container center">
-	        <input type="submit" value="로그인" class="login-btn-frame basic">
-	      </div>
-	   </form>
-    </div>
-  </div>
+      <div id="myModal" class="modal">
+      	<div class="modal-content">
+        	<span class="close">&times;</span>                                                               
+	      	<div class="login-wrapper">
+	            <a href="<%=request.getContextPath()  %>/index.jsp"><div class="login-logo"></div></a>
+	            <form id="loginFrm" action="<%=request.getContextPath() %>/login" method="get" onsubmit="return fn_login validate();" class="login-container">
+	                <input type="text" name="memberId" class="login-form" placeholder="아이디 입력">
+	                <input type="password" name="memberPw" class="login-form" placeholder="비밀번호 입력">
+	                <button type="button"class="kakao" onclick="kaLogin()"></button>
+	                <div class="login-member">
+	                    <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/find.jsp">아이디 찾기</a>
+	                    <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/find.jsp">비밀번호 찾기</a>
+	                    <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/regiester.jsp">회원 가입</a>
+	                </div>
+	                <input type="submit" value="로그인" class="login-btn-frame">
+	            </form>
+	        </div>
+    	</div>
+	</div>
   
   
   <script>
@@ -142,9 +133,6 @@
 			}
 			
 		</script>
-      </div>
- 
-    </div>
     
     <script>
     var modal = document.getElementById('myModal');
