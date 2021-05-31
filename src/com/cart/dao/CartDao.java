@@ -119,4 +119,37 @@ public class CartDao {
 		return result;
 	}
 	
+	public int selectDelete(Connection conn, String cartNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("selectDelete"));
+			pstmt.setInt(1, Integer.parseInt(cartNo));
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteAll(Connection conn, int userNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("deleteAll"));
+			pstmt.setInt(1, userNo);
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

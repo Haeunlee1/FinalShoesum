@@ -334,7 +334,60 @@ public class MemberDao {
 	}
 	
 	
+	// kakao check 
+	public Member kakaoCheck(Connection conn,String userName , String email) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("kakaoCheck"));
+			pstmt.setString(1,userName);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				m = new Member();
+				m.setMemberNo(rs.getInt("MEMBER_NO"));
+				m.setMemberId(rs.getString("MEMBER_ID"));
+				m.setMemberPw(rs.getString("MEMBER_PW"));
+				m.setMemberName(rs.getString("MEMBER_NAME"));
+				m.setEmail(rs.getString("MEMBER_EMAIL"));
+				m.setPhone("01000000000");
+				m.setPostNo("우주");
+				m.setAddress("지구");
+				m.setAddressEnd("서울");
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return m;
+	}
 	
+	public int kakaoRegister(Connection conn,String userName,String email) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("kakaoRegister"));
+			pstmt.setString(1, userName);
+			pstmt.setString(2, email);
+			pstmt.setString(3, "00000000000");
+			pstmt.setString(4, "우주");
+			pstmt.setString(5, "지구");
+			pstmt.setString(6, "한국");
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} 
+		return result;
+	}
 	
 	
 // branch 'master' of https://github.com/Haeunlee1/FinalShoesum.git

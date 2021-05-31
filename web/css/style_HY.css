@@ -285,6 +285,11 @@ table#cart_table #cart_null td input {
 }
 
 
+ div#sel-btn {
+ 	display : flex;
+ 	justify-content : space-between;
+ }
+
 /* order price */
 
 
