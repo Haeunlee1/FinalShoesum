@@ -22,9 +22,7 @@ public class CartService {
 		Connection conn = getConnection();
 		
 		List<Cart> list = dao.cartListView(conn,userNo);
-		
 		close(conn);
-		
 		return list;
 	}
 	
@@ -54,5 +52,35 @@ public class CartService {
 		return result; 
 	}
 	
+	public int selectDelete(String[] cartNosArr) {
+		
+		Connection conn = getConnection();
+		
+		int result = 0;
+		for(String cartNo : cartNosArr) {
+			result += dao.selectDelete(conn,cartNo);
+		}
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+	
+	public int deleteAll(int userNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.deleteAll(conn,userNo);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
 	
 }

@@ -41,7 +41,7 @@
             <tr class="cart_products">
                 <td><input type="checkbox" class="select_products" name="select_products" onclick = "calPrice()">
                 <input type ="hidden" class = "hold_cart_no" value="<%= c.getCartNo() %>">
-                <input type = "hidden" id = "btn_proNo" value="<%=c.getProNo() %>">
+                <input type = "hidden" id = "btn_proNo" class="btn_proNo" value="<%=c.getProNo() %>">
                 <input type = "hidden" id = "btn_proCount" value="<%=c.getCartProCount() %>"> 
                 </td>
                 <td><a href="<%=request.getContextPath()%>/product/productDetail?proNo=<%=c.getProNo()%>"><img src="<%=request.getContextPath() %>/images/product/<%=c.getProCate() %>/<%=c.getProImgSrc() %>" alt=""></a></td>
@@ -72,6 +72,10 @@
             <% } %>
         </table>
             <% if (!list.isEmpty()){ %>
+        <div id="sel-btn"> 
+            <button onclick="sel_delete()">선택삭제</button>
+            <button onclick="all_delete()">전체상품 비우기</button>
+        </div>
         <div id="order_price">
             <div id="price_head_wrap">
                 <div>총상품가격</div>
@@ -185,7 +189,40 @@
                          }
                          return n;
                   }
-	
+        
+        
+        // 선택상품 삭제 
+        
+       	function sel_delete(){
+        	
+        	let flag = false;
+        	let selPros = document.getElementsByClassName("select_products");
+        	let btnCarts = document.getElementsByClassName("hold_cart_no");
+        	let cartNos = "";
+        	
+        	for(i=0;i<selPros.length;i++){
+        		if(selPros[i].checked == true){
+        			cartNos += btnCarts[i].value+"/"; 
+        			flag = true;
+        		}
+        	}
+        	
+        	if(flag == false){
+        		alert("상품을 선택해주세요");
+        		return;
+        	}
+        	
+        	location.replace('<%=request.getContextPath()%>/cart/cartSelDelete?cartNos='+cartNos+"&userNo=<%=loginMember.getMemberNo()%>");
+        }
+		
+        // 전체 상품 삭제
+        
+        function all_delete(){
+        	
+        	location.replace('<%=request.getContextPath()%>/cart/cartAllDelete?userNo=<%=loginMember.getMemberNo()%>');
+        	
+        }
+        
 	</script>
 
 <%@ include file =  "/views/common/footer.jsp" %>

@@ -35,7 +35,7 @@ public class CartViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		
+		System.out.println(userNo);
 		List<Cart> list = new CartService().cartListView(userNo);
 		
 		request.setAttribute("list", list);
