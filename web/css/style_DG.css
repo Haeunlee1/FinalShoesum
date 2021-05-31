@@ -5,106 +5,83 @@ body {
   height: 100%;
 }
 
+/* 로그인 css 수정 */
+
 .login-wrapper {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    width: 100%;
+    height: auto;
+    margin: auto;
+    padding: 30px;
+  }
+  
+  .login-logo {
+    width: 250px;
+    height: 150px;
+    background: url(../images/ui/logo.png) no-repeat center;
+    background-size: contain;
+    margin: auto;
+    margin-bottom: 10px;
+  }
 
-.login-logo {
-  width: 160px;
-  height: 80px;
-  background: url(../images/ui/logo.png) no-repeat center;
-  background-size: contain;
-  margin: auto;
-  margin-bottom: 50px;
-}
+  .login-container {
+      width: 250px;
+      height: auto;
+      padding: 20px 0;
+      margin: auto;
+  }
 
-.login-form.login {
-  width: 250px;
-}
+  .login-form {
+    width: 250px;
+    height: 30px;
+    outline: none;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+  }
+  
+  .kakao {
+    width: 250px;
+    height: 30px;
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    background: url(../images/ui/kakao_login.jpg) no-repeat center;
+    background-size: cover;
+    margin: auto;
+    cursor: pointer;
+  }
 
-.google {
-  background: url(../images/google.JPG) no-repeat center;
-  background-size: contain;
-}
+  .login-member {
+      margin-bottom: 30px;
+      padding: 0 8px;
+  }
 
-.facebook {
-  background: url(../images/facebook.JPG) no-repeat center;
-  background-size: contain;
-}
+  .memberBtn{
+    display: inline-block;
+    width: 75px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 11px;
+    color: rgb(167, 167, 167);
+  }
 
-.memberBtn{
-	display: inline;
-	text-decoration: none;
-}
-		
-.button-social {
-  width: 25px;
-  height: 25px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+  .login-btn-frame {
+    width: 80px;
+    height: 30px;
+    margin: auto;
+    background-color: black;
+    border: none;
+    border-radius: 7%;
+    cursor: pointer;
+    color: white;
+    margin-left: 85px;
+  }
 
-.link {
-  cursor: pointer;
-  padding: 0 13px;
-}
-
-.link.border {
-  border-right: 1px solid gray;
-}
-
-.login-container.link {
-  margin-bottom: 50px;
-}
-
-.login-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.login-container.center {
-  justify-content: center;
-}
-
-.login-container.around {
-  justify-content: space-around;
-}
-
-.login-container-no-margin {
-  display: flex;
-  align-items: center;
-}
-
-.login-guide {
-  font-size: 11px;
-  color: gray;
-}
-
-.login-btn-frame.basic {
-  color: white;
-  background-color: rgba(128, 128, 128, 1);
-}
-
-.login-btn-frame.basic:hover {
-  background-color: rgba(128, 128, 128, 0.7);
-}
-
-.login-btn-frame {
-  height: 30px;
-  padding: 4px 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.login-form {
-  height: 30px;
-}
+  .login-btn-frame:hover {
+    background-color: #eaeaea;
+    color: black;
+  }
 
 /* -------------------------------------------------------- */
 
@@ -360,7 +337,7 @@ body {
             top: 0;
             width: 100%; /* Full width */
             height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
+            overflow: hidden; /* Enable scroll if needed */
             background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
         }
@@ -368,10 +345,10 @@ body {
         /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 10% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 50%; /* Could be more or less, depending on screen size */                          
+    width: 30%; /* Could be more or less, depending on screen size */                          
 }
 /* The Close Button */
 .close {

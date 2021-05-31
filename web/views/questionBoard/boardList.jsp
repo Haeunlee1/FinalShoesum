@@ -67,9 +67,7 @@
             </table>
 
             <!-- 글쓰기 버튼-->
-            <div id="question_bottom_container">
-                <input type="button" style="float:right" value="글쓰기" onclick="fn_boardWrite();">
-            </div>
+            <input type="button" class="write_button" value="글쓰기" onclick="fn_boardWrite();">
             <div id="pageBar">
             	<%=request.getAttribute("pageBar") %>
             </div>

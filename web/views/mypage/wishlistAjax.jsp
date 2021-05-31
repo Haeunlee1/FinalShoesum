@@ -25,7 +25,6 @@
                 		case "w" :type="woman";break;
                 		case "k" :type="kids";break;
                 	}
-             
              %>
              <tr class="wish_product">
                  <td>

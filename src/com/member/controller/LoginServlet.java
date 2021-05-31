@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("loc", "/index.jsp");
 		}else {
 			msg = "로그인 실패 :)";
-			request.setAttribute("loc", "/views/login/login.jsp");
+			request.setAttribute("loc", "/index.jsp");
 		}
 		
 		request.setAttribute("msg", msg);
