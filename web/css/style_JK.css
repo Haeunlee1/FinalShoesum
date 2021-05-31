@@ -43,11 +43,12 @@ ul#header_top>li {
     font-size: 11px;
     border-left: 1px solid lightgray;
     padding: 0 10px;
+    cursor: pointer;
 }
 ul#header_top>li:first-of-type {
     border: none;
 }
-div#logo {
+header div#logo {
     width: 160px;
     height: 80px;
     position: absolute;

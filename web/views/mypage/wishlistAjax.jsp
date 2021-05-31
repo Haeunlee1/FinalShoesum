@@ -20,9 +20,9 @@
              </tr>
              <%for(Product p: wishList) {
              	String type="";
-             	if(p.getProNo().contains("m")) type="man";
-             	else if(p.getProNo().contains("w")) type="woman";
-             	else if(p.getProNo().contains("k")) type="kids";
+             	if(p.getProNo().substring(0,1).contains("m")) type="man";
+             	else if(p.getProNo().substring(0,1).contains("w")) type="woman";
+             	else if(p.getProNo().substring(0,1).contains("k")) type="kids";
              
              %>
              <tr class="wish_product">

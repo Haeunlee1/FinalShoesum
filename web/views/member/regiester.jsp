@@ -156,11 +156,7 @@
 			var str = $("#memberForm").serialize();
 		    $.ajax({
 		      type:"POST",
-<<<<<<< HEAD
-		      url:"<%=request.getContextPath()%>/isCheckId",
-=======
 		      url:"<%=request.getContextPath() %>/isCheckId",
->>>>>>> branch 'master' of https://github.com/Haeunlee1/FinalShoesum.git
 		      contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		      data: str,
 		      datatype:"json",

@@ -18,37 +18,37 @@
 	       <h2>HOT DEAL</h2>
 	       <div class="product">
 	           <div>	
-	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=w01_white_170&hotpd=hotpd&sale=0.8">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=w02_white_170&hotpd=hotpd&sale=0.8">
 	                   <div class="sale">20%</div>
-	                   <img src="<%=request.getContextPath() %>/images/product/woman/w_01_01.jpg" alt="">
+	                   <img src="<%=request.getContextPath() %>/images/product/woman/w_02_01.jpg" alt="">
 	                   <div class="time_attack">
 	                       <img src="<%=request.getContextPath() %>/images/ui/time_attcak.png" alt="">
 	                       <div id="count_time"></div>
 	                   </div>
 	               </a>
-	               <p>[슈썸]블레어뮬<br><span class="sale_price">40,000</span></p>
+	               <p>[슈썸]레거시슬립온<br><span class="sale_price">29,600</span></p>
 	           </div>
 	           <div>
-	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=m01_white_170&hotpd=hotpd&sale=0.65">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=m02_white_170&hotpd=hotpd&sale=0.65">
 	                   <div class="sale">35%</div>
-	                   <img src="<%=request.getContextPath() %>/images/product/man/m_01_01.jpg" alt="">
+	                   <img src="<%=request.getContextPath() %>/images/product/man/m_02_01.jpg" alt="">
 	                   <div class="time_attack">
 	                       <img src="<%=request.getContextPath() %>/images/ui/time_attcak.png" alt="">
 	                       <div id="count_time2"></div>
 	                   </div>
 	               </a>
-	               <p>[슈썸]에어맥스SC<br><span class="sale_price">19,500</span></p>
+	               <p>[슈썸]바이맥스<br><span class="sale_price">33,800</span></p>
 	           </div>
 	           <div>
-	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=k01_white_170&hotpd=hotpd&sale=0.23">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=k02_white_170&hotpd=hotpd&sale=0.23">
 	                   <div class="sale">77%</div>
-	                   <img src="<%=request.getContextPath() %>/images/product/kids/k_01_01.jpg" alt="">
+	                   <img src="<%=request.getContextPath() %>/images/product/kids/k_02_01.jpg" alt="">
 	                   <div class="time_attack">
 	                       <img src="<%=request.getContextPath() %>/images/ui/time_attcak.png" alt="">
 	                       <div id="count_time3"></div>
 	                   </div>
 	               </a>
-	               <p>[슈썸]척테일러<br><span class="sale_price">8,700</span></p>
+	               <p>[슈썸]메를린<br><span class="sale_price">10,300</span></p>
 	           </div>
 	       </div>
 	   </div>
@@ -155,8 +155,8 @@
 
             	// 핫딜 카운트다운 스크립트
                 CountDownTimer('06/06/2021', 'count_time');
-                CountDownTimer('06/03/2021', 'count_time2');
-                CountDownTimer('07/02/2021', 'count_time3');
+                CountDownTimer('07/03/2021', 'count_time2');
+                CountDownTimer('06/17/2021', 'count_time3');
 
                 function CountDownTimer(dt, id) {
 
