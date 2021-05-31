@@ -86,122 +86,93 @@ body {
 /* -------------------------------------------------------- */
 
 
-
-
-
 /* -----------아이디 비밀번호 찾기 페이지-------------------------- */
-html,
-body {
-  height: 100%;
+div.regiester_con {
+	width: 1000px;
+	height: auto;
 }
-
-.recovery-wrapper {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 50px;
+div.regiester_con>p {
+	width: 900px;
+	height: 200px;
+	margin:auto;
+	font-size: 35px;
+	line-height: 200px;
+	
 }
-
-.container-recovery {
-	width:400px;
+div.regiester_find {
+	width: 400px;
 	height: 400px;
 	border: 1px solid lightgray;
+	padding : 35px 0;
+	float :left;
+	margin: 0 50px 150px 50px;
 }
-.container-recover>p {
+div.regiester_find_pw {
+	width: 400px;
+	height: 400px;
+	border: 1px solid lightgray;
+	padding: 25px 0;
+	float :left;
+	margin: 0 50px 150px 50px;
+	background : #eaeaea;
+}
+div.regiester_find>p,
+div.regiester_find_pw>p  {
 	width : 100%;
-	font-size : 20px;
-	text-align : center;
+	font-size : 25px;
+	padding: 30px 0;
 }
-.container-title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+div.regiester_find input,
+div.regiester_find_pw input {
+	width: 250px;
+	height: 30px;
+	margin: 10px;
+	padding-left: 5px;
 }
-
-.recovery-container.hint {
-  width: 300px;
-  justify-content: space-between;
+div.regiester_find>button,
+div.regiester_find_pw>button {
+	width :100px;
+	height:30px;
+	border-radius: 7%;
+	background:black;
+	color:white;
+	margin: 10px 0;
+	display: block;
+	margin-left:150px;
+	cursor:pointer;
 }
-
-.container-pw-recovery {
-  background-color: rgba(230, 230, 230, 1);
-  border: 1px solid rgba(230, 230, 230, 1);
-  padding: 20px 30px;
-  margin:40px;
+div.regiester_find>span,
+div.regiester_find_pw>span {
+	width : 100%;
+	font-size : 13px;
+	padding: 0 0 30px 0;
+	color : lgihtgray;
 }
-
-.container-id-recovery {
-  border: 1px solid rgba(230, 230, 230, 1);
-  padding: 20px 30px;
-  margin:40px;
+div.regiester_find span>button {
+	display:inline-block;
+	width :50px;
+	height:20px;
+	border-radius: 7%;
+	background:lightgray;
+	color:black;
+	margin: 10px 0;
+	font-size: 10px;
+	outline:none;
+	border: none;
+	cursor:pointer;
 }
-
-.recovery-container.title {
-  margin-bottom: 30px;
-}
-
-.recovery-container.title>p {
-  font-size: 20px;
-}
-
-.recovery-container.blank {
-  margin-bottom: 60px;
-}
-
-.recovery-form.recovery {
-  width: 200px;
-}
-
-.recovery-btn-frame {
-  height: 30px;
-  padding: 4px 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.recovery-btn-frame.small {
-  height: 25px;
-  padding: 2.5px 9px;
-  font-size: 11px;
-}
-
-.recovery-btn-frame.basic {
-  color: white;
-  background-color: rgba(128, 128, 128, 1);
-}
-
-.recovery-btn-frame.basic:hover {
-  background-color: rgba(128, 128, 128, 0.7);
-}
-
-.recovery-btn-frame.primary {
-  color: white;
-  background-color: rgba(0, 0, 0, 1);
-}
-
-.recovery-btn-frame.primary:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.recovery-guide {
-  font-size: 11px;
-  color: gray;
-}
-
-.recovery-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.recovery-container.center {
-  justify-content: center;
-}
-
-.recovery-form {
-  height: 30px;
+div.regiester_find_pw span>button {
+	display:inline-block;
+	width :50px;
+	height:20px;
+	border-radius: 7%;
+	background:white;
+	color:black;
+	margin: 10px 0;
+	font-size: 10px;
+	outline:none;
+	border: none;
+	cursor:pointer;
 }
 
 /*----------------------------------------------------------------*/
