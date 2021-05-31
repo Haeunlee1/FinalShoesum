@@ -4,6 +4,8 @@
 <%@page import="java.util.List, com.member.model.vo.*,com.product.model.vo.*" %>
 <%@ page import="java.text.*"%>
 <%
+	Member m = (Member)request.getAttribute("member");
+
 	//주문내역리스트
 	List<Ordered> orderList = (List<Ordered>)request.getAttribute("orderList");
 	DecimalFormat df = new DecimalFormat("#,###,###");
@@ -158,7 +160,7 @@
                 <table id="tbl-profile" >
                     <tr>
                         <td>아이디<span class="redPoint">*</span></td>
-                        <td><input type="text"  name="userId" id="userId" value="<%=loginMember.getMemberId() %>" readonly>
+                        <td><input type="text"  name="userId" id="userId" value="<%=m.getMemberId() %>" readonly>
                         <span class="profile_text, redPoint">(아이디는 수정불가)</span></td>
                     </tr>
                     <tr>
@@ -178,11 +180,11 @@
                     </tr>
                     <tr>
                         <td>이름<span class="redPoint">*</span></td>
-                        <td><input type="text" name="userName" id="userName" value="<%=loginMember.getMemberName()%>"required></td>
+                        <td><input type="text" name="userName" id="userName" value="<%=m.getMemberName()%>"required></td>
                    </tr>
                    <tr>
                         <td>이메일<span class="redPoint">*</span></td>
-                       <td><input type="email" name="email" value="<%=loginMember.getEmail()%>"required></td>
+                       <td><input type="email" name="email" value="<%=m.getEmail()%>"required></td>
                   </tr>
                   <tr>
                         <td>휴대전화<span class="redPoint">*</span></td>
@@ -193,8 +195,8 @@
                                 <option value="018">018</option>
                                 <option value="019">019</option>
                             </select> -
-                            <input type="text" maxlength="4" id="phone2" name="phone2" value="<%=loginMember.getPhone().substring(3,7) %>" required> -
-                            <input type="text" maxlength="4" id="phone3" name="phone3" value="<%=loginMember.getPhone().substring(7,11) %>"required>
+                            <input type="text" maxlength="4" id="phone2" name="phone2" value="<%=m.getPhone().substring(3,7) %>" required> -
+                            <input type="text" maxlength="4" id="phone3" name="phone3" value="<%=m.getPhone().substring(7,11) %>"required>
                         </td>
                     </tr>
                     <tr>
@@ -202,14 +204,14 @@
                        <td id="address_td">
                               <ul class="profile_address">
                                 <li> 
-                                    <input type="text" name="postcode" id="postcode" size="6" value="<%=loginMember.getPostNo()%>"required>&nbsp;&nbsp;
+                                    <input type="text" name="postcode" id="postcode" size="6" value="<%=m.getPostNo()%>"required>&nbsp;&nbsp;
                                     <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
                                 </li>
-                                <li><input type="text" name="address1" id="address1" size="50" required value="<%=loginMember.getAddress()%>">
+                                <li><input type="text" name="address1" id="address1" size="50" required value="<%=m.getAddress()%>">
                                     <span class="profile_text">&nbsp;&nbsp;기본 주소</span>
                                 </li>
                                 <li>
-                                    <input type="text" name="address2" id="address2" size="50" value="<%=loginMember.getAddressEnd()%>">
+                                    <input type="text" name="address2" id="address2" size="50" value="<%=m.getAddressEnd()%>">
                                     <span class="profile_text">&nbsp;&nbsp;나머지 주소</span>
                                     <input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
                                 </li>
@@ -221,7 +223,7 @@
                     <input type="submit" value="수정" style="background-color : black; color : white; cursor:pointer" >
                     <input type="reset" value="취소" style="cursor:pointer;" onclick=""><!-- 메인으로 돌아가기 -->
                 </div>
-                <input type="hidden" id="memberNo" name="memberNo" value="<%=loginMember.getMemberNo()%>"> <!--member_no를 hidden으로 넘기기  -->
+                <input type="hidden" id="memberNo" name="memberNo" value="<%=m.getMemberNo()%>"> <!--member_no를 hidden으로 넘기기  -->
             </form>
         </div>
     </article>
@@ -297,7 +299,6 @@ $(function(){
 			data:{
 				"memberNo":"<%=loginMember.getMemberNo()%>",
 				"type":"wish",
-				
 			},
 			type:"post",
 			success:data=>{

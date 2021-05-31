@@ -82,9 +82,6 @@ public class MyboardListAjaxServlet extends HttpServlet {
 //			+"/mypage/myboardList?cPage="+pageNo+"&memberNo="+memberNo+"'>&gt;</div>";
 			pageBar+="<div class=\"pageBar-icon\"><a href=\"javascript:fn_ajax("+pageNo+");\">&gt;</div>";
 		}
-		
-		
-		
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("list", list);
 		request.setAttribute("total", totalData);
