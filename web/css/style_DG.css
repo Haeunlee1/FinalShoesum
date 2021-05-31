@@ -10,15 +10,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 30px;
 }
 
 .login-logo {
-  width: 160px;
-  height: 80px;
+  width: 250px;
+  height: 150px;
   background: url(../images/ui/logo.png) no-repeat center;
   background-size: contain;
   margin: auto;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .login-form.login {
@@ -360,7 +361,7 @@ body {
             top: 0;
             width: 100%; /* Full width */
             height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
+            overflow: hidden; /* Enable scroll if needed */
             background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
         }

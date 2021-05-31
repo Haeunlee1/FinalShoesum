@@ -39,7 +39,7 @@ public class BoardListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerpage=12;
+		int numPerpage=8;
 		System.out.println("cPage"+cPage);
 		List<Board> list = new BoardService().boardList(cPage,numPerpage);
 		
