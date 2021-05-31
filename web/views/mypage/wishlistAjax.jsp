@@ -19,11 +19,12 @@
                  <td>선택</td>
              </tr>
              <%for(Product p: wishList) {
-             	String type="";
-             	if(p.getProNo().substring(0,1).contains("m")) type="man";
-             	else if(p.getProNo().substring(0,1).contains("w")) type="woman";
-             	else if(p.getProNo().substring(0,1).contains("k")) type="kids";
-             
+            	 String type="";
+                	switch(p.getProNo().substring(0,1)){
+                		case "m" :type="man";break;
+                		case "w" :type="woman";break;
+                		case "k" :type="kids";break;
+                	}
              %>
              <tr class="wish_product">
                  <td>

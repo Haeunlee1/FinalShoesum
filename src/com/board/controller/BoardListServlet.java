@@ -39,16 +39,16 @@ public class BoardListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerpage=8;
-		System.out.println("cPage"+cPage);
+		int numPerpage=10;
 		List<Board> list = new BoardService().boardList(cPage,numPerpage);
+		
+		//전체 총 게시글 갯수 
 		
 		int totalData=new BoardService().allBoardCount();
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
-		
 		String pageBar="";
 		if(pageNo==1) {
 			pageBar+="<div class=\"pageBar-icon\">&lt;</div>";
@@ -76,6 +76,7 @@ public class BoardListServlet extends HttpServlet {
 		}
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("list", list);
+		request.setAttribute("total", totalData);
 		request.getRequestDispatcher("/views/questionBoard/boardList.jsp").forward(request, response);
 		
 	}

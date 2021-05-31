@@ -18,7 +18,7 @@
 	       <h2>HOT DEAL</h2>
 	       <div class="product">
 	           <div>	
-	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=w02_white_170&hotpd=hotpd&sale=0.8">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=w02_white_170&hotpd=hotpd&sale=1">
 	                   <div class="sale">20%</div>
 	                   <img src="<%=request.getContextPath() %>/images/product/woman/w_02_01.jpg" alt="">
 	                   <div class="time_attack">
@@ -29,7 +29,7 @@
 	               <p>[슈썸]레거시슬립온<br><span class="sale_price">29,600</span></p>
 	           </div>
 	           <div>
-	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=m02_white_170&hotpd=hotpd&sale=0.65">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=m02_white_170&hotpd=hotpd&sale=1">
 	                   <div class="sale">35%</div>
 	                   <img src="<%=request.getContextPath() %>/images/product/man/m_02_01.jpg" alt="">
 	                   <div class="time_attack">
@@ -40,7 +40,7 @@
 	               <p>[슈썸]바이맥스<br><span class="sale_price">33,800</span></p>
 	           </div>
 	           <div>
-	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=k02_white_170&hotpd=hotpd&sale=0.23">
+	               <a href="<%=request.getContextPath() %>/product/productDetail?proNo=k02_white_170&hotpd=hotpd&sale=1">
 	                   <div class="sale">77%</div>
 	                   <img src="<%=request.getContextPath() %>/images/product/kids/k_02_01.jpg" alt="">
 	                   <div class="time_attack">

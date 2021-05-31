@@ -181,5 +181,13 @@ public class MemberService {
 		return result;
 	}
 	
+	public Member checkMember(int memberNo) {
+		//로그인된 객체 가져오기
+		Connection conn=getConnection();
+		Member m =dao.checkMember(conn, memberNo);
+		close(conn);
+		return m;
+	}
+	
 }
 
