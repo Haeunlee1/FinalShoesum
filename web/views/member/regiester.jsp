@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
 <section>
-    <article>
-      <div class="container-regiester">
+	<div class="container-regiester">
         <div>
           <div class="title-regiester">
             <p>슈썸 회원가입</p>
@@ -107,7 +108,6 @@
           </form>
         </div>
       </div>
-    </article>
   </section>
   <script>
   	function memberCheck(){

@@ -58,7 +58,7 @@ body {
   }
 
   .memberBtn{
-    display: inline-block;
+    display: inline-block !important;
     width: 75px;
     text-align: center;
     text-decoration: none;
