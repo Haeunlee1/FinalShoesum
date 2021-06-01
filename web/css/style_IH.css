@@ -34,8 +34,7 @@ div#write_content {
 div#write_content>textarea {
 	padding: 15px;
 }
-div#write_container>span,
-div#write_bottom_container>span {
+div#write_container>span {
 	display: inline-block;
 	font-size: 20px;
 	padding: 0 15px 0 10px;
@@ -51,12 +50,17 @@ div#write_content>#qab_content{
 
 /* 비밀번호, 목록 버튼 css*/
 #write_bottom_container{
-	width:900px;
+	width:1000px;
 	margin: auto;
-    border-bottom:1px lightgray solid;
+    border-bottom: 1px lightgray solid;
     text-align: left;
     line-height: 45px;
     padding-bottom: 10px;
+}
+div#write_bottom_container>span {
+	display: inline-block;
+	font-size: 20px;
+	padding: 0 15px 0 60px;
 }
 input.password_table {
 	width:200px;
@@ -324,8 +328,8 @@ table#FAQ_table .FAQ_answer {
 	background: black;
 	color: white;
 	float: right;
-	margin-top: 15px;
-	margin-right: 7px;
+	margin-top: 10px;
+	margin-right: 10px;
 	cursor: pointer;
 }
 /* 자주 묻는 질문 + 질문게시판 css 끝 */

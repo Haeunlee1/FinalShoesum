@@ -49,16 +49,17 @@ ul#header_top>li:first-of-type {
     border: none;
 }
 header div#logo {
-    width: 160px;
-    height: 80px;
+    width: 220px;
+    height: 100px;
     position: absolute;
-    top: 50px;
-    left: 50px;
+    top: 40px;
+    left: 390px;
     background: url(../images/ui/logo.png) no-repeat center;
     background-size: contain;
     cursor:pointer;
 }
-div#search_bar {
+/* 검색창 css - 언젠가 사용...ㅠㅠ */
+/* div#search_bar {
     width: 350px;
     height: 30px;
     border-bottom: 1px solid black;
@@ -82,11 +83,11 @@ div#search_bar>button {
     background-size: contain;
     border: none;
     outline: none;
-}
+} */
 div#direct_ui {
     position: absolute;
-    right: 25px;
-    top: 90px;
+    right: 17px;
+    top: 107px;
 }
 div#direct_ui img {
     width: 35px;
@@ -103,7 +104,7 @@ ul#menu_bar {
     margin: auto;
 }
 ul#menu_bar>li {
-    width: 130px;
+    width: 150px;
     display: inline-block;
     font-size: 20px;
     font-weight: 600;
@@ -113,6 +114,9 @@ ul#menu_bar>li {
     line-height: 50px;
     position: relative;
     cursor: pointer;
+}
+ul#menu_bar>li:first-child {
+	margin-left:275px;
 }
 ul#menu_bar .menu_sub {
     width: 100%;
@@ -532,23 +536,18 @@ div#pd_info>button {
     cursor: pointer;
 }
 
-/*  											REVIEW                                             */
+/*  REVIEW   */
 div#pd_review {
     clear: both;
-    /* height: 750px; */
     border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
-  
 }
 div#pd_review_content {
     clear: both;
-/*     height: 750px; */
-    border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
 }
 div#pd_review_content>p {
-    font-size: 27px;
-    font-weight: bold;
+    font-size: 35px;
     padding: 50px 0;
 }
 div#pd_review_content .review_box {
@@ -557,13 +556,15 @@ div#pd_review_content .review_box {
     background: #eaeaea;
     margin-bottom: 20px;
 }
-
 div#review_null {
 	width : 1000px;
-	height : 200px;
-	font-size : 30px;
-	line-height : 120px;
+	height : 80px;
+	font-size : 20px;
+	line-height : 50px;
 	text-align : center;
+	margin-bottom : 20px;
+	font-style: italic;
+	color: gray;
 }
 
 div#review_rating_wrapper {
@@ -575,13 +576,20 @@ div#review_rating {
 	margin-left : 5px;
 	font-size : 25px;
 }
-/* -------------------------------------------------------------------------------------------------- */
 div#pd_review .review_box p:first-child, #review_rating_wrapper>p {
     height: 65px;
     line-height: 65px;
-    font-size: 25px;
+    font-size: 20px;
     text-align: left;
     padding-left: 30px;
+}
+.fa-star {
+	width:20px;
+	height:20px;
+	font-size:20px;
+	padding-left: 10px;
+	padding-bottom: 30px;
+	cursor: pointer;
 }
 div#pd_review .review_box div {
     width: 980px;
@@ -604,9 +612,9 @@ div#pd_review .review_write {
     margin-bottom: 20px;
 }
 div#pd_review .review_write textarea {
-    width: 850px;
+    width: 830px;
     height: 50px;
-    font-size: 17px;
+    padding: 5px;
     float: left;
     margin-left: 30px;
 }
@@ -626,7 +634,6 @@ div#recommend_pd {
 }
 div#recommend_pd>p {
     font-size: 27px;
-    font-weight: bold;
 }
 
 
