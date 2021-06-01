@@ -43,8 +43,8 @@ public class LoginCheckFilter implements Filter {
 			//로긴 안 했을 때
 			request.setAttribute("msg","로그인 후 이용가능합니다");
 			//request.setAttribute("loc", "/views/login/login.jsp");  //나중에 로그인페이지로 이동하게 만들기
-			String referer = ((HttpServletRequest) request).getHeader("referer");
-			request.setAttribute("loc", referer);
+			String referer = ((HttpServletRequest) request).getHeader("referer"); // 이전페이지 url 저장
+			request.setAttribute("loc", referer); // 이전페이지 url로 이동
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
 			//로그인 시에 doFilter ㄱㄱ 

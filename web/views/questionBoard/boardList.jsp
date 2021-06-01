@@ -78,7 +78,6 @@
 		const fn_boardWrite=()=>{
 			<% if(loginMember==null){%>
 				alert("로그인이 필요합니다.");
-				location.assign("<%=request.getContextPath()%>/views/login/login.jsp");
 			<% }else{ %>
 				location.assign("<%=request.getContextPath()%>/board/boardForm");
 			<% } %>
