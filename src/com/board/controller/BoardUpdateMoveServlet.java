@@ -35,9 +35,11 @@ public class BoardUpdateMoveServlet extends HttpServlet {
 		String qabPw="0";
 		Board b = new BoardService().selectBoard(qabNo,qabPw);
 		BoardComment bc=new BoardService().selectComment(qabNo);
-		int memberNo=0;
-		if(request.getParameter("memberNo")!=null) {
+		int memberNo;
+		if(request.getParameter("memberNo")!=null) {			//마이페이지에서 왔다면 memberNo저장
 			memberNo=Integer.parseInt(request.getParameter("memberNo"));
+		}else {			//그냥 질문게시판 이면 -1 저장 
+			memberNo=-1;
 		}
 		request.setAttribute("comment", bc);
 		request.setAttribute("board", b);

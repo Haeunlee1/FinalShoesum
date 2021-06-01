@@ -10,7 +10,7 @@
         <div id="write_top_container"> 
             <p>문의하기</p>
         </div>
-        <form action='<%=request.getContextPath()%>/board/boardUpdateEnd' method="post">
+        <form action='<%=request.getContextPath()%>/board/boardUpdateEnd?' method="post">
             <div id="write_container">
                 <span id="qab_title">제목</span>
                 <select name="qab_cate" id="qab_cate" >
@@ -23,17 +23,16 @@
                 <textarea rows="50" cols="50"name="qab_content" id="qab_content"><%=b.getQabContent() %></textarea>
             </div>
             <div id="write_bottom_container">
-                <ul>
-                    <li>비밀번호</li>
-                    <li><input type="password" name="qabPw" class="password_table" placeholder="4자리 숫자를 입력하세요." maxlength="4" required></li>
-                </ul>
+                <span>비밀번호</span>
+                <input type="password" name="qabPw" class="password_table" placeholder="4자리 숫자를 입력하세요." maxlength="4" required>
             </div>
-            <button type="button" class="back_button" onclick="fn_backToList();">목록으로</button>
-            <input type="submit" id="checkBtn" value="수정">
-            
+             <div class="write_server_button">
+	            <button type="button" class="back_button" onclick="fn_backToList();">목록으로</button>
+	            <input type="submit" id="checkBtn" value="수정">
+            </div>
             <input type="hidden" name="memberId" value="<%=loginMember.getMemberId() %>">
             <input type="hidden" name="qabNo" value="<%=b.getQabNo() %>">
-			<input type="hidden" name="memberNo" value="<%=memberNo%>">		<!-- 마이페이지에서 넘어왔는지 확인하는 값 -->            
+			<input type="hidden" name="memberNo" value="<%=memberNo%>">		<!-- 마이페이지에서 넘어왔는지 확인하는 값  / -1 이면 그냥 질문게시판 접근임-->            
         </form>
     </section>
     

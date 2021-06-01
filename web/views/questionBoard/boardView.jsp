@@ -112,7 +112,7 @@
    		<%if (bc==null){%>	//댓글이 없을 경우에만 게시글 수정 가능
    			<%if(m!=null){%>
 				location.assign("<%=request.getContextPath()%>/board/boardEdit?qabNo="+'<%=b.getQabNo()%>'+'&memberNo='+'<%=m.getMemberNo() %>');
-			<%} else{%>
+			<%}else{%>
 				location.assign("<%=request.getContextPath()%>/board/boardEdit?qabNo="+'<%=b.getQabNo()%>');
 			<%}%>
    		<%} else {%> 	//댓글이 있을 땐 수정 불가

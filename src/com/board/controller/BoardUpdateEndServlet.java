@@ -40,23 +40,22 @@ public class BoardUpdateEndServlet extends HttpServlet {
 
 		String msg=result>0?"게시글이 수정되었습니다.":"게시글 수정에 실패했습니다. 다시 시도해주세요.";
 		String loc="";
-		int memberNo=0;
+		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		if(result>0) {
-			if(request.getParameter("memberNo")!=null) {		//수정 성공 & 마이페이지 접근
+			if(memberNo!=-1) {		//수정 성공 & 마이페이지 접근
 				memberNo=Integer.parseInt(request.getParameter("memberNo"));
 				loc="/mypage/mypage.do?memberNo="+memberNo+"&type=board";
 			}else {
 				loc="/board/boardView.do?admin_check=a&boardNo="+qabNo;
 			}
 		}else {
-			if(request.getParameter("memberNo")!=null) {		//수정 실패 & 마이페이지 접근
+			if(memberNo!=-1) {		//수정 실패 & 마이페이지 접근
 				memberNo=Integer.parseInt(request.getParameter("memberNo"));
 				loc="/mypage/mypage.do?memberNo="+memberNo+"&type=board";
 			}else {
 				loc="/board/boardEdit?qabNo="+qabNo;
 			}
 		}
-		System.out.println(memberNo==0);
 		request.setAttribute("msg",msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
