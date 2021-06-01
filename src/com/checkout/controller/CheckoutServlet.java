@@ -48,8 +48,8 @@ public class CheckoutServlet extends HttpServlet {
 		}
 		// 카트번호
 		String cartNo;
-		
-		System.out.println("--");
+		System.out.println(" ");
+		System.out.println(" ");
 		if(request.getParameter("cartNo") !=null) {
 			cartNo = request.getParameter("cartNo");
 		} else {
