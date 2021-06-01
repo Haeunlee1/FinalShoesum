@@ -8,6 +8,8 @@
 	List<Checkout> list = (List<Checkout>)request.getAttribute("list");
 	Member m = (Member)request.getAttribute("member");
 	DecimalFormat df = new DecimalFormat("#,###,###");
+	String cartNo = (String)request.getAttribute("cartNo");
+	
 	String checkPro = " ";
 	String checkToProNo = "";
 	String checkToProCount = ""; 
@@ -223,7 +225,7 @@
         </table>
     </div>
     <div id="btn_order_sub">
-        <input type="button" value="결제하기" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkoutEnd?totalPrice=<%=checkPrice %>&proNo=<%=checkToProNo %>&proCount=<%=checkToProCount%>&memberNo=<%=m.getMemberNo()%>')">
+        <input type="button" value="결제하기" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkoutEnd?totalPrice=<%=checkPrice %>&proNo=<%=checkToProNo %>&proCount=<%=checkToProCount%>&memberNo=<%=m.getMemberNo()%>&cartNo=<%=cartNo%>')">
     </div>
 </section>
 

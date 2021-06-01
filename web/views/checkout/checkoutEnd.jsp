@@ -7,6 +7,7 @@
 	int userNo = (int)request.getAttribute("userNo");
 	String proNo = (String)request.getAttribute("proNo");
 	String proCount = (String)request.getAttribute("proCount");
+	String cartNo = (String)request.getAttribute("cartNo");
 	
 %>    
 <!DOCTYPE html>
@@ -64,7 +65,7 @@
 	    		}
 	    	});
 	    	
-			location.replace('<%=request.getContextPath()%>/mypage/insertOrderedList?userNo=<%=userNo%>&proNo=<%=proNo%>&proCount=<%=proCount%>');	    	
+			location.replace('<%=request.getContextPath()%>/mypage/insertOrderedList?userNo=<%=userNo%>&proNo=<%=proNo%>&proCount=<%=proCount%>&cartNo=<%=cartNo%>');	    	
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;

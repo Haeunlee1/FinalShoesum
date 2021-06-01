@@ -47,7 +47,16 @@ public class CheckoutServlet extends HttpServlet {
 			proPrice = 0;
 		}
 		// 카트번호
-		String cartNo = request.getParameter("cartNo");
+		String cartNo;
+		
+		System.out.println("--");
+		if(request.getParameter("cartNo") !=null) {
+			cartNo = request.getParameter("cartNo");
+		} else {
+			cartNo = "-1";
+		}
+		
+		request.setAttribute("cartNo", cartNo);
 		
 		// 제품 수량 분기 처리
 		int proCount;
@@ -63,8 +72,8 @@ public class CheckoutServlet extends HttpServlet {
 		// 출처
 		String from = request.getParameter("from"); 
 		
+		// 장바구니에서 온 데이터 
 		
-
 		// 멤머데이터 , 상품 데이터 가져오기
 		Member m = new CheckoutService().memberInfo(userNo);
 		request.setAttribute("member",m);
@@ -89,7 +98,6 @@ public class CheckoutServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/checkout/checkoutPro.jsp").forward(request,response);
 			break;
 		};
-		
 		
 		
 	}

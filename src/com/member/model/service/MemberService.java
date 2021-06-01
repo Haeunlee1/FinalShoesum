@@ -136,8 +136,11 @@ public class MemberService {
 		
 		// 단일 상품 와 복수개의 상품 분기처리하기 
 		
+		System.out.println(proNoArray.length);
+		System.out.println(proCountArray.length);
+		
 		if(proCountArray.length==1) {
-			for(int i=0;i<proNoArray.length;i++) {
+			for(int i=0;i<proCountArray.length;i++) {
 				resultDe += dao.insertOrderDetail(conn,proNoArray[i].trim(),proCountArray[i].trim());
 			}
 		} else {

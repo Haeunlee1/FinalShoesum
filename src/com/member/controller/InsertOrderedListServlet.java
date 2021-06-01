@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cart.service.CartService;
 import com.member.model.service.MemberService;
 
 /**
@@ -33,8 +34,25 @@ public class InsertOrderedListServlet extends HttpServlet {
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		String proNo = request.getParameter("proNo");
 		String proCount = request.getParameter("proCount");
+		String cartNo = request.getParameter("cartNo");
+		System.out.println(cartNo);
 		
 		int result = new MemberService().insertOrder(userNo,proNo,proCount);
+		
+		if(!cartNo.equals("-1")) {
+			
+			if(cartNo.contains("/")) {
+				// 여러 카트 항목 
+				String[] cartNoArr = cartNo.split("/");
+				result += new CartService().selectDelete(cartNoArr);
+				
+			} else {
+				// 단일 카드 항목
+				result += new  CartService().cartDelete(Integer.parseInt(cartNo));
+			}
+			
+		}
+		
 		
 		String msg = "";
 		String loc = "";

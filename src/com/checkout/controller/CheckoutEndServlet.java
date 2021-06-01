@@ -46,15 +46,18 @@ public class CheckoutEndServlet extends HttpServlet {
 			// 3. 상품번호
 			String proNo = request.getParameter("proNo");
 			
-			
 			// 4. 상품수량 
 			String proCount = request.getParameter("proCount");
+			
+			// 장바구니 삭제 여부 
+			String cartNo = request.getParameter("cartNo");
 			
 		// 결제 정보 보내기
 		request.setAttribute("price", totalPrice);
 		request.setAttribute("userNo", userNo);
 		request.setAttribute("proNo", proNo);
 		request.setAttribute("proCount", proCount);
+		request.setAttribute("cartNo",cartNo);
 		
 		request.getRequestDispatcher("/views/checkout/checkoutEnd.jsp").forward(request, response);
 	}

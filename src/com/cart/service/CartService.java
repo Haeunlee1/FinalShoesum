@@ -58,7 +58,7 @@ public class CartService {
 		
 		int result = 0;
 		for(String cartNo : cartNosArr) {
-			result += dao.selectDelete(conn,cartNo);
+			result += dao.selectDelete(conn,cartNo.trim());
 		}
 		
 		if(result>0) {

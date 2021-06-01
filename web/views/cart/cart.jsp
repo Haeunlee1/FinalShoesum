@@ -62,7 +62,7 @@
                 </td>
                 <td>
                     <ul>
-                        <li><input type="button" name="btn_order" value = "주문하기" style="background-color : black; color : white" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=loginMember.getMemberNo() %>&proNo=<%= c.getProNo() %>&from=p&proPrice=<%=c.getProPrice() %>&proCount=<%=c.getCartProCount() %>');"></li>
+                        <li><input type="button" name="btn_order" value = "주문하기" style="background-color : black; color : white" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkout?userNo=<%=loginMember.getMemberNo() %>&proNo=<%= c.getProNo() %>&from=p&proPrice=<%=c.getProPrice() %>&proCount=<%=c.getCartProCount() %>'+'&cartNo=<%=c.getCartNo()%>');"></li>
                         <li><input type="button" name="btn_delete" value="삭제" style="background-color : #CCCCCC" onclick="location.replace('<%=request.getContextPath()%>/cart/cartDelete?cartNo=<%=c.getCartNo()%>&userNo=<%=c.getMemberNo()%>')">
                         </li>
                     </ul> 

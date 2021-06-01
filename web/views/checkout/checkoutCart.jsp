@@ -5,9 +5,13 @@
 
 <%
 
+	// 전송된 데이터 출력 받기 
+	
 	List<Checkout> list = (List<Checkout>)request.getAttribute("list");
 	Member m = (Member)request.getAttribute("member");
 	DecimalFormat df = new DecimalFormat("#,###,###");
+	String cartNo = (String)request.getAttribute("cartNo"); 
+	
 	
 	String checkPro = "";
 	int checkPrice = 0;		
@@ -222,7 +226,7 @@
         </table>
     </div>
     <div id="btn_order_sub">
-        <input type="button" value="결제하기" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkoutEnd?totalPrice=<%=checkPrice %>&proNo=<%=checkToProNo %>&proCount=<%=checkToProCount%>&memberNo=<%=m.getMemberNo() %>')">
+        <input type="button" value="결제하기" onclick="location.assign('<%=request.getContextPath()%>/checkout/checkoutEnd?totalPrice=<%=checkPrice %>&proNo=<%=checkToProNo %>&proCount=<%=checkToProCount%>&memberNo=<%=m.getMemberNo() %>&cartNo=<%=cartNo%>')">
     </div>
 </section>
 
