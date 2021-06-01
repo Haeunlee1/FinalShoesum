@@ -41,12 +41,8 @@ public class MypageMoveServlet extends HttpServlet {
 		List<Ordered> list = new MemberService().basicOrdered(memberNo);
 		request.setAttribute("orderList", list);
 		request.setAttribute("member", m);
-		int index=0;
 		System.out.println("주문내역갯수:"+list.size());		//rs가 없으면 0이 찍힘 jsp에서 0을 기준으로 분기하기
 		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);
-		
-		
-		
 	}
 
 	/**

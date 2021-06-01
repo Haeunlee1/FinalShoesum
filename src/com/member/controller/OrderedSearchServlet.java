@@ -44,7 +44,6 @@ public class OrderedSearchServlet extends HttpServlet {
 		request.setAttribute("orderList", list);
 		request.setAttribute("member", m);
 		request.getRequestDispatcher("/views/mypage/mypage.jsp").forward(request, response);
-		
 	}
 
 	/**

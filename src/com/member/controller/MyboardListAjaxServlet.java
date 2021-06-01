@@ -54,11 +54,10 @@ public class MyboardListAjaxServlet extends HttpServlet {
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		String pageBar="";
+		//ajax에서 페이징처리 할 때는 a태그에 스크립트 함수를 넣어 처리하거나, gson or jackson을 사용하자
 		if(pageNo==1) {
 			pageBar+="<div class=\"pageBar-icon\">&lt;</div>";
 		}else {
-//			pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
-//			+"/mypage/myboardList?cPage="+(pageNo-1)+"&memberNo="+memberNo+"'>&lt;</div>";
 			pageBar+="<div class=\"pageBar-icon\"><<a href=\"javascript:fn_ajax("+(pageNo-1)+");\">&lt;</div>";
 		}
 		
@@ -66,9 +65,6 @@ public class MyboardListAjaxServlet extends HttpServlet {
 			if(pageNo==cPage) {
 				pageBar+="<div class=\"pageBar-icon\" style=\"background-color:rgb(255, 166, 0);color:white\">"+pageNo+"</div>";
 			}else {
-//				pageBar+="<div class=\"pageBar-icon\">"
-//						+ "<a href='"+request.getContextPath()
-//				+"/mypage/myboardList?cPage="+pageNo+"&memberNo="+memberNo+"'>"+pageNo+"</div>";
 				pageBar+="<div class=\"pageBar-icon\"><a href=\"javascript:fn_ajax("+pageNo+");\">"+pageNo+"</div>";
 			}
 			pageNo++;
@@ -78,8 +74,6 @@ public class MyboardListAjaxServlet extends HttpServlet {
 			pageBar+="<div class=\"pageBar-icon\">&gt;</div>";
 		}
 		else {
-//			pageBar+="<div class=\"pageBar-icon\"><a href='"+request.getContextPath()
-//			+"/mypage/myboardList?cPage="+pageNo+"&memberNo="+memberNo+"'>&gt;</div>";
 			pageBar+="<div class=\"pageBar-icon\"><a href=\"javascript:fn_ajax("+pageNo+");\">&gt;</div>";
 		}
 		request.setAttribute("pageBar", pageBar);

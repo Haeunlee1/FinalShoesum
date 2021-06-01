@@ -31,8 +31,6 @@ public class BoardCheckPasswordServlet extends HttpServlet {
 		int boardNo=Integer.parseInt(request.getParameter("boardNo"));
 		request.setAttribute("boardNo", boardNo);
 		request.getRequestDispatcher("/views/questionBoard/boardCheckPw.jsp").forward(request, response);
-	
-	
 	}
 
 	/**

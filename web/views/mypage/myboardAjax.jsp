@@ -75,7 +75,6 @@ table#tbl-myboard{
     border-bottom:2px gray solid;
     background-color: #EAEAEA;
     border-collapse: collapse;
-/*     height:200px; */
 }
 tbody#myboard_tbody tr:nth-child(2n-1){
     background-color:white;

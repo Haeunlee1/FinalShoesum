@@ -37,7 +37,6 @@ public class CommentDeleteServlet extends HttpServlet {
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", "/board/boardView.do?admin_check=a&boardNo="+qabNo);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-	
 	}
 
 	/**
