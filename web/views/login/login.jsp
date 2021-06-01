@@ -23,33 +23,7 @@
 </head>
 
 <body>
-  <%-- <div class="login-wrapper">
-    <div>
-      <a href="<%=request.getContextPath()  %>/index.jsp"><div class="login-logo"></div></a>
-      <form id="loginFrm" action="<%=request.getContextPath() %>/login" method="get" onsubmit="return fn_login validate();">
-	      <div class="login-container center">
-	        <input type="text" name="memberId" class="login-form login" placeholder="아이디 입력">
-	      </div>
-	      <div class="login-container center blank">
-	        <input type="password" name="memberPw" class="login-form login" placeholder="비밀번호 입력">
-	      </div>
-	      <div class="login-container around">
-	        <button type="button" class="button-social google"></button>
-	        <button type="button" class="button-social facebook"></button>
-	      </div>
-	      <div class="login-container around link">
-	         <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/find.jsp"><span class="link border login-guide">아이디 찾기</span></a>
-	         <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/find.jsp"><span class="link border login-guide">비밀번호 찾기</span></a>
-	         <a class="memberBtn" href="<%=request.getContextPath() %>/views/member/regiester.jsp"><span class="link login-guide">회원 가입</span></a>
-	      </div>
-	      <div class="login-container center">
-	        <input type="submit" value="로그인" class="login-btn-frame basic">
-	      </div>
-	   </form>
-    </div>
-  </div> --%>
-  
-  
+ 
   <div class="login-wrapper">
 	            <a href="<%=request.getContextPath()  %>/index.jsp"><div class="login-logo"></div></a>
 	            <form id="loginFrm" action="<%=request.getContextPath() %>/login" method="get" onsubmit="return fn_login validate();" class="login-container">
@@ -92,7 +66,7 @@
  		scope:'profile, account_email, gender',
  		success:function(authObj){
  			console.log(authObj);
- 			window.Kakao.API.request({
+ 			 window.Kakao.API.request({
  				url:'/v2/user/me',
  				success : res =>{
  					const kakao_account = res.kakao_account;
@@ -102,7 +76,7 @@
  					console.log(kakaoEmail);
  					location.replace('<%=request.getContextPath()%>/kakao/kakaoCheck?kakaoName='+kakaoName+'&kakaoEmail='+kakaoEmail);
  				    }
- 			    });
+ 			    }); 
  		    }
         })
  	}

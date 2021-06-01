@@ -46,6 +46,7 @@ public class KakaoCheckServlet extends HttpServlet {
 			// session 객체 생성 ! 
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", m);
+			//request.getRequestDispatcher("/views/common/msg.jsp");
 			response.sendRedirect(request.getContextPath());
 		} else {
 			request.getRequestDispatcher("/kakao/register?userName="+userName+"&email="+email).forward(request, response);
